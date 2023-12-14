@@ -1,0 +1,3 @@
+{
+    col = import ./colors "gruvbox";
+}

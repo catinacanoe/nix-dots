@@ -1,0 +1,20 @@
+# https://github.com/tinted-theming/base16-schemes/blob/main/gruvbox-dark-medium.yaml
+{
+    t0 = "282828";
+    t1 = "3c3836";
+    t2 = "504945";
+    t3 = "665c54";
+    t4 = "bdae93";
+    t5 = "d5c4a1";
+    t6 = "ebdbb2";
+    t7 = "fbf1c7";
+
+    red    = "fb4934";
+    orange = "fe8019";
+    yellow = "fabd2f";
+    green  = "b8bb26";
+    aqua   = "8ec07c";
+    blue   = "83a598";
+    purple = "d3869b";
+    brown  = "d65d0e";
+}

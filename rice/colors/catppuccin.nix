@@ -1,0 +1,20 @@
+# https://github.com/tinted-theming/base16-schemes/blob/main/catppuccin-mocha.yaml
+{
+    t0 = "1e1e2e";
+    t1 = "181825";
+    t2 = "313244";
+    t3 = "45475a";
+    t4 = "585b70";
+    t5 = "868cb7";
+    t6 = "b4befe";
+    t7 = "cdd6f4";
+
+    red    = "f38ba8";
+    orange = "fab387";
+    yellow = "f9e2af";
+    green  = "a6e3a1";
+    aqua   = "94e2d5";
+    blue   = "89b4fa";
+    purple = "cba6f7";
+    brown  = "f2cdcd";
+}
