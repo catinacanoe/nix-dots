@@ -32,6 +32,7 @@
 	bc
 	fzf
 	ripgrep
+	eza
     
         # user apps
         neovim nvimpager

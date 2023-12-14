@@ -17,17 +17,25 @@ in
 
             vpn = "sudo protonvpn";
 
-	    en = "e ~";
 	    o = "e ..";
 	    oo = "e ../..";
 	    ooo = "e ../../..";
 	    oooo = "e ../../../..";
 	    ooooo = "e ../../../../..";
 	    oooooo = "e ../../../../../..";
+
+	    n = "eza -a1lo --no-user --no-permissions --no-filesize --no-time";
+	    t = "eza -T";
+
+	    gp = "grep";
+	    gpi = "grep -i";
         };
 	initExtra = ''
-	e() {
+	en() {
 	    xioxide cd "grep '/$'" pwd dirs $@ && ls -al
+	}
+	e() {
+	    xioxide cd "grep '/$'" pwd dirs $@
 	}
 	h() {
 	    xioxide "$EDITOR" "" pwd dirs $@
