@@ -70,7 +70,7 @@ in
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
 
-	bindkey '^[[Z' autosuggest-accept
+	bindkey '^I' autosuggest-accept
 	'';
     };
 

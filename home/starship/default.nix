@@ -13,19 +13,21 @@ in
 	    directory = {
 	        truncation_length = 0;
                 truncate_to_repo = true;
+
                 style = "cyan italic";
-                repo_root_style = "cyan bold italic";
-                format = "[$path]($style) " ;
+                format = "[$path]($style) ";
 	    };
 
 	    git_status = {
                 style = "yellow italic bold";
-                format = "[$ahead_behind$all_status]($style) ";
+                format = "[$ahead_behind $all_status]($style) ";
+
+                up_to_date = "->";
                 ahead = ">>";
                 behind = "<<";
-                up_to_date = "<>";
                 conflicted = "><";
                 diverged = "><";
+
                 untracked = "nw";
                 stashed = "$$";
                 modified = "ch";
