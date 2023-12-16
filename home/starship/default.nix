@@ -20,20 +20,20 @@ in
 
 	    git_status = {
                 style = "yellow italic bold";
-                format = "[$ahead_behind $all_status]($style) ";
+                format = "[$ahead_behind$all_status]($style) ";
 
                 up_to_date = "->";
-                ahead = ">>";
-                behind = "<<";
+                ahead      = ">>";
+                behind     = "<<";
                 conflicted = "><";
-                diverged = "><";
+                diverged   = "><";
 
-                untracked = "nw";
-                stashed = "$$";
-                modified = "ch";
-                staged = "gc";
-                renamed = "mv";
-                deleted = "rm";
+                untracked = " nw";
+                stashed   = " $$";
+                modified  = " ch";
+                staged    = " gc";
+                renamed   = " mv";
+                deleted   = " rm";
 	    };
 	};
     };
