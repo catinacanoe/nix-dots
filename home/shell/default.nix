@@ -70,7 +70,14 @@ in
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
 
-	bindkey '^I' autosuggest-accept
+	bindkey '^[[Z' autosuggest-accept
+	'';
+
+	completionInit = ''
+	autoload -U compinit
+	zstyle ':completion:*' menu select
+	compinit
+	_comp_options+=(globdots)
 	'';
     };
 

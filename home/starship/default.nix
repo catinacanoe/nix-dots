@@ -6,7 +6,13 @@ in
     programs.starship = {
         enable = true;
 	enableZshIntegration = true;
-	settings = {
+	settings = 
+	let
+	    dirstyle = "cyan";
+	    gitstyle = "blue";
+	    gitstylealt = "yellow";
+	in
+	{
 	    add_newline = true;
 	    format = "$git_status$directory";
 
@@ -14,13 +20,11 @@ in
 	        truncation_length = 0;
                 truncate_to_repo = true;
 
-                style = "cyan italic";
-                format = "[$path]($style) ";
+                format = "[$path](${dirstyle}) ";
 	    };
 
 	    git_status = {
-                style = "yellow italic bold";
-                format = "[$ahead_behind$all_status]($style) ";
+                format = "[$ahead_behind](${gitstyle})[$all_status](${gitstylealt}) ";
 
                 up_to_date = "->";
                 ahead      = ">>";
