@@ -43,6 +43,8 @@ r ${repos}/
                 c colors.nix
                 mb gen-mbsync-gmail.nix
                 mu gen-mutt-gmail.nix
+            mk mako/
+                d default.nix
             nv nvim/
                 d default.nix
             pa pass/
@@ -51,7 +53,7 @@ r ${repos}/
                 d default.nix
             sh shell/
                 d default.nix
-		p plugins/
+                p plugins/
             st starship/
                 d default.nix
             xd xdg/

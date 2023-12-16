@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 let
-    mainfont = "VictorMono";
+    mainfont = (import ../rice).font.name;
 in
 {
     fonts = {

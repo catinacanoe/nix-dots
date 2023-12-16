@@ -1,6 +1,8 @@
 { config, inputs, pkgs, ... }:
 let
-    col = (import ../../rice).col; 
+    rice = import ../../rice;
+    col = rice.col;
+    font_size = rice.font.size;
 in
 {
     home.activation.kitty = inputs.home-manager.lib.hm.dag.entryAfter ["onFilesChange"]
@@ -30,7 +32,7 @@ in
 	    window_alert_on_bell = false;
 	    confirm_os_window_close = 0;
 
-	    font_size = 13;
+	    inherit font_size;
 	    window_padding_width = "4.7";
 	    scrollback_lines = 10000;
 	    update_check_interval = 0;

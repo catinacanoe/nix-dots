@@ -1,8 +1,12 @@
 { config, inputs, pkgs, hyprfocus, ... }:
 let
-    col = (import ../../rice).col; 
-    gradient = "rgba(${col.fg}b0) rgba(00000000) rgba(${col.fg}b0) rgba(00000000) 45deg";
     lib = inputs.home-manager.lib;
+
+    rice = (import ../../rice);
+    col = rice.col; 
+    window = rice.window;
+
+    gradient = "rgba(${col.fg}b0) rgba(00000000) rgba(${col.fg}b0) rgba(00000000) 45deg";
 in
 {
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
@@ -35,9 +39,9 @@ in
     general {
         # defaults
         # no_cursor_warps = false # allow cursor to be moved by refocus
-        border_size = 2
-        gaps_in = 7
-        gaps_out = 17
+        border_size = ${toString window.border}
+        gaps_in = ${toString window.gaps-in}
+        gaps_out = ${toString window.gaps-out}
 
         col.inactive_border = rgba(00000000)
         col.nogroup_border = rgba(00000000)
@@ -55,7 +59,7 @@ in
         # drop shadow (see wiki)
         # dim inactive windows (see wiki)
         # screen_shader (custom shader to apply @ end of pipeline)
-        rounding = 7
+        rounding = ${toString window.radius}
         fullscreen_opacity = 1.0
         active_opacity = 0.95
         inactive_opacity = 0.8

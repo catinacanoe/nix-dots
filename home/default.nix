@@ -29,6 +29,7 @@ in
         ./xioxide
         ./pw
         ./mail
+        ./mako
     ];
 
     services.ssh-agent.enable = true;

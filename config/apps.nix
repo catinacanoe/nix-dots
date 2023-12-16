@@ -41,18 +41,19 @@
         neovim nvimpager
         firefox ungoogled-chromium
 	networkmanagerapplet protonvpn-cli_2
-	zsh
 
         kitty
         mpv-unwrapped
         tofi
         neomutt
         htop-vim
+	zsh
 
         # core system apps
         hyprland hypr
         pulseaudio pipewire
         waybar
+	mako
         swww
     ];
 }
