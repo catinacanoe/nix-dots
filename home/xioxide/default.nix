@@ -36,7 +36,7 @@ r ${repos}/
                 d default.nix
             gi git/
                 d default.nix
-            fk thefuck/
+            fu thefuck/
                 d default.nix
             gp gpg/
                 d default.nix
