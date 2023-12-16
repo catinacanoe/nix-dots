@@ -51,6 +51,7 @@ r ${repos}/
                 d default.nix
             sh shell/
                 d default.nix
+		p plugins/
             st starship/
                 d default.nix
             xd xdg/
