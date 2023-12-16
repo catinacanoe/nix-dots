@@ -69,15 +69,22 @@ in
 	e() { ${xioxide} cd "grep '/$'" pwd dirs $@ && ${n}; }
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
-
-	bindkey '^[[Z' autosuggest-accept
 	'';
 
 	completionInit = ''
 	autoload -U compinit
 	zstyle ':completion:*' menu select
+	zmodload zsh/complist
 	compinit
 	_comp_options+=(globdots)
+
+	bindkey -M menuselect 'n' vi-backward-char
+	bindkey -M menuselect 'a' vi-up-line-or-history
+	bindkey -M menuselect 'i' vi-down-line-or-history
+	bindkey -M menuselect 'o' vi-forward-char
+
+	bindkey '^I' autosuggest-accept # tab
+	bindkey '^[[Z' expand-or-complete # S-tab
 	'';
     };
 

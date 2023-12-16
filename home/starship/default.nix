@@ -8,7 +8,7 @@ in
 	enableZshIntegration = true;
 	settings = 
 	let
-	    dirstyle = "cyan";
+	    dirstyle = "cyan italic";
 	    gitstyle = "blue";
 	    gitstylealt = "yellow";
 	in
