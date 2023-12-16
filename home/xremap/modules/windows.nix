@@ -5,6 +5,9 @@ let
 in
 ''
 # windows.nix
+        ${mod}-space:
+            ${hypr "animatefocused"}
+
         ${mod}-m:
             ${hypr "togglesplit"}
         ${mod}-shift-m:

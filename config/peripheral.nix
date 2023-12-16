@@ -24,9 +24,9 @@
     networking = {
         networkmanager.enable = true;
 	#nameservers = [ "1.0.0.1" ];
-        wireless.iwd = {
-	    enable = true;
-	};
+#        wireless.iwd = {
+#	    enable = true;
+#	};
     };
 
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

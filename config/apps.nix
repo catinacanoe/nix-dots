@@ -2,6 +2,8 @@
 {
     nixpkgs.config.allowUnfree = true;
 
+    environment.pathsToLink = [ "/share/zsh" ]; # ZSH comp requirement
+
     environment.systemPackages = with pkgs;
     let
         hypr = writeShellScriptBin "hypr" "source ~/.profile && Hyprland";
@@ -33,12 +35,13 @@
 	fzf
 	ripgrep
 	eza
+	starship
     
         # user apps
         neovim nvimpager
-        firefox ungoogled-chromium qutebrowser
-	networkmanagerapplet iwgtk
-	protonvpn-cli_2
+        firefox ungoogled-chromium
+	networkmanagerapplet protonvpn-cli_2
+	zsh
 
         kitty
         mpv-unwrapped
@@ -46,8 +49,6 @@
         neomutt
         htop-vim
 
-	#cloudflare-warp # https://developers.cloudflare.com/warp-client/get-started/linux/
-    
         # core system apps
         hyprland hypr
         pulseaudio pipewire

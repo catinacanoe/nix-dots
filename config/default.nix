@@ -1,8 +1,8 @@
 # configuration.nix
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   imports = [ 
-      ../ignore/hardware-config.nix # auto generated on install
+      ./ignore-hardware.nix # auto generated on install
       ./apps.nix
       ./environment.nix # desktop environemnt setup basically
       ./fonts.nix
@@ -24,16 +24,13 @@
 
   networking.hostName = "nixpad";
 
-  # for xremap
-  #users.groups.uinput.members = [ "canoe" ];
-  #users.groups.input.members = [ "canoe" ];
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.canoe = {
     isNormalUser = true;
     description = "canoe";
     extraGroups = [ "networkmanager" "wheel" "uinput" "input" ];
-    packages = with pkgs; [];
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
   };
 
   # This value determines the NixOS release from which the default

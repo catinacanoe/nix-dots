@@ -1,10 +1,11 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, hyprfocus, ... }:
 let
     col = (import ../../rice).col; 
     gradient = "rgba(${col.fg}b0) rgba(00000000) rgba(${col.fg}b0) rgba(00000000) 45deg";
+    lib = inputs.home-manager.lib;
 in
 {
-    home.activation.hyprland = inputs.home-manager.lib.hm.dag.entryAfter ["onFilesChange"]
+    home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD ${pkgs.hyprland}/bin/hyprctl reload > /dev/null";
 
     wayland.windowManager.hyprland.extraConfig = ''
@@ -27,6 +28,9 @@ in
     bind = SUPER, mouse:274, killactive # super+mmb
     bindm = SUPER, mouse:272, movewindow # super+lmb
     bindm = SUPER, mouse:273, resizewindow # super+rmb
+
+    bezier=linear, 1, 1, 0, 0
+    bezier=easeout, 0.25, 1, 0.5, 1
 
     general {
         # defaults
@@ -76,9 +80,6 @@ in
 
     animations {
         enabled = true
-
-        bezier=linear, 1, 1, 0, 0
-        bezier=easeout, 0.25, 1, 0.5, 1
 
         animation = windowsIn,1,   5, easeout, slide # spawning
         animation = windowsOut,1,  2, linear,  slide # closing
@@ -186,5 +187,22 @@ in
     # hyprctl output create headless (see wiki)
 
     #windowrulev2 = opacity 1.0 override 1.0, title:^(.*Youtube.*)$
+
+    plugin:hyprfocus {
+        enabled = yes
+
+        keyboard_focus_animation = shrink
+        mouse_focus_animation = shrink
+
+        shrink {
+            shrink_percentage = 1.03
+    
+            in_bezier = easeout
+            in_speed = 1
+
+            out_bezier = linear
+            out_speed = 1
+        }
+    }
     '';
 }

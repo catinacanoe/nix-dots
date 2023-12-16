@@ -59,7 +59,7 @@ in
 	    foreground = "#${col.fg}";
 	    background = "#${col.bg}";
 	    color0  = "#${col.bg}";
-	    color8  = "#${col.bg}";
+	    color8  = "#${col.t2}";
 	    color1  = "#${col.red}";
 	    color9  = "#${col.red}";
 	    color2  = "#${col.green}";
@@ -72,8 +72,8 @@ in
 	    color13 = "#${col.purple}";
 	    color6  = "#${col.aqua}";
 	    color14 = "#${col.aqua}";
-	    color7  = "#${col.fg}";
-	    color15 = "#${col.t4}";
+	    color7  = "#${col.t4}";
+	    color15 = "#${col.fg}";
 	    mark1_foreground = "#${col.bg}";
 	    mark1_background = "#${col.blue}";
 	    mark2_foreground = "#${col.bg}";

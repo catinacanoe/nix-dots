@@ -1,5 +1,5 @@
 # home.nix
-{ config, pkgs, inputs, system, ... }:
+{ config, pkgs, inputs, system, hyprfocus, lib, ... }:
 let
     username = "canoe";
     homeDirectory = "/home/${username}";
@@ -22,12 +22,13 @@ in
         ./nvim
         ./gpg
         ./shell
+        ./starship
         ./xdg
         ./pass
-        ./mbsync
         ./git
         ./xioxide
         ./pw
+        ./mail
     ];
 
     services.ssh-agent.enable = true;

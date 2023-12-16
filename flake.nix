@@ -9,27 +9,46 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        xremap-flake.url = "github:xremap/nix-flake";
         hyprland.url = "github:hyprwm/Hyprland";
+        xremap-flake.url = "github:xremap/nix-flake";
+	hyprfocus-flake = {
+	    url = "github:vortexcoyote/hyprfocus";
+            inputs.hyprland.follows = "hyprland";
+	};
     };
 
     outputs = { ... }@inputs:
     let
         system = "x86_64-linux";
         pkgs = inputs.nixpkgs.legacyPackages.${system};
+
+	hyprfocus = inputs.hyprfocus-flake.packages.${pkgs.system}.hyprfocus;
+	lib = inputs.home-manager.lib;
     in
     {
         nixosConfigurations."nixpad" = inputs.nixpkgs.lib.nixosSystem {
             inherit system;
-            modules = [ ./config ];
+	    specialArgs = {
+	        inherit inputs;
+	    };
+            modules = [
+	        ./config
+	    ];
         };
 
-        homeConfigurations."canoe" = inputs.home-manager.lib.homeManagerConfiguration {
+        homeConfigurations."canoe" = lib.homeManagerConfiguration {
             inherit pkgs;
-            extraSpecialArgs = { inherit inputs system; };
+            extraSpecialArgs = {
+	        inherit inputs system hyprfocus;
+	    };
             modules = [
                 ./home
-                inputs.hyprland.homeManagerModules.default {wayland.windowManager.hyprland.enable = true;}
+                inputs.hyprland.homeManagerModules.default {
+		    wayland.windowManager.hyprland = {
+		        enable = true;
+		        plugins = [ hyprfocus ];
+		    };
+		}
             ];
         };
     };

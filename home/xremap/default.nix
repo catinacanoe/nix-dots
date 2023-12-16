@@ -1,4 +1,4 @@
-{ mod, inputs, ... }:
+{ mod, ... }:
 let
     mod = "super";
 
@@ -7,8 +7,7 @@ let
     programs = (import ./modules/programs.nix);
 in
 {
-    home.activation.xremap = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"]
-        "echo 'recommend running `xremap-start`'";
+    # activated due to the `exec` line in hypr conf
     xdg.configFile."xremap/config.yml".text = ''
 # default.nix
 default_mode: main
