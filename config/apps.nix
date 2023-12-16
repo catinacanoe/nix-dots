@@ -36,6 +36,12 @@
 	ripgrep
 	eza
 	starship
+	bat
+	thefuck
+	diff-so-fancy
+
+	# lib
+	python311Full
     
         # user apps
         neovim nvimpager

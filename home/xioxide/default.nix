@@ -30,7 +30,13 @@ r ${repos}/
         f flake.nix
         h home/
             d default.nix
+            ba bat/
+                d default.nix
+            di diffsofancy/
+                d default.nix
             gi git/
+                d default.nix
+            fk thefuck/
                 d default.nix
             gp gpg/
                 d default.nix
@@ -80,7 +86,7 @@ r ${repos}/
         r rice/
             d default.nix
             c colors/
-            d default.nix
+                d default.nix
                 c catppuccin.nix
                 g gruvbox.nix
                 r rosepine.nix

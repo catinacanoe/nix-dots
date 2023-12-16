@@ -58,9 +58,14 @@ in
 	e() { ${xioxide} cd "grep '/$'" pwd dirs $@ && ${n}; }
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
+	diff() { diff $@ -u | diff-so-fancy | less --tabs=4 -RF; }
 
-	for plugin in $ZDOTDIR/plugins/*; do
+	for plugin in $ZDOTDIR/plugins/pre/*.plugin.zsh; do
 	    source "$plugin"
+	done
+
+	for plugin in $ZDOTDIR/plugins/*.plugin.zsh; do
+	    zsh-defer source "$plugin"
 	done
 	'';
 

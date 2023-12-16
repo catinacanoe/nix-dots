@@ -26,9 +26,11 @@ in
         ./xdg
         ./pass
         ./git
+        ./thefuck
         ./xioxide
         ./pw
         ./mail
+        ./bat
         ./mako
     ];
 
