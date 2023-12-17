@@ -1,9 +1,5 @@
 { config, inputs, pkgs, ... }:
-let
-    rice = import ../../rice;
-    col = rice.col;
-    font_size = rice.font.size;
-in
+with (import ../../rice);
 {
     home.activation.kitty = inputs.home-manager.lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD kill $VERBOSE_ARG -SIGUSR1 $(${pkgs.procps}/bin/pgrep kitty)";
@@ -21,9 +17,6 @@ in
 	    "ctrl+shift+l" = "change_font_size all 0";
 	    "ctrl+shift+tab" = "change_font_size all +2.0";
 	    "ctrl+shift+u" = "change_font_size all -2.0";
-
-	    #"ctrl+shift+h" = "open_url_with_hints";
-	    # interesting option but doesn't work 4 me
 	};
 
 	settings = {
@@ -32,11 +25,16 @@ in
 	    window_alert_on_bell = false;
 	    confirm_os_window_close = 0;
 
-	    inherit font_size;
+	    font_size = font.size;
 	    window_padding_width = "4.7";
 	    scrollback_lines = 10000;
 	    update_check_interval = 0;
 	    mouse_hide_wait = 0;
+
+	    font_family = font.full.family;
+	    bold_font = font.full.bold;
+	    italic_font = font.full.italic;
+	    bold_italic_font = font.full.bold-italic;
 
 	    touch_scroll_multiplier = "1.7";
 	    wheel_scroll_multiplier = "5.0";
@@ -57,7 +55,7 @@ in
 	    undercurl_style = "thick-sparse";
 	    underline_hyperlinks = "always";
 
-	    background_opacity = "0.5";
+	    background_opacity = "0.7";
 	    foreground = "#${col.fg}";
 	    background = "#${col.bg}";
 	    color0  = "#${col.bg}";

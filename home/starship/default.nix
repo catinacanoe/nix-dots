@@ -10,7 +10,7 @@ in
 	let
 	    dirstyle = "cyan italic";
 	    gitstyle = "blue";
-	    gitstylealt = "yellow";
+	    gitstylealt = "yellow bold";
 	in
 	{
 	    add_newline = true;

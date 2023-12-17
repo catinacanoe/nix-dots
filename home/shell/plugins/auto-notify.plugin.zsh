@@ -5,24 +5,30 @@ export AUTO_NOTIFY_VERSION="0.8.1"
     export AUTO_NOTIFY_EXPIRE_TIME=8000
 # Threshold in seconds for when to automatically show a notification
 [[ -z "$AUTO_NOTIFY_THRESHOLD" ]] &&
-    export AUTO_NOTIFY_THRESHOLD=10
+    export AUTO_NOTIFY_THRESHOLD=7
 # List of commands/programs to ignore sending notifications for
 [[ -z "$AUTO_NOTIFY_IGNORE" ]] &&
     export AUTO_NOTIFY_IGNORE=(
         'h'
+        'lf'
         'vim'
         'nvim'
         'less'
-        'more'
         'man'
-        'tig'
         'watch'
         'git commit'
-        'top'
-        'htop'
-        'ssh'
-        'nano'
+	'git diff'
 	'bat'
+	'info'
+	'hst'
+    )
+# cancel the ignore list
+[[ -z "$AUTO_NOTIFY_WHITELIST" ]] &&
+    export AUTO_NOTIFY_WHITELIST=(
+	'hm'
+	'nx'
+	'home-manager'
+	'nix'
     )
 
 function _auto_notify_format() {

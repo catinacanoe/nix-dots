@@ -44,6 +44,11 @@ r ${repos}/
                 d default.nix
             ki kitty/
                 d default.nix
+            lf lf/
+                d default.nix
+                c colors
+                s scripts/
+                r run/
             ma mail/
                 d default.nix
                 c colors.nix

@@ -32,6 +32,7 @@ in
 	shellAliases = {
             hm = "home-manager switch --flake path:${repos}/nix-dots/ && xioxide reload";
             nx = "sudo nixos-rebuild switch --flake path:${repos}/nix-dots/";
+            hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
             sw = "swww";
             swki = "swww kill";
@@ -47,17 +48,28 @@ in
 	    ooooo = "e ../../../../..";
 	    oooooo = "e ../../../../../..";
 
-	    n = "eza -a1lo --no-user --no-permissions --no-filesize --no-time";
+	    k = "mkdir -p";
+	    l = "touch";
+	    m = "mv -i";
+	    c = "cp -ri";
+	    r = "trash-put";
+	    z = "exit";
+
+	    src = "exec zsh";
+
 	    t = "eza -T";
+	    n = "eza -a1lo --no-user --no-permissions --no-filesize --no-time";
 
 	    gp = "grep";
 	    gpi = "grep -i";
 	};
 
 	initExtra = with config.programs.zsh.shellAliases; ''
+	eo() { cd - > /dev/null && ${n}; }
 	e() { ${xioxide} cd "grep '/$'" pwd dirs $@ && ${n}; }
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
+	ke() { ${k} "$1" && e "$1"; }
 	diff() { diff $@ -u | diff-so-fancy | less --tabs=4 -RF; }
 
 	for plugin in $ZDOTDIR/plugins/pre/*.plugin.zsh; do

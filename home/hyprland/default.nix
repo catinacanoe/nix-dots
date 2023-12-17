@@ -135,8 +135,8 @@ in
         # allow_session_lock_restore = false # restore locking apps
   
         enable_swallow = true
-        swallow_regex = ^(kitty)$
-        # swallow_exception_regex = "" # TITLE regex to exclude specific windows
+        swallow_regex = ^(kitty)$ # class
+        swallow_exception_regex = ^(*dragon*)$ # title
 
         disable_autoreload = true
         disable_splash_rendering = true
@@ -199,10 +199,10 @@ in
         mouse_focus_animation = shrink
 
         shrink {
-            shrink_percentage = 1.03
+            shrink_percentage = 1.015
     
             in_bezier = easeout
-            in_speed = 1
+            in_speed = 0.7
 
             out_bezier = linear
             out_speed = 1
