@@ -60,6 +60,8 @@ r ${repos}/
                 d default.nix
             pa pass/
                 d default.nix
+            po power/
+                d default.nix
             pw pw/
                 d default.nix
             sh shell/

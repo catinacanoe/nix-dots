@@ -29,6 +29,7 @@ in
         ./thefuck
         ./xioxide
         ./pw
+        ./power
         ./lf
         ./mail
         ./bat

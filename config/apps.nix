@@ -1,12 +1,15 @@
 { config, pkgs, ... }:
 {
-    nixpkgs.config.allowUnfree = true;
-
     environment.pathsToLink = [ "/share/zsh" ]; # ZSH comp requirement
 
+    nixpkgs.config.allowUnfree = true;
     environment.systemPackages = with pkgs;
     let
-        hypr = writeShellScriptBin "hypr" "source $ZDOTDIR/.zshenv && Hyprland";
+        hypr = writeShellScriptBin "hypr" "Hyprland";
+        zargs = writeShellScriptBin "zargs" ''
+        [ "$1" == "-E" ] && esc="$2" && shift 2 || esc="%%%"
+        eval "$(cat | sed "s|$esc|$@|g")"
+	'';
     in
     [
         # cli utils
@@ -52,6 +55,15 @@
 	unrar
 	unzip
 	xz
+	ascii-image-converter
+	catimg
+	viu
+	libcaca
+	poppler_utils
+	ffmpegthumbnailer
+	imagemagick
+	audiowaveform
+	zargs
 
 	# lib
 	python311Full
@@ -74,6 +86,7 @@
         hyprland hypr
         pulseaudio pipewire
         waybar
+	swaylock-effects
 	mako
         swww
     ];

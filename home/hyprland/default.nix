@@ -136,7 +136,7 @@ in
   
         enable_swallow = true
         swallow_regex = ^(kitty)$ # class
-        swallow_exception_regex = ^(*dragon*)$ # title
+        #swallow_exception_regex = ^(*dragon*)$ # title # this completely removes swallowing :/
 
         disable_autoreload = true
         disable_splash_rendering = true

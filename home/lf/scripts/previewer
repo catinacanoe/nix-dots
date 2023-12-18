@@ -1,13 +1,7 @@
 #!/usr/bin/env bash
 
 image() {
-    FILE_PATH="$1"
-    X=$4
-    Y=$5
-    MW=$(($2 - 1))
-    MH=$3
-    ueberzugpp cmd -s "$UB_SOCKET" -a add -i PREVIEW -x "$X" -y "$Y" --max-width "$MW" --max-height "$MH" -f "$FILE_PATH"
-    exit 1
+    img2txt "$1" -W "$2" -H "$3"
 }
 
 batorcat() {
@@ -44,22 +38,21 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | tr '[:upper:]' '[:lower:]')" in
         ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | batorcat --language=csv
         ;;
     *.wav | *.mp3 | *.flac | *.m4a | *.wma | *.ape | *.ac3 | *.og[agx] | *.spx | *.opus | *.as[fx] | *.mka)
-        media "$1"
+	[ ! -f "${CACHE}.jpg" ] && audiowaveform -i "$1" -o "${CACHE}.png" --background-color 000000 --waveform-color ffffff --no-axis-labels
+        image "${CACHE}.png" "$2" "$3" "$4" "$5"
         ;;
-    *.pdf)
-	media "$1"
-        ;;
+    *.pdf) pdftotext -layout "$1" /dev/stdout ;;
     *.avi | *.mp4 | *.wmv | *.dat | *.3gp | *.ogv | *.mkv | *.mpg | *.mpeg | *.vob | *.fl[icv] | *.m2v | *.mov | *.webm | *.ts | *.mts | *.m4v | *.r[am] | *.qt | *.divx)
-	media "$1"
+	[ ! -f "${CACHE}.jpg" ] && ffmpegthumbnailer -i "$1" -o "${CACHE}.jpg" -s 0 -q 5
+        image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
         ;;
     *.bmp | *.jpg | *.jpeg | *.png | *.xpm | *.webp | *.gif | *.jfif)
-	media "$1"
+	image "$1" "$2" "$3" "$4" "$5"
         ;;
     *.svg)
-	media "$1"
+	[ ! -f "${CACHE}.jpg" ] && convert "$1" "${CACHE}.jpg"
+        image "${CACHE}.jpg" "$2" "$3" "$4" "$5"
         ;;
-    *)
-        batorcat "$1"
-        ;;
+    *) batorcat "$1" ;;
 esac
 exit 0

@@ -12,15 +12,24 @@ in
 	recursive = true;
     };
 
-    programs.zsh.shellAliases.a = "lf";
+    programs.zsh.initExtra = ''
+    lfcd() {
+        tmp="$(mktemp -uq)"
+        trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
+        lf -last-dir-path="$tmp" "$@"
+        if [ -f "$tmp" ]; then
+            dir="$(cat "$tmp")"
+            [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+        fi
+    }
+    '';
 
-    # maybe readd typetonav
+    # maybe re-add typetonav
     programs.lf =
     {
         enable = true;
 	settings = 
         let
-            cursor = ''\033[3m\033[1m>'';
 	    bold = ''\033[1m'';
 	    italic = ''\033[3m'';
 	    inverse = ''\033[7m'';
@@ -29,18 +38,38 @@ in
 	    shell = "zsh";
 	    hidden = true;
 	    ignorecase = true;
-	    icons = false;
 	    ifs = ''\n'';
-	    scrolloff = 7;
+	    scrolloff = 3;
 	    tabstop = 4;
 	    cursorpreviewfmt = "${bold+italic}>";
 	    cursorparentfmt = "${bold+italic}>";
 	    cursoractivefmt = "${bold+italic+inverse}";
+	    errorfmt = ''\033[0;31;13m'';
 	    previewer = "${scriptdir}/previewer";
+	    globsearch = true;
 	};
-	commands = {
+	commands = 
+	let
+	    inherit (config.programs.zsh.shellAliases) xioxide;
+	in
+	{
 	    custom_open = ''%${scriptdir}/opener'';
 	    custom_wall = ''%swww img "$f"'';
+
+	    custom_ee = "cd ~";
+	    custom_eo = ''%lf -remote "send $id cd \"$OLDPWD\""'';
+	    custom_e = ''%{{
+	        printf " e "
+		read ans
+		target="$(${xioxide} "" "grep '/$'" pwd dirs $ans)"
+		lf --remote "send $id cd \"$target\""
+	    }}'';
+	    custom_h = ''%{{
+	        printf " h "
+		read ans
+		target="$(${xioxide} "" "grep -v '/$'" pwd dirs $ans)"
+		lf --remote "send $id \$$EDITOR \"$target\""
+	    }}'';
 
 	    custom_mkdir = ''%{{
                 printf " dir name: "
@@ -100,10 +129,15 @@ in
 	    "<right>" = null;
 	    "q" = null;
 	    "f" = null;
-	    "h" = null;
 	    "v" = null;
-	    "e" = null;
 	    "x" = null;
+	    "e" = null;
+	    "h" = null;
+
+	    "e<enter>" = "custom_ee";
+	    "eo" = "custom_eo";
+	    "e<space>" = "custom_e";
+	    "h<space>" = "custom_h";
 
 	    ";" = "quit";
 	    "n" = "updir";

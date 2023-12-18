@@ -1,7 +1,9 @@
-{ config, inputs, ... }:
+{ config, inputs, pkgs, ... }:
 let
     home = config.home.homeDirectory;
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
+  
+    inherit (import ../../rice) col;
 in
 {
     xdg.configFile."zsh/plugins" = {
@@ -29,7 +31,8 @@ in
 	    share = true; # shared hist between files
 	};
 
-	shellAliases = {
+	shellAliases =
+	{
             hm = "home-manager switch --flake path:${repos}/nix-dots/ && xioxide reload";
             nx = "sudo nixos-rebuild switch --flake path:${repos}/nix-dots/";
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
@@ -55,6 +58,9 @@ in
 	    r = "trash-put";
 	    z = "exit";
 
+	    a = "lf";
+	    A = "lfcd";
+
 	    src = "exec zsh";
 
 	    t = "eza -T";
@@ -62,16 +68,19 @@ in
 
 	    gp = "grep";
 	    gpi = "grep -i";
+            
 	};
 
-	initExtra = with config.programs.zsh.shellAliases; ''
-	eo() { cd - > /dev/null && ${n}; }
+	initExtraFirst = with config.programs.zsh.shellAliases; ''
 	e() { ${xioxide} cd "grep '/$'" pwd dirs $@ && ${n}; }
+	eo() { cd - > /dev/null && ${n}; }
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
 	ke() { ${k} "$1" && e "$1"; }
 	diff() { diff $@ -u | diff-so-fancy | less --tabs=4 -RF; }
+        '';
 
+	initExtra = ''
 	for plugin in $ZDOTDIR/plugins/pre/*.plugin.zsh; do
 	    source "$plugin"
 	done
@@ -79,6 +88,27 @@ in
 	for plugin in $ZDOTDIR/plugins/*.plugin.zsh; do
 	    zsh-defer source "$plugin"
 	done
+
+	# TTY colors
+	if [ "$TERM" = "linux" ]; then
+            echo -en "\e]P0${col.bg}" #black
+            echo -en "\e]P8${col.t2}" #darkgrey
+            echo -en "\e]P1${col.brown}" #darkred
+            echo -en "\e]P9${col.red}" #red
+            echo -en "\e]P2${col.green}" #darkgreen
+            echo -en "\e]PA${col.green}" #green
+            echo -en "\e]P3${col.orange}" #brown
+            echo -en "\e]PB${col.yellow}" #yellow
+            echo -en "\e]P4${col.blue}" #darkblue
+            echo -en "\e]PC${col.blue}" #blue
+            echo -en "\e]P5${col.purple}" #darkmagenta
+            echo -en "\e]PD${col.purple}" #magenta
+            echo -en "\e]P6${col.aqua}" #darkcyan
+            echo -en "\e]PE${col.aqua}" #cyan
+            echo -en "\e]P7${col.t4}" #lightgrey
+            echo -en "\e]PF${col.fg}" #white
+            clear #for background artifacting
+        fi
 	'';
 
 	completionInit = ''
