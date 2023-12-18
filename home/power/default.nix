@@ -6,7 +6,6 @@ with (import ../../rice);
     let
         swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
         hyprctl = "${pkgs.hyprland}/bin/hyprctl";
-        systemctl = "${pkgs.systemdMinimal}/bin/systemctl";
     in
     [(pkgs.writeShellScriptBin "power" /*bash*/ ''
     options="$(echo 'lock_suspend_reload_tty_reboot_shutdown' | tr '_' '\n')"
@@ -18,9 +17,11 @@ with (import ../../rice);
         choice="$(echo "$options" | grep "^$1" | head -n 1)"
     fi
 
+    delay() { sleep 0.2; }
+
     case "$choice" in
-	lock) ${swaylock} ;;
-	suspend) ${swaylock} --daemonize && sleep 1 && ${systemctl} suspend ;;
+	lock) delay && ${swaylock} ;;
+	suspend) delay && ${swaylock} && delay && systemctl suspend ;;
 	reload) ${hyprctl} dispatch forcerendererreload ;;
 	tty) ${hyprctl} kill ;;
         reboot) reboot ;;
@@ -31,6 +32,7 @@ with (import ../../rice);
     programs.swaylock = {
         enable = true;
         settings = {
+	    daemonize = true;
             screenshots = true;
             effect-blur = "7x5";
             effect-vignette = "0.5:0.5";
@@ -39,7 +41,7 @@ with (import ../../rice);
             font-size = "500";
 
             fade-in = "0.2";
-            grace = "2";
+            grace = "0.5";
 
             text-color = col.fg;
             text-clear-color = col.bg;

@@ -15,11 +15,8 @@ keymap:
   - mode: main
     remap:
         ${mod}-semicolon:
-            ${hypr "killactive"}
-        ${mod}-shift-semicolon:
-            ${hypr "forcerendererreload"}
-        ${mod}-ctrl-semicolon:
-            ${launch "hyprctl kill"}
+            remap:
+                ${(import ./modules/power.nix) { inherit mod; }}
 
         ${(import ./modules/windows.nix) { inherit mod; }}
         ${(import ./modules/workspaces.nix) { inherit mod; }}
