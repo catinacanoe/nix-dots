@@ -8,7 +8,7 @@ with (import ../../rice);
         hyprctl = "${pkgs.hyprland}/bin/hyprctl";
     in
     [(pkgs.writeShellScriptBin "power" /*bash*/ ''
-    options="$(echo 'lock_suspend_reload_tty_reboot_shutdown' | tr '_' '\n')"
+    options="$(echo 'lock_suspend_reload_tty_cycle_shutdown' | tr '_' '\n')"
 
     if [ -z "$1" ]; then
         # interactive menu
@@ -19,12 +19,14 @@ with (import ../../rice);
 
     delay() { sleep 0.2; }
 
+    lock() { ${swaylock} --image="$(swww query | sed 's|^.*image: ||')" "$@"; }
+
     case "$choice" in
-	lock) delay && ${swaylock} ;;
-	suspend) delay && ${swaylock} && delay && systemctl suspend ;;
+	lock) delay && lock --grace=0.5 ;;
+	suspend) delay && lock && delay && systemctl suspend ;;
 	reload) ${hyprctl} dispatch forcerendererreload ;;
 	tty) ${hyprctl} kill ;;
-        reboot) reboot ;;
+        cycle) reboot ;;
         shutdown) shutdown now ;;
     esac
     '')];
@@ -33,49 +35,50 @@ with (import ../../rice);
         enable = true;
         settings = {
 	    daemonize = true;
-            screenshots = true;
             effect-blur = "7x5";
             effect-vignette = "0.5:0.5";
 
             font = font.name;
-            font-size = "500";
+            font-size = "300";
 
             fade-in = "0.2";
-            grace = "0.5";
 
             text-color = col.fg;
             text-clear-color = col.bg;
             text-ver-color = col.aqua;
             text-wrong-color = col.red;
-            text-caps-lock-color = col.orange;
+            text-caps-lock-color = col.purple;
 
             clock = true;
             timestr = "";
-            datestr = "locked";
+            datestr = "Locked";
 
             indicator = true;
             indicator-caps-lock = true;
             ignore-empty-password = true;
             disable-caps-lock-text = true;
 
-            indicator-radius = "500";
-            indicator-thickness = "20";
+            indicator-radius = "350";
+            indicator-thickness = "12";
 
-            key-hl-color = "00000000";
-            bs-hl-color = "00000000";
-            caps-lock-key-hl-color = "00000000";
-            caps-lock-bs-hl-color = "00000000";
+            key-hl-color = col.fg;
+            bs-hl-color = col.bg;
+            caps-lock-key-hl-color = col.purple;
+            caps-lock-bs-hl-color = col.purple;
+
             separator-color = "00000000";
             inside-color = "00000000";
             inside-clear-color = "00000000";
             inside-caps-lock-color = "00000000";
             inside-ver-color = "00000000";
             inside-wrong-color = "00000000";
+
             ring-color = "00000000";
             ring-clear-color = "00000000";
             ring-caps-lock-color = "00000000";
             ring-ver-color = "00000000";
             ring-wrong-color = "00000000";
+
             line-color = "00000000";
             line-clear-color = "00000000";
             line-caps-lock-color = "00000000";

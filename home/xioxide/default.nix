@@ -64,6 +64,17 @@ r ${repos}/
                 d default.nix
             pw pw/
                 d default.nix
+            re remap/
+                d default.nix
+                f fn/
+                    l launch.nix
+                    h hypr.nix
+                m modules/
+                    pe peripherals.nix
+                    po power.nix
+                    pr programs.nix
+                    wi windows.nix
+                    wo workspaces.nix
             sh shell/
                 d default.nix
                 p plugins/
@@ -73,10 +84,6 @@ r ${repos}/
                 d default.nix
             xi xioxide/
                 d default.nix
-            xr xremap/
-                d default.nix
-                f fn/
-                m modules/
         c config/
             d default.nix
             f fonts.nix

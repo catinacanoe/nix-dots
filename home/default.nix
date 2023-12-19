@@ -5,7 +5,7 @@ let
     homeDirectory = "/home/${username}";
   
     xremap = inputs.xremap-flake.packages.${system}.default;
-    xremap-start = (import ./xremap/start.nix { inherit pkgs homeDirectory xremap; });
+    xremap-start = (import ./remap/start.nix { inherit pkgs homeDirectory xremap; });
 in
 {
     programs.home-manager.enable = true;
@@ -18,7 +18,7 @@ in
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
         ./hyprland
         ./kitty
-        ./xremap
+        ./remap
         ./nvim
         ./gpg
         ./shell

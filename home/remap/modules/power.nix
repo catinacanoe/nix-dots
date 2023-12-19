@@ -15,5 +15,7 @@ in
                     ${launch "power suspend"}
                 ${mod}-r:
                     ${launch "power reload"}
+        ${mod}-shift-ctrl-semicolon:
+            ${launch "hyprctl exit"}
 # power.nix
 ''

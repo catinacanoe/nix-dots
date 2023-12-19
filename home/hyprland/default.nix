@@ -16,22 +16,11 @@ in
     exec-once = kitty
     exec-once = swww init
     exec-once = waybar
-    exec = xremap-start
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
     # bindl=,switch:[switch name],exec,swaylock # see wiki, bind#switches
     # use pass dispatcher to pass binds to certain apps # see wiki
-
-    bind = SUPER_ALT, F4, exit,
-    bind = , XF86MonBrightnessUp, exec, brightnessctl set 5%+
-    bind = , XF86MonBrightnessDown, exec, brightnessctl set 5%-
-    bind = CTRL, XF86MonBrightnessUp, exec, brightnessctl set 1%+
-    bind = CTRL, XF86MonBrightnessDown, exec, brightnessctl set 1%-
-
-    bind = SUPER, mouse:274, killactive # super+mmb
-    bindm = SUPER, mouse:272, movewindow # super+lmb
-    bindm = SUPER, mouse:273, resizewindow # super+rmb
 
     bezier=linear, 1, 1, 0, 0
     bezier=easeout, 0.25, 1, 0.5, 1
