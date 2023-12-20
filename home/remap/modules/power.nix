@@ -16,6 +16,6 @@ in
                 ${mod}-r:
                     ${launch "power reload"}
         ${mod}-shift-ctrl-semicolon:
-            ${launch "hyprctl exit"}
+            ${hypr "exit"}
 # power.nix
 ''

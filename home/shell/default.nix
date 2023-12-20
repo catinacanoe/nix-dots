@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }@args:
 let
     home = config.home.homeDirectory;
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
@@ -33,7 +33,6 @@ in
 
 	shellAliases =
 	{
-            hm = "home-manager switch --flake path:${repos}/nix-dots/ && xioxide reload";
             nx = "sudo nixos-rebuild switch --flake path:${repos}/nix-dots/";
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
@@ -78,6 +77,43 @@ in
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
 	ke() { ${k} "$1" && e "$1"; }
 	diff() { diff $@ -u | diff-so-fancy | less --tabs=4 -RF; }
+        hm() {
+	    [ -z "$1" ] && arg="h" || arg="$1"
+
+            if [[ "$arg" == *"h"* ]]; then
+	        home-manager switch --flake path:${repos}/nix-dots/ || exit
+	    fi
+
+            if [[ "$arg" == *"f"* ]]; then
+	        echo -e "\nACTIVATING FIREFOX"
+	        ${import ../firefox/activate.nix args}
+	    fi
+
+            if [[ "$arg" == *"x"* ]]; then
+	        echo -e "\nACTIVATING XIOXIDE"
+	        ${import ../xioxide/activate.nix args}
+	    fi
+	}
+	function x() {
+            if [ -f "$1" ] ; then
+                case "$1" in
+                    *.tar.bz2) tar xjf    "$1" ;;
+                    *.tar.gz)  tar xzf    "$1" ;;
+                    *.bz2)     bunzip2    "$1" ;;
+                    *.rar)     unrar x    "$1" ;;
+                    *.gz)      gunzip     "$1" ;;
+                    *.tar)     tar xf     "$1" ;;
+                    *.tbz2)    tar xjf    "$1" ;;
+                    *.tgz)     tar xzf    "$1" ;;
+                    *.zip)     unzip      "$1" ;;
+                    *.Z)       uncompress "$1" ;;
+                    *.7z)      7z x       "$1" ;;
+                    *)         echo "'$1' cannot be extracted via ex()" ;;
+                esac
+            else
+                echo "'$1' is not a valid file"
+            fi
+        }
         '';
 
 	initExtra = ''

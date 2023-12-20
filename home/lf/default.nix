@@ -50,11 +50,32 @@ in
 	};
 	commands = 
 	let
-	    inherit (config.programs.zsh.shellAliases) xioxide;
+	    inherit (config.programs.zsh.shellAliases) xioxide swi;
 	in
 	{
 	    custom_open = ''%${scriptdir}/opener'';
-	    custom_wall = ''%swww img "$f"'';
+	    custom_wall = ''%${swi} "$f"'';
+
+	    custom_extract = ''%{{
+                if [ -f "$f" ] ; then
+                    case "$f" in
+                        *.tar.bz2) tar xjf    "$f" ;;
+                        *.tar.gz)  tar xzf    "$f" ;;
+                        *.bz2)     bunzip2    "$f" ;;
+                        *.rar)     unrar x    "$f" ;;
+                        *.gz)      gunzip     "$f" ;;
+                        *.tar)     tar xf     "$f" ;;
+                        *.tbz2)    tar xjf    "$f" ;;
+                        *.tgz)     tar xzf    "$f" ;;
+                        *.zip)     unzip      "$f" ;;
+                        *.Z)       uncompress "$f" ;;
+                        *.7z)      7z x       "$f" ;;
+                        *)         echo "'$f' cannot be extracted via ex()" ;;
+                    esac
+                else
+                    echo "'$f' is not a valid file"
+                fi
+	    }}'';
 
 	    custom_ee = "cd ~";
 	    custom_eo = ''%lf -remote "send $id cd \"$OLDPWD\""'';
@@ -130,7 +151,6 @@ in
 	    "q" = null;
 	    "f" = null;
 	    "v" = null;
-	    "x" = null;
 	    "e" = null;
 	    "h" = null;
 
@@ -139,6 +159,7 @@ in
 	    "e<space>" = "custom_e";
 	    "h<space>" = "custom_h";
 
+	    "<c-r>" = "reload";
 	    ";" = "quit";
 	    "n" = "updir";
 	    "a" = "up";
@@ -159,6 +180,7 @@ in
 	    "c" = "custom_chmod";
 	    "." = "set hidden!";
 	    "w" = "custom_wall";
+	    "x" = "custom_extract";
 	    "<c-d>" = "custom_drag";
 	};
     };

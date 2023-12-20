@@ -1,4 +1,4 @@
-{ config, inputs, pkgs, hyprfocus, ... }:
+{ config, inputs, pkgs, ... }:
 let
     lib = inputs.home-manager.lib;
 
@@ -16,6 +16,10 @@ in
     exec-once = kitty
     exec-once = swww init
     exec-once = waybar
+
+    #windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
+    #windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class^(firefox)$
+    #windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
@@ -50,7 +54,7 @@ in
         # screen_shader (custom shader to apply @ end of pipeline)
         rounding = ${toString window.radius}
         fullscreen_opacity = 1.0
-        active_opacity = 0.95
+        active_opacity = 0.9
         inactive_opacity = 0.8
         drop_shadow = false
 
@@ -178,8 +182,6 @@ in
     }
 
     # hyprctl output create headless (see wiki)
-
-    #windowrulev2 = opacity 1.0 override 1.0, title:^(.*Youtube.*)$
 
     plugin:hyprfocus {
         enabled = yes

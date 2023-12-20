@@ -28,6 +28,27 @@ r ${repos}/
         f functions.sh
     n nix-dots/
         f flake.nix
+        c config/
+            d default.nix
+            f fonts.nix
+            e environment.nix
+            l locale.nix
+            a apps.nix
+            p peripheral.nix
+            s services.nix
+        p private/
+            m mail/
+                c canoe.nix
+                m marklif.nix
+                s school.nix
+            f firefox/firefox/main/
+        r rice/
+            d default.nix
+            c colors/
+                d default.nix
+                c catppuccin.nix
+                g gruvbox.nix
+                r rosepine.nix
         h home/
             d default.nix
             ba bat/
@@ -36,6 +57,9 @@ r ${repos}/
                 d default.nix
             gi git/
                 d default.nix
+            fi firefox/
+                a activate.nix
+                s sync
             fu thefuck/
                 d default.nix
             gp gpg/
@@ -84,32 +108,21 @@ r ${repos}/
                 d default.nix
             xi xioxide/
                 d default.nix
-        c config/
-            d default.nix
-            f fonts.nix
-            e environment.nix
-            l locale.nix
-            a apps.nix
-            p peripheral.nix
-            s services.nix
-        p private/
-            m mail/
-                c canoe.nix
-                m marklif.nix
-                s school.nix
-        r rice/
-            d default.nix
-            c colors/
-                d default.nix
-                c catppuccin.nix
-                g gruvbox.nix
-                r rosepine.nix
+                a activate.nix
 c ${home}/crypt/
     p pass/
         m .map
 d ${download}/
 p ${pictures}/
     w wall/
+        d digital/
+            a anime/
+            b abstract/
+            r art/
+            p pixel/
+        i irl/
+            p plant/
+            l landscape/
 x ${documents}/
     m mail/
         c canoe/

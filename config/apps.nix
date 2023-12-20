@@ -2,7 +2,10 @@
 {
     environment.pathsToLink = [ "/share/zsh" ]; # ZSH comp requirement
 
-    nixpkgs.config.allowUnfree = true;
+    nixpkgs.config = {
+        allowUnfree = true;
+    };
+
     environment.systemPackages = with pkgs;
     let
         hypr = writeShellScriptBin "hypr" "Hyprland";
@@ -70,7 +73,7 @@
 	python311Packages.docx2txt
     
         # user apps
-        neovim nvimpager
+        neovim brave nvimpager
         firefox ungoogled-chromium
 	networkmanagerapplet protonvpn-cli_2
 	lf
