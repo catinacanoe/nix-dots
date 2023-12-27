@@ -45,9 +45,9 @@ with (import ../../rice);
 
             text-color = col.fg;
             text-clear-color = col.bg;
-            text-ver-color = col.aqua;
-            text-wrong-color = col.red;
-            text-caps-lock-color = col.purple;
+            text-ver-color = col.blue;
+            text-wrong-color = col.purple;
+            text-caps-lock-color = col.aqua;
 
             clock = true;
             timestr = "";
@@ -63,8 +63,8 @@ with (import ../../rice);
 
             key-hl-color = col.fg;
             bs-hl-color = col.bg;
-            caps-lock-key-hl-color = col.purple;
-            caps-lock-bs-hl-color = col.purple;
+            caps-lock-key-hl-color = col.aqua;
+            caps-lock-bs-hl-color = col.aqua;
 
             separator-color = "00000000";
             inside-color = "00000000";

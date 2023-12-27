@@ -67,6 +67,7 @@
 	imagemagick
 	audiowaveform
 	zargs
+	shellcheck
 
 	# lib
 	python311Full

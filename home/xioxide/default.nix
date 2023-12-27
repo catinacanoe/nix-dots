@@ -16,6 +16,9 @@ with config.xdg.userDirs;
 t /
     m mnt/
 r ${repos}/
+    c crypt/
+        r README.md
+        m main.sh
     x xioxide/
         r README.md
         m main.sh
@@ -52,6 +55,8 @@ r ${repos}/
         h home/
             d default.nix
             ba bat/
+                d default.nix
+            cr crypt/
                 d default.nix
             di diffsofancy/
                 d default.nix

@@ -17,6 +17,6 @@ with schemes."${theme-name}";
         t0 t1 t2 t3 t4 t5 t6 t7
 	red orange yellow green aqua blue purple brown;
     bg = t0;
-    mg = t3;
+    mg = t4;
     fg = t7;
 }

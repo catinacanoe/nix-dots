@@ -19,6 +19,7 @@ in
         ./hyprland
         ./kitty
         ./remap
+        ./crypt
         ./nvim
         ./gpg
         ./shell

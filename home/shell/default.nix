@@ -43,7 +43,7 @@ in
 
             vpn = "sudo protonvpn";
 
-	    o = "e ..";
+	    o = "e ../";
 	    oo = "e ../..";
 	    ooo = "e ../../..";
 	    oooo = "e ../../../..";
@@ -62,7 +62,7 @@ in
 
 	    src = "exec zsh";
 
-	    t = "eza -T";
+	    t = "eza -Ta";
 	    n = "eza -a1lo --no-user --no-permissions --no-filesize --no-time";
 
 	    gp = "grep";
@@ -76,7 +76,7 @@ in
 	h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
 	w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
 	ke() { ${k} "$1" && e "$1"; }
-	diff() { diff $@ -u | diff-so-fancy | less --tabs=4 -RF; }
+	dsf() { diff -u $@  | diff-so-fancy | less --tabs=4 -RF; }
         hm() {
 	    [ -z "$1" ] && arg="h" || arg="$1"
 
@@ -105,7 +105,7 @@ in
                     *.tar)     tar xf     "$1" ;;
                     *.tbz2)    tar xjf    "$1" ;;
                     *.tgz)     tar xzf    "$1" ;;
-                    *.zip)     unzip      "$1" ;;
+                    *.zip|*.xpi)     unzip      "$1" ;;
                     *.Z)       uncompress "$1" ;;
                     *.7z)      7z x       "$1" ;;
                     *)         echo "'$1' cannot be extracted via ex()" ;;
