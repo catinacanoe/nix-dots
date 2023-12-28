@@ -19,9 +19,11 @@ r ${repos}/
     c crypt/
         r README.md
         m main.sh
+        f fn/
     g gitutils/
         r README.md
         m main.sh
+        f fn/
     x xioxide/
         r README.md
         m main.sh
@@ -29,8 +31,7 @@ r ${repos}/
         l reload.sh
     p pw/
         r README.md
-        m man.txt
-        d default.sh
+        m main.sh
         f functions.sh
     n nix-dots/
         f flake.nix
@@ -61,15 +62,13 @@ r ${repos}/
                 d default.nix
             cr crypt/
                 d default.nix
-            di diffsofancy/
-                d default.nix
+            fi firefox/
+                a activate.nix
+                s sync
             gi git/
                 d default.nix
             gu gitutils/
                 d default.nix
-            fi firefox/
-                a activate.nix
-                s sync
             fu thefuck/
                 d default.nix
             gp gpg/
@@ -109,11 +108,12 @@ r ${repos}/
                     pr programs.nix
                     wi windows.nix
                     wo workspaces.nix
-            si sioyek/
-                d default.nix
             sh shell/
                 d default.nix
                 p plugins/
+                g modules/git.nix
+            si sioyek/
+                d default.nix
             st starship/
                 d default.nix
             xd xdg/
