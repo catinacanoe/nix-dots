@@ -32,6 +32,7 @@ in
 	};
 
 	shellAliases =
+	(import ./modules/git.nix args) //
 	{
             nx = "sudo nixos-rebuild switch --flake path:${repos}/nix-dots/";
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
@@ -67,7 +68,6 @@ in
 
 	    gp = "grep";
 	    gpi = "grep -i";
-            
 	};
 
 	initExtraFirst = with config.programs.zsh.shellAliases; ''
@@ -80,18 +80,27 @@ in
         hm() {
 	    [ -z "$1" ] && arg="h" || arg="$1"
 
+	    handled=""
+
             if [[ "$arg" == *"h"* ]]; then
-	        home-manager switch --flake path:${repos}/nix-dots/ || exit
+	        home-manager switch --flake path:${repos}/nix-dots/ || return
+		handled="true"
 	    fi
 
             if [[ "$arg" == *"f"* ]]; then
 	        echo -e "\nACTIVATING FIREFOX"
 	        ${import ../firefox/activate.nix args}
+		handled="true"
 	    fi
 
             if [[ "$arg" == *"x"* ]]; then
 	        echo -e "\nACTIVATING XIOXIDE"
 	        ${import ../xioxide/activate.nix args}
+		handled="true"
+	    fi
+
+	    if [ -z "$handled" ]; then
+	        home-manager --flake path:${repos}/nix-dots/ $@
 	    fi
 	}
 	function x() {

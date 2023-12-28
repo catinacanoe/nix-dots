@@ -11,6 +11,11 @@
         agentTimeout = "5h";
     };
 
+    services.atd = {
+        enable = true;
+	allowEveryone = true;
+    };
+
     services.logind = {
 	powerKey = "ignore";
         powerKeyLongPress = "ignore";

@@ -18,6 +18,7 @@ in
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
         ./hyprland
         ./kitty
+        ./sioyek
         ./remap
         ./crypt
         ./nvim
@@ -27,6 +28,7 @@ in
         ./xdg
         ./pass
         ./git
+        ./gitutils
         ./thefuck
         ./xioxide
         ./pw

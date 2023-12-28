@@ -19,4 +19,13 @@ with schemes."${theme-name}";
     bg = t0;
     mg = t4;
     fg = t7;
+
+    rgb01 = with rgb01_; {
+        inherit
+            t0 t1 t2 t3 t4 t5 t6 t7
+	    red orange yellow green aqua blue purple brown;
+        bg = t0;
+        mg = t4;
+        fg = t7;
+    };
 }

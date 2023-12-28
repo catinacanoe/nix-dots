@@ -38,6 +38,7 @@
         isync
 	bind
 	bc
+	at
 	fzf
 	ripgrep
 	eza
@@ -74,16 +75,17 @@
 	python311Packages.docx2txt
     
         # user apps
-        neovim brave nvimpager
-        firefox ungoogled-chromium
+        neovim nvimpager
+        firefox ungoogled-chromium brave
 	networkmanagerapplet protonvpn-cli_2
-	lf
+	lf libqalculate
 
         kitty
         mpv-unwrapped
         tofi
         neomutt
         htop-vim
+	sioyek
 	zsh
 
         # core system apps

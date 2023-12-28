@@ -1,3 +1,5 @@
+{ config, ... }:
+''
 #!/usr/bin/env bash
 
 type="$(file --dereference --brief --mime-type -- "$f")"
@@ -7,6 +9,7 @@ case "$type" in
     image/*) mpv "$f" ;;
     video/*) mpv "$f" ;;
     audio/*) mpv "$f" ;;
-    */pdf) notify-send "no pdf editor installed yet" ;;
+    */pdf) ${config.programs.zsh.shellAliases.sy} "$f" ;;
     *) lf --remote "send $id \$nvim \"$f\"" ;;
 esac
+''

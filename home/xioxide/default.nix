@@ -19,6 +19,9 @@ r ${repos}/
     c crypt/
         r README.md
         m main.sh
+    g gitutils/
+        r README.md
+        m main.sh
     x xioxide/
         r README.md
         m main.sh
@@ -62,6 +65,8 @@ r ${repos}/
                 d default.nix
             gi git/
                 d default.nix
+            gu gitutils/
+                d default.nix
             fi firefox/
                 a activate.nix
                 s sync
@@ -104,6 +109,8 @@ r ${repos}/
                     pr programs.nix
                     wi windows.nix
                     wo workspaces.nix
+            si sioyek/
+                d default.nix
             sh shell/
                 d default.nix
                 p plugins/

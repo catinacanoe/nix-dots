@@ -7,9 +7,10 @@ let
 in
 {
     xdg.configFile."lf/colors".source = ./colors;
-    xdg.configFile."lf/scripts" = {
-        source = ./scripts;
-	recursive = true;
+    xdg.configFile."lf/scripts/previewer".source = ./scripts/previewer;
+    xdg.configFile."lf/scripts/opener"= {
+        executable = true;
+        text = (import ./scripts/opener.nix { inherit config; });
     };
 
     programs.zsh.initExtra = ''
