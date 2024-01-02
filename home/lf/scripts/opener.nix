@@ -1,5 +1,5 @@
 { config, ... }:
-''
+/* bash */ ''
 #!/usr/bin/env bash
 
 type="$(file --dereference --brief --mime-type -- "$f")"

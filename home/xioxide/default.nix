@@ -1,9 +1,8 @@
-{ config, pkgs, inputs, ... }:
+{ config, ... }:
 let
     home = config.home.homeDirectory;
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
 
-    lib = inputs.home-manager.lib;
     xioxide_bin = "${config.home.sessionVariables.XIOXIDE_PATH}/main.sh";
 in
 with config.xdg.userDirs;
@@ -12,7 +11,7 @@ with config.xdg.userDirs;
     programs.zsh.shellAliases.xioxide="source ${xioxide_bin}";
     home.sessionVariables.XIOXIDE_PATH = "${extraConfig.XDG_REPOSITORY_DIR}/xioxide";
 
-    xdg.configFile."xioxide/dirs.conf".text = ''
+    xdg.configFile."xioxide/dirs.conf".text = /* bash */ ''
 t /
     m mnt/
 r ${repos}/

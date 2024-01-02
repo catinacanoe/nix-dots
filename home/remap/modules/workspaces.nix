@@ -2,7 +2,7 @@
 let
     hypr = (import ../fn/hypr.nix);
 
-    wsbind = { key, ws, pad ? "                " }: ''
+    wsbind = { key, ws, pad ? "                " }: /* yaml */ ''
     # wsbind
     ${pad}${mod}-${key}:
         ${pad}${hypr "workspace ${ws}"}
@@ -12,7 +12,7 @@ let
         ${pad}${hypr "movetoworkspacesilent ${ws}"}
     # wsbind'';
 
-    wsmon = { offset }: ''
+    wsmon = { offset }: /* yaml */ ''
     # wsmon
                     ${wsbind { key = "r"; ws = "${offset}1"; }}
                     ${wsbind { key = "s"; ws = "${offset}2"; }}
@@ -25,7 +25,7 @@ let
                     ${wsbind { key = "o"; ws = "${offset}8"; }}
     # wsmon'';
 in
-''
+/* yaml */ ''
 # workspaces.nix
         ${wsbind { key = "c"; ws = "e-1"; pad = "        "; }}
         ${wsbind { key = "y"; ws = "e+1"; pad = "        "; }}

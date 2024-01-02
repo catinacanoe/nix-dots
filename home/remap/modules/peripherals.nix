@@ -10,7 +10,7 @@ let
     vol = incr: "${launch "wpctl set-volume @DEFAULT_SINK@ ${incr}"}";
     bright = incr: "${launch "brightnessctl set ${incr}"}";
 in
-''
+/* yaml */ ''
 # peripherals.nix
         # brightness keys are defined in hypr config b/c xremap is too stupid to catch them
         volumeup:

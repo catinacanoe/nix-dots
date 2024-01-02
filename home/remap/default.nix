@@ -1,4 +1,4 @@
-{ mod, ... }:
+{ ... }:
 let
     mod = "super";
 
@@ -24,7 +24,7 @@ in
     bindm = SUPER, mouse:273, resizewindow # super+rmb
     '';
 
-    xdg.configFile."xremap/config.yml".text = ''
+    xdg.configFile."xremap/config.yml".text = /* yaml */ ''
 # default.nix
 default_mode: main
 keymap:

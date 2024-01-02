@@ -24,6 +24,7 @@
         wirelesstools
         pavucontrol
         procps
+        fd
         psmisc
         wev
         libnotify

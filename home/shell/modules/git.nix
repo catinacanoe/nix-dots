@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
     g = "git";
     gy = "gitutils sync";
@@ -6,7 +6,7 @@
     gd = "gitutils diff";
     gii = "gitutils init";
 
-    ga = "echo 'g add %%% && gs' | zargs";
+    ga = "echo 'git add %%% && gitutils status' | zargs";
     gaa = "ga .";
     gau = "ga -u";
     gc = "g commit";

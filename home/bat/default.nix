@@ -1,14 +1,14 @@
-{ config, ... }:
+{ ... }:
 with (import ../../rice).col;
 {
     programs.bat = {
         enable = true;
-	config  = {
-	    theme = "main";
-	};
+        config  = {
+            theme = "main";
+        };
     };
 
-    xdg.configFile."bat/themes/main.tmTheme".text = ''
+    xdg.configFile."bat/themes/main.tmTheme".text = /* xml */ ''
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">

@@ -3,7 +3,7 @@ let
     launch = (import ../fn/launch.nix);
     hypr = (import ../fn/hypr.nix);
 in
-''
+/* yaml */ ''
 # power.nix
                 ${mod}-n:
                     ${hypr "killactive"}

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
     lfdir = "${config.xdg.configHome}/lf";
 in
@@ -13,7 +13,7 @@ in
         text = (import ./scripts/opener.nix { inherit config; });
     };
 
-    programs.zsh.initExtra = ''
+    programs.zsh.initExtra = /* bash */ ''
     lfcd() {
         tmp="$(mktemp -uq)"
         trap 'rm -f $tmp >/dev/null 2>&1 && trap - HUP INT QUIT TERM PWR EXIT' HUP INT QUIT TERM PWR EXIT
@@ -29,35 +29,37 @@ in
     programs.lf =
     {
         enable = true;
-	settings = 
+
+        settings = 
         let
-	    bold = ''\033[1m'';
-	    italic = ''\033[3m'';
-	    inverse = ''\033[7m'';
+            bold = ''\033[1m'';
+            italic = ''\033[3m'';
+            inverse = ''\033[7m'';
         in
         {
-	    shell = "zsh";
-	    hidden = true;
-	    ignorecase = true;
-	    ifs = ''\n'';
-	    scrolloff = 3;
-	    tabstop = 4;
-	    cursorpreviewfmt = "${bold+italic}>";
-	    cursorparentfmt = "${bold+italic}>";
-	    cursoractivefmt = "${bold+italic+inverse}";
-	    errorfmt = ''\033[0;31;13m'';
-	    previewer = "${scriptdir}/previewer";
-	    globsearch = true;
-	};
-	commands = 
-	let
-	    inherit (config.programs.zsh.shellAliases) xioxide swi;
-	in
-	{
-	    custom_open = ''%${scriptdir}/opener'';
-	    custom_wall = ''%${swi} "$f"'';
+            shell = "zsh";
+            hidden = true;
+            ignorecase = true;
+            ifs = ''\n'';
+            scrolloff = 3;
+            tabstop = 4;
+            cursorpreviewfmt = "${bold+italic}>";
+            cursorparentfmt = "${bold+italic}>";
+            cursoractivefmt = "${bold+italic+inverse}";
+            errorfmt = ''\033[0;31;13m'';
+            previewer = "${scriptdir}/previewer";
+            globsearch = true;
+        };
 
-	    custom_extract = ''%{{
+        commands = 
+        let
+            inherit (config.programs.zsh.shellAliases) xioxide swi;
+        in
+        {
+            custom_open = ''%${scriptdir}/opener'';
+            custom_wall = ''%${swi} "$f"'';
+
+            custom_extract = /* bash */ ''%{{
                 if [ -f "$f" ] ; then
                     case "$f" in
                         *.tar.bz2) tar xjf    "$f" ;;
@@ -76,60 +78,60 @@ in
                 else
                     echo "'$f' is not a valid file"
                 fi
-	    }}'';
+            }}'';
 
-	    custom_ee = "cd ~";
-	    custom_eo = ''%lf -remote "send $id cd \"$OLDPWD\""'';
-	    custom_e = ''%{{
-	        printf " e "
-		read ans
-		target="$(${xioxide} "" "grep '/$'" pwd dirs $ans)"
-		lf --remote "send $id cd \"$target\""
-	    }}'';
-	    custom_h = ''%{{
-	        printf " h "
-		read ans
-		target="$(${xioxide} "" "grep -v '/$'" pwd dirs $ans)"
-		lf --remote "send $id \$$EDITOR \"$target\""
-	    }}'';
+            custom_ee = "cd ~";
+            custom_eo = /* bash */ ''%lf -remote "send $id cd \"$OLDPWD\""'';
+            custom_e = /* bash */ ''%{{
+                printf " e "
+                read ans
+                target="$(${xioxide} "" "grep '/$'" pwd dirs $ans)"
+                lf --remote "send $id cd \"$target\""
+            }}'';
+            custom_h = /* bash */ ''%{{
+                printf " h "
+                read ans
+                target="$(${xioxide} "" "grep -v '/$'" pwd dirs $ans)"
+                lf --remote "send $id \$$EDITOR \"$target\""
+            }}'';
 
-	    custom_mkdir = ''%{{
+            custom_mkdir = /* bash */ ''%{{
                 printf " dir name: "
                 read ans
                 mkdir -p "$ans"
-	    }}'';
+            }}'';
 
-	    custom_touch = ''%{{
+            custom_touch = /* bash */ ''%{{
                 printf " file name: "
                 read ans
                 touch "$ans"
-		echo -e '\n' > "$ans"
-	    }}'';
+                echo -e '\n' > "$ans"
+            }}'';
 
-            custom_chmod = ''%{{
-	        printf " chmod bits: "
-		read ans
-		for file in "$fx"; do
-		    chmod "$ans" "$file"
-		done
-	    }}'';
+            custom_chmod = /* bash */ ''%{{
+                printf " chmod bits: "
+                read ans
+                for file in "$fx"; do
+                    chmod "$ans" "$file"
+                done
+            }}'';
 
-	    custom_drag = ''%{{
-	        num="$(echo "$fx" | wc -l)"
+            custom_drag = /* bash */ ''%{{
+                num="$(echo "$fx" | wc -l)"
 
                 if [ "$num" = "1" ]; then
                     dragon -T -x "$f" &
                 else
                     dragon -T -a -x "$fx" &
                 fi
-	    }}'';
+            }}'';
 
-	    custom_trash =
-	    let
-	        file = "\${files%%;*}";
-	        files = "\${files#*;}";
-	    in
-	    ''%{{
+            custom_trash =
+            let
+                file = "\${files%%;*}";
+                files = "\${files#*;}";
+            in
+            /* bash */ ''%{{
                 files=$(printf "$fx" | tr '\n' ';')
                 while [ "$files" ]; do
                     file=${file}
@@ -142,47 +144,47 @@ in
                     fi
                 done
             }}'';
-	};
-	keybindings = {
-	    # drag and drop
-	    "<left>" = null;
-	    "<up>" = null;
-	    "<down>" = null;
-	    "<right>" = null;
-	    "q" = null;
-	    "f" = null;
-	    "v" = null;
-	    "e" = null;
-	    "h" = null;
+        };
 
-	    "e<enter>" = "custom_ee";
-	    "eo" = "custom_eo";
-	    "e<space>" = "custom_e";
-	    "h<space>" = "custom_h";
+        keybindings = {
+            "<left>" = null;
+            "<up>" = null;
+            "<down>" = null;
+            "<right>" = null;
+            "q" = null;
+            "f" = null;
+            "v" = null;
+            "e" = null;
+            "h" = null;
 
-	    "<c-r>" = "reload";
-	    ";" = "quit";
-	    "n" = "updir";
-	    "a" = "up";
-	    "i" = "down";
-	    "o" = "custom_open";
+            "e<enter>" = "custom_ee";
+            "eo" = "custom_eo";
+            "e<space>" = "custom_e";
+            "h<space>" = "custom_h";
 
-	    "/" = "search";
-	    "j" = "search-next";
-	    "J" = "search-prev";
+            "<c-r>" = "reload";
+            ";" = "quit";
+            "n" = "updir";
+            "a" = "up";
+            "i" = "down";
+            "o" = "custom_open";
 
-	    "k" = "custom_mkdir";
-	    "m" = "rename";
-	    "l" = "custom_touch";
+            "/" = "search";
+            "j" = "search-next";
+            "J" = "search-prev";
 
-	    "r" = "custom_trash";
-	    "u" = "$trash-restore";
+            "k" = "custom_mkdir";
+            "m" = "rename";
+            "l" = "custom_touch";
 
-	    "c" = "custom_chmod";
-	    "." = "set hidden!";
-	    "w" = "custom_wall";
-	    "x" = "custom_extract";
-	    "<c-d>" = "custom_drag";
-	};
+            "r" = "custom_trash";
+            "u" = "$trash-restore";
+
+            "c" = "custom_chmod";
+            "." = "set hidden!";
+            "w" = "custom_wall";
+            "x" = "custom_extract";
+            "<c-d>" = "custom_drag";
+        };
     };
 }

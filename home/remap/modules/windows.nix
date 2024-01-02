@@ -3,7 +3,7 @@ let
     hypr = (import ../fn/hypr.nix);
     resize = "50";
 in
-''
+/* yaml */ ''
 # windows.nix
         ${mod}-space:
             ${hypr "animatefocused"}

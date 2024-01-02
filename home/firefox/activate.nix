@@ -1,5 +1,5 @@
 { config, ... }:
-''
+/* bash */ ''
 echo "removing files from ~/.mozilla"
 rm -rf "${config.home.homeDirectory}/.mozilla" | head
 

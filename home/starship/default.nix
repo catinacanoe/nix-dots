@@ -1,29 +1,26 @@
-{ config, inputs, ... }:
-let
-    lib = inputs.home-manager.lib;
-in
+{ ... }:
 {
     programs.starship = {
         enable = true;
-	enableZshIntegration = true;
-	settings = 
-	let
-	    dirstyle = "cyan italic";
-	    gitstyle = "blue";
-	    gitstylealt = "yellow bold";
-	in
-	{
-	    add_newline = true;
-	    format = "$git_status$directory";
+        enableZshIntegration = true;
+        settings = 
+        let
+            dirstyle = "cyan italic";
+            gitstyle = "blue";
+            gitstylealt = "yellow bold";
+        in
+        {
+            add_newline = true;
+            format = "$git_status$directory";
 
-	    directory = {
-	        truncation_length = 0;
+            directory = {
+                truncation_length = 0;
                 truncate_to_repo = true;
 
                 format = "[$path](${dirstyle}) ";
-	    };
+            };
 
-	    git_status = {
+            git_status = {
                 format = "[$ahead_behind](${gitstyle})[$all_status](${gitstylealt}) ";
 
                 up_to_date = "->";
@@ -38,7 +35,7 @@ in
                 staged    = " gc";
                 renamed   = " mv";
                 deleted   = " rm";
-	    };
-	};
+            };
+        };
     };
 }

@@ -7,12 +7,12 @@ with (import ../../rice);
         swaylock = "${pkgs.swaylock-effects}/bin/swaylock";
         hyprctl = "${pkgs.hyprland}/bin/hyprctl";
     in
-    [(pkgs.writeShellScriptBin "power" /*bash*/ ''
+    [(pkgs.writeShellScriptBin "power" ''
     options="$(echo 'lock_suspend_reload_tty_cycle_shutdown' | tr '_' '\n')"
 
     if [ -z "$1" ]; then
         # interactive menu
-	choice="$(echo "$options" | $MENU)"
+        choice="$(echo "$options" | $MENU)"
     else
         choice="$(echo "$options" | grep "^$1" | head -n 1)"
     fi
@@ -22,10 +22,10 @@ with (import ../../rice);
     lock() { ${swaylock} --image="$(swww query | sed 's|^.*image: ||')" "$@"; }
 
     case "$choice" in
-	lock) delay && lock --grace=0.5 ;;
-	suspend) delay && lock && delay && systemctl suspend ;;
-	reload) ${hyprctl} dispatch forcerendererreload ;;
-	tty) ${hyprctl} kill ;;
+        lock) delay && lock --grace=0.5 ;;
+        suspend) delay && lock && delay && systemctl suspend ;;
+        reload) ${hyprctl} dispatch forcerendererreload ;;
+        tty) ${hyprctl} kill ;;
         cycle) reboot ;;
         shutdown) shutdown now ;;
     esac
@@ -34,7 +34,7 @@ with (import ../../rice);
     programs.swaylock = {
         enable = true;
         settings = {
-	    daemonize = true;
+            daemonize = true;
             effect-blur = "7x5";
             effect-vignette = "0.5:0.5";
 

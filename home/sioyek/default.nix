@@ -1,14 +1,15 @@
-{ config, pkgs, ... }:
+{ ... }:
 with (import ../../rice);
 with col.rgb01;
 {
-
-    programs.zsh.shellAliases.sy = ''echo 'tmp=$(mktemp) && cp "%%%" $tmp && echo "rm $tmp" | at now + 2 min && sioyek $tmp' | zargs'';
+    programs.zsh.shellAliases.sy = /* bash */ ''
+        echo 'tmp=$(mktemp) && cp "%%%" $tmp && echo "rm $tmp" | at now + 2 min && sioyek $tmp' | zargs
+    '';
 
     programs.sioyek = {
         enable = true;
 
-	config = {
+        config = {
             "startup_commands" = "toggle_custom_color";
             "should_launch_new_window" = "1";
             "collapsed_toc" = "1";
@@ -72,9 +73,9 @@ with col.rgb01;
             "highlight_color_x" = aqua;
             "highlight_color_y" = aqua;
             "highlight_color_z" = aqua;
-	};
+        };
 
-	bindings = {
+        bindings = {
             "goto_beginning" = "g";
             "goto_end" = "G";
 
@@ -116,6 +117,6 @@ with col.rgb01;
             "toggle_highlight" = "<C-v>";
 
             "keyboard_select" = "v";
-	};
+        };
     };
 }

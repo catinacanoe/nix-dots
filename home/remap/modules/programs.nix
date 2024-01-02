@@ -2,7 +2,7 @@
 let
     launchdir = (import ../fn/launchdir.nix);
 in
-''
+/* yaml */ ''
 # programs.nix ${direction}
                 ${mod}-space:
                     ${launchdir direction "echo"}

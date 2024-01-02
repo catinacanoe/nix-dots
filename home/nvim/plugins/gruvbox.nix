@@ -1,6 +1,6 @@
-vimPlugins: col:
-with vimPlugins; {
-    plugin = gruvbox-nvim;
+{ col, pkgs, ... }:
+{
+    plugin = pkgs.vimPlugins.gruvbox-nvim;
     type = "lua";
     config = /* lua */ ''
         require("gruvbox").setup({
