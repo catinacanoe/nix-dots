@@ -162,7 +162,7 @@ in
     # name, res@fps, pos of monitor's TpLft corner in layout, scale
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
-    monitor=eDP-1, 2560x1600@60, 0x0, 1.3
+    monitor=eDP-1, 2560x1600@60, 0x0, 1.333333
     monitor=,preferred,auto,1 # auto rule for random monitors
 
     # window rules to make rofi always floating and stuff

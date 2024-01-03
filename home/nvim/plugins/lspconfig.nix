@@ -4,9 +4,9 @@
         plugin = pkgs.vimPlugins.nvim-lspconfig;
         type = "lua";
         config = /* lua */ ''
-        vim.keymap.set("n", "<space>si", vim.diagnostic.open_float)
-        vim.keymap.set("n", "<space>sn", vim.diagnostic.goto_prev)
-        vim.keymap.set("n", "<space>so", vim.diagnostic.goto_next)
+        vim.keymap.set("n", "<space>ei", vim.diagnostic.open_float)
+        vim.keymap.set("n", "<space>en", vim.diagnostic.goto_prev)
+        vim.keymap.set("n", "<space>eo", vim.diagnostic.goto_next)
 
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -22,8 +22,8 @@
                 vim.keymap.set("n", "I", vim.lsp.buf.hover, opts)
                 vim.keymap.set("n", "A", vim.lsp.buf.signature_help, opts)
 
-                vim.keymap.set("n", "<leader>sr", vim.lsp.buf.rename, opts)
-                vim.keymap.set({ "n", "v" }, "<leader>sa", vim.lsp.buf.code_action, opts)
+                vim.keymap.set("n", "<leader>er", vim.lsp.buf.rename, opts)
+                vim.keymap.set({ "n", "v" }, "<leader>ea", vim.lsp.buf.code_action, opts)
 
                 -- vim.lsp.buf.format { async = true }
             end,

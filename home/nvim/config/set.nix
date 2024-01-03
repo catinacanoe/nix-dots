@@ -3,6 +3,11 @@
 /* lua */ ''
 vim.g.mapleader = " "
 
+-- save screenspace
+vim.o.showmode = false -- remove the ' -- INSERT -- ' line at the bottom
+vim.o.cmdheight = 0
+vim.o.showtabline = 0
+
 -- no mouse
 vim.opt.mouse = ""
 
@@ -10,8 +15,8 @@ vim.opt.mouse = ""
 vim.opt.clipboard = "unnamed,unnamedplus"
 
 -- line num
-vim.opt.nu = true
-vim.opt.relativenumber = true
+vim.opt.nu = false
+vim.opt.relativenumber = false
 
 -- split direction
 vim.opt.splitright = true
@@ -51,6 +56,7 @@ vim.opt.isfname:append("@-@")
 vim.opt.termguicolors = true
 vim.opt.wrap = false
 vim.opt.updatetime = 50
+vim.opt.gcr = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 vim.opt.colorcolumn = "0"
 vim.opt.timeoutlen = 500
 vim.opt.showmode = false

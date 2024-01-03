@@ -20,23 +20,23 @@ with pkgs.vimPlugins;
                 },
 
                 mapping = {
-                    ['<Up>'] = cmp.mapping(function(fallback)
+                    ['<Up>'] = cmp.mapping(function()
                         if cmp.visible() then
                             cmp.select_prev_item()
                         else
                             cmp.complete()
                         end
                         cmp.open_docs()
-                    end, { 'i', 'c' }),
+                    end, { 'i' }),
 
-                    ['<Down>'] = cmp.mapping(function(fallback)
+                    ['<Down>'] = cmp.mapping(function()
                         if cmp.visible() then
                             cmp.select_next_item()
                         else
                             cmp.complete()
                         end
                         cmp.open_docs()
-                    end, { 'i', 'c' }),
+                    end, { 'i' }),
 
                     ['<S-Up>'] = cmp.mapping(function(fallback)
                         if cmp.visible_docs() then

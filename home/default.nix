@@ -11,8 +11,21 @@ in
     programs.home-manager.enable = true;
     home = {
         inherit username homeDirectory;
-	stateVersion = "23.05";
+        stateVersion = "23.05";
     };
+
+    nixpkgs = { overlays = [(final: prev: {
+        vimPlugins = prev.vimPlugins // {
+            cellular-automaton-nvim = prev.vimUtils.buildVimPlugin {
+                name = "cellular-automaton";
+                src = inputs.vimplugin-cellular-automaton;
+            };
+            canoe-mini-nvim = prev.vimUtils.buildVimPlugin {
+                name = "canoe-mini-nvim";
+                src = inputs.vimplugin-canoe-mini-nvim;
+            };
+        };
+    })];};
 
     imports = [
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}

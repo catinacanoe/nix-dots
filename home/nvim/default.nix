@@ -13,11 +13,13 @@ in
         plugins = with pkgs.vimPlugins; 
         (import ./plugins/telescope.nix args).plugins ++
         (import ./plugins/cmp.nix args).plugins ++
+        (import ./plugins/noice.nix args).plugins ++
         [
             (import ./plugins/lspconfig.nix args).plugin
             (import ./plugins/cmp.nix args).plugin
             (import ./plugins/telescope.nix args).plugin
             (import ./plugins/luasnip.nix args).plugin
+            (import ./plugins/noice.nix args).plugin
             (import ./plugins/treesitter.nix args)
             (import ./plugins/tsplayground.nix args)
             (import ./plugins/gruvbox.nix args)
@@ -28,10 +30,14 @@ in
             (import ./plugins/autosave.nix args)
             (import ./plugins/autopairs.nix args)
             (import ./plugins/commentary.nix args)
-            (import ./plugins/surround.nix args)
+            (import ./plugins/treesj.nix args)
             (import ./plugins/gitsigns.nix args)
             (import ./plugins/toggleterm.nix args)
             (import ./plugins/undotree.nix args)
+            (import ./plugins/gitblame.nix args)
+            (import ./plugins/mini.nix args)
+            (import ./plugins/trouble.nix args)
+            (import ./plugins/cellular-automaton.nix args)
             repeat
             vim-lastplace
             vim-automkdir

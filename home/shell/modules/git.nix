@@ -6,7 +6,7 @@
     gd = "gitutils diff";
     gii = "gitutils init";
 
-    ga = "echo 'git add %%% && gitutils status' | zargs";
+    ga = "echo 'git add %%% && gitutils status' | yargs";
     gaa = "ga .";
     gau = "ga -u";
     gc = "g commit";

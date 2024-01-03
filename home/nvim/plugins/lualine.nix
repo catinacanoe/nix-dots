@@ -3,25 +3,78 @@
     plugin = pkgs.vimPlugins.lualine-nvim;
     type = "lua";
     config = /* lua */ ''
-        vim.o.showmode = false; -- remove the ' -- INSERT -- ' line at the bottom
 
         require('lualine').setup {
+            sections = {
+                lualine_a = {{
+                    "buffers",
+                    max_length = vim.o.columns,
+                    show_modified_status = false,
+                    use_mode_colors = true,
+                    symbols = {
+                        modified = "",
+                        alternate_file = "",
+                        directory = "",
+                    },
+                }},
+                lualine_b = {},
+                lualine_c = {},
+                lualine_x = {
+                    {
+                        require("noice").api.statusline.mode.get,
+                        cond = require("noice").api.statusline.mode.has,
+                        color = { fg = "#${col.purple}" },
+                    }
+                },
+                lualine_y = {},
+                lualine_z = {"os.date('%H:%M')"},
+            },
+
+            winbar = {
+                lualine_a = {{
+                    "tabs",
+                    mode = 0,
+                    path = 0,
+                    use_mode_colors = true,
+                    show_modified_status = false,
+                }},
+                lualine_c = {{
+                    "filename",
+                    symbols = {
+                        modified = "",
+                        readonly = "RO",
+                        unnamed = "unnamed",
+                        newfile = "new",
+                    }
+                }},
+                lualine_x = {"location", "diagnostics", "diff"},
+                lualine_y = {},
+                lualine_z = {"branch"}
+            },
+
+            inactive_winbar = {
+                lualine_c = {"filename"},
+            },
+
+            tabline = {},
+            inactive_sections = {},
+            
             options = {
+                globalstatus = true,
                 icons_enabled = false,
-                component_separators = { left = '|', right = '|'},
-                section_separators = { left = "", right = ""},
+                component_separators = "",
+                section_separators = "",
                 disabled_filetypes = {
                     statusline = {},
                     winbar = {},
                 },
                 ignore_focus = {},
-                always_divide_middle = true,
-                globalstatus = false,
+                always_divide_middle = false,
                 refresh = {
-                    statusline = 1000,
-                    tabline = 1000,
-                    winbar = 1000,
+                    statusline = 300,
+                    tabline = 700,
                 },
+
                 theme = {
                     normal = {
                       a = {bg = "#${col.t4}", fg = "#${col.bg}", gui = 'bold'},
@@ -52,29 +105,9 @@
                       a = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'bold'},
                       b = {bg = "#${col.t1}", fg = "#${col.fg}"},
                       c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'}
-                    }
-		},
+                    },
+		        },
             },
-            sections = {
-                lualine_a = {'mode'},
-                lualine_b = {'branch', 'diff', 'diagnostics'},
-                lualine_c = {'filename'},
-                lualine_x = {"os.date('%H:%M')"},
-                lualine_y = {'progress'},
-                lualine_z = {'location'}
-            },
-            inactive_sections = {
-                lualine_a = {},
-                lualine_b = {},
-                lualine_c = {'filename'},
-                lualine_x = {},
-                lualine_y = {},
-                lualine_z = {}
-            },
-            tabline = {},
-            winbar = {},
-            inactive_winbar = {},
-            extensions = {}
         }
     '';
 }

@@ -4,8 +4,8 @@
 vim.keymap.set({"i", "v", "x", "s"}, ";n", "<Esc>")
 vim.keymap.set("n", ";n", "ZZ")
 
--- exiting a certain item
-vim.keymap.set("n", ";t", vim.cmd.tabclose)
+-- cmd
+vim.keymap.set("n", ";w", vim.cmd.write)
 
 -- actually typing a semicolon
 vim.keymap.set("i", ";e", "<Esc>A;<Esc>")

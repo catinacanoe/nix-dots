@@ -58,9 +58,6 @@ in
             r = "trash-put";
             z = "exit";
 
-            a = "lf";
-            A = "lfcd";
-
             src = "exec zsh";
 
             t = "eza -Ta";
@@ -73,9 +70,12 @@ in
         initExtraFirst = with config.programs.zsh.shellAliases; /* bash */ ''
         e() { ${xioxide} cd "grep '/$'" pwd dirs $@ && ${n}; }
         eo() { cd - > /dev/null && ${n}; }
-        h() { ${xioxide} "$EDITOR" "" pwd dirs $@; }
-        w() { ${xioxide} "$EDITOR" "" pwd dirs w$@; }
         ke() { ${k} "$1" && e "$1"; }
+
+        a() { ${xioxide} lf "grep '/$'" pwd dirs $@; }
+        A() { ${xioxide} lfcd "grep '/$'" pwd dirs $@; }
+        h() { [ -z "$1" ] && "$EDITOR" . || ${xioxide} "$EDITOR" "" pwd dirs $@; }
+
         dsf() { diff -u $@  | diff-so-fancy | less --tabs=4 -RF; }
         hm() {
             [ -z "$1" ] && arg="h" || arg="$1"

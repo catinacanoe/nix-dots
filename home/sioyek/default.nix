@@ -2,9 +2,8 @@
 with (import ../../rice);
 with col.rgb01;
 {
-    programs.zsh.shellAliases.sy = /* bash */ ''
-        echo 'tmp=$(mktemp) && cp "%%%" $tmp && echo "rm $tmp" | at now + 2 min && sioyek $tmp' | zargs
-    '';
+    programs.zsh.shellAliases.sy = /* bash */
+        ''echo "tmp=$(mktemp) && cp \"%%%\" \$tmp && echo \"rm \$tmp\" | at now + 2 min && sioyek \$tmp" | yargs'';
 
     programs.sioyek = {
         enable = true;

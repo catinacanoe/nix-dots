@@ -40,29 +40,6 @@
         "type": "github"
       }
     },
-    "firefox-addons": {
-      "inputs": {
-        "flake-utils": "flake-utils",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "dir": "pkgs/firefox-addons",
-        "lastModified": 1704099878,
-        "narHash": "sha256-j+UPcv2d3DMkO3Jb3PBqEQ/oJwJzvY6em0azAP1VJg4=",
-        "owner": "rycee",
-        "repo": "nur-expressions",
-        "rev": "8275e917db7b7cd3f6a29b4b455b29e16eb2eef5",
-        "type": "gitlab"
-      },
-      "original": {
-        "dir": "pkgs/firefox-addons",
-        "owner": "rycee",
-        "repo": "nur-expressions",
-        "type": "gitlab"
-      }
-    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -78,21 +55,6 @@
       "original": {
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "type": "github"
-      }
-    },
-    "flake-utils": {
-      "locked": {
-        "lastModified": 1629284811,
-        "narHash": "sha256-JHgasjPR0/J1J3DRm4KxM4zTyAj4IOJY8vIl75v/kPI=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "c5d161cc0af116a2e17f54316f0bf43f0819785c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -382,11 +344,12 @@
     },
     "root": {
       "inputs": {
-        "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "hyprfocus-flake": "hyprfocus-flake",
         "hyprland": "hyprland",
         "nixpkgs": "nixpkgs_2",
+        "vimplugin-canoe-mini-nvim": "vimplugin-canoe-mini-nvim",
+        "vimplugin-cellular-automaton": "vimplugin-cellular-automaton",
         "xremap-flake": "xremap-flake"
       }
     },
@@ -432,6 +395,38 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "vimplugin-canoe-mini-nvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1704285294,
+        "narHash": "sha256-ZGfAiZ3nPOih/b7k4NkUHA04KVo+LVsrGMyOFsXVKeo=",
+        "owner": "catinacanoe",
+        "repo": "mini.nvim",
+        "rev": "0587776142ac33c9bb526a1c22d0c808ed624c90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catinacanoe",
+        "repo": "mini.nvim",
+        "type": "github"
+      }
+    },
+    "vimplugin-cellular-automaton": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693589931,
+        "narHash": "sha256-szbd6m7hH7NFI0UzjWF83xkpSJeUWCbn9c+O8F8S/Fg=",
+        "owner": "Eandrju",
+        "repo": "cellular-automaton.nvim",
+        "rev": "b7d056dab963b5d3f2c560d92937cb51db61cb5b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Eandrju",
+        "repo": "cellular-automaton.nvim",
         "type": "github"
       }
     },

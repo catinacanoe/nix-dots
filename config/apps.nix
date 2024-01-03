@@ -9,13 +9,14 @@
     environment.systemPackages = with pkgs;
     let
         hypr = writeShellScriptBin "hypr" "Hyprland";
-        zargs = writeShellScriptBin "zargs" ''
+        yargs = writeShellScriptBin "yargs" ''
         [ "$1" == "-E" ] && esc="$2" && shift 2 || esc="%%%"
         eval "$(cat | sed "s|$esc|$@|g")"
-	'';
+        '';
     in
     [
         # cli utils
+        yargs
         speedtest-cli
         yt-dlp
         pciutils
@@ -37,64 +38,64 @@
         wtype
         jc jq
         isync
-	bind
-	bc
-	at
-	fzf
-	ripgrep
-	eza
-	starship
-	bat
-	thefuck
-	diff-so-fancy
-	wl-clipboard
-	file
-	trash-cli
-	xdragon
-	exiftool
-	gnumeric
-	catdoc
-	odt2txt
-	cdrtools
-	p7zip
-	unrar
-	unzip
-	xz
-	ascii-image-converter
-	catimg
-	viu
-	libcaca
-	poppler_utils
-	ffmpegthumbnailer
-	imagemagick
-	audiowaveform
-	zargs
-	shellcheck
+        bind
+        bc
+        at
+        fzf
+        ripgrep
+        eza
+        starship
+        bat
+        thefuck
+        diff-so-fancy
+        wl-clipboard
+        file
+        trash-cli
+        xdragon
+        exiftool
+        gnumeric
+        catdoc
+        odt2txt
+        cdrtools
+        p7zip
+        unrar
+        unzip
+        xz
+        ascii-image-converter
+        catimg
+        viu
+        libcaca
+        poppler_utils
+        ffmpegthumbnailer
+        imagemagick
+        audiowaveform
+        shellcheck
 
-	# lib
-	python311Full
-	python311Packages.docx2txt
+        # lib
+        python311Full
+        python311Packages.docx2txt
     
         # user apps
         neovim nvimpager
         firefox ungoogled-chromium brave
-	networkmanagerapplet protonvpn-cli_2
-	lf libqalculate
+        networkmanagerapplet protonvpn-cli_2
+        lf libqalculate
 
         kitty
         mpv-unwrapped
         tofi
         neomutt
         htop-vim
-	sioyek
-	zsh
+        sioyek
+        zsh
 
         # core system apps
-        hyprland hypr
+        hypr
+        hyprland
         pulseaudio pipewire
         waybar
-	swaylock-effects
-	mako
+        swaylock-effects
+        mako
         swww
     ];
 }

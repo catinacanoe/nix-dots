@@ -27,11 +27,13 @@ vim.keymap.set("n", "N", "mzJ`z")
 vim.keymap.set({"v", "s", "x", "o"}, "N", "H")
 
 vim.keymap.set({"v", "s", "x"}, "A", ":m '<-2<CR>gv=gv") -- moves line up in visual mode
-vim.keymap.set("n", "A", "<C-u>zz") -- goes up and down a page, keeping cursor centered
+vim.keymap.set("n", "A", "<C-u>") -- goes up and down a page, keeping cursor centered
+vim.keymap.set("n", "<up>", "<C-u>")
 vim.keymap.set("o", "A", "K")
 
-vim.keymap.set({"v", "s", "x"}, "I", ":m '>+1<CR>gv=gv")
-vim.keymap.set("n", "I", "<C-d>zz")
+vim.keymap.set({"v", "s", "x"}, "I", ":m '>+1<cr>gv=gv")
+vim.keymap.set("n", "I", "<c-d>")
+vim.keymap.set("n", "<down>", "<C-d>")
 vim.keymap.set("o", "I", "J")
 
 vim.keymap.set(modes, "o", "l")
