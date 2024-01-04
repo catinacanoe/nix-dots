@@ -1,10 +1,9 @@
-{ pkgs, col, ... }:
-with pkgs.vimPlugins;
-{
-    plugin = {
-        plugin = noice-nvim;
-        type = "lua";
-        config = /* lua */ ''
+{ plugins, col, ... }:
+let
+    config = /* lua */ ''
+        "folke/noice.nvim",
+        
+        config = function(_, _)
             vim.cmd("hi FloatShadow guibg=#${col.bg}")
             vim.cmd("hi FloatShadow guifg=#${col.fg}")
             vim.cmd("hi FloatShadowThrough guibg=#${col.bg}")
@@ -23,17 +22,18 @@ with pkgs.vimPlugins;
                 fps = 60,
                 top_down = false,
                 timeout = 3000,
-                render = "simple",
+                render = "minimal",
+                stages = "slide",
                 icons = {
                     DEBUG = "B",
                     ERROR = "E",
                     INFO = "I",
                     TRACE = "T",
-                    WARN = "W"
+                    WARN = "W",
                 },
             }
 
-            require("noice").setup({
+            require("noice").setup {
                 lsp = {
                     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                     override = {
@@ -58,6 +58,14 @@ with pkgs.vimPlugins;
                                 event = "msg_show",
                                 kind = "",
                                 find = "written",
+                            },
+                            opts = { skip = true },
+                        },
+                        { -- hide AutoSave notifs
+                            filter = {
+                                event = "msg_show",
+                                kind = "",
+                                find = "AutoSave:",
                             },
                             opts = { skip = true },
                         },
@@ -96,9 +104,18 @@ with pkgs.vimPlugins;
                     inc_rename = false, -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = false, -- add a border to hover docs and signature help
                 },
-            })
-        '';
-    };
+            }
+        end,
 
-    plugins = [ nui-nvim nvim-notify ];
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify",
+        },
+    '';
+in {
+    plugin."${plugins}/noice.lua".text = ''
+        return {{
+            ${config}
+        }}
+    '';
 }

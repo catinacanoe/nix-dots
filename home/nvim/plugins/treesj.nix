@@ -1,11 +1,20 @@
-{ pkgs, ... }:
-{
-    plugin = pkgs.vimPlugins.treesj;
-    type = "lua";
-    config = /* lua */ ''
-        require("treesj").setup {
-            use_default_keymaps = false,
-        }
-        vim.keymap.set("n", "<leader>et", vim.cmd.TSJToggle)
-    '';
+{ plugins, ... }:
+let
+    config = /* lua */ ''{
+        "wansmer/treesj",
+
+        lazy = true,
+        cmd = {
+            "TSJJoin",
+            "TSJSplit",
+            "TSJToggle",
+        },
+        keys = {
+            { "<leader>et", vim.cmd.TSJToggle }
+        },
+
+        opts = { use_default_keymaps = false },
+    }'';
+in {
+    plugin."${plugins}/treesj.lua".text= "return {${config}}";
 }

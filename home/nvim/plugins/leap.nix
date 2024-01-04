@@ -1,15 +1,21 @@
-{ col, pkgs, ... }:
-{
-    plugin = pkgs.vimPlugins.leap-nvim;
-    type = "lua";
-    config = /* lua */ ''
-        vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { bg = '#${col.purple}', fg = '#${col.fg}' })
-        vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { bg = '#${col.purple}', fg = '#${col.bg}' })
+{ col, plugins, ... }:
+let
+    config = /* lua */ ''{
+        "ggandor/leap.nvim",
 
-        vim.keymap.set({'n', 'x', 'o'}, '<Tab>', '<Plug>(leap-forward-to)')
-        vim.keymap.set({'n', 'x', 'o'}, '<S-Tab>', '<Plug>(leap-backward-to)')
+        lazy = true,
+        keys = {
+            { "<tab>", "<Plug>(leap-forward-to)", mode = {'n', 'x', 'o'} },
+            { "<s-tab>", "<Plug>(leap-backward-to)", mode = {'n', 'x', 'o'} },
+            -- vim.keymap.set('o', '.', '<Plug>(leap-forward-till)')
+            -- vim.keymap.set('o', ',', '<Plug>(leap-backward-till)')
+        },
 
-        -- vim.keymap.set('o', '.', '<Plug>(leap-forward-till)')
-        -- vim.keymap.set('o', ',', '<Plug>(leap-backward-till)')
-    '';
+        config = function(_, _)
+            vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { bg = '#${col.purple}', fg = '#${col.fg}' })
+            vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { bg = '#${col.purple}', fg = '#${col.bg}' })
+        end
+    }'';
+in {
+    plugin."${plugins}/leap.lua".text= "return {${config}}";
 }

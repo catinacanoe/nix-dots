@@ -1,8 +1,9 @@
 # I use semicolin to lead all of my 'esc' binds
-/* lua */ ''
+{ ... }: /* lua */ ''
 -- basic exit
 vim.keymap.set({"i", "v", "x", "s"}, ";n", "<Esc>")
 vim.keymap.set("n", ";n", "ZZ")
+vim.keymap.set("c", ";n", "<c-c>")
 
 -- cmd
 vim.keymap.set("n", ";w", vim.cmd.write)

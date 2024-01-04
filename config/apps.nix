@@ -70,6 +70,7 @@
         imagemagick
         audiowaveform
         shellcheck
+        pipx
 
         # lib
         python311Full

@@ -1,9 +1,18 @@
-{ pkgs, ... }:
-{
-    plugin = pkgs.vimPlugins.toggleterm-nvim;
-    type = "lua";
-    config = /* lua */ ''
-        require('toggleterm').setup {
+{ plugins, ... }:
+let
+    config = /* lua */ ''{
+        "akinsho/toggleterm.nvim",
+
+        lazy = true,
+        cmd = "ToggleTerm",
+        keys = {
+            "<c-l>",
+            { "<leader>la", "<cmd>ToggleTerm direction=float<cr>" },
+            { "<leader>li", "<cmd>ToggleTerm direction=horizontal<cr>" },
+            { "<leader>lo", "<cmd>ToggleTerm direction=vertical<cr>" },
+        },
+
+        opts = {
             size = function(term)
                 if term.direction == "horizontal" then
                     scale = vim.o.lines * 0.2
@@ -45,11 +54,10 @@
                 },
                 width = function() return math.floor(vim.o.columns * 0.8) end,
                 height = function() return math.floor(vim.o.lines * 0.8) end,
-            },
-        }
-
-        vim.keymap.set("n", "<leader>la", "<cmd>ToggleTerm direction=float<CR>")
-        vim.keymap.set("n", "<leader>li", "<cmd>ToggleTerm direction=horizontal<CR>")
-        vim.keymap.set("n", "<leader>lo", "<cmd>ToggleTerm direction=vertical<CR>")
-    '';
+            }
+        },
+    }'';
+in
+{
+    plugin."${plugins}/toggleterm.lua".text = "return {${config}}";
 }

@@ -1,6 +1,16 @@
-{ pkgs, ... }:
-{
-    plugin = pkgs.vimPlugins.nvim-autopairs;
-    type = "lua";
-    config = /* lua */ "require('nvim-autopairs').setup {}";
+{ plugins, ... }:
+let
+    config = /* lua */ ''{
+        "windwp/nvim-autopairs",
+
+        lazy = true,
+        event = {
+            "InsertEnter",
+            "CursorHold",
+        },
+
+        opts = {},
+    }'';
+in {
+    plugin."${plugins}/autopairs.lua".text = "return {${config}}";
 }

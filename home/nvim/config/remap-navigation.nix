@@ -1,5 +1,5 @@
 # navigating through nvim (tabs, windows, ...)
-/* lua */ ''
+{ ... }: /* lua */ ''
 -- win nav
 vim.keymap.set({"n", "v"}, "<leader>n", "<C-w><Left>")
 vim.keymap.set({"n", "v"}, "<leader>a", "<C-w><Up>")
@@ -7,15 +7,25 @@ vim.keymap.set({"n", "v"}, "<leader>i", "<C-w><Down>")
 vim.keymap.set({"n", "v"}, "<leader>o", "<C-w><Right>")
 
 -- win resize
-vim.keymap.set({"n"}, "<S-Left>", "5<C-w>>")
-vim.keymap.set({"n"}, "<S-Up>", "2<C-w>+")
-vim.keymap.set({"n"}, "<S-Down>", "2<C-w>-")
-vim.keymap.set({"n"}, "<S-Right>", "5<C-w><")
 vim.keymap.set({"n", "v"}, "<leader>we", "<C-w>=")
 
 -- win open
-vim.keymap.set({"n", "v"}, "<leader>wi", vim.cmd.split)
-vim.keymap.set({"n", "v"}, "<leader>wo", vim.cmd.vsplit)
+vim.keymap.set({"n", "v"}, "<leader>N", function()
+    vim.opt.splitright = false
+    vim.cmd.vsplit()
+end)
+vim.keymap.set({"n", "v"}, "<leader>A", function()
+    vim.opt.splitbelow = false
+    vim.cmd.split()
+end)
+vim.keymap.set({"n", "v"}, "<leader>I", function()
+    vim.opt.splitbelow = true
+    vim.cmd.split()
+end)
+vim.keymap.set({"n", "v"}, "<leader>O", function()
+    vim.opt.splitright = true
+    vim.cmd.vsplit()
+end)
 
 -- tabs
 vim.keymap.set("n", ";t", vim.cmd.tabclose)

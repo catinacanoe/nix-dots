@@ -1,12 +1,15 @@
-{ pkgs, ... }:
-{
-    plugin = pkgs.vimPlugins.nvim-colorizer-lua;
-    type = "lua";
-    config = /* lua */ ''
-        require("colorizer").setup { user_default_options = {
-	    RGB = true,
-	    RRGGBB = true,
-	    names = false,
+{ plugins, ... }:
+let
+    config = /* lua */ ''{
+        "nvchad/nvim-colorizer.lua",
+
+        lazy = true,
+        event = "VeryLazy",
+
+        opts = { user_default_options = {
+            names = false,
+            RGB = false,
+            RRGGBB = true,
             RRGGBBAA = true,
             AARRGGBB = true,
             rgb_fn = true,
@@ -14,7 +17,9 @@
             css = true,
             css_fn = true,
 
-	    mode = "virtualtext",
-	}}
-    '';
+            mode = "virtualtext",
+        }}
+    }'';
+in {
+    plugin."${plugins}/colorizer.lua".text = "return {${config}}";
 }

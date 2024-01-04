@@ -1,64 +1,96 @@
-{ pkgs, col, ... }:
-{
-    plugin = pkgs.vimPlugins.canoe-mini-nvim;
-    type = "lua";
-    config = /* lua */ ''
-        require("mini.surround").setup {}
+{ col, plugins, ... }:
+let
+    config = /* lua */ ''{
+        "catinacanoe/mini.nvim",
 
-        require("mini.animate").setup {
-            open = { enable = false },
-            close = { enable = false },
-            resize = { enable = false },
-        }
+        config = function(_, _)
+            require("mini.misc").setup()
+            MiniMisc.setup_auto_root({'.git', '.crypt', 'Makefile', 'README.md'})
 
-        require("mini.files").setup {
-            mappings = {
-                close       = '<CR>',
-                go_in       = '_',
-                go_in_plus  = 'o',
-                go_out      = 'n',
-                go_out_plus = '_',
-                reset       = '<BS>',
-                reveal_cwd  = '@',
-                show_help   = 'g?',
-                synchronize = 'w',
-                trim_left   = '<',
-                trim_right  = '>',
-            },
+            require("mini.animate").setup {
+                open = { enable = false },
+                close = { enable = false },
+                resize = { enable = false },
+            }
 
-            options = {
-                use_as_default_explorer = true,
-            },
+            require("mini.surround").setup {
+                custom_surroundings = {
+                    ['b'] = { output = { left = '(', right = ')' } },
+                    [')'] = { output = { left = '(', right = ')' } },
+                    ['('] = { output = { left = '( ', right = ' )' } },
 
-            windows = {
-                preview = true,
-                width_focus = 30,
-                width_nofocus = 20,
-                width_preview = 50,
-            },
-        }
+                    ['B'] = { output = { left = '{', right = '}' } },
+                    ['}'] = { output = { left = '{', right = '}' } },
+                    ['{'] = { output = { left = '{ ', right = ' }' } },
 
-        vim.keymap.set("n", "<CR>", MiniFiles.open)
+                    ['s'] = { output = { left = '[', right = ']' } },
+                    [']'] = { output = { left = '[', right = ']' } },
+                    ['['] = { output = { left = '[ ', right = ' ]' } },
 
+                    ['a'] = { output = { left = '<', right = '>' } },
+                    ['>'] = { output = { left = '<', right = '>' } },
+                    ['<'] = { output = { left = '< ', right = ' >' } },
 
-        vim.api.nvim_create_autocmd('User', {
-            pattern = 'MiniFilesWindowOpen',
-            callback = function(args)
-                local win_id = args.data.win_id
-                vim.api.nvim_win_set_config(win_id, { border = 'rounded' })
-                vim.api.nvim_win_set_option(win_id, 'winhighlight', 'FloatBorder:${col.fg}')
-            end,
-        })
+                    ['"'] = { output = { left = '"', right = '"' } },
+                    ['d'] = { output = { left = '"', right = '"' } },
+                    ["'"] = { output = { left = "'", right = "'" } },
+                    ["q"] = { output = { left = "'", right = "'" } },
+                },
+                n_lines = 30,
+                search_method = "cover_or_next",
+                silent = true,
+            }
 
-        -- custom additions
-        vim.cmd("hi MiniFilesBorder guifg=#${col.fg}")
+            require("mini.files").setup {
+                mappings = {
+                    close       = ',',
+                    go_in       = '_',
+                    go_in_plus  = 'o',
+                    go_out      = 'n',
+                    go_out_plus = '_',
+                    reset       = '<BS>',
+                    reveal_cwd  = '@',
+                    show_help   = 'g?',
+                    synchronize = 'w',
+                    trim_left   = '<',
+                    trim_right  = '>',
+                },
 
-        vim.cmd("hi MiniFilesCursorLine guifg=#${col.aqua}")
-        vim.cmd("hi MiniFilesCursorLine guibg=#${col.bg}")
+                options = {
+                    use_as_default_explorer = true,
+                },
 
-        vim.cmd("hi MiniFilesTitle guifg=#${col.fg}")
-        vim.cmd("hi MiniFilesTitleFocused guifg=#${col.fg}")
+                windows = {
+                    preview = true,
+                    width_focus = 30,
+                    width_nofocus = 20,
+                    width_preview = 50,
+                },
+            }
 
-        vim.cmd("hi MiniFilesFile guifg=#${col.aqua}")
-    '';
+            vim.keymap.set("n", ",", MiniFiles.open)
+
+            vim.api.nvim_create_autocmd('User', {
+                pattern = 'MiniFilesWindowOpen',
+                callback = function(args)
+                    local win_id = args.data.win_id
+                    vim.api.nvim_win_set_config(win_id, { border = 'rounded' })
+                    vim.api.nvim_win_set_option(win_id, 'winhighlight', 'FloatBorder:${col.fg}')
+                end,
+            })
+
+            -- custom additions
+            vim.cmd("hi MiniFilesBorder guifg=#${col.fg}")
+
+            vim.cmd("hi MiniFilesCursorLine guifg=#${col.aqua}")
+            vim.cmd("hi MiniFilesCursorLine guibg=#${col.bg}")
+
+            vim.cmd("hi MiniFilesTitle guifg=#${col.fg}")
+            vim.cmd("hi MiniFilesTitleFocused guifg=#${col.fg}")
+
+            vim.cmd("hi MiniFilesFile guifg=#${col.aqua}")
+        end,
+    }'';
+in {
+    plugin."${plugins}/mini.lua".text = "return {${config}}";
 }

@@ -1,6 +1,5 @@
 # setting vim.opts
-
-/* lua */ ''
+{ ... }: /* lua */ ''
 vim.g.mapleader = " "
 
 -- save screenspace
@@ -55,6 +54,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.termguicolors = true
 vim.opt.wrap = false
+vim.opt.report = 10 -- min number of lines changed for notification
 vim.opt.updatetime = 50
 vim.opt.gcr = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
 vim.opt.colorcolumn = "0"

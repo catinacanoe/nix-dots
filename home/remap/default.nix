@@ -24,7 +24,7 @@ in
     bindm = SUPER, mouse:273, resizewindow # super+rmb
     '';
 
-    xdg.configFile."xremap/config.yml".text = /* yaml */ ''
+    xdg.configFile."xremap/config.yml".text = ''
 # default.nix
 default_mode: main
 keymap:
