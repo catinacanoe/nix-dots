@@ -12,8 +12,8 @@ let
         },
 
         config = function(_, _)
-            vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { bg = '#${col.purple}', fg = '#${col.fg}' })
-            vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { bg = '#${col.purple}', fg = '#${col.bg}' })
+            vim.api.nvim_set_hl(0, 'LeapLabelPrimary', { bg = '#${col.purple.hex}', fg = '#${col.fg.hex}' })
+            vim.api.nvim_set_hl(0, 'LeapLabelSecondary', { bg = '#${col.purple.hex}', fg = '#${col.bg.hex}' })
         end
     }'';
 in {

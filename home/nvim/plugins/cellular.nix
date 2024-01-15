@@ -19,7 +19,7 @@ let
         end
     }'';
 in {
-    plugin."${plugins}/cellular-automaton.lua".text= ''
+    plugin."${plugins}/cellular.lua".text = /* lua */ ''
         local animate =  function()
             local rand = math.random(1,3)
             if (rand == 1) then

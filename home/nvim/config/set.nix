@@ -2,6 +2,11 @@
 { ... }: /* lua */ ''
 vim.g.mapleader = " "
 
+vim.g.focus_running = false
+vim.g.cmp_running = true
+
+vim.wo.fillchars = "eob: " -- remove tildes at end of buffer
+
 -- save screenspace
 vim.o.showmode = false -- remove the ' -- INSERT -- ' line at the bottom
 vim.o.cmdheight = 0
@@ -14,12 +19,8 @@ vim.opt.mouse = ""
 vim.opt.clipboard = "unnamed,unnamedplus"
 
 -- line num
-vim.opt.nu = false
-vim.opt.relativenumber = false
-
--- split direction
-vim.opt.splitright = true
-vim.opt.splitbelow = true
+vim.opt.nu = true
+vim.opt.relativenumber = true
 
 -- tab settings
 vim.opt.smartindent = true
@@ -28,6 +29,8 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
+vim.opt.breakindent = true -- indent wrapped lines
+vim.opt.linebreak = true -- wrap only at whats defined in ':h breakat'
 
 -- undo hist
 vim.opt.swapfile = false
@@ -50,6 +53,7 @@ vim.opt.conceallevel = 1 -- conceals links and stuff
 vim.opt.concealcursor = "n"
 
 -- other
+vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.termguicolors = true

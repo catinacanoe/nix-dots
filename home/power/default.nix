@@ -43,11 +43,11 @@ with (import ../../rice);
 
             fade-in = "0.2";
 
-            text-color = col.fg;
-            text-clear-color = col.bg;
-            text-ver-color = col.blue;
-            text-wrong-color = col.purple;
-            text-caps-lock-color = col.aqua;
+            text-color = col.fg.hex;
+            text-clear-color = col.bg.hex;
+            text-ver-color = col.blue.hex;
+            text-wrong-color = col.purple.hex;
+            text-caps-lock-color = col.aqua.hex;
 
             clock = true;
             timestr = "";
@@ -61,10 +61,10 @@ with (import ../../rice);
             indicator-radius = "350";
             indicator-thickness = "12";
 
-            key-hl-color = col.fg;
-            bs-hl-color = col.bg;
-            caps-lock-key-hl-color = col.aqua;
-            caps-lock-bs-hl-color = col.aqua;
+            key-hl-color = col.fg.hex;
+            bs-hl-color = col.bg.hex;
+            caps-lock-key-hl-color = col.aqua.hex;
+            caps-lock-bs-hl-color = col.aqua.hex;
 
             separator-color = "00000000";
             inside-color = "00000000";

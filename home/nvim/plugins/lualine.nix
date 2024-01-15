@@ -41,7 +41,7 @@ let
                 {
                     require("noice").api.statusline.mode.get,
                     cond = require("noice").api.statusline.mode.has,
-                    color = { fg = "#${col.purple}" },
+                    color = { fg = "#${col.purple.hex}" },
                 }
             },
             lualine_y = {},
@@ -83,34 +83,34 @@ let
 
                     theme = {
                         normal = {
-                          a = {bg = "#${col.t4}", fg = "#${col.bg}", gui = 'bold'},
-                          b = {bg = "#${col.t2}", fg = "#${col.fg}"},
-                          c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'},
+                          a = {bg = "#${col.t4.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
+                          b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
                         },
                         insert = {
-                          a = {bg = "#${col.blue}", fg = "#${col.bg}", gui = 'bold'},
-                          b = {bg = "#${col.t2}", fg = "#${col.fg}"},
-                          c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'},
+                          a = {bg = "#${col.blue.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
+                          b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
                         },
                         visual = {
-                          a = {bg = "#${col.purple}", fg = "#${col.bg}", gui = 'bold'},
-                          b = {bg = "#${col.t2}", fg = "#${col.fg}"},
-                          c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'},
+                          a = {bg = "#${col.purple.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
+                          b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
                         },
                         replace = {
-                          a = {bg = "#${col.red}", fg = "#${col.bg}", gui = 'bold'},
-                          b = {bg = "#${col.t2}", fg = "#${col.fg}"},
-                          c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'},
+                          a = {bg = "#${col.red.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
+                          b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
                         },
                         command = {
-                          a = {bg = "#${col.aqua}", fg = "#${col.bg}", gui = 'bold'},
-                          b = {bg = "#${col.t2}", fg = "#${col.fg}"},
-                          c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'},
+                          a = {bg = "#${col.aqua.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
+                          b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
                         },
                         inactive = {
-                          a = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'bold'},
-                          b = {bg = "#${col.t1}", fg = "#${col.fg}"},
-                          c = {bg = "#${col.t1}", fg = "#${col.t4}", gui = 'italic'},
+                          a = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'bold'},
+                          b = {bg = "#${col.t1.hex}", fg = "#${col.fg.hex}"},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
                         },
                     }
                 }

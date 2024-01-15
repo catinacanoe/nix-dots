@@ -13,6 +13,8 @@ let
             local luasnip = require("luasnip")
 
             cmp.setup {
+                enabled = function() return vim.g.cmp_running end,
+
                 snippet = {
                     expand = function(args)
                         require('luasnip').lsp_expand(args.body)

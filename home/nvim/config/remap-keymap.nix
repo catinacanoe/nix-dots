@@ -3,6 +3,8 @@
 { ... }: /* lua */ ''
 local modes = {"n", "v", "s", "x", "o"}
 
+vim.api.nvim_del_keymap("x", "a%")
+
 vim.keymap.set(modes, "h", "i")
 vim.keymap.set(modes, "k", "a")
 vim.keymap.set(modes, "j", "n")
@@ -19,9 +21,11 @@ vim.keymap.set(modes, "d", "r")
 vim.keymap.set(modes, "D", "R")
 
 vim.keymap.set(modes, "n", "h")
-vim.keymap.set(modes, "a", "k")
-vim.keymap.set(modes, "i", "j")
+vim.keymap.set({"v", "s", "x", "o"}, "a", "k")
+vim.keymap.set({"v", "s", "x", "o"}, "i", "j")
 vim.keymap.set(modes, "o", "l")
+vim.keymap.set("n", "a", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "i", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 vim.keymap.set("n", "N", "mzJ`z")
 vim.keymap.set({"v", "s", "x", "o"}, "N", "H")

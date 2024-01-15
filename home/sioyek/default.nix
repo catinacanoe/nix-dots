@@ -1,6 +1,6 @@
 { ... }:
 with (import ../../rice);
-with col.rgb01;
+with col;
 {
     programs.zsh.shellAliases.sy = /* bash */
         ''echo "tmp=$(mktemp) && cp \"%%%\" \$tmp && echo \"rm \$tmp\" | at now + 2 min && sioyek \$tmp" | yargs'';
@@ -13,65 +13,65 @@ with col.rgb01;
             "should_launch_new_window" = "1";
             "collapsed_toc" = "1";
 
-            "background_color" = bg;
-            "custom_background_color" = bg;
-            "custom_text_color" = fg;
+            "background_color" = bg.rgb0;
+            "custom_background_color" = bg.rgb0;
+            "custom_text_color" = fg.rgb0;
 
 
-            "text_highlight_color" = blue;
-            "search_highlight_color" = yellow;
-            "link_highlight_color" = blue;
-            "synctex_highlight_color" = blue;
+            "text_highlight_color" = blue.rgb0;
+            "search_highlight_color" = yellow.rgb0;
+            "link_highlight_color" = blue.rgb0;
+            "synctex_highlight_color" = blue.rgb0;
 
 
             "ui_font" = font.full.family;
             "font_size" = toString font.size;
 
-            "ui_background_color" = bg;
-            "ui_text_color" = fg;
+            "ui_background_color" = bg.rgb0;
+            "ui_text_color" = fg.rgb0;
 
-            "ui_selected_background_color" = purple;
-            "ui_selected_text_color" = bg;
+            "ui_selected_background_color" = purple.rgb0;
+            "ui_selected_text_color" = bg.rgb0;
 
 
-            "status_bar_color" = t1;
-            "status_bar_text_color" = fg;
+            "status_bar_color" = t1.rgb0;
+            "status_bar_text_color" = fg.rgb0;
             "status_bar_font_size" = toString font.size;
 
 
             "flat_toc" = "0";
 
             "page_separator_width" = "5";
-            "page_separator_color" = t2;
+            "page_separator_color" = t2.rgb0;
 
             "case_sensitive_search" = "1";
 
-            "highlight_color_a" = aqua;
-            "highlight_color_b" = aqua;
-            "highlight_color_c" = aqua;
-            "highlight_color_d" = aqua;
-            "highlight_color_e" = aqua;
-            "highlight_color_f" = aqua;
-            "highlight_color_g" = aqua;
-            "highlight_color_h" = aqua;
-            "highlight_color_i" = aqua;
-            "highlight_color_j" = aqua;
-            "highlight_color_k" = aqua;
-            "highlight_color_l" = aqua;
-            "highlight_color_m" = aqua;
-            "highlight_color_n" = aqua;
-            "highlight_color_o" = aqua;
-            "highlight_color_p" = aqua;
-            "highlight_color_q" = aqua;
-            "highlight_color_r" = aqua;
-            "highlight_color_s" = aqua;
-            "highlight_color_t" = aqua;
-            "highlight_color_u" = aqua;
-            "highlight_color_v" = aqua;
-            "highlight_color_w" = aqua;
-            "highlight_color_x" = aqua;
-            "highlight_color_y" = aqua;
-            "highlight_color_z" = aqua;
+            "highlight_color_a" = aqua.rgb0;
+            "highlight_color_b" = aqua.rgb0;
+            "highlight_color_c" = aqua.rgb0;
+            "highlight_color_d" = aqua.rgb0;
+            "highlight_color_e" = aqua.rgb0;
+            "highlight_color_f" = aqua.rgb0;
+            "highlight_color_g" = aqua.rgb0;
+            "highlight_color_h" = aqua.rgb0;
+            "highlight_color_i" = aqua.rgb0;
+            "highlight_color_j" = aqua.rgb0;
+            "highlight_color_k" = aqua.rgb0;
+            "highlight_color_l" = aqua.rgb0;
+            "highlight_color_m" = aqua.rgb0;
+            "highlight_color_n" = aqua.rgb0;
+            "highlight_color_o" = aqua.rgb0;
+            "highlight_color_p" = aqua.rgb0;
+            "highlight_color_q" = aqua.rgb0;
+            "highlight_color_r" = aqua.rgb0;
+            "highlight_color_s" = aqua.rgb0;
+            "highlight_color_t" = aqua.rgb0;
+            "highlight_color_u" = aqua.rgb0;
+            "highlight_color_v" = aqua.rgb0;
+            "highlight_color_w" = aqua.rgb0;
+            "highlight_color_x" = aqua.rgb0;
+            "highlight_color_y" = aqua.rgb0;
+            "highlight_color_z" = aqua.rgb0;
         };
 
         bindings = {

@@ -6,7 +6,7 @@ let
     col = rice.col; 
     window = rice.window;
 
-    gradient = "rgba(${col.fg}b0) rgba(00000000) rgba(${col.fg}b0) rgba(00000000) 45deg";
+    gradient = "rgba(${col.fg.hex}b0) rgba(00000000) rgba(${col.fg.hex}b0) rgba(00000000) 45deg";
 in
 {
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
@@ -16,6 +16,10 @@ in
     exec-once = kitty
     exec-once = swww init
     exec-once = waybar
+
+    # cursor
+    exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
+    env = XCURSOR_SIZE,${toString config.home.pointerCursor.size} # affected by scale (i think)
 
     #windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
     #windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class^(firefox)$
@@ -150,7 +154,6 @@ in
 
         force_zero_scaling = true # remove scaling, clearer image
     }
-    env = XCURSOR_SIZE,24 # affected by scale (i think)
     # env gdk scale see xwayland hyprland wiki
 
     # exec-once = _, exec = _

@@ -71,10 +71,23 @@
         audiowaveform
         shellcheck
         pipx
+        imgurbash2
+        gnumake
+        mlocate
+        xdg-utils
 
-        # lib
+        # python
         python311Full
         python311Packages.docx2txt
+
+        # c
+        clang_15 boost183 ncurses
+
+        # manpages ???
+        stdmanpages clang-manpages llvm-manpages
+
+        # cursor
+        bibata-cursors phinger-cursors
     
         # user apps
         neovim nvimpager

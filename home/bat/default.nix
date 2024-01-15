@@ -29,78 +29,78 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>background</key>
-          <string>#${bg}</string>
+          <string>#${bg.hex}</string>
           <key>caret</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
           <key>foreground</key>
-          <string>#${fg}80</string>
+          <string>#${fg.hex}80</string>
           <key>invisibles</key>
-          <string>#${fg}26</string>
+          <string>#${fg.hex}26</string>
           <key>lineHighlight</key>
-          <string>#${t1}</string>
+          <string>#${t1.hex}</string>
           <key>selection</key>
-          <string>#${t1}</string>
+          <string>#${t1.hex}</string>
           <key>inactiveSelection</key>
-          <string>#${t1}</string>
+          <string>#${t1.hex}</string>
           <key>guide</key>
-          <string>#${fg}26</string>
+          <string>#${fg.hex}26</string>
           <key>activeGuide</key>
-          <string>#${fg}80</string>
+          <string>#${fg.hex}80</string>
           <key>stackGuide</key>
-          <string>#${fg}40</string>
+          <string>#${fg.hex}40</string>
           <key>bracketContentsOptions</key>
           <string>underline</string>
           <key>bracketContentsForeground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
           <key>bracketsOptions</key>
           <string>underline</string>
           <key>bracketsForeground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
           <key>gutterForeground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
           <key>highlight</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
           <key>highlightForeground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
           <key>findHighlight</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
           <key>findHighlightForeground</key>
-          <string>#${bg}</string>
+          <string>#${bg.hex}</string>
           <key>tagsOptions</key>
           <string>underline</string>
           <key>selectionBorder</key>
-          <string>#${t1}</string>
+          <string>#${t1.hex}</string>
           <key>popupCss</key>
           <string>
             html {
-              background-color: #${bg};
-              color: #${fg};
+              background-color: #${bg.hex};
+              color: #${fg.hex};
               padding: 12px;
             }
 
             a {
-              color: #${aqua};
+              color: #${aqua.hex};
             }
 
             .error, .deleted {
-              color: #${red};
+              color: #${red.hex};
             }
 
             .success, .inserted, .name {
-              color: #${green};
+              color: #${green.hex};
             }
 
             .warning, .modified {
-              color: #${yellow};
+              color: #${yellow.hex};
             }
 
             .type {
-              color: #${yellow};
+              color: #${yellow.hex};
               font-style: italic;
             }
 
             .param {
-              color: #${fg};
+              color: #${fg.hex};
             }
 
             .current {
@@ -117,7 +117,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -128,7 +128,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -141,7 +141,7 @@ with (import ../../rice).col;
           <key>fontStyle</key>
           <string>italic</string>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -152,7 +152,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t5}</string>
+          <string>#${t5.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -163,7 +163,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -174,7 +174,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -185,7 +185,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -196,7 +196,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -207,7 +207,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -218,7 +218,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -229,7 +229,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -240,7 +240,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -249,7 +249,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -260,7 +260,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -271,7 +271,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -282,7 +282,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -293,7 +293,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -304,7 +304,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -315,7 +315,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -326,7 +326,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -337,7 +337,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -348,7 +348,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -359,7 +359,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -370,7 +370,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -381,7 +381,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -392,9 +392,9 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
           <key>background</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -405,7 +405,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -416,7 +416,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -427,7 +427,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -438,7 +438,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -449,7 +449,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -460,7 +460,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -471,7 +471,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -482,7 +482,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -493,7 +493,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -504,7 +504,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -515,7 +515,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -526,7 +526,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -537,7 +537,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -548,7 +548,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -559,7 +559,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -570,7 +570,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -581,7 +581,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${orange}</string>
+          <string>#${orange.hex}</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -594,7 +594,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${brown}</string>
+          <string>#${brown.hex}</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -607,7 +607,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -620,7 +620,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
           <key>fontStyle</key>
           <string>italic</string>
         </dict>
@@ -633,7 +633,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -644,7 +644,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -655,7 +655,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -666,7 +666,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -677,7 +677,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -688,7 +688,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -699,7 +699,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -710,7 +710,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -721,7 +721,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -732,7 +732,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -743,7 +743,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -754,7 +754,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -765,7 +765,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -776,7 +776,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${orange}</string>
+          <string>#${orange.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -787,7 +787,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${orange}</string>
+          <string>#${orange.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -798,7 +798,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${brown}</string>
+          <string>#${brown.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -809,7 +809,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -820,7 +820,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -831,7 +831,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -842,7 +842,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -851,7 +851,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -862,7 +862,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -873,7 +873,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -884,7 +884,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -895,7 +895,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -906,7 +906,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -915,7 +915,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -926,7 +926,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -937,7 +937,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -946,7 +946,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -957,7 +957,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -968,7 +968,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -979,7 +979,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -990,7 +990,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1001,7 +1001,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1012,7 +1012,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1023,7 +1023,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1034,7 +1034,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1045,7 +1045,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1056,7 +1056,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1067,7 +1067,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1078,7 +1078,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1089,7 +1089,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1100,7 +1100,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1111,7 +1111,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1122,7 +1122,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1133,7 +1133,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1144,7 +1144,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1155,7 +1155,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1166,7 +1166,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1177,7 +1177,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1188,7 +1188,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1199,7 +1199,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1210,7 +1210,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1221,7 +1221,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1232,7 +1232,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1243,7 +1243,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1254,7 +1254,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1265,7 +1265,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1276,7 +1276,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1287,7 +1287,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1298,7 +1298,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1309,9 +1309,9 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${bg}</string>
+          <string>#${bg.hex}</string>
           <key>background</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1322,9 +1322,9 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${bg}</string>
+          <string>#${bg.hex}</string>
           <key>background</key>
-          <string>#${orange}</string>
+          <string>#${orange.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1335,7 +1335,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}26</string>
+          <string>#${fg.hex}26</string>
         </dict>
       </dict>
       <dict>
@@ -1346,7 +1346,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}26</string>
+          <string>#${fg.hex}26</string>
         </dict>
       </dict>
       <dict>
@@ -1357,9 +1357,9 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${green}</string>
+          <string>#${green.hex}</string>
           <key>background</key>
-          <string>#${t1}</string>
+          <string>#${t1.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1370,7 +1370,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${t4}</string>
+          <string>#${t4.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1381,7 +1381,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1392,7 +1392,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${fg}</string>
+          <string>#${fg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1403,7 +1403,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1414,7 +1414,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${aqua}</string>
+          <string>#${aqua.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1425,7 +1425,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1436,7 +1436,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${red}</string>
+          <string>#${red.hex}</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -1449,7 +1449,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${orange}</string>
+          <string>#${orange.hex}</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -1462,7 +1462,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -1475,7 +1475,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${yellow}</string>
+          <string>#${yellow.hex}</string>
           <key>fontStyle</key>
           <string>bold</string>
         </dict>
@@ -1488,7 +1488,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${purple}</string>
+          <string>#${purple.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1499,7 +1499,7 @@ with (import ../../rice).col;
         <key>settings</key>
         <dict>
           <key>foreground</key>
-          <string>#${blue}</string>
+          <string>#${blue.hex}</string>
         </dict>
       </dict>
       <dict>
@@ -1512,7 +1512,7 @@ with (import ../../rice).col;
           <key>fontStyle</key>
           <string>italic</string>
           <key>foreground</key>
-          <string>#${mg}</string>
+          <string>#${mg.hex}</string>
         </dict>
       </dict>
     </array>

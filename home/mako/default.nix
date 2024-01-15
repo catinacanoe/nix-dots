@@ -23,9 +23,9 @@ in
         margin = toString rice.window.gaps-out;
         padding = toString rice.window.gaps-in;
 
-        textColor = "#${col.fg}ff";
-        borderColor = "#${col.fg}a0";
-        backgroundColor = "#${col.bg}b0";
-        progressColor = "#${col.aqua}ff";
+        textColor = "${col.fg.h}ff";
+        borderColor = "${col.fg.h}a0";
+        backgroundColor = "${col.bg.h}b0";
+        progressColor = "${col.aqua.h}ff";
     };
 }

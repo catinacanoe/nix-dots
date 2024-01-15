@@ -1,38 +1,55 @@
 # https://discourse.nixos.org/t/neovim-and-nixos-star-crossed-lovers/25568/15
 # https://github.com/collinarnett/brew/blob/0169cc473d781352e8418660d1b20a2c30c2e84c/modules/home-manager/neovim/neovim.nix
+
+# DAP LINKS
+## Github
+### https://gist.github.com/ldelossa/5454ec60202cf1a9bd199724e03900ff
+### https://github.com/rcarriga/nvim-dap-ui
+### https://github.com/mfussenegger/nvim-dap
+### https://github.com/theHamsta/nvim-dap-virtual-text
+### https://github.com/ldelossa/nvim-dap-projects
+### https://github.com/nvim-telescope/telescope-dap.nvim
+## Youtube
+### https://www.youtube.com/watch?v=RziPWdTzSV8
+### https://www.youtube.com/watch?v=0moS8UHupGc
+### https://www.youtube.com/watch?v=lEMZnrC-ST4
+
+# https://github.com/rmagatti/goto-preview
+
 { pkgs, ... }:
 let
     col = (import ../../rice).col;
     args = { inherit pkgs col; plugins = "nvim/lua/plugins"; };
 in {
     xdg.configFile =
-        (import ./plugins/autopairs.nix          args).plugin //
-        (import ./plugins/autosave.nix           args).plugin //
-        (import ./plugins/bufresize.nix          args).plugin //
-        (import ./plugins/cellular-automaton.nix args).plugin //
-        (import ./plugins/cmp.nix                args).plugin //
-        (import ./plugins/colorizer.nix          args).plugin //
-        (import ./plugins/commentary.nix         args).plugin //
-        (import ./plugins/gitblame.nix           args).plugin //
-        (import ./plugins/gitsigns.nix           args).plugin //
-        (import ./plugins/gruvbox.nix            args).plugin //
-        (import ./plugins/indent.nix             args).plugin //
-        (import ./plugins/leap.nix               args).plugin //
-        (import ./plugins/lspconfig.nix          args).plugin //
-        (import ./plugins/lualine.nix            args).plugin //
-        (import ./plugins/luasnip.nix            args).plugin //
-        (import ./plugins/mini.nix               args).plugin //
-        (import ./plugins/neorg.nix              args).plugin //
-        (import ./plugins/noice.nix              args).plugin //
-        (import ./plugins/smartsplits.nix        args).plugin //
-        (import ./plugins/telescope.nix          args).plugin //
-        (import ./plugins/toggleterm.nix         args).plugin //
-        (import ./plugins/treesitter.nix         args).plugin //
-        (import ./plugins/treesj.nix             args).plugin //
-        (import ./plugins/trouble.nix            args).plugin //
-        (import ./plugins/tsplayground.nix       args).plugin //
-        (import ./plugins/undotree.nix           args).plugin //
-        (import ./plugins/winshift.nix           args).plugin //
+        (import ./plugins/autopairs.nix    args).plugin //
+        (import ./plugins/autosave.nix     args).plugin //
+        (import ./plugins/bufresize.nix    args).plugin //
+        (import ./plugins/cellular.nix     args).plugin //
+        (import ./plugins/cmp.nix          args).plugin //
+        (import ./plugins/colorizer.nix    args).plugin //
+        (import ./plugins/comment.nix      args).plugin //
+        (import ./plugins/gitblame.nix     args).plugin //
+        (import ./plugins/gitsigns.nix     args).plugin //
+        (import ./plugins/gruvbox.nix      args).plugin //
+        (import ./plugins/indent.nix       args).plugin //
+        (import ./plugins/leap.nix         args).plugin //
+        (import ./plugins/lspconfig.nix    args).plugin //
+        (import ./plugins/lualine.nix      args).plugin //
+        (import ./plugins/luasnip.nix      args).plugin //
+        (import ./plugins/mini.nix         args).plugin //
+        (import ./plugins/neorg.nix        args).plugin //
+        (import ./plugins/noice.nix        args).plugin //
+        (import ./plugins/smartsplits.nix  args).plugin //
+        (import ./plugins/telescope.nix    args).plugin //
+        (import ./plugins/toggleterm.nix   args).plugin //
+        (import ./plugins/treesitter.nix   args).plugin //
+        (import ./plugins/treesj.nix       args).plugin //
+        (import ./plugins/trouble.nix      args).plugin //
+        (import ./plugins/tsplayground.nix args).plugin //
+        (import ./plugins/undotree.nix     args).plugin //
+        (import ./plugins/winshift.nix     args).plugin //
+        (import ./plugins/wrapping.nix     args).plugin //
         {
             "${args.plugins}/other.lua".text = ''
                 return {
@@ -68,14 +85,9 @@ in {
             end
             vim.opt.rtp:prepend(lazypath)
 
-            ${(import ./config/set.nix args)}
+            vim.loader.enable()
 
-            ${(import ./config/remap-keymap.nix args)}
-            ${(import ./config/remap-navigation.nix args)}
-            ${(import ./config/remap-operator.nix args)}
-            ${(import ./config/remap-other.nix args)}
-            ${(import ./config/remap-semicolon.nix args)}
-            ${(import ./config/remap-yank.nix args)}
+            ${(import ./config/set.nix args)}
 
             require("lazy").setup("plugins", {
                 install = { colorscheme = { "gruvbox" } },
@@ -108,6 +120,13 @@ in {
                     },
                 }
             })
+
+            ${(import ./config/remap-keymap.nix args)}
+            ${(import ./config/remap-navigation.nix args)}
+            ${(import ./config/remap-operator.nix args)}
+            ${(import ./config/remap-other.nix args)}
+            ${(import ./config/remap-semicolon.nix args)}
+            ${(import ./config/remap-yank.nix args)}
         '';
     };
 }

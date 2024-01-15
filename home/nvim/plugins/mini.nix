@@ -7,34 +7,46 @@ let
             require("mini.misc").setup()
             MiniMisc.setup_auto_root({'.git', '.crypt', 'Makefile', 'README.md'})
 
-            require("mini.animate").setup {
-                open = { enable = false },
-                close = { enable = false },
-                resize = { enable = false },
-            }
-
             require("mini.surround").setup {
                 custom_surroundings = {
-                    ['b'] = { output = { left = '(', right = ')' } },
-                    [')'] = { output = { left = '(', right = ')' } },
-                    ['('] = { output = { left = '( ', right = ' )' } },
+                    b = {
+                        input = { '%(().-()%)' },
+                        output = { left = '(', right = ')' },
+                    },
 
-                    ['B'] = { output = { left = '{', right = '}' } },
-                    ['}'] = { output = { left = '{', right = '}' } },
-                    ['{'] = { output = { left = '{ ', right = ' }' } },
+                    B = {
+                        input = { '%{().-()%}' },
+                        output = { left = '{', right = '}' },
+                    },
 
-                    ['s'] = { output = { left = '[', right = ']' } },
-                    [']'] = { output = { left = '[', right = ']' } },
-                    ['['] = { output = { left = '[ ', right = ' ]' } },
+                    s = {
+                        input = { '%[().-()%]' },
+                        output = { left = '[', right = ']' },
+                    },
 
-                    ['a'] = { output = { left = '<', right = '>' } },
-                    ['>'] = { output = { left = '<', right = '>' } },
-                    ['<'] = { output = { left = '< ', right = ' >' } },
+                    a = {
+                        input = { '%<().-()%>' },
+                        output = { left = '<', right = '>' },
+                    },
 
-                    ['"'] = { output = { left = '"', right = '"' } },
-                    ['d'] = { output = { left = '"', right = '"' } },
-                    ["'"] = { output = { left = "'", right = "'" } },
-                    ["q"] = { output = { left = "'", right = "'" } },
+                    d = {
+                        input = { '%"().-()%"' },
+                        output = { left = '"', right = '"' },
+                    },
+                    
+                    q = {
+                        input = { "%'().-()%'" },
+                        output = { left = "'", right = "'" },
+                    },
+                },
+                mappings = {
+                    add = 'sa',
+                    delete = 'sr',
+                    replace = 'sd',
+                    find = 'sf',
+                    find_left = 'sF',
+                    highlight = 'sh',
+                    update_n_lines = 'sn',
                 },
                 n_lines = 30,
                 search_method = "cover_or_next",
@@ -75,20 +87,9 @@ let
                 callback = function(args)
                     local win_id = args.data.win_id
                     vim.api.nvim_win_set_config(win_id, { border = 'rounded' })
-                    vim.api.nvim_win_set_option(win_id, 'winhighlight', 'FloatBorder:${col.fg}')
+                    vim.api.nvim_win_set_option(win_id, 'winhighlight', 'FloatBorder:${col.fg.hex}')
                 end,
             })
-
-            -- custom additions
-            vim.cmd("hi MiniFilesBorder guifg=#${col.fg}")
-
-            vim.cmd("hi MiniFilesCursorLine guifg=#${col.aqua}")
-            vim.cmd("hi MiniFilesCursorLine guibg=#${col.bg}")
-
-            vim.cmd("hi MiniFilesTitle guifg=#${col.fg}")
-            vim.cmd("hi MiniFilesTitleFocused guifg=#${col.fg}")
-
-            vim.cmd("hi MiniFilesFile guifg=#${col.aqua}")
         end,
     }'';
 in {

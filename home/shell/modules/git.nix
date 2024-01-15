@@ -17,6 +17,7 @@
     gcl = "g clone";
 
 
+    y = "crypt";
     yy = "crypt sync";
     ys = "crypt status";
     yii = "crypt init";

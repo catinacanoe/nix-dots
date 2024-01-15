@@ -2,37 +2,12 @@
 let
     config = /* lua */ ''
         "folke/noice.nvim",
+
+        keys = {
+            { "<leader><leader>", "<cmd>NoiceDismiss<cr>" },
+        },
         
         config = function(_, _)
-            vim.cmd("hi FloatShadow guibg=#${col.bg}")
-            vim.cmd("hi FloatShadow guifg=#${col.fg}")
-            vim.cmd("hi FloatShadowThrough guibg=#${col.bg}")
-            vim.cmd("hi FloatShadowThrough guifg=#${col.fg}")
-
-            vim.cmd("hi NoiceLspProgressSpinner guibg=#${col.bg}")
-            vim.cmd("hi NoiceLspProgressSpinner guifg=#${col.bg}")
-            vim.cmd("hi NoiceLspProgressTitle guifg=#${col.fg}")
-            vim.cmd("hi NoiceLspProgressClient guifg=#${col.purple}")
-
-            vim.cmd("hi NoiceVirtualText guifg=#${col.mg}")
-            vim.cmd("hi NoiceCmdlinePopupBorder guifg=#${col.fg}")
-
-            require("notify").setup {
-                background_colour = "#${col.bg}",
-                fps = 60,
-                top_down = false,
-                timeout = 3000,
-                render = "minimal",
-                stages = "slide",
-                icons = {
-                    DEBUG = "B",
-                    ERROR = "E",
-                    INFO = "I",
-                    TRACE = "T",
-                    WARN = "W",
-                },
-            }
-
             require("noice").setup {
                 lsp = {
                     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -50,26 +25,39 @@ let
                     documentation = { enabled = false },
                     routes = {
                         {
+                            filter = {
+                                event = "msg_showmode",
+                            },
                             view = "notify",
-                            filter = { event = "msg_showmode" },
                         },
                         {
                             filter = {
-                                event = "msg_show",
-                                kind = "",
+                                event = "notify",
+                                find = "No information available",
+                            },
+                            opts = { skip = true },
+                        },
+                        {
+                            filter = {
+                                event = "notify",
                                 find = "written",
                             },
                             opts = { skip = true },
                         },
                         { -- hide AutoSave notifs
                             filter = {
-                                event = "msg_show",
-                                kind = "",
+                                event = "notify",
                                 find = "AutoSave:",
                             },
                             opts = { skip = true },
                         },
                     },
+                },
+
+                commands = {
+                    history = { view = "split" },
+                    last = { view = "split" },
+                    errors = { view = "split" },
                 },
 
                 cmdline = {
@@ -103,6 +91,22 @@ let
                     long_message_to_split = true, -- long messages will be sent to a split
                     inc_rename = false, -- enables an input dialog for inc-rename.nvim
                     lsp_doc_border = false, -- add a border to hover docs and signature help
+                },
+            }
+
+            require("notify").setup {
+                background_colour = "#${col.bg.hex}",
+                fps = 60,
+                top_down = false,
+                timeout = 10000,
+                render = "minimal",
+                stages = "slide",
+                icons = {
+                    DEBUG = "B",
+                    ERROR = "E",
+                    INFO = "I",
+                    TRACE = "T",
+                    WARN = "W",
                 },
             }
         end,

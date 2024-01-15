@@ -29,27 +29,29 @@ in
 
     imports = [
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
-        ./hyprland
-        ./kitty
-        ./sioyek
-        ./remap
+        ./bat
         ./crypt
-        ./nvim
-        ./gpg
-        ./shell
-        ./starship
-        ./xdg
-        ./pass
+        ./firefox
         ./git
         ./gitutils
-        ./thefuck
-        ./xioxide
-        ./pw
-        ./power
+        ./gpg
+        ./gui
+        ./hyprland
+        ./kitty
         ./lf
         ./mail
-        ./bat
         ./mako
+        ./nvim
+        ./pass
+        ./power
+        ./pw
+        ./remap
+        ./shell
+        ./sioyek
+        ./starship
+        ./thefuck
+        ./xdg
+        ./xioxide
     ];
 
     services.ssh-agent.enable = true;

@@ -7,7 +7,7 @@ let
         event = "BufEnter *",
 
         config = function(_, _)
-            require("luasnip.loaders.from_vscode").load()
+            require("luasnip.loaders.from_vscode").lazy_load()
         end,
 
         dependencies = {

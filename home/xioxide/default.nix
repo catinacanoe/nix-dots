@@ -11,6 +11,12 @@ with config.xdg.userDirs;
     programs.zsh.shellAliases.xioxide="source ${xioxide_bin}";
     home.sessionVariables.XIOXIDE_PATH = "${extraConfig.XDG_REPOSITORY_DIR}/xioxide";
 
+    xdg.configFile."xioxide/dirs.sed".text = /* sed */ ''
+    s/^h/rnh/
+    s/^n/rn/
+    s/^o/cs/
+    '';
+
     xdg.configFile."xioxide/dirs.conf".text = /* bash */ ''
 t /
     m mnt/
@@ -62,8 +68,8 @@ r ${repos}/
             cr crypt/
                 d default.nix
             fi firefox/
+                d default.nix
                 a activate.nix
-                s sync
             gi git/
                 d default.nix
             gu gitutils/
@@ -123,7 +129,19 @@ r ${repos}/
 c ${home}/crypt/
     p pass/
         m .map
+    s school/
+        c czech/
+        h history/
+        l literature/
+        m math/
+        p physics/
+        r rsm/
+        s spanish/
+    w wiki/
+    m meme/
 d ${download}/
+m ${music}/
+v ${videos}/
 p ${pictures}/
     w wall/
         d digital/

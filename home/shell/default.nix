@@ -1,6 +1,5 @@
 { config, ... }@args:
 let
-    home = config.home.homeDirectory;
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
   
     inherit (import ../../rice) col;
@@ -65,6 +64,10 @@ in
 
             gp = "grep";
             gpi = "grep -i";
+
+            q = "qalc";
+
+            nt = "~/dox/norgtask/bin/asan";
         };
 
         initExtraFirst = with config.programs.zsh.shellAliases; /* bash */ ''
@@ -83,7 +86,7 @@ in
             handled=""
 
             if [[ "$arg" == *"h"* ]]; then
-                home-manager switch --flake path:${repos}/nix-dots/ || return
+                home-manager switch --show-trace --flake path:${repos}/nix-dots/ || return
                 handled="true"
             fi
 
@@ -123,6 +126,20 @@ in
                 echo "'$1' is not a valid file"
             fi
         }
+        function vdl() {
+            if [ -n "$1" ]; then
+                yt-dlp --format mp4 "$@"
+            else
+                yt-dlp --format mp4 "$(wl-paste)"
+            fi
+        }
+        function adl() {
+            if [ -n "$1" ]; then
+                yt-dlp -x --audio-format mp3 --audio-quality 0 "$@"
+            else
+                yt-dlp -x --audio-format mp3 --audio-quality 0 "$(wl-paste)"
+            fi
+        }
         '';
 
         initExtra = /* bash */ ''
@@ -136,22 +153,22 @@ in
 
         # TTY colors
         if [ "$TERM" = "linux" ]; then
-            echo -en "\e]P0${col.bg}" #black
-            echo -en "\e]P8${col.t2}" #darkgrey
-            echo -en "\e]P1${col.brown}" #darkred
-            echo -en "\e]P9${col.red}" #red
-            echo -en "\e]P2${col.green}" #darkgreen
-            echo -en "\e]PA${col.green}" #green
-            echo -en "\e]P3${col.orange}" #brown
-            echo -en "\e]PB${col.yellow}" #yellow
-            echo -en "\e]P4${col.blue}" #darkblue
-            echo -en "\e]PC${col.blue}" #blue
-            echo -en "\e]P5${col.purple}" #darkmagenta
-            echo -en "\e]PD${col.purple}" #magenta
-            echo -en "\e]P6${col.aqua}" #darkcyan
-            echo -en "\e]PE${col.aqua}" #cyan
-            echo -en "\e]P7${col.t4}" #lightgrey
-            echo -en "\e]PF${col.fg}" #white
+            echo -en "\e]P0${col.bg.hex}" #black
+            echo -en "\e]P8${col.t2.hex}" #darkgrey
+            echo -en "\e]P1${col.brown.hex}" #darkred
+            echo -en "\e]P9${col.red.hex}" #red
+            echo -en "\e]P2${col.green.hex}" #darkgreen
+            echo -en "\e]PA${col.green.hex}" #green
+            echo -en "\e]P3${col.orange.hex}" #brown
+            echo -en "\e]PB${col.yellow.hex}" #yellow
+            echo -en "\e]P4${col.blue.hex}" #darkblue
+            echo -en "\e]PC${col.blue.hex}" #blue
+            echo -en "\e]P5${col.purple.hex}" #darkmagenta
+            echo -en "\e]PD${col.purple.hex}" #magenta
+            echo -en "\e]P6${col.aqua.hex}" #darkcyan
+            echo -en "\e]PE${col.aqua.hex}" #cyan
+            echo -en "\e]P7${col.t4.hex}" #lightgrey
+            echo -en "\e]PF${col.fg.hex}" #white
             clear #for background artifacting
         fi
         '';

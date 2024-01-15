@@ -75,11 +75,19 @@ let
             })
 
             vim.keymap.set("n", "<leader>el", require("lint").try_lint)
+
+            require("lsp_lines").setup()
+            vim.diagnostic.config({
+                virtual_text = false,
+                virtual_lines = true,
+                update_in_insert = true,
+            })
         end,
 
         dependencies = {
             "sbdchd/neoformat",
             "mfussenegger/nvim-lint",
+            "Maan2003/lsp_lines.nvim",
         },
     }'';
 in {

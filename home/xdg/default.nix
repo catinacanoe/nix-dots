@@ -35,7 +35,8 @@ in
         mimeApps = {
             enable = true;
             defaultApplications = {
-                #"mimetype1" = [ "app.desktop" ];
+                "x-scheme-handler/http" = [ "firefox.desktop" ];
+                "x-scheme-handler/https" = [ "firefox.desktop" ];
             };
             associations.removed = { # remove associations forced by some apps
                 #"mimetype1" = "shittyapp.desktop";
