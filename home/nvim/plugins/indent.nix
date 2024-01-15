@@ -27,17 +27,14 @@ let
             require("ibl").setup {
                 indent = {
                     highlight = highlight,
-                    char = "▏",
+                    char = "┊",
                 },
                 whitespace = {
                     highlight = highlight,
                     remove_blankline_trail = false,
                 },
                 scope = {
-                    char = "▎",
-                    enabled = true,
-                    highlight = "indent_purple",
-                    show_start = false,
+                    enabled = false,
                 },
                 exclude = {
                     filetypes = { "norg" },
