@@ -9,8 +9,15 @@ vim.keymap.set("v", "<leader>s", '"hy:%s/<c-r>h//g<left><left> <BS>')
 vim.keymap.set("n", "<c-s>", ':%s///g<left><left><left>')
 vim.keymap.set("v", "<c-s>", ':s///g<left><left><left>')
 
-vim.keymap.set("n", "<c-w>", 'Vg<c-g><esc>')
-vim.keymap.set("v", "<c-w>", 'g<c-g><esc>')
+local printwords = function(prefix)
+    return [[<cmd>lua wordcount = vim.api.nvim_eval "wordcount()"<cr>]]
+    .. [[<cmd>lua print("]] .. prefix .. [[" .. (wordcount["visual_words"] or wordcount["words"]))<cr>]]
+end
+
+vim.keymap.set("n", "<c-s-w>", printwords("document word count: "))
+vim.keymap.set("n", "<c-w>", "V" .. printwords("line word count: ") .. "<esc>")
+vim.keymap.set("v", "<c-w>", printwords("visual selection word count: "))
+vim.keymap.set("i", "<c-w>", "<esc>mwV" .. printwords("line word count: ") .. "<esc>`wa")
 
 vim.keymap.set("n", "<c-.>", "@@")
 vim.keymap.set("n", "cc", "cc<esc>cc")
