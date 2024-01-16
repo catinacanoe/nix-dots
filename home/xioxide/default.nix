@@ -134,9 +134,17 @@ c ${home}/crypt/
         h history/
         l literature/
         m math/
+            t textbook.pdf
         p physics/
+            i ip/
+            l l/
+            r r/
+            t textbook.pdf
+            e equations.pdf
         r rsm/
+            t textbook.pdf
         s spanish/
+        t transcript.pdf
     w wiki/
     m meme/
 d ${download}/

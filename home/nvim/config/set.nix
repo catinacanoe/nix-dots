@@ -32,6 +32,10 @@ vim.opt.expandtab = true
 vim.opt.breakindent = true -- indent wrapped lines
 vim.opt.linebreak = true -- wrap only at whats defined in ':h breakat'
 
+-- search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
 -- undo hist
 vim.opt.swapfile = false
 vim.opt.backup = false
