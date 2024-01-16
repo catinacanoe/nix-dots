@@ -57,6 +57,11 @@ let
                         end,
                     },
                 },
+                ['core.esupports.metagen'] = {
+                    config = {
+                        update_date = false,
+                    },
+                },
                 ['core.summary'] = {},
                 ['core.export'] = {},
                 ['core.neorgcmd'] = {},
