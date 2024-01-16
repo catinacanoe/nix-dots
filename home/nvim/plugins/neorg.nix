@@ -55,7 +55,10 @@ let
                 ['core.keybinds'] = {
                     config = {
                         hook = function(keybinds)
-                            keybinds.remap_key("norg", "i", "<M-CR>", "<C-CR>")
+                            keybinds.remap_key("norg", "i", "<m-cr>", "<c-cr>")
+                            keybinds.map("norg", "i", "<cr>", " <bs><cr>")
+                            keybinds.remap_key("norg", "n", ">>", "<c-p>")
+                            keybinds.remap_key("norg", "n", "<<", "<c-g>")
                         end,
                     },
                 },

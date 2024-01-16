@@ -21,8 +21,8 @@ end)
 vim.keymap.set("i", "#", " <bs>#") -- fix bad indenting
 
 -- indent
-vim.keymap.set("n", ">", ">>")
-vim.keymap.set("n", "<", "<<")
+vim.keymap.set("n", "<c-p>", ">>")
+vim.keymap.set("n", "<c-g>", "<<")
 vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("v", "<", "<gv")
 
