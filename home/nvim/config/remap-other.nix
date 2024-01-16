@@ -9,13 +9,15 @@ vim.keymap.set("v", "<leader>s", '"hy:%s/<c-r>h//g<left><left> <BS>')
 vim.keymap.set("n", "<c-s>", ':%s///g<left><left><left>')
 vim.keymap.set("v", "<c-s>", ':s///g<left><left><left>')
 
-vim.keymap.set({"n", "v"}, "<c-w>", 'Vg<c-g><esc>')
+vim.keymap.set("n", "<c-w>", 'Vg<c-g><esc>')
+vim.keymap.set("v", "<c-w>", 'g<c-g><esc>')
 
 vim.keymap.set("n", "<c-.>", "@@")
 vim.keymap.set("n", "cc", "cc<esc>cc")
 
 vim.keymap.set({"n", "v", "i"}, "<c-c>", function()
     vim.g.cmp_running = not vim.g.cmp_running
+    print("toggled completion " .. (vim.g.cmp_running and "on" or "off"))
 end)
 
 vim.keymap.set("i", "#", " <bs>#") -- fix bad indenting
