@@ -15,11 +15,6 @@ let
         opts = {
             load = {
                 ['core.defaults'] = {},
-                ['core.presenter'] = {
-                    config = {
-                        zen_mode = "truezen"
-                    }
-                },
                 ['core.concealer'] = {
                     config = {
                         icons = {
@@ -55,14 +50,14 @@ let
                 ['core.keybinds'] = {
                     config = {
                         hook = function(keybinds)
-                            keybinds.remap_key("norg", "i", "<m-cr>", "<c-cr>")
-                            keybinds.map("norg", "i", "<cr>", " <bs><cr>")
-                            keybinds.remap_key("norg", "n", ">>", "<c-p>")
-                            keybinds.remap_key("norg", "n", "<<", "<c-g>")
+                            keybinds.remap_key("norg", "i", "<M-CR>", "<S-CR>")
+                            keybinds.remap_key("norg", "n", ">>", "<c-t>")
+                            keybinds.remap_key("norg", "n", "<<", "<c-d>")
                         end,
                     },
                 },
                 ['core.summary'] = {},
+                ['core.export'] = {},
                 ['core.neorgcmd'] = {},
             }
         },
@@ -70,6 +65,7 @@ let
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
+
     }'';
 in {
     plugin."${plugins}/neorg.lua".text = "return {${config}}";

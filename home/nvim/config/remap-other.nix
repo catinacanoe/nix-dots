@@ -9,7 +9,7 @@ vim.keymap.set("v", "<leader>s", '"hy:%s/<c-r>h//g<left><left> <BS>')
 vim.keymap.set("n", "<c-s>", ':%s///g<left><left><left>')
 vim.keymap.set("v", "<c-s>", ':s///g<left><left><left>')
 
-vim.keymap.set({"n", "v"}, "<c-w>", 'g<c-g>')
+vim.keymap.set({"n", "v"}, "<c-w>", 'Vg<c-g><esc>')
 
 vim.keymap.set("n", "<c-.>", "@@")
 vim.keymap.set("n", "cc", "cc<esc>cc")
@@ -21,10 +21,10 @@ end)
 vim.keymap.set("i", "#", " <bs>#") -- fix bad indenting
 
 -- indent
-vim.keymap.set("n", "<c-p>", ">>")
-vim.keymap.set("n", "<c-g>", "<<")
-vim.keymap.set("v", ">", ">gv")
-vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("n", "<c-t>", ">>")
+vim.keymap.set("n", "<c-d>", "<<")
+vim.keymap.set("v", "<c-t>", ">gv")
+vim.keymap.set("v", "<c-d>", "<gv")
 
 -- incr/decr number
 vim.keymap.set("n", "+", "<c-a>")
