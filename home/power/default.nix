@@ -44,9 +44,9 @@ with (import ../../rice);
             fade-in = "0.2";
 
             text-color = col.fg.hex;
-            text-clear-color = col.bg.hex;
-            text-ver-color = col.blue.hex;
-            text-wrong-color = col.purple.hex;
+            text-clear-color = col.purple.hex;
+            text-ver-color = col.yellow.hex;
+            text-wrong-color = col.red.hex;
             text-caps-lock-color = col.aqua.hex;
 
             clock = true;
@@ -62,7 +62,7 @@ with (import ../../rice);
             indicator-thickness = "12";
 
             key-hl-color = col.fg.hex;
-            bs-hl-color = col.bg.hex;
+            bs-hl-color = col.purple.hex;
             caps-lock-key-hl-color = col.aqua.hex;
             caps-lock-bs-hl-color = col.aqua.hex;
 

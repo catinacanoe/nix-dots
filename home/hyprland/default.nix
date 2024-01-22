@@ -21,9 +21,14 @@ in
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
     env = XCURSOR_SIZE,${toString config.home.pointerCursor.size} # affected by scale (i think)
 
-    #windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
-    #windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class^(firefox)$
-    #windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
+    # window rules to make rofi always floating and stuff
+    # or to set window opacity
+    # idle inhibit, (youtube windows for example)
+
+    # windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
+    # windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class:^(firefox)$
+    # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
+    windowrulev2 = opacity 1.0 override 1.0, class:^(firefox)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
@@ -167,10 +172,6 @@ in
     # use ,transform to rotate, see wiki
     monitor=eDP-1, 2560x1600@60, 0x0, 1.333333
     monitor=,preferred,auto,1 # auto rule for random monitors
-
-    # window rules to make rofi always floating and stuff
-    # or to set window opacity
-    # idle inhibit, (youtube windows for example)
 
     dwindle {
         force_split = 0 # 0-follow mouse 1-topleft 2-botright

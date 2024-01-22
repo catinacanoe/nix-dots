@@ -7,10 +7,27 @@ let
         cmd = "Neorg",
         event = "BufEnter *.norg",
 
-        keys = {
-            { '<leader>ri', '<cmd>Neorg inject-metadata<cr>' },
-            { '<leader>rg', '<cmd>Neorg generate-workspace-summary<cr>' },
-        },
+        init = function()
+            vim.keymap.set("n", "<leader>ri", function()
+                print("injecting metadata")
+                vim.cmd "Neorg inject-metadata"
+                vim.cmd("%s/^created: .*$/created: " .. os.date("%d.%m.%Y"))
+                vim.cmd("%s/^updated: .*$/updated: " .. os.date("%d.%m.%Y"))
+            end)
+
+            vim.keymap.set("n", "<leader>rg", function()
+                print("generating workspace summary")
+                vim.cmd "Neorg generate-workspace-summary"
+            end)
+
+            -- change updated date string
+            vim.api.nvim_create_autocmd({"BufRead"}, {
+                pattern = { "*.norg" },
+                callback = function(ev)
+                    vim.cmd("%s/^updated: .*$/updated: " .. os.date("%d.%m.%Y"))
+                end
+            })
+        end,
 
         opts = {
             load = {

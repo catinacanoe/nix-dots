@@ -56,6 +56,8 @@ r ${repos}/
             f firefox/firefox/main/
         r rice/
             d default.nix
+            w wall/
+                d default.nix
             c colors/
                 d default.nix
                 c catppuccin.nix
@@ -120,6 +122,8 @@ r ${repos}/
             si sioyek/
                 d default.nix
             st starship/
+                d default.nix
+            wp wpp/
                 d default.nix
             xd xdg/
                 d default.nix

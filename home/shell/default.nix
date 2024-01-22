@@ -36,11 +36,6 @@ in
             nx = "sudo nixos-rebuild switch --flake path:${repos}/nix-dots/";
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
-            sw = "swww";
-            swki = "swww kill";
-            swin = "swww init";
-            swi = "swww img -t wipe";
-
             vpn = "sudo protonvpn";
 
             o = "e ../";

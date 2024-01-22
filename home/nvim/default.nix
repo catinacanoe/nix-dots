@@ -14,7 +14,9 @@
 ### https://www.youtube.com/watch?v=0moS8UHupGc
 ### https://www.youtube.com/watch?v=lEMZnrC-ST4
 
-# https://github.com/rmagatti/goto-preview
+# lsp goto definition (in a small preview pane) https://github.com/rmagatti/goto-preview
+# treesitter textobjects https://www.youtube.com/watch?v=FuYQ7M73bC0
+# rust codinf setup https://www.youtube.com/watch?v=Mccy6wuq3JE
 
 { pkgs, ... }:
 let

@@ -50,6 +50,7 @@ in
         ./sioyek
         ./starship
         ./thefuck
+        ./wpp
         ./xdg
         ./xioxide
     ];

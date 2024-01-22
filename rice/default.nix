@@ -1,6 +1,7 @@
 {
     # remember to regenerate wallpapers if you change scheme
     col = import ./colors "gruvbox";
+    wall = import ./wall;
 
     font = {
         name = "VictorMono";
@@ -19,8 +20,4 @@
         gaps-out = 17;
         gaps-in = 7;
     };
-
-    wall.url = "https://i.imgur.com/2e6DOl2.jpeg";
-    wall.url-blur = "https://i.imgur.com/ryPT1V8.jpeg";
-    wall.url-dim = "https://i.imgur.com/FSEigyT.jpeg";
 }

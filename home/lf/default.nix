@@ -53,11 +53,12 @@ in
 
         commands = 
         let
-            inherit (config.programs.zsh.shellAliases) xioxide swi;
+            inherit (config.programs.zsh.shellAliases) xioxide;
         in
         {
             custom_open = ''%${scriptdir}/opener'';
-            custom_wall = ''%${swi} "$f"'';
+            custom_wall = ''%wpp desktop "$f"'';
+            custom_fullwall = ''$wpp browser "$f" && echo -n "press enter" && read'';
 
             custom_extract = /* bash */ ''%{{
                 if [ -f "$f" ] ; then
@@ -183,6 +184,7 @@ in
             "c" = "custom_chmod";
             "." = "set hidden!";
             "w" = "custom_wall";
+            "W" = "custom_fullwall";
             "x" = "custom_extract";
             "<c-d>" = "custom_drag";
         };
