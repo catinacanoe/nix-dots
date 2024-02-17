@@ -1,14 +1,17 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ... }@args:
 {
     environment.pathsToLink = [ "/share/zsh" ]; # ZSH comp requirement
 
-    nixpkgs.config = {
-        allowUnfree = true;
-    };
+    nixpkgs.config.allowUnfree = true;
 
     environment.systemPackages = with pkgs;
     let
         hypr = writeShellScriptBin "hypr" "Hyprland";
+        vp = (import ./custom/vpnshell.nix args);
+        browsepad = (import ./custom/browsepad.nix args);
+        browse = (import ./custom/browse.nix args);
+        nixshell = (import ./custom/nixshell.nix args);
+        drop = (import ./custom/drop.nix args);
         yargs = writeShellScriptBin "yargs" ''
         [ "$1" == "-E" ] && esc="$2" && shift 2 || esc="%%%"
         eval "$(cat | sed "s|$esc|$@|g")"
@@ -16,6 +19,11 @@
     in
     [
         # cli utils
+        vp
+        drop
+        browsepad
+        nixshell
+        browse
         yargs
         speedtest-cli
         yt-dlp
@@ -75,13 +83,24 @@
         gnumake
         mlocate
         xdg-utils
+        bintools-unwrapped
+        binwalk
+        zsteg
+        grim
+        slurp
+        htop-vim
+        tty-clock
+        cbonsai
+        imv
 
-        # python
+        # lib
         python311Full
         python311Packages.docx2txt
+        python311Packages.howdoi
 
-        # c
         clang_15 boost183 ncurses
+
+        zulu # java
 
         # manpages ???
         stdmanpages clang-manpages llvm-manpages
@@ -94,18 +113,21 @@
         firefox ungoogled-chromium brave
         networkmanagerapplet protonvpn-cli_2
         lf libqalculate
+        tradingview
+        (discord.override { # https://nixos.wiki/wiki/Discord
+            withVencord = true;
+        })
 
         kitty
         mpv-unwrapped
         tofi
         neomutt
-        htop-vim
         sioyek
         zsh
 
         # core system apps
-        hypr
         hyprland
+        hypr pyprland
         pulseaudio pipewire
         waybar
         swaylock-effects

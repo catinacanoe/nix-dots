@@ -2,19 +2,18 @@
 let
     home = config.home.homeDirectory;
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
-
-    xioxide_bin = "${config.home.sessionVariables.XIOXIDE_PATH}/main.sh";
 in
 with config.xdg.userDirs;
 {
     # activated in the `hm` shell alias
-    programs.zsh.shellAliases.xioxide="source ${xioxide_bin}";
+    programs.zsh.shellAliases.xioxide="source ${repos}/xioxide/main.sh";
     home.sessionVariables.XIOXIDE_PATH = "${extraConfig.XDG_REPOSITORY_DIR}/xioxide";
 
     xdg.configFile."xioxide/dirs.sed".text = /* sed */ ''
     s/^h/rnh/
     s/^n/rn/
-    s/^o/cs/
+    s/^o/xs/
+    s/^w/xw/
     '';
 
     xdg.configFile."xioxide/dirs.conf".text = /* bash */ ''
@@ -41,6 +40,14 @@ r ${repos}/
     n nix-dots/
         f flake.nix
         c config/
+            p packages/
+                n nsxiv/
+                    d default.nix
+            c custom/
+                v vpnshell.nix
+                bp browsepad.nix
+                b browse.nix
+                n nixshell.nix
             d default.nix
             f fonts.nix
             e environment.nix
@@ -60,18 +67,25 @@ r ${repos}/
                 d default.nix
             c colors/
                 d default.nix
-                c catppuccin.nix
-                g gruvbox.nix
-                r rosepine.nix
+                c out/catppuccin.nix
+                g out/gruvbox.nix
+                r out/rosepine.nix
         h home/
             d default.nix
             ba bat/
                 d default.nix
             cr crypt/
                 d default.nix
+            di discord/
+                d default.nix
+                a activate.nix
+            dy dye/
+                d default.nix
             fi firefox/
                 d default.nix
                 a activate.nix
+            fz fzf/
+                d default.nix
             gi git/
                 d default.nix
             gu gitutils/
@@ -82,7 +96,10 @@ r ${repos}/
                 d default.nix
             hy hyprland/
                 d default.nix
+                p pyprland.nix
             ki kitty/
+                d default.nix
+            im imv/
                 d default.nix
             lf lf/
                 d default.nix
@@ -115,6 +132,8 @@ r ${repos}/
                     pr programs.nix
                     wi windows.nix
                     wo workspaces.nix
+            sc scrot/
+                d default.nix
             sh shell/
                 d default.nix
                 p plugins/
@@ -130,9 +149,34 @@ r ${repos}/
             xi xioxide/
                 d default.nix
                 a activate.nix
-c ${home}/crypt/
-    p pass/
-        m .map
+                s sites.nix
+s ${config.programs.password-store.settings.PASSWORD_STORE_DIR}/
+    m .map
+d ${download}/
+m ${music}/
+v ${videos}/
+    m meme/
+p ${pictures}/
+    t troll/
+    g grim/
+    w wall/
+        n index
+        d digital/
+            b abstract/
+            a anime/
+            f focus/
+            l landscape/
+            n nature/
+            p pixel/
+            s sky/
+        i irl/
+            a animals/
+            f food/
+            l landscape/
+            p plant/
+            s sky/
+            v vehicle/
+x ${documents}/
     s school/
         c czech/
         h history/
@@ -149,25 +193,58 @@ c ${home}/crypt/
             t textbook.pdf
         s spanish/
         t transcript.pdf
+        l calendar.pdf
     w wiki/
-    m meme/
-d ${download}/
-m ${music}/
-v ${videos}/
-p ${pictures}/
-    w wall/
-        d digital/
-            a anime/
-            b abstract/
-            r art/
-            p pixel/
-        i irl/
-            p plant/
-            l landscape/
-x ${documents}/
+        e engineering/
+        g gamedev/
+        j journal/
+            d day.norg
+            m month.norg
+            g goals.norg
+        l learning/
+            c czech.norg
+            o food.norg
+            h history.norg
+            k kaizen.norg
+            l learning.norg
+            p piano.norg
+            t trading.norg
+        f life/
+            b birthdays.norg
+            d dental.norg
+            l drivers-license.norg
+            o other.norg
+            r room.norg
+            v vehicles.norg
+        x linux/
+        o school/
+            a .avid.norg
+            c .czech.norg
+            h .history.norg
+            l .literature.norg
+            m .math.norg
+            o .other.norg
+            e .ped.norg
+            p .physics.norg
+            r .rsm.norg
+            s .spanish.norg
+            p other-posthigh.norg
+        s softwaredev/
+        y style/
+            i .index.norg
+            h head.norg
+        w work/
+            a airborne.norg
+            r rsm.norg
+            s selling.norg
+        i .index.norg
+    i important/
+    b bricklink/
     m mail/
         c canoe/
         m marklif/
         s school/
     '';
+
+    xdg.configFile."xioxide/sites.conf".text = import ./sites.nix;
 }

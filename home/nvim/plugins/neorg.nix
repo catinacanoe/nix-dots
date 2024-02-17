@@ -58,7 +58,7 @@ let
                 ['core.dirman'] = {
                     config = {
                         workspaces = {
-                            main = '~/crypt/wiki/',
+                            main = '~/dox/wiki/',
                         },
                         default_workspace = 'main',
                         index = '.index.norg'

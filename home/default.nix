@@ -31,12 +31,16 @@ in
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
         ./bat
         ./crypt
+        ./discord
+        ./dye
         ./firefox
+        ./fzf
         ./git
         ./gitutils
         ./gpg
         ./gui
         ./hyprland
+        ./imv
         ./kitty
         ./lf
         ./mail
@@ -46,6 +50,7 @@ in
         ./power
         ./pw
         ./remap
+        ./scrot
         ./shell
         ./sioyek
         ./starship
@@ -69,6 +74,6 @@ in
         EDITOR = "nvim";
         BROWSER = "firefox";
         TERMINAL = "kitty";
-        MENU = "tofi";
+        DMENU_PROGRAM = "tofi";
     };
 }

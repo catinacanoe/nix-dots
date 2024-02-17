@@ -8,11 +8,11 @@ with (import ../../rice);
         hyprctl = "${pkgs.hyprland}/bin/hyprctl";
     in
     [(pkgs.writeShellScriptBin "power" ''
-    options="$(echo 'lock_suspend_reload_tty_cycle_shutdown' | tr '_' '\n')"
+    options="$(echo 'lock_suspend_reload_logout_cycle_shutdown' | tr '_' '\n')"
 
     if [ -z "$1" ]; then
         # interactive menu
-        choice="$(echo "$options" | $MENU)"
+        choice="$(echo "$options" | $DMENU_PROGRAM)"
     else
         choice="$(echo "$options" | grep "^$1" | head -n 1)"
     fi
@@ -25,7 +25,7 @@ with (import ../../rice);
         lock) delay && lock --grace=0.5 ;;
         suspend) delay && lock && delay && systemctl suspend ;;
         reload) ${hyprctl} dispatch forcerendererreload ;;
-        tty) ${hyprctl} kill ;;
+        logout) ${hyprctl} dispatch exit ;;
         cycle) reboot ;;
         shutdown) shutdown now ;;
     esac

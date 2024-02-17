@@ -9,6 +9,6 @@ in
                 ${mod}-t:
                     ${launchdir direction "kitty ~"}
                 ${mod}-h:
-                    ${launchdir direction "firefox --new-window about:blank"}
+                    ${launchdir direction "firefox -P main --new-window about:blank"}
 # programs.nix ${direction}
 ''

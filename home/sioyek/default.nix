@@ -2,7 +2,7 @@
 with (import ../../rice);
 with col;
 {
-    programs.zsh.shellAliases.sy = /* bash */
+    programs.zsh.shellAliases.sio = /* bash */
         ''echo "tmp=$(mktemp) && cp \"%%%\" \$tmp && echo \"rm \$tmp\" | at now + 2 min && sioyek \$tmp" | yargs'';
 
     programs.sioyek = {
@@ -46,13 +46,19 @@ with col;
 
             "case_sensitive_search" = "1";
 
+            "highlight_color_r" = red.rgb0;
+            "highlight_color_o" = orange.rgb0;
+            "highlight_color_y" = yellow.rgb0;
+            "highlight_color_g" = green.rgb0;
             "highlight_color_a" = aqua.rgb0;
-            "highlight_color_b" = aqua.rgb0;
+            "highlight_color_b" = blue.rgb0;
+            "highlight_color_p" = purple.rgb0;
+            "highlight_color_w" = fg.rgb0;
+
             "highlight_color_c" = aqua.rgb0;
             "highlight_color_d" = aqua.rgb0;
             "highlight_color_e" = aqua.rgb0;
             "highlight_color_f" = aqua.rgb0;
-            "highlight_color_g" = aqua.rgb0;
             "highlight_color_h" = aqua.rgb0;
             "highlight_color_i" = aqua.rgb0;
             "highlight_color_j" = aqua.rgb0;
@@ -60,17 +66,12 @@ with col;
             "highlight_color_l" = aqua.rgb0;
             "highlight_color_m" = aqua.rgb0;
             "highlight_color_n" = aqua.rgb0;
-            "highlight_color_o" = aqua.rgb0;
-            "highlight_color_p" = aqua.rgb0;
             "highlight_color_q" = aqua.rgb0;
-            "highlight_color_r" = aqua.rgb0;
             "highlight_color_s" = aqua.rgb0;
             "highlight_color_t" = aqua.rgb0;
             "highlight_color_u" = aqua.rgb0;
             "highlight_color_v" = aqua.rgb0;
-            "highlight_color_w" = aqua.rgb0;
             "highlight_color_x" = aqua.rgb0;
-            "highlight_color_y" = aqua.rgb0;
             "highlight_color_z" = aqua.rgb0;
         };
 

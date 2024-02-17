@@ -33,10 +33,12 @@ in
         shellAliases =
         (import ./modules/git.nix args) //
         {
-            nx = "sudo nixos-rebuild switch --flake path:${repos}/nix-dots/";
+            nx = "sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/";
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
-            vpn = "sudo protonvpn";
+            vpu = "sudo protonvpn connect -f";
+            vpd = "sudo protonvpn disconnect";
+            vpr = "sudo protonvpn reconnect";
 
             o = "e ../";
             oo = "e ../..";
@@ -71,6 +73,10 @@ in
         ke() { ${k} "$1" && e "$1"; }
 
         a() { ${xioxide} lf "grep '/$'" pwd dirs $@; }
+        sy() {
+            ${xioxide} "" "" pwd dirs $@ | read file
+            tmp=$(mktemp) && cp "$file" "$tmp" && echo "rm $tmp" | at now + 2 min && sioyek "$tmp"
+        }
         A() { ${xioxide} lfcd "grep '/$'" pwd dirs $@; }
         h() { [ -z "$1" ] && "$EDITOR" . || ${xioxide} "$EDITOR" "" pwd dirs $@; }
 
@@ -88,6 +94,12 @@ in
             if [[ "$arg" == *"f"* ]]; then
                 echo -e "\nACTIVATING FIREFOX"
                 ${import ../firefox/activate.nix args}
+                handled="true"
+            fi
+
+            if [[ "$arg" == *"d"* ]]; then
+                echo -e "\nACTIVATING DISCORD (VENCORD)"
+                ${import ../discord/activate.nix args}
                 handled="true"
             fi
 

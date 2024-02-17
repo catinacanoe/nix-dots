@@ -12,12 +12,21 @@ function block() {
     b0="0$(bc <<< "scale = 3; $b / 255")"
     g0="0$(bc <<< "scale = 3; $g / 255")"
 
+    local dyeout
+    dyeout="$(dye -x hsl "#$hex")"
+    local h s l
+
+    h="$(echo "$dyeout" | sed -e 's/^hsla(//' -e 's/, .*//')"
+    s="$(echo "$dyeout" | sed -e 's/^hsla([^,]*, //' -e 's/%, .*//')"
+    l="$(echo "$dyeout" | sed -e 's/^hsla([^%]*%, //' -e 's/%)$//')"
+
     echo "    $name = {"
     echo "        hex = \"$hex\"; h = \"#$hex\";"
     echo "        r = $r; g = $g; b = $b;"
     echo "        r0 = $r0; g0 = $g0; b0 = $b0;"
     echo "        rgb = \"$r, $g, $b\";"
     echo "        rgb0 = \"$r0 $g0 $b0\";"
+    echo "        hu = $h; sa = $s; va = $l;"
     echo "    };"
 }
 

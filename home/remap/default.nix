@@ -4,6 +4,7 @@ let
 
     hypr = (import ./fn/hypr.nix);
     launch = (import ./fn/launch.nix);
+
     programs = (import ./modules/programs.nix);
 in
 {
@@ -16,11 +17,14 @@ keymap:
         ${(import ./modules/windows.nix) { inherit mod; }}
         ${(import ./modules/workspaces.nix) { inherit mod; }}
         ${(import ./modules/peripherals.nix) { inherit mod; }}
+        ${(import ./modules/dropdown.nix) { inherit mod; }}
 
         ${mod}-p:
             ${launch "pw"}
         ${mod}-shift-p:
             ${launch "pw --interactive"}
+        ${mod}-z:
+            ${launch "scrot"}
 
         ${mod}-semicolon:
             remap:

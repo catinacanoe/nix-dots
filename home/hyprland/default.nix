@@ -1,10 +1,11 @@
-{ config, inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }@args:
 let
     lib = inputs.home-manager.lib;
 
     rice = (import ../../rice);
     col = rice.col; 
     window = rice.window;
+    pypr = (import ./pyprland.nix args);
 
     gradient = "rgba(${col.fg.hex}b0) rgba(00000000) rgba(${col.fg.hex}b0) rgba(00000000) 45deg";
 in
@@ -12,7 +13,14 @@ in
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD ${pkgs.hyprland}/bin/hyprctl reload > /dev/null";
 
+    home.activation.pyprland = lib.hm.dag.entryAfter ["onFilesChange"]
+        pypr.activation;
+
+    xdg.configFile."hypr/pyprland.toml" = pypr.pypr;
+
     wayland.windowManager.hyprland.extraConfig = /* bash */ ''
+    ${pypr.hypr.text}
+
     exec-once = kitty
     exec-once = swww init
     exec-once = waybar
@@ -29,6 +37,9 @@ in
     # windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class:^(firefox)$
     # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
     windowrulev2 = opacity 1.0 override 1.0, class:^(firefox)$
+    windowrulev2 = opacity 1.0 override 1.0, class:^(imv)$
+
+    windowrulev2 = opacity 0.7, class:^(sioyek)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
@@ -40,7 +51,7 @@ in
 
     general {
         # defaults
-        # no_cursor_warps = false # allow cursor to be moved by refocus
+        no_cursor_warps = false # allow cursor to be moved by refocus
         border_size = ${toString window.border}
         gaps_in = ${toString window.gaps-in}
         gaps_out = ${toString window.gaps-out}
@@ -102,9 +113,9 @@ in
     # per device input settings exist (see wiki)
     input {
         # defaults
-        # natural_scroll = false
-        # follow_mouse = 1 # (0-3) see wiki (1 is intuitive enable)
-        mouse_refocus = false # see wiki (only relevant if follow_mouse = 1)
+        natural_scroll = false
+        follow_mouse = 1 # (0-3) see wiki (1 is intuitive enable)
+        mouse_refocus = true # see wiki (only relevant if follow_mouse = 1)
 	# this is needed if mouse does not warp on spawn
 
         numlock_by_default = true # who uses numpad for navigation anyways
@@ -134,6 +145,7 @@ in
         force_default_wallpaper = 0 # set to 0 once we add our own
 
         animate_manual_resizes = true
+        focus_on_activate = true
         # allow_session_lock_restore = false # restore locking apps
   
         enable_swallow = true
