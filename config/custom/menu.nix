@@ -11,7 +11,7 @@ while true; do
     selected="$(echo "$response" | tail -n 1)"
     typed="$(echo "$response" | head -n 1)"
 
-    if [ "$(echo "$response" | wc -l)" == "1" ]; then
+    if [ "$(echo "$response" | wc -l)" == "1" ]; then # there is no
     else
     fi
 done
