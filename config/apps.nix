@@ -95,6 +95,11 @@
         mpc-cli
         newsboat
         git
+        gcc
+
+        # nvidia compat
+        qt5ct
+        libva
 
         # lib
         python311Full

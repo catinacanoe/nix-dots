@@ -57,12 +57,6 @@ function activate_xx() {
     source ${repos}/xioxide/main.sh reload
 }
 
-function activate_dc() {
-    echo "activating vencord"
-    cat ${confighome}/Vencord-gen/settings/settings.json > ${confighome}/Vencord/settings/settings.json
-    cat ${confighome}/Vencord-gen/themes/Translucence.theme.css > ${confighome}/Vencord/themes/Translucence.theme.css
-}
-
 function handle_response() {
     if [ -z "$response" ] || [ "$response" == "help" ]; then
         echo
@@ -86,9 +80,6 @@ function handle_response() {
         elif [ "$char" == "f" ]; then
             activate_ff
             notify-send "nixshell" "firefox preactivation complete"
-        elif [ "$char" == "d" ]; then
-            activate_dc
-            notify-send "nixshell" "discord activation complete"
         elif [ "$char" == "x" ]; then
             activate_xx
             notify-send "nixshell" "xioxide activation complete"

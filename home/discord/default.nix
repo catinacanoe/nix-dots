@@ -1,7 +1,7 @@
 { ... }:
 with (import ../../rice).col;
 {
-    xdg.configFile."Vencord-gen/settings/settings.json".text = /* json */ ''
+    xdg.configFile."Vencord/settings/settings.json".text = /* json */ ''
         {
             "notifyAboutUpdates": true,
             "autoUpdate": false,
@@ -511,7 +511,7 @@ with (import ../../rice).col;
         }
     '';
 
-    xdg.configFile."Vencord-gen/themes/Translucence.theme.css".text = /* css */ ''
+    xdg.configFile."Vencord/themes/Translucence.theme.css".text = /* css */ ''
         /**
          * @name TranslucencePlus
          * @version 1.4

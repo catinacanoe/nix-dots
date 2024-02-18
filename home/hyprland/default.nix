@@ -25,10 +25,10 @@ in
 
     exec-once = waybar
     exec-once = swww init
-    exec-once = mpd
+    exec-once = mpd && mpc volume 70
 
     exec-once = kitty
-    exec-once = discord
+    exec-once = discord --enable-features=UseOzonePlatform --ozone-platform=wayland
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}

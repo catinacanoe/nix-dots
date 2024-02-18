@@ -37,8 +37,6 @@ r ${repos}/
         r README.md
         m main.sh
         f functions.sh
-    f firefox/
-        s stylus/
     n nix-dots/
         f flake.nix
         c config/
@@ -58,6 +56,7 @@ r ${repos}/
             a apps.nix
             p peripheral.nix
             s services.nix
+            h ignore-hardware.nix
         p private/
             m mail/
                 c canoe.nix
@@ -102,6 +101,8 @@ r ${repos}/
             hy hyprland/
                 d default.nix
                 p pyprland.nix
+                ih ignore-hypr.nix
+                ip ignore-pypr.nix
             ki kitty/
                 d default.nix
             im imv/
