@@ -6,6 +6,7 @@ let
     col = rice.col; 
     window = rice.window;
     pypr = (import ./pyprland.nix args);
+    ignore = (import ./ignore-hypr.nix);
 
     gradient = "rgba(${col.fg.hex}b0) rgba(00000000) rgba(${col.fg.hex}b0) rgba(00000000) 45deg";
 in
@@ -20,7 +21,7 @@ in
 
     wayland.windowManager.hyprland.extraConfig = /* bash */ ''
     ${pypr.hypr.text}
-    ${(import ./ignore-hypr.nix args)}
+    ${ignore.vars}
 
     exec-once = waybar
     exec-once = swww init
@@ -187,7 +188,7 @@ in
     # name, res@fps, pos of monitor's TpLft corner in layout, scale
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
-    monitor=eDP-1, 2560x1600@60, 0x0, 1.333333
+    ${ignore.monitor}
     monitor=,preferred,auto,1 # auto rule for random monitors
 
     dwindle {
