@@ -1,0 +1,12 @@
+* { border-color: #0000 !important; }
+
+main {
+    background-image: var(--rwall-dim) !important;
+}
+
+* {
+    color: var(--rcol-fg) !important;
+}
+
+/* idk why but the site doesn't let you apply a background image */
+/* (it's because of firefox content security policy) */

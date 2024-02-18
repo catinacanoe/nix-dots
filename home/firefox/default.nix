@@ -1,22 +1,13 @@
 { ... }:
 let 
-    prefix = "repos/nix-dots/private/firefox-gen";
+    prefix = ".mozilla/firefox";
     rice = (import ../../rice);
-in
-{
-    home.file."${prefix}/chrome/userContent.css".text = ''
+    usercontent = /* css */ ''
         :root {
             ${import ./modules/vars.nix rice}
         }
     '';
-
-    home.file."${prefix}-nodecor/chrome/userContent.css".text = ''
-        :root {
-            ${import ./modules/vars.nix rice}
-        }
-    '';
-
-    home.file."${prefix}/chrome/userChrome.css".text = ''
+    userchrome-full = /* css */ ''
         :root {
             ${import ./modules/vars.nix rice}
 
@@ -145,10 +136,9 @@ in
         }
 
         toolbar#nav-bar {
-            background-image: var(--rwall-blur) !important;
-            background-size: 1920px;
-            background-position: -22px -107px;
             box-shadow: none !important;
+            background-image: var(--rwall-blur) !important;
+            ${import ./modules/ignore-size.nix}
         }
 
         /* Sets the URL bar color */
@@ -431,8 +421,7 @@ in
             display: none !important
         }
     '';
-
-    home.file."${prefix}-nodecor/chrome/userChrome.css".text = ''
+    userchrome-nodecor = /* css */ ''
         :root {
             ${import ./modules/vars.nix rice}
 
@@ -860,4 +849,14 @@ in
             display: none !important
         }
     '';
+in
+{
+    home.file."${prefix}/main/chrome/userContent.css".text = usercontent;
+    home.file."${prefix}/main/chrome/userChrome.css".text = userchrome-full;
+
+    home.file."${prefix}/scratch/chrome/userContent.css".text = usercontent;
+    home.file."${prefix}/scratch/chrome/userChrome.css".text = userchrome-full;
+
+    home.file."${prefix}/gpt/chrome/userContent.css".text = usercontent;
+    home.file."${prefix}/gpt/chrome/userChrome.css".text = userchrome-nodecor;
 }

@@ -1,0 +1,61 @@
+header,
+footer,
+xxx { display: none !important; }
+
+* {
+    border: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+p {
+    color: var(--rcol-fg) !important;
+    font-size: 15px;
+}
+
+main {
+    background-image: var(--rwall-dim);
+    background-size: 1740px !important;
+    background-position: -64px -140px !important;
+    background-attachment: fixed !important;
+}
+
+h1 { color: var(--rcol-purple) !important; }
+h2 { color: var(--rcol-orange) !important; }
+
+/* link buttons */
+.docbook-page .pager a {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background-image: var(--rwall-blur) !important;
+    background-attachment: fixed !important;
+    background-size: 1740px !important;
+    background-position: -64px -140px !important;
+    color: var(--rcol-fg) !important;
+    font-size: 15px;
+}
+
+code,
+body { background: none !important; }
+
+code.code,
+.terminal-console, .highlight-shell-session .highlight pre, div.docbook .screen,
+code.filename {
+    color: var(--rcol-fg) !important;
+    background: rgba(var(--rrgb-bg), 0.6) !important;
+    padding: 1px !important;
+}
+
+strong.userinput {
+    color: var(--rcol-red) !important;
+}
+
+/* note */
+aside {
+    background: rgba(var(--rrgb-blue), 0.3) !important;
+    
+}
+
+div.title {
+    color: var(--rcol-blue) !important;
+}

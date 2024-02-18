@@ -1,0 +1,77 @@
+ytd-mini-guide-renderer,
+yt-icon#logo-icon,
+div#voice-search-button,
+yt-icon-button#button,
+div#search-clear-button,
+button#search-icon-legacy,
+ytd-feed-filter-chip-bar-renderer[fluid-width] #chips-content.ytd-feed-filter-chip-bar-renderer,
+ytd-rich-section-renderer.style-scope.ytd-rich-grid-renderer,
+xxx { display: none !important; }
+
+ytd-feed-filter-chip-bar-renderer[component-style="FEED_FILTER_CHIP_BAR_STYLE_TYPE_CHANNEL_PAGE_GRID"] #chips-wrapper.ytd-feed-filter-chip-bar-renderer,
+div#chips-content { /* popular, oldest, latest */
+    background: #0000 !important;
+}
+
+div#container.style-scope.ytd-searchbox {
+    border-radius: 40px !important;
+    background-size: cover !important;
+}
+
+/* WALLPAPER */
+ytd-app {
+    background-image: var(--rwall-dim) !important;
+    background-size: 1920px !important;
+    background-position: -70px -150px;
+    background-attachment: fixed !important;
+}
+
+div#container.style-scope.ytd-searchbox,
+.sbsb_a,
+div#background {
+    background-image: var(--rwall-blur) !important;
+    background-size: 1920px !important;
+    background-position: -70px -150px !important;
+    background-attachment: fixed !important;
+}
+
+/* DARK BG */
+yt-chip-cloud-chip-renderer[chip-style="STYLE_DEFAULT"][selected], yt-chip-cloud-chip-renderer[chip-style="STYLE_HOME_FILTER"][selected],
+.yt-spec-button-shape-next--mono.yt-spec-button-shape-next--filled,
+xxx { background: rgba(var(--rrgb-bg), 0.5) !important; }
+ 
+/* TRASNPARENT BG */
+div#content,
+div#container.style-scope.ytd-playlist-panel-renderer,
+div#channel-header,
+div#channel-header-container,
+div#channel-container,
+div#tabs-container,
+div#tabs-inner-container,
+div#movie-player,
+xxx { background: #0000 !important; }
+
+/* LINKS */
+a { color: var(--rcol-blue) !important; }
+a:visited { color: var(--rcol-purple) !important; }
+
+/* FOREGROUND */
+div,
+yt-icon,
+svg,
+button,
+span,
+span.yt-core-attributed-string,
+input,
+h3,
+yt-formatted-string,
+* { color: var(--rcol-fg) !important; }
+
+div#metadata-line {
+    color: var(--rcol-mg) !important;
+}
+
+* {
+    border: none !important;
+    box-shadow: none !important;
+}

@@ -41,41 +41,6 @@ function nixos() {
     sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/#default || notify-send "nixshell" "ERROR in nixos rebuild"
 }
 
-function activate_ff() {
-    echo "activating firefox"
-    [ -n "$(pgrep firefox)" ] && echo "killing all firefox windows" && killall .firefox-wrapped
-
-    echo "clearing firefox build"
-    out="$(rm -rfv "${private}/firefox-build/")"
-    echo "$out" | head
-    echo
-
-    echo "pulling runtime config from ~/.mozilla"
-    out="$(cp -rv ~/.mozilla/ "${private}/firefox-build/")"
-    echo "$out" | head
-    out="$(rm -rf "${private}/firefox-build/firefox/scratch")"
-    out="$(rm -rf "${private}/firefox-build/firefox/gpt")"
-    out="$(cp -r "${private}/firefox-build/firefox/main" "${private}/firefox-build/firefox/scratch")"
-    out="$(cp -r "${private}/firefox-build/firefox/main" "${private}/firefox-build/firefox/gpt")"
-    echo
-
-    echo "overlaying generated files"
-    out="$(cp -rv "${private}/firefox-gen"/* "${private}/firefox-build/firefox/main/")"
-    out="$(cp -rv "${private}/firefox-gen"/* "${private}/firefox-build/firefox/scratch/")"
-    out="$(cp -rv "${private}/firefox-gen-nodecor"/* "${private}/firefox-build/firefox/gpt/")"
-    echo "$out" | head
-    echo
-
-    echo "removing files from ~/.mozilla"
-    out="$(rm -rf ~/.mozilla/)"
-    echo "$out" | head
-    echo
-
-    echo "copying files from store to mozilla"
-    out="$(cp -r "${private}/firefox-build" ~/.mozilla/)"
-    echo "$out" | head
-}
-
 function activate_xx() {
     echo "activating xioxide"
     source ${repos}/xioxide/main.sh reload
@@ -109,10 +74,6 @@ function handle_response() {
             echo
             homeman
             notify-send "nixshell" "home manager complete"
-        elif [ "$char" == "f" ]; then
-            echo
-            activate_ff
-            notify-send "nixshell" "firefox activation complete"
         elif [ "$char" == "d" ]; then
             echo
             activate_dc

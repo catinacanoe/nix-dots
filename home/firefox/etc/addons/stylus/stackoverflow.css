@@ -1,0 +1,118 @@
+div#left-sidebar,
+div#sidebar,
+a.ws-nowrap.s-btn.s-btn__filled,
+.left-sidebar--sticky-container,
+button.js-vote-down-btn,
+button.js-vote-up-btn,
+blockquote::before,
+div.site-footer--container,
+div.d-flex.g4.gsx.ai-center,
+a.js-add-link.comments-link,
+div.user-info,
+form#post-form,
+div.js-post-menu,
+svg.js-saves-btn-unselected,
+a.js-post-issue,
+h2.bottom-notice,
+div.snippet-ctas
+{ display: none !important; }
+
+div.js-vote-count {
+    font-size: 25px !important;
+}
+a.question-hyperlink,
+h2.mb0 {
+    font-size: 40px !important;
+}
+
+body {
+    background-image: var(--rwall-dim) !important;
+    background-size: 1920px !important;
+    background-position: -70px -150px !important;
+    min-height: 100%;
+    background-attachment: fixed;
+}
+div#content { background: #0000 !important; }
+
+/* topbar */
+header,
+div.s-topbar--container {
+    display: none !important;
+}
+
+/* remove separator bar under question */
+.bc-black-200 {
+    border-color: #0000 !important;
+}
+
+/* MG COL */
+.mr2,
+div.flex--item.ws-nowrap.mb8,
+h2.bottom-notice,
+time,
+div.d-flex {
+    color: var(--rcol-mg) !important;
+}
+/* FG COL */
+span,
+body,
+.fc-theme-body-font,
+code,
+kbd,
+div,
+select,
+pre,
+p {
+    color: var(--rcol-fg) !important;
+}
+
+/* DARK BG */
+code,
+textarea,
+div.user-info,
+div.user-info.user-hover,
+div.post-signature,
+a.post-tag,
+aside,
+select,
+pre
+{ background: rgba(var(--rrgb-bg), 0.3) !important; }
+
+/* LIGHT BG */
+span.flex--item,
+a.comment-user,
+a.post-tag,
+kbd,
+.s-btn.s-btn__filled
+{
+    background: rgba(var(--rrgb-fg), 0.1) !important;
+}
+
+img {
+    border-radius: 7px !important;
+}
+kbd {
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+button:hover, .s-btn:hover {
+    color: var(--rcol-mg) !important;
+}
+
+div.js-vote-count
+{ color: var(--rcol-orange) !important; }
+
+.s-btn { /* buttons */
+    color: var(--rcol-fg) !important;
+}
+
+svg.svg-icon.iconCheckmarkLg { /* accepted ans check */
+    color: var(--rcol-green) !important;
+}
+
+.s-popover { /* hover tooltip */
+    background: rgba(var(--rrgb-bg), 0.7) !important;
+}
+
+* { border: none !important; }

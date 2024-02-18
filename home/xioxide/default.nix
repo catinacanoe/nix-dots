@@ -37,6 +37,8 @@ r ${repos}/
         r README.md
         m main.sh
         f functions.sh
+    f firefox/
+        s stylus/
     n nix-dots/
         f flake.nix
         c config/

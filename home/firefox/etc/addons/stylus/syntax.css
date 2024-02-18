@@ -1,0 +1,33 @@
+/* SYNTAX */
+code.hljs { background: #0000 !important; }
+
+span.hljs-built_in,
+span.hljs-name,
+xxx { color: var(--rcol-red) !important; }
+
+span.hljs-literal,
+xxx { color: var(--rcol-orange) !important; }
+
+span.hljs-keyword,
+span.hljs-type,
+span.hljs-function,
+span.hljs-attribute,
+span.hljs-attr,
+xxx { color: var(--rcol-yellow) !important; }
+
+span.hljs-string,
+xxx { color: var(--rcol-green) !important; }
+
+span.hljs-selector-class,
+xxx { color: var(--rcol-aqua) !important; }
+
+span.hljs-number,
+xxx { color: var(--rcol-blue) !important; }
+
+span.hljs-variable,
+span.hljs-title,
+xxx { color: var(--rcol-purple) !important; }
+
+span.hljs-meta,
+span.hljs-comment,
+xxx { color: var(--rcol-mg) !important; }
