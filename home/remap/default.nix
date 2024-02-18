@@ -1,6 +1,6 @@
 { ... }:
 let
-    mod = "super";
+    mod = (import ./ignore-mod.nix);
 
     hypr = (import ./fn/hypr.nix);
     launch = (import ./fn/launch.nix);
