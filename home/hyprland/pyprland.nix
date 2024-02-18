@@ -25,7 +25,7 @@
     ${termpad "vpn" "sudo vp"}
     ${termpad "nix" "nixshell"}
     ${termpad "qalc" "qalc"}
-    ${termpad "browsepad" "pb"}
+    ${termpad "browsepad" "bp"}
     ${termpad "bluetooth" "bluetoothctl"}
 
     # BROWSER #
