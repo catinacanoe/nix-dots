@@ -38,7 +38,7 @@ function homeman() {
 
 function nixos() {
     echo "rebuilding the nixos system"
-    sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/ || notify-send "nixshell" "ERROR in nixos rebuild"
+    sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/#default || notify-send "nixshell" "ERROR in nixos rebuild"
 }
 
 function activate_ff() {

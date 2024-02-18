@@ -35,7 +35,7 @@
         lib = inputs.home-manager.lib;
     in
     {
-        nixosConfigurations."nixpad" = inputs.nixpkgs.lib.nixosSystem {
+        nixosConfigurations."default" = inputs.nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
                 inherit inputs;
