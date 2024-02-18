@@ -79,8 +79,7 @@ in
         EDITOR = "nvim";
         BROWSER = "firefox";
         TERMINAL = "kitty";
-        DMENU_PROGRAM = "tofi";
-
-        MENUFIFO = "/tmp/menu.fifo";
+        DMENU_PROGRAM = "menu";
+        MANPAGER = "manpager";
     };
 }

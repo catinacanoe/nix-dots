@@ -24,6 +24,8 @@ in
                     ${drop "qalc"}
                 ${mod}-b:
                     ${drop "bluetooth"}
+                ${mod}-l:
+                    ${drop "launcher"}
 
                 ${mod}-h:
                     ${drop "browser"}

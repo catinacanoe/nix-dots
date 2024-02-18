@@ -7,95 +7,93 @@
     environment.systemPackages = with pkgs;
     let
         hypr = writeShellScriptBin "hypr" "Hyprland";
+
         vp = (import ./custom/vpnshell.nix args);
         browsepad = (import ./custom/browsepad.nix args);
         browse = (import ./custom/browse.nix args);
         nixshell = (import ./custom/nixshell.nix args);
         drop = (import ./custom/drop.nix args);
-        yargs = writeShellScriptBin "yargs" ''
-        [ "$1" == "-E" ] && esc="$2" && shift 2 || esc="%%%"
-        eval "$(cat | sed "s|$esc|$@|g")"
-        '';
-    in
-    [
+        menu = (import ./custom/menu.nix args);
+        launcher = (import ./custom/launcher.nix args);
+        yargs = (import ./custom/yargs.nix args);
+        manpager = (import ./custom/manpager.nix args);
+    in [
+        # custom apps
+        vp drop browsepad nixshell browse yargs menu.ui menu.wrap launcher manpager
+
         # cli utils
-        vp
-        drop
-        browsepad
-        nixshell
-        browse
-        yargs
-        speedtest-cli
-        yt-dlp
-        pciutils
-        sysfsutils
-        iw
-        wirelesstools
-        pavucontrol
-        procps
-        fd
-        psmisc
-        wev
-        libnotify
-        ffmpeg
-        mediainfo
-        unzip
-        brightnessctl
-        tldr
-        neofetch
-        wtype
-        jc jq
-        isync
-        bind
-        bc
-        at
-        fzf
-        ripgrep
-        eza
-        starship
-        bat
-        thefuck
-        diff-so-fancy
-        wl-clipboard
-        file
-        trash-cli
-        xdragon
-        exiftool
-        gnumeric
-        catdoc
-        odt2txt
-        cdrtools
-        p7zip
-        unrar
-        unzip
-        xz
+        ansifilter
         ascii-image-converter
-        catimg
-        viu
-        libcaca
-        poppler_utils
-        ffmpegthumbnailer
-        imagemagick
+        at
         audiowaveform
-        shellcheck
-        pipx
-        imgurbash2
-        gnumake
-        mlocate
-        xdg-utils
+        bat
+        bc
+        bind
         bintools-unwrapped
         binwalk
-        zsteg
-        grim
-        slurp
-        htop-vim
-        tty-clock
+        brightnessctl
+        catdoc
+        catimg
         cbonsai
-        imv
-        mpc-cli
-        newsboat
-        git
+        cdrtools
+        diff-so-fancy
+        exiftool
+        eza
+        fd
+        ffmpeg
+        ffmpegthumbnailer
+        file
+        fzf
         gcc
+        git
+        gnumake
+        gnumeric
+        grim
+        htop-vim
+        imagemagick
+        imgurbash2
+        imv
+        isync
+        iw
+        jc jq
+        libcaca
+        libnotify
+        mediainfo
+        mlocate
+        mpc-cli
+        neofetch
+        newsboat
+        odt2txt
+        p7zip
+        pavucontrol
+        pciutils
+        pipx
+        poppler_utils
+        procps
+        psmisc
+        ripgrep
+        shellcheck
+        slurp
+        speedtest-cli
+        starship
+        sysfsutils
+        thefuck
+        tldr
+        trash-cli
+        tty-clock
+        unrar
+        unzip
+        unzip
+        viu
+        wev
+        wirelesstools
+        wl-clipboard
+        wtype
+        xdg-utils
+        xdragon
+        xz
+        yt-dlp
+        zsteg
 
         # nvidia compat
         qt5ct

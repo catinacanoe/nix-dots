@@ -47,6 +47,9 @@ r ${repos}/
                 b browse.nix
                 p browsepad.nix
                 d drop.nix
+                m menu.nix
+                u menuui.nix
+                l launcher.nix
                 n nixshell.nix
                 v vpnshell.nix
             d default.nix

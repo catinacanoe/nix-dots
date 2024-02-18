@@ -27,6 +27,8 @@
     ${termpad "qalc" "qalc"}
     ${termpad "browsepad" "bp"}
     ${termpad "bluetooth" "bluetoothctl"}
+    ${termpad "menu" "menuui"}
+    ${termpad "launcher" "launcher"}
 
     # BROWSER #
     ${browserpad "browser" "scratch about:blank" (import ./ignore-pypr.nix).browser}
