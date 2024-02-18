@@ -20,6 +20,7 @@ in
 
     wayland.windowManager.hyprland.extraConfig = /* bash */ ''
     ${pypr.hypr.text}
+    ${(import ./ignore-hypr.nix args)}
 
     exec-once = waybar
     exec-once = swww init
