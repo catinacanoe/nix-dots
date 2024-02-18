@@ -44,7 +44,7 @@ vim.keymap.set("n", "<cr>", "gd")
 -- zen mode basically lmfao
 vim.g.focus_running = false
 
-vim.keymap.set("n", "<leader>m", function()
+vim.keymap.set("n", "<c-m>", function()
     if vim.g.focus_running then -- disable it
         vim.g.focus_running = false
 

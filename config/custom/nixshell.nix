@@ -33,12 +33,12 @@ function printhelp() {
 
 function homeman() {
     echo "activating home manager"
-    home-manager switch --show-trace --flake path:${repos}/nix-dots/
+    home-manager switch --show-trace --flake path:${repos}/nix-dots/ || notify-send "nixshell" "ERROR in home manager activation"
 }
 
 function nixos() {
-    echo "rebuilding the nix system"
-    sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/
+    echo "rebuilding the nixos system"
+    sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/ || notify-send "nixshell" "ERROR in nixos rebuild"
 }
 
 function activate_ff() {
@@ -98,35 +98,33 @@ function handle_response() {
         exit
     fi
 
-    if [[ "$response" == *"h"* ]]; then
-        echo
-        homeman
-        notify-send "home manager complete"
-    fi
+    for (( i=0; i<${"\${#response}"}; i++ )); do
+        char="${"\${response:$i:1}"}"
 
-    if [[ "$response" == *"n"* ]]; then
-        echo
-        nixos
-        notify-send "nixos rebuild complete"
-    fi
-
-    if [[ "$response" == *"f"* ]]; then
-        echo
-        activate_ff
-        notify-send "firefox activation complete"
-    fi
-
-    if [[ "$response" == *"d"* ]]; then
-        echo
-        activate_dc
-        notify-send "discord activation complete"
-    fi
-
-    if [[ "$response" == *"x"* ]]; then
-        echo
-        activate_xx
-        notify-send "xioxide activation complete"
-    fi
+        if [ "$char" == "n" ]; then
+            echo
+            nixos
+            notify-send "nixshell" "nixos rebuild complete"
+        elif [ "$char" == "h" ]; then
+            echo
+            homeman
+            notify-send "nixshell" "home manager complete"
+        elif [ "$char" == "f" ]; then
+            echo
+            activate_ff
+            notify-send "nixshell" "firefox activation complete"
+        elif [ "$char" == "d" ]; then
+            echo
+            activate_dc
+            notify-send "nixshell" "discord activation complete"
+        elif [ "$char" == "x" ]; then
+            echo
+            activate_xx
+            notify-send "nixshell" "xioxide activation complete"
+        else
+            echo "character $char not recognized"
+        fi
+    done
 }
 
 if [ -n "$1" ]; then

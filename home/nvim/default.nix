@@ -1,6 +1,3 @@
-# https://discourse.nixos.org/t/neovim-and-nixos-star-crossed-lovers/25568/15
-# https://github.com/collinarnett/brew/blob/0169cc473d781352e8418660d1b20a2c30c2e84c/modules/home-manager/neovim/neovim.nix
-
 # DAP LINKS
 ## Github
 ### https://gist.github.com/ldelossa/5454ec60202cf1a9bd199724e03900ff
@@ -16,7 +13,7 @@
 
 # lsp goto definition (in a small preview pane) https://github.com/rmagatti/goto-preview
 # treesitter textobjects https://www.youtube.com/watch?v=FuYQ7M73bC0
-# rust codinf setup https://www.youtube.com/watch?v=Mccy6wuq3JE
+# rust coding setup https://www.youtube.com/watch?v=Mccy6wuq3JE
 
 { pkgs, ... }:
 let

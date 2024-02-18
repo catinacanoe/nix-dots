@@ -53,6 +53,8 @@ vim.opt.sidescrolloff = 3
 -- fold and conceal
 vim.opt.foldmethod = 'indent'
 vim.opt.foldlevel = 99 -- depth at which to start folding on file open
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
 vim.opt.conceallevel = 1 -- conceals links and stuff
 vim.opt.concealcursor = "n"
 

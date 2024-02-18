@@ -21,9 +21,12 @@ in
     wayland.windowManager.hyprland.extraConfig = /* bash */ ''
     ${pypr.hypr.text}
 
-    exec-once = kitty
-    exec-once = swww init
     exec-once = waybar
+    exec-once = swww init
+    exec-once = mpd
+
+    exec-once = kitty
+    exec-once = discord
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
@@ -127,6 +130,7 @@ in
 
         touchpad {
             scroll_factor = 0.4
+            disable_while_typing = false
         }#touchpad
     }#input
 

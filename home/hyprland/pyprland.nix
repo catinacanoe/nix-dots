@@ -19,6 +19,12 @@
     size = "70% 70%"
     position = "15% 15%"
 
+    [scratchpads.news]
+    command = "${config.home.sessionVariables.TERMINAL} --class scratchpad -e newsboat"
+    unfocus = "hide"
+    size = "70% 70%"
+    position = "15% 15%"
+
     [scratchpads.vpn]
     command = "${config.home.sessionVariables.TERMINAL} --class scratchpad -e sudo vp"
     unfocus = "hide"
@@ -58,13 +64,6 @@
 
     [scratchpads.gpt]
     command = "${config.home.sessionVariables.BROWSER} --no-remote -P gpt chat.openai.com"
-    unfocus = "hide"
-    size = "70% 70%"
-    position = "15% 15%"
-
-    # GUI #
-    [scratchpads.discord]
-    command = "killall .Discord-wrapped && discord"
     unfocus = "hide"
     size = "70% 70%"
     position = "15% 15%"

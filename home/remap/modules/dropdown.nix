@@ -7,10 +7,13 @@ in
 # dropdown.nix
         ${mod}-dot:
             remap:
-                ${mod}-t:
+                ${mod}-w:
                     ${launch "drop"}
+                    
                 ${mod}-t:
                     ${drop "term"}
+                ${mod}-e:
+                    ${drop "news"}
                 ${mod}-m:
                     ${drop "network"}
                 ${mod}-v:
@@ -21,12 +24,11 @@ in
                     ${drop "qalc"}
                 ${mod}-b:
                     ${drop "bluetooth"}
+
                 ${mod}-h:
                     ${drop "browser"}
                 ${mod}-g:
                     ${drop "gpt"}
-                ${mod}-d:
-                    ${drop "discord"}
         ${mod}-w:
             ${drop "browsepad"}
 # dropdown.nix

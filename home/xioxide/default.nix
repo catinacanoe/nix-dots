@@ -44,10 +44,11 @@ r ${repos}/
                 n nsxiv/
                     d default.nix
             c custom/
-                v vpnshell.nix
-                bp browsepad.nix
                 b browse.nix
+                p browsepad.nix
+                d drop.nix
                 n nixshell.nix
+                v vpnshell.nix
             d default.nix
             f fonts.nix
             e environment.nix
@@ -73,6 +74,8 @@ r ${repos}/
         h home/
             d default.nix
             ba bat/
+                d default.nix
+            ca cava/
                 d default.nix
             cr crypt/
                 d default.nix
@@ -111,7 +114,13 @@ r ${repos}/
                 c colors.nix
                 mb gen-mbsync-gmail.nix
                 mu gen-mutt-gmail.nix
+            md mpd/
+                d default.nix
+            mv mpv/
+                d default.nix
             mk mako/
+                d default.nix
+            ne newsboat/
                 d default.nix
             nv nvim/
                 d default.nix
@@ -154,6 +163,7 @@ s ${config.programs.password-store.settings.PASSWORD_STORE_DIR}/
     m .map
 d ${download}/
 m ${music}/
+    d dl/
 v ${videos}/
     m meme/
 p ${pictures}/

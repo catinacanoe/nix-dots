@@ -3,6 +3,8 @@
     col = import ./colors "gruvbox";
     wall = import ./wall;
 
+    menufifo = "/tmp/menu.fifo";
+
     font = {
         name = "VictorMono";
         size = 13;

@@ -30,6 +30,7 @@ in
     imports = [
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
         ./bat
+        ./cava
         ./crypt
         ./discord
         ./dye
@@ -45,6 +46,9 @@ in
         ./lf
         ./mail
         ./mako
+        ./mpd
+        ./mpv
+        ./newsboat
         ./nvim
         ./pass
         ./power
@@ -61,6 +65,7 @@ in
     ];
 
     services.ssh-agent.enable = true;
+    programs.yt-dlp.settings.cookies-from-browser = config.home.sessionVariables.BROWSER;
 
     home.packages = with pkgs;
     [

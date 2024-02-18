@@ -84,12 +84,12 @@ let
 
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp_signature_help' },
-                    { name = 'neorg' },
-                    { name = 'luasnip' },
-                    { name = 'async_path' },
                     { name = 'nvim_lsp' },
                     { name = 'nvim_lua' },
+                    { name = 'neorg' },
+                    { name = 'async_path' },
                     { name = 'buffer', option = { get_bufnrs = vim.api.nvim_list_bufs } },
+                    { name = 'luasnip' },
                     { name = 'dotenv' },
                     { name = 'fonts' },
                     -- { name = 'dap' },

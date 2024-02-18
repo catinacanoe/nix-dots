@@ -33,7 +33,6 @@ in
         shellAliases =
         (import ./modules/git.nix args) //
         {
-            nx = "sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/";
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
             vpu = "sudo protonvpn connect -f";
@@ -50,7 +49,8 @@ in
             k = "mkdir -p";
             l = "touch";
             m = "mv -i";
-            c = "cp -ri";
+            y = "cp -ri";
+            c = "chmod";
             r = "trash-put";
             z = "exit";
 
@@ -81,38 +81,6 @@ in
         h() { [ -z "$1" ] && "$EDITOR" . || ${xioxide} "$EDITOR" "" pwd dirs $@; }
 
         dsf() { diff -u $@  | diff-so-fancy | less --tabs=4 -RF; }
-        hm() {
-            [ -z "$1" ] && arg="h" || arg="$1"
-
-            handled=""
-
-            if [[ "$arg" == *"h"* ]]; then
-                home-manager switch --show-trace --flake path:${repos}/nix-dots/ || return
-                handled="true"
-            fi
-
-            if [[ "$arg" == *"f"* ]]; then
-                echo -e "\nACTIVATING FIREFOX"
-                ${import ../firefox/activate.nix args}
-                handled="true"
-            fi
-
-            if [[ "$arg" == *"d"* ]]; then
-                echo -e "\nACTIVATING DISCORD (VENCORD)"
-                ${import ../discord/activate.nix args}
-                handled="true"
-            fi
-
-            if [[ "$arg" == *"x"* ]]; then
-                echo -e "\nACTIVATING XIOXIDE"
-                ${import ../xioxide/activate.nix args}
-                handled="true"
-            fi
-
-            if [ -z "$handled" ]; then
-                home-manager --flake path:${repos}/nix-dots/ $@
-            fi
-        }
         function x() {
             if [ -f "$1" ] ; then
                 case "$1" in

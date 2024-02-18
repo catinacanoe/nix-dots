@@ -92,6 +92,8 @@
         tty-clock
         cbonsai
         imv
+        mpc-cli
+        newsboat
 
         # lib
         python311Full
@@ -110,14 +112,14 @@
     
         # user apps
         neovim nvimpager
-        firefox ungoogled-chromium brave
+        firefox ungoogled-chromium
         networkmanagerapplet protonvpn-cli_2
         lf libqalculate
-        tradingview
         (discord.override { # https://nixos.wiki/wiki/Discord
             withVencord = true;
         })
-
+        cava
+        lunar-client
         kitty
         mpv-unwrapped
         tofi
@@ -133,5 +135,6 @@
         swaylock-effects
         mako
         swww
+        mpd
     ];
 }
