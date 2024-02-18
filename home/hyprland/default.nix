@@ -6,7 +6,7 @@ let
     col = rice.col; 
     window = rice.window;
     pypr = (import ./pyprland.nix args);
-    ignore = (import ./ignore-hypr.nix);
+    ignore = (import ./ignore-hypr.nix args);
 
     gradient = "rgba(${col.fg.hex}b0) rgba(00000000) rgba(${col.fg.hex}b0) rgba(00000000) 45deg";
 in
