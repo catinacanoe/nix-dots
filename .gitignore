@@ -1,3 +1,4 @@
-ignore*
-private
 flake.lock
+private
+rice/wall
+ignore*
