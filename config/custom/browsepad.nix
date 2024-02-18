@@ -70,7 +70,11 @@ function get_query() {
     else
         query="$(echo "$fzout" | head -n 1)"
         [ "$query" == ":q" ] && exit
-        echo "$query *" >> "$BROWSEPAD_HIST"
+        if ! grep -q "$query *" "$BROWSEPAD_HIST"; then # not already in history
+            if [ -z "$(xio "$query")" ]; then # not a xioxide entry
+                echo "$query *" >> "$BROWSEPAD_HIST"
+            fi
+        fi
     fi
 }
 

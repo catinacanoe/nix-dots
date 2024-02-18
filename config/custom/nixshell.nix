@@ -41,6 +41,17 @@ function nixos() {
     sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/#default || notify-send "nixshell" "ERROR in nixos rebuild"
 }
 
+function activate_ff() {
+    echo "running firefox preactivation"
+    killall .firefox-wrapped
+
+    rm -rv ~/.mozilla/firefox/gpt/
+    rm -rv ~/.mozilla/firefox/scratch/
+
+    cp -r ~/.mozilla/firefox/main/ ~/.mozilla/firefox/gpt/
+    cp -r ~/.mozilla/firefox/main/ ~/.mozilla/firefox/scratch/
+}
+
 function activate_xx() {
     echo "activating xioxide"
     source ${repos}/xioxide/main.sh reload
@@ -67,19 +78,18 @@ function handle_response() {
         char="${"\${response:$i:1}"}"
 
         if [ "$char" == "n" ]; then
-            echo
             nixos
             notify-send "nixshell" "nixos rebuild complete"
         elif [ "$char" == "h" ]; then
-            echo
             homeman
             notify-send "nixshell" "home manager complete"
+        elif [ "$char" == "f" ]; then
+            activate_ff
+            notify-send "nixshell" "firefox preactivation complete"
         elif [ "$char" == "d" ]; then
-            echo
             activate_dc
             notify-send "nixshell" "discord activation complete"
         elif [ "$char" == "x" ]; then
-            echo
             activate_xx
             notify-send "nixshell" "xioxide activation complete"
         else
