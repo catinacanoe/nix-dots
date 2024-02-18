@@ -80,5 +80,7 @@ in
         BROWSER = "firefox";
         TERMINAL = "kitty";
         DMENU_PROGRAM = "tofi";
+
+        MENUFIFO = "/tmp/menu.fifo";
     };
 }

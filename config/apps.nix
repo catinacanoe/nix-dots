@@ -94,6 +94,7 @@
         imv
         mpc-cli
         newsboat
+        git
 
         # lib
         python311Full
