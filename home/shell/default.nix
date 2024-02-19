@@ -35,9 +35,7 @@ in
         {
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
-            vpu = "sudo protonvpn connect -f";
-            vpd = "sudo protonvpn disconnect";
-            vpr = "sudo protonvpn reconnect";
+            tp = "gotop";
 
             o = "e ../";
             oo = "e ../..";

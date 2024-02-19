@@ -48,8 +48,8 @@
         git
         gnumake
         gnumeric
+        gotop
         grim
-        htop-vim
         imagemagick
         imgurbash2
         imv

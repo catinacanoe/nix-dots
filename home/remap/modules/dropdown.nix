@@ -12,6 +12,8 @@ in
                     
                 ${mod}-t:
                     ${drop "term"}
+                ${mod}-p:
+                    ${drop "top"}
                 ${mod}-e:
                     ${drop "news"}
                 ${mod}-m:

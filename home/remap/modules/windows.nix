@@ -2,6 +2,7 @@
 let
     hypr = (import ../fn/hypr.nix);
     resize = "50";
+    resize-small = "10";
 in
 /* yaml */ ''
 # windows.nix
@@ -24,14 +25,23 @@ in
         ${mod}-o:
             ${hypr "movefocus r"}
 
-        ${mod}-ctrl-n:
+        ${mod}-left:
             ${hypr "resizeactive -${resize} 0"}
-        ${mod}-ctrl-a:
+        ${mod}-up:
             ${hypr "resizeactive 0 -${resize}"}
-        ${mod}-ctrl-i:
+        ${mod}-down:
             ${hypr "resizeactive 0 ${resize}"}
-        ${mod}-ctrl-o:
+        ${mod}-right:
             ${hypr "resizeactive ${resize} 0"}
+
+        ${mod}-shift-left:
+            ${hypr "resizeactive -${resize-small} 0"}
+        ${mod}-shift-up:
+            ${hypr "resizeactive 0 -${resize-small}"}
+        ${mod}-shift-down:
+            ${hypr "resizeactive 0 ${resize-small}"}
+        ${mod}-shift-right:
+            ${hypr "resizeactive ${resize-small} 0"}
 
         ${mod}-shift-n:
             ${hypr "swapwindow l && hyprctl dispatch moveactive -${resize} 0"}

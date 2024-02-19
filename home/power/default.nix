@@ -22,7 +22,7 @@ with (import ../../rice);
     lock() { ${swaylock} --image="$(swww query | sed 's|^.*image: ||')" "$@"; }
 
     case "$choice" in
-        lock) delay && lock --grace=0.5 ;;
+        lock) delay && lock ;;
         suspend) delay && lock && delay && systemctl suspend ;;
         reload) ${hyprctl} dispatch forcerendererreload ;;
         logout) ${hyprctl} dispatch exit ;;

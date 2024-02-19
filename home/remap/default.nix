@@ -8,6 +8,24 @@ let
     programs = (import ./modules/programs.nix);
 in
 {
+
+# cyf workspaces
+# rsth taken by workspaces
+# p is pass
+
+# z is scrot
+# ltabuq is windows / launching
+# m naio is window controls
+# w is browsepad
+# . is scratchpads
+# ; is power options
+
+#  |(j)| c | y | f |(k)|     | z | l |tab| u | q |
+#  | r | s | t | h |(d)|     | m | n | a | i | o |
+#|(ret)|(v)|(g)| p |(b)|     |(x)| w | . | ; |(')|
+
+# technically <num layer> is taken by volume controls
+
     xdg.configFile."xremap/config.yml".text = ''
 # default.nix
 default_mode: main

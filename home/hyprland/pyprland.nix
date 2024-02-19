@@ -30,6 +30,11 @@
     ${termpad "menu" "menuui"}
     ${termpad "launcher" "launcher"}
 
+    [scratchpads.top]
+    command = "${config.home.sessionVariables.TERMINAL} --class scratchpad gotop"
+    unfocus = "hide"
+    ${(import ./ignore-pypr.nix).browser}
+
     # BROWSER #
     ${browserpad "browser" "scratch about:blank" (import ./ignore-pypr.nix).browser}
     ${browserpad "gpt" "gpt chat.openai.com" (import ./ignore-pypr.nix).gpt}

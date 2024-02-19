@@ -167,11 +167,10 @@ in
     }#misc
 
     binds {
-        # defaults
-        # movefocus_cycles_fullscreen = true # not sure about this one
-
+        movefocus_cycles_fullscreen = false # not sure about this one
         workspace_center_on = 1 # mouse over the last active window when switching wspc
         focus_preferred_method = 0 # (0-history, 1-shared border length)
+        allow_workspace_cycles = true
     }
 
     xwayland {
