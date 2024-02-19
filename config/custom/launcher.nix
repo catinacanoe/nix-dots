@@ -24,7 +24,6 @@ function construct_list() {
     find ${"\${PATH//:/ }"} -maxdepth 1 -executable 2>/dev/null | awk -F "/" '{ print $NF }' | sort | grep -v "\[\|^\." # no "[" or leading dot "^."
 
     if [ -n "$RECENT_LAUNCHES" ]; then
-        echo
         echo "$RECENT_LAUNCHES"
     fi
 }
@@ -33,8 +32,7 @@ while true; do
     program="$(construct_list | tac | fzf)"
     [ -z "$program" ] && exit
 
-    notify-send "$program"
-    hyprctl dispatch exec "kitty -e $program" > ~/dl/test.out
+    hyprctl dispatch exec "$TERMINAL -e $program" > /dev/null
 
     update_recents
 done

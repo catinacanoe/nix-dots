@@ -1,10 +1,15 @@
-let
-googleusers = ''
+{
+    sed = ''
+    s/^\([^.]\)/.\1/
+    '';
+
+    conf = let
+    googleusers = ''
 a u/0/
     s u/1/
     m u/2/
-'';
-in /* bash */ ''
+    '';
+    in /* bash */ ''
 nx mynixos.com/
     s search?q=
 hy wiki.hyprland.org/
@@ -73,4 +78,5 @@ ga myaccount.google.com/
 gd drive.google.com/drive/
     ${googleusers}
     s search?q=
-''
+    '';
+}

@@ -9,11 +9,14 @@ with config.xdg.userDirs;
     programs.zsh.shellAliases.xioxide="source ${repos}/xioxide/main.sh";
     home.sessionVariables.XIOXIDE_PATH = "${extraConfig.XDG_REPOSITORY_DIR}/xioxide";
 
+    xdg.configFile."xioxide/sites.conf".text = (import ./sites.nix).conf;
+    xdg.configFile."xioxide/sites.sed".text = (import ./sites.nix).sed;
+
     xdg.configFile."xioxide/dirs.sed".text = /* sed */ ''
-    s/^h/rnh/
-    s/^n/rn/
-    s/^o/xs/
-    s/^w/xw/
+    s/^\.h/\.rnh/
+    s/^\.n/\.rn/
+    s/^\.o/\.xs/
+    s/^\.w/\.xw/
     '';
 
     xdg.configFile."xioxide/dirs.conf".text = /* bash */ ''
@@ -261,6 +264,4 @@ x ${documents}/
         m marklif/
         s school/
     '';
-
-    xdg.configFile."xioxide/sites.conf".text = import ./sites.nix;
 }
