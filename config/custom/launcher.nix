@@ -31,10 +31,10 @@ function construct_list() {
 
 while true; do
     program="$(construct_list | tac | fzf)"
-    [ "$program" == "z" ] && exit
-    [ -z "$program" ] && continue
+    [ -z "$program" ] && exit
 
-    hyprctl dispatch exec kitty -e "$program"
+    notify-send "$program"
+    hyprctl dispatch exec "kitty -e $program" > ~/dl/test.out
 
     update_recents
 done
