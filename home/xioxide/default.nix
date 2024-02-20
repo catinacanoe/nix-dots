@@ -13,10 +13,10 @@ with config.xdg.userDirs;
     xdg.configFile."xioxide/sites.sed".text = (import ./sites.nix).sed;
 
     xdg.configFile."xioxide/dirs.sed".text = /* sed */ ''
-    s/^\.h/\.rnh/
-    s/^\.n/\.rn/
-    s/^\.o/\.xs/
-    s/^\.w/\.xw/
+    s/^h/rnh/
+    s/^n/rn/
+    s/^o/xs/
+    s/^w/xw/
     '';
 
     xdg.configFile."xioxide/dirs.conf".text = /* bash */ ''

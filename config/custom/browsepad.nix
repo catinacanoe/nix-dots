@@ -12,7 +12,7 @@ function default() {
 }
 
 function xio() {
-    source /home/canoe/repos/xioxide/main.sh "" "" echo sites "$@" --no-passthrough
+    source /home/canoe/repos/xioxide/main.sh "" "" echo "" sites "$@" --no-passthrough
 }
 
 function handle_query() {

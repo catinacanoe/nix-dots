@@ -19,6 +19,7 @@ let
             },
             softener = {
                 norg = true,
+                markdown = true,
             },
         },
     }'';

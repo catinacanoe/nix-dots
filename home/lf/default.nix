@@ -1,9 +1,8 @@
 { config, ... }:
 let
     lfdir = "${config.xdg.configHome}/lf";
-in
-let
     scriptdir = "${lfdir}/scripts";
+    home = config.home.homeDirectory;
 in
 {
     xdg.configFile."lf/colors".source = ./colors;
@@ -70,6 +69,7 @@ in
         commands = 
         let
             inherit (config.programs.zsh.shellAliases) xioxide;
+            xioxide_fn = ''[ "$1" == "$HOME" ] && return || return 1'';
         in
         {
             custom_open = ''%${scriptdir}/opener'';
@@ -102,13 +102,13 @@ in
             custom_e = /* bash */ ''%{{
                 printf " e "
                 read ans
-                target="$(${xioxide} "" "grep '/$'" pwd dirs $ans)"
+                target="$(${xioxide} "" "grep '/$'" pwd '${xioxide_fn}' dirs $ans)"
                 lf --remote "send $id cd \"$target\""
             }}'';
             custom_h = /* bash */ ''%{{
                 printf " h "
                 read ans
-                target="$(${xioxide} "" "grep -v '/$'" pwd dirs $ans)"
+                target="$(${xioxide} "" "grep -v '/$'" pwd '${xioxide_fn}' dirs $ans)"
                 lf --remote "send $id \$$EDITOR \"$target\""
             }}'';
 

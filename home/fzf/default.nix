@@ -22,7 +22,7 @@ in
             gutter = "-1";
             info = c.mg.h;
             # border = c.mg.h;
-            border = "-1";
+            # border = "-1";
 
             prompt = c.mg.h;
             pointer = c.blue.h;
