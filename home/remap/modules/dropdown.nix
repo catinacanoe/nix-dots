@@ -32,6 +32,6 @@ in
                 ${mod}-g:
                     ${drop "gpt"}
         ${mod}-w:
-            ${drop "browsepad"}
+            ${drop "browseshell nohist"}
 # dropdown.nix
 ''

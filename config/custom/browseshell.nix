@@ -1,6 +1,6 @@
-{ pkgs, ... }: pkgs.writeShellScriptBin "browsepad" ''
+{ pkgs, ... }: pkgs.writeShellScriptBin "browseshell" ''
 
-BROWSEPAD_HIST="/tmp/browsepad.hist"
+BROWSESHELL_HIST="/tmp/browseshell.hist"
 
 function encode() {
     local escape="$(echo "$@" | sed 's|"|\"|g')"
@@ -53,7 +53,7 @@ function get_query() {
             local first_no_under="$(echo "$first" | sed 's/_//g')"
             echo "$first_no_under $rest"
         done <<< "$(/home/canoe/repos/xioxide/main.sh parsed sites)"
-        tac "$BROWSEPAD_HIST"
+        tac "$BROWSESHELL_HIST"
     )"
 
     fzout="$(echo "$hist" | fzf --print-query)"
@@ -70,9 +70,9 @@ function get_query() {
     else
         query="$(echo "$fzout" | head -n 1)"
         [ "$query" == ":q" ] && exit
-        if ! grep -q "$query *" "$BROWSEPAD_HIST"; then # not already in history
+        if ! grep -q "$query *" "$BROWSESHELL_HIST"; then # not already in history
             if [ -z "$(xio "$query")" ]; then # not a xioxide entry
-                echo "$query *" >> "$BROWSEPAD_HIST"
+                echo "$query *" >> "$BROWSESHELL_HIST"
             fi
         fi
     fi
@@ -87,5 +87,6 @@ fi
 while true ; do
     get_query
     handle_query
+    drop browseshell nohist
 done
 ''

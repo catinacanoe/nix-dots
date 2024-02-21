@@ -48,7 +48,7 @@
     ${termpad "network" "netshell"}
     ${termpad "vpn" "sudo vpnshell"}
     ${termpad "nix" "nixshell"}
-    ${termpad "browsepad" "browsepad"}
+    ${termpad "browseshell" "browseshell"}
     ${termpad "launcher" "launcher"}
     ${termpad "menu" "menuui"}
 
