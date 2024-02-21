@@ -65,6 +65,7 @@ r ${repos}/
             p peripheral.nix
             s services.nix
             i ignore-hardware.nix
+            h hardware.nix
         p private/
             m mail/
                 c canoe.nix
