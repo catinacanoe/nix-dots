@@ -54,6 +54,7 @@ r ${repos}/
                 me menu.nix
                 ms netshell.nix
                 ns nixshell.nix
+                ss sshkey.nix
                 vs vpnshell.nix
                 ya yargs.nix
             d default.nix

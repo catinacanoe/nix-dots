@@ -6,18 +6,18 @@
 
     environment.systemPackages = with pkgs;
     let
-        hypr = writeShellScriptBin "hypr" "Hyprland";
-
-        browse =      (import ./custom/browse.nix args);
+        hypr        = (import ./custom/hypr.nix args);
+        browse      = (import ./custom/browse.nix args);
         browseshell = (import ./custom/browseshell.nix args);
-        drop =        (import ./custom/drop.nix args);
-        launcher =    (import ./custom/launcher.nix args);
-        manpager =    (import ./custom/manpager.nix args);
-        menu =        (import ./custom/menu.nix args);
-        netshell =    (import ./custom/netshell.nix args);
-        nixshell =    (import ./custom/nixshell.nix args);
-        vpnshell =    (import ./custom/vpnshell.nix args);
-        yargs =       (import ./custom/yargs.nix args);
+        drop        = (import ./custom/drop.nix args);
+        launcher    = (import ./custom/launcher.nix args);
+        manpager    = (import ./custom/manpager.nix args);
+        menu        = (import ./custom/menu.nix args);
+        netshell    = (import ./custom/netshell.nix args);
+        nixshell    = (import ./custom/nixshell.nix args);
+        sshkey      = (import ./custom/sshkey.nix args);
+        vpnshell    = (import ./custom/vpnshell.nix args);
+        yargs       = (import ./custom/yargs.nix args);
     in [
         # custom apps
         browse
@@ -29,6 +29,7 @@
         menu.wrap
         netshell
         nixshell
+        sshkey
         vpnshell
         yargs
 
@@ -48,6 +49,7 @@
         cbonsai
         cdrtools
         diff-so-fancy
+        expect
         exiftool
         eza
         fd

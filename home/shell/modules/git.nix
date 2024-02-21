@@ -1,7 +1,7 @@
 { ... }:
 {
     g = "git";
-    gy = "gitutils sync";
+    gy = "sshkey && gitutils sync";
     gs = "gitutils status";
     gd = "gitutils diff";
     gii = "gitutils init";
@@ -11,22 +11,22 @@
     gau = "ga -u";
     gc = "g commit";
 
-    gll = "g pull";
-    gsh = "g push";
-    gf = "g fetch";
-    gcl = "g clone";
+    gll = "sshkey && g pull";
+    gsh = "sshkey && g push";
+    gf = "sshkey && g fetch";
+    gcl = "sshkey && g clone";
 
 
     cry = "crypt";
-    yy = "crypt sync";
+    yy = "sshkey && crypt sync";
     ys = "crypt status";
     yii = "crypt init";
-    ycl = "crypt clone";
+    ycl = "sshkey && crypt clone";
 
-    yll = "crypt pull";
-    ysh = "crypt push";
+    yll = "sshkey && crypt pull";
+    ysh = "sshkey && crypt push";
     yc = "crypt commit";
-    yf = "crypt fetch";
+    yf = "sshkey && crypt fetch";
 
     ye = "crypt encrypt";
     yd = "crypt decrypt";
