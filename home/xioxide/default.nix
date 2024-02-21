@@ -49,6 +49,7 @@ r ${repos}/
                 br browse.nix
                 bs browseshell.nix
                 dr drop.nix
+                hy hypr.nix
                 la launcher.nix
                 ma manpager.nix
                 me menu.nix

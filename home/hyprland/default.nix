@@ -34,8 +34,9 @@ in {
     '' else ""}
 
     exec-once = waybar
-    exec-once = swww init
+    exec-once = sleep 3 && swww init
     exec-once = mpd && mpc volume 70
+    exec-once = drop init
 
     exec-once = kitty
     exec-once = discord --start-minimized ${if host == "nixbox" then "--enable-features=UseOzonePlatform --ozone-platform=wayland" else ""}

@@ -2,12 +2,15 @@
 LASTFILE="/tmp/pypr-drop-last.save"
 CURRENTFILE="/tmp/pypr-drop-current.save"
 
-[ -f "$LASTFILE" ] || touch "$LASTFILE"
-[ -f "$CURRENTFILE" ] || touch "$CURRENTFILE"
-
 last="$(cat "$LASTFILE")"
 current="$(cat "$CURRENTFILE")"
 alt="$2"
+
+if [ "$1" == "init" ]; then
+    echo > "$LASTFILE"
+    echo > "$CURRENTFILE"
+    exit
+fi
 
 function hide() {
     hyprctl dispatch focuscurrentorlast &> /dev/null
