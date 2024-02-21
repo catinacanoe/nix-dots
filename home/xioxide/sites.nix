@@ -1,8 +1,4 @@
 {
-    sed = ''
-    s/^\([^.]\)/.\1/
-    '';
-
     conf = let
     googleusers = ''
 a u/0/
