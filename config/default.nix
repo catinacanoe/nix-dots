@@ -11,6 +11,8 @@
         ./services.nix
     ];
 
+    networking.hostName = import ../ignore-hostname.nix;
+
     nix.nixPath = [
         "nixpkgs=/home/canoe/.nix-defexpr/channels/nixos/"
         "nixos-config=/home/canoe/repos/nix-dots/config/default.nix"

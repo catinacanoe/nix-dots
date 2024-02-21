@@ -1,7 +1,8 @@
-{
+let host = import ../ignore-hostname.nix; in {
     # remember to regenerate wallpapers if you change scheme
     col = import ./colors "gruvbox";
     wall = import ./wall;
+    test = "test";
 
     font = {
         name = "VictorMono";
@@ -14,10 +15,12 @@
         };
     };
 
-    window = {
-        border = 2;
-        radius = 7;
-        gaps-out = 17;
-        gaps-in = 7;
+    window = let
+        gaps = 7;
+    in {
+        border = if host == "nixbox" then 3 else 2;
+        radius = if host== "nixbox" then 14 else 7;
+        gaps-in = gaps;
+        gaps-out = 2*gaps;
     };
 }

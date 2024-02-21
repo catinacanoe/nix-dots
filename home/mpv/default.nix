@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
     font = (import ../../rice).font.name;
 in {

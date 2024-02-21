@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 with (import ../../rice).col;
 {
     xdg.configFile."Vencord/settings/settings.json".text = /* json */ ''

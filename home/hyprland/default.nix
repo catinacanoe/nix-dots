@@ -6,11 +6,14 @@ let
     col = rice.col; 
     window = rice.window;
     pypr = (import ./pyprland.nix args);
-    ignore = (import ./ignore-hypr.nix args);
 
-    gradient = "rgba(${col.fg.hex}b0) rgba(00000000) rgba(${col.fg.hex}b0) rgba(00000000) 45deg";
-in
-{
+    host = import ../../ignore-hostname.nix;
+
+    maincol = "rgba(${col.fg.hex}b0)";
+    altcol = "rgba(00000000)";
+    strip = "${maincol} ${maincol} ${altcol}";
+    gradient = "${strip} ${strip} ${strip} 45deg";
+in {
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD ${pkgs.hyprland}/bin/hyprctl reload > /dev/null";
 
@@ -21,14 +24,21 @@ in
 
     wayland.windowManager.hyprland.extraConfig = /* bash */ ''
     ${pypr.hypr.text}
-    ${ignore.vars}
+
+    ${if host == "nixbox" then ''
+    env = LIBVA_DRIVER_NAME,nvidia
+    env = XDG_SESSION_TYPE,wayland
+    env = GBM_BACKEND,nvidia-drm
+    env = WLR_NO_HARDWARE_CURSORS,1
+    env = WLR_DRM_NO_ATOMIC,1
+    '' else ""}
 
     exec-once = waybar
     exec-once = swww init
     exec-once = mpd && mpc volume 70
 
     exec-once = kitty
-    exec-once = discord ${import ../discord/ignore-flags.nix}
+    exec-once = discord ${if host == "nixbox" then "--enable-features=UseOzonePlatform --ozone-platform=wayland" else ""}
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
@@ -190,7 +200,9 @@ in
     # name, res@fps, pos of monitor's TpLft corner in layout, scale
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
-    ${ignore.monitor}
+    ${if host == "nixbox" then "monitor=DP-3, 3840x2160@60, 0x0, 1.2"
+    else if host == "nixpad" then "monitor=eDP-1, 2560x1600@60, 0x0, 1.333333"
+    else ""}
     monitor=,preferred,auto,1 # auto rule for random monitors
 
     dwindle {

@@ -14,7 +14,7 @@ in
                     ${drop "term"}
                 ${mod}-p:
                     ${drop "top"}
-                ${mod}-e:
+                ${mod}-s:
                     ${drop "news"}
                 ${mod}-m:
                     ${drop "network"}

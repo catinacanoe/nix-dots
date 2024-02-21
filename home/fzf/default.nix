@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
     c = (import ../../rice).col;
 in

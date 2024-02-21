@@ -1,4 +1,4 @@
-{  pkgs, ... }:
+{  pkgs, config, ... }:
 with (import ../../rice).col;
 {
     home.packages = [(pkgs.writeShellScriptBin "scrot" ''

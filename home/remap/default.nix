@@ -1,6 +1,6 @@
 { ... }:
 let
-    mod = (import ./ignore-mod.nix);
+    mod = if (import ../../ignore-hostname.nix) == "nixbox" then "super-alt" else "super";
 
     hypr = (import ./fn/hypr.nix);
     launch = (import ./fn/launch.nix);

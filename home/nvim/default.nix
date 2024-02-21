@@ -15,7 +15,7 @@
 # treesitter textobjects https://www.youtube.com/watch?v=FuYQ7M73bC0
 # rust coding setup https://www.youtube.com/watch?v=Mccy6wuq3JE
 
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
     col = (import ../../rice).col;
     args = { inherit pkgs col; plugins = "nvim/lua/plugins"; };

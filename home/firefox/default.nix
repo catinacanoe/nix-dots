@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let 
     prefix = ".mozilla/firefox";
     rice = (import ../../rice);
@@ -138,7 +138,13 @@ let
         toolbar#nav-bar {
             box-shadow: none !important;
             background-image: var(--rwall-blur) !important;
-            ${import ./modules/ignore-size.nix}
+            ${let host = (import ../../ignore-hostname.nix); in if host == "nixbox" then ''
+            background-size: 3840px;
+            background-position: -19px -259px;
+            '' else if host == "nixpad" then ''
+            background-size: 1920px;
+            background-position: -22px -107px;
+            '' else ""}
         }
 
         /* Sets the URL bar color */

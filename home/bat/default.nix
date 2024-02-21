@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 with (import ../../rice).col;
 {
     programs.bat = {

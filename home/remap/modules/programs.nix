@@ -11,7 +11,7 @@ in
                 ${mod}-h:
                     ${launchdir direction "firefox -P main --new-window about:blank"}
                 ${mod}-d:
-                    ${launchdir direction "discord ${import ../../discord/ignore-flags.nix}"}
+                    ${launchdir direction "discord"}
                 ${mod}-l:
                     ${launchdir direction "pypr toggle launcher"}
 # programs.nix ${direction}

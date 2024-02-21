@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 let
     rice = (import ../../rice);
     fontsize = rice.font.size;

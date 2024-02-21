@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 with (import ../../rice);
 with col;
 {
