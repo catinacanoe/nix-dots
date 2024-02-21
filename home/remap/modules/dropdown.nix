@@ -5,6 +5,10 @@ let
 in
 /* yaml */ ''
 # dropdown.nix
+        ${mod}-w:
+            ${launch "pypr toggle browseshell"}
+        ${mod}-comma:
+            ${drop "focus"}
         ${mod}-dot:
             remap:
                 ${mod}-w:
@@ -31,7 +35,5 @@ in
                     ${drop "browser"}
                 ${mod}-g:
                     ${drop "gpt"}
-        ${mod}-w:
-            ${launch "pypr toggle browseshell"}
 # dropdown.nix
 ''

@@ -1,14 +1,3 @@
-{ ... }:
-let
-    mod = if (import ../../ignore-hostname.nix) == "nixbox" then "super-alt" else "super";
-
-    hypr = (import ./fn/hypr.nix);
-    launch = (import ./fn/launch.nix);
-
-    programs = (import ./modules/programs.nix);
-in
-{
-
 # cyf workspaces
 # rsth taken by workspaces
 # p is pass
@@ -26,7 +15,13 @@ in
 
 # technically <num layer> is taken by volume controls
 
-    xdg.configFile."xremap/config.yml".text = ''
+{ ... }:
+let
+    mod = if (import ../../ignore-hostname.nix) == "nixbox" then "super-alt" else "super";
+    hypr = (import ./fn/hypr.nix);
+    launch = (import ./fn/launch.nix);
+    programs = (import ./modules/programs.nix);
+in { xdg.configFile."xremap/config.yml".text = ''
 # default.nix
 default_mode: main
 keymap:
