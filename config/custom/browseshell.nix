@@ -7,8 +7,18 @@ function encode() {
     python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(\"$escape\"))"
 }
 
+function open() {
+    hyprctl dispatch focuscurrentorlast &> /dev/null
+
+    [ "$(hyprctl activewindow -j | jq .class)" == "\"$BROWSER\"" ] || return
+
+    wtype -M ctrl -k t -m ctrl
+    wtype "$@"
+    wtype -k Return
+}
+
 function default() {
-    browse "google.com/search?q=$(encode "$query")"
+    open "google.com/search?q=$(encode "$query")"
 }
 
 function xio() {
@@ -17,13 +27,13 @@ function xio() {
 
 function handle_query() {
     case "$(echo "$query" | wc -w)" in
-        0) echo "please pass a valid query" ;;
+        0) true ;;
         1) 
             out="$(xio "$query")"
             if [ -z "$out" ]; then # there was no match
                 default
             else
-                browse "$out"
+                open "$out"
             fi
             ;;
         *)
@@ -38,7 +48,7 @@ function handle_query() {
                     default
                 else
                     search="$(echo "$query" | sed 's|^[^ ]* ||')"
-                    browse "$searchout$(encode "$search")"
+                    open "$searchout$(encode "$search")"
                 fi
             fi
             ;;
@@ -87,6 +97,5 @@ fi
 while true ; do
     get_query
     handle_query
-    drop browseshell nohist
 done
 ''

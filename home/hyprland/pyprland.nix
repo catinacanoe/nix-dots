@@ -9,7 +9,7 @@
 
             browser = /* toml */ ''
                 size = "60% 65%"
-                position = "20% 25%"
+                position = "20% 28%"
             '';
 
             gpt = /* toml */ ''
@@ -33,6 +33,13 @@
             ${size.term}
         '';
 
+        focustermpad = name: command: /* toml */ ''
+            [scratchpads.${name}]
+            command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
+            unfocus = "hide"
+            ${size.term}
+        '';
+
         browserpad = name: args: sizing: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.BROWSER} --no-remote -P ${args}"
@@ -48,9 +55,10 @@
     ${termpad "network" "netshell"}
     ${termpad "vpn" "sudo vpnshell"}
     ${termpad "nix" "nixshell"}
-    ${termpad "browseshell" "browseshell"}
-    ${termpad "launcher" "launcher"}
-    ${termpad "menu" "menuui"}
+
+    ${focustermpad "browseshell" "browseshell"}
+    ${focustermpad "launcher" "launcher"}
+    ${focustermpad "menu" "menuui"}
 
     ${termpad "news" "newsboat"}
     ${termpad "qalc" "qalc"}

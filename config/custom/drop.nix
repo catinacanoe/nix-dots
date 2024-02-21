@@ -7,7 +7,7 @@ CURRENTFILE="/tmp/pypr-drop-current.save"
 
 last="$(cat "$LASTFILE")"
 current="$(cat "$CURRENTFILE")"
-nohist="$2"
+alt="$2"
 
 function hide() {
     hyprctl dispatch focuscurrentorlast &> /dev/null
@@ -20,8 +20,6 @@ function show() {
     pypr show "$1"
 
     echo "$1" > "$CURRENTFILE"
-
-    [ -n "$nohist" ] && return
     echo "$1" > "$LASTFILE"
 }
 
@@ -35,7 +33,7 @@ else
     if [ "$current" == "$1" ]; then
         hide "$current"
     elif [ -n "$current" ]; then
-        hide "$current"
+        [ -z "$alt" ] && hide "$current"
         show "$1"
     else
         show "$1"

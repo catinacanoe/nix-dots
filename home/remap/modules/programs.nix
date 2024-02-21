@@ -13,6 +13,6 @@ in
                 ${mod}-d:
                     ${launchdir direction "discord"}
                 ${mod}-l:
-                    ${launchdir direction "drop launcher"}
+                    ${launchdir direction "pypr show launcher"}
 # programs.nix ${direction}
 ''

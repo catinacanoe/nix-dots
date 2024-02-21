@@ -32,6 +32,6 @@ in
                 ${mod}-g:
                     ${drop "gpt"}
         ${mod}-w:
-            ${drop "browseshell nohist"}
+            ${launch "pypr toggle browseshell"}
 # dropdown.nix
 ''

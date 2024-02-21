@@ -11,6 +11,9 @@ function printhelp() {
     echo "active|a"
     echo "    just prints the current active connection"
     echo
+    echo "list|l"
+    echo "    lists all available connections"
+    echo
     echo "up|u"
     echo "    the first argument is a search string, used to grep through active networks, connects to the first match"
     echo
@@ -95,6 +98,7 @@ function handle_response() {
         'quit'|'q'|':q') exit ;;
         'help'|'h') printhelp ;;
         'active'|'a') current ;;
+        'list'|'l') list ;;
         'up'|'u') search_connect "$arguments" ;;
         'down'|'d') disconnect ;;
         'reload'|'r') reload ;;

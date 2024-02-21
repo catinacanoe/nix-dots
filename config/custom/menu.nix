@@ -10,7 +10,7 @@ in {
         [ -f "${outfile}" ] && rm "${outfile}"
         [ -p "${outfile}" ] || mkfifo "${outfile}"
 
-        drop menu nohist
+        pypr show menu
 
         echo "$(
             if  [ "$1" == "--allow-new" ]; then
@@ -22,7 +22,7 @@ in {
 
         cat "${outfile}"
 
-        drop menu nohist
+        hyprctl dispatch focuscurrentorlast &> /dev/null
     '';
 
     ui = pkgs.writeShellScriptBin "menuui" ''
