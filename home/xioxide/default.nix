@@ -46,14 +46,16 @@ r ${repos}/
                 n nsxiv/
                     d default.nix
             c custom/
-                b browse.nix
-                p browsepad.nix
-                d drop.nix
-                m menu.nix
-                u menuui.nix
-                l launcher.nix
-                n nixshell.nix
-                v vpnshell.nix
+                br browse.nix
+                bs browseshell.nix
+                dr drop.nix
+                la launcher.nix
+                ma manpager.nix
+                me menu.nix
+                ms netshell.nix
+                ns nixshell.nix
+                vs vpnshell.nix
+                ya yargs.nix
             d default.nix
             f fonts.nix
             e environment.nix

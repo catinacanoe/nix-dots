@@ -6,6 +6,43 @@
         reloadThreads = 8;
         autoReload = true;
 
+        extraConfig = ''
+            color info                                    default  default
+            color article                                 default  default
+            color background                              default  default
+            color listnormal                              default  default
+            color listnormal_unread                       yellow   default
+            color listfocus                               green    default  bold underline
+            color listfocus_unread                        yellow   default  bold underline
+
+            highlight article "^(Feed|Link):.*$"          color11  default  bold
+            highlight article "^(Title|Date|Author):.*$"  color11  default  bold
+            highlight article "https?://[^ ]+"            blue     default  underline
+            highlight article "\\[[0-9]+\\]"              color2   default  bold
+            highlight article "\\[image\\ [0-9]+\\]"      color2   default  bold
+
+            highlight feedlist "^.*~~.*~~~.*$"            magenta  default  bold
+
+            auto-reload no
+
+            bind-key n quit
+            bind-key a up
+            bind-key i down
+            bind-key o open
+
+            bind-key A prev-unread
+            bind-key I next-unread
+
+            bind-key e toggle-article-read
+
+            bind-key g home
+            bind-key G end
+
+            bind-key ; hard-quit
+
+            browser ${config.home.sessionVariables.BROWSER}
+        '';
+
         urls = [
             { title = "~~ music ~~~"; url = ""; tags = []; }
             { title = "Aden Foyer"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCktCCsmFnLxDv8c9xfI-i3g"; tags = [ "music" "yt" ]; }
@@ -72,42 +109,5 @@
             { title = "Carbon"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCMOBdfLjLT-PzrGzld8GjRw"; tags = [ "fun" "yt" ]; }
             { title = "Dani"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCIabPXjvT5BVTxRDPCBBOOQ"; tags = [ "fun" "yt" ]; }
         ];
-
-        extraConfig = ''
-            color info                                    default  default
-            color article                                 default  default
-            color background                              default  default
-            color listnormal                              default  default
-            color listnormal_unread                       yellow   default
-            color listfocus                               green    default  bold underline
-            color listfocus_unread                        yellow   default  bold underline
-
-            highlight article "^(Feed|Link):.*$"          color11  default  bold
-            highlight article "^(Title|Date|Author):.*$"  color11  default  bold
-            highlight article "https?://[^ ]+"            blue     default  underline
-            highlight article "\\[[0-9]+\\]"              color2   default  bold
-            highlight article "\\[image\\ [0-9]+\\]"      color2   default  bold
-
-            highlight feedlist "^.*~~.*~~~.*$"            magenta  default  bold
-
-            auto-reload no
-
-            bind-key n quit
-            bind-key a up
-            bind-key i down
-            bind-key o open
-
-            bind-key A prev-unread
-            bind-key I next-unread
-
-            bind-key e toggle-article-read
-
-            bind-key g home
-            bind-key G end
-
-            bind-key ; hard-quit
-
-            browser ${config.home.sessionVariables.BROWSER}
-        '';
     };
 }

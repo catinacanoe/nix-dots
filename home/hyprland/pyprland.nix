@@ -30,6 +30,7 @@
         termpad = name: command: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
+            lazy = true
             ${size.term}
         '';
 
@@ -37,12 +38,14 @@
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
             unfocus = "hide"
+            lazy = true
             ${size.term}
         '';
 
         browserpad = name: args: sizing: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.BROWSER} --no-remote -P ${args}"
+            lazy = true
             ${sizing}
         '';
     in /* toml */ ''
@@ -66,6 +69,7 @@
 
     [scratchpads.top]
     command = "${config.home.sessionVariables.TERMINAL} --class scratchpad gotop"
+    lazy = true
     ${size.browser}
 
     # BROWSER #

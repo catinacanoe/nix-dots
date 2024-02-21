@@ -3,8 +3,9 @@
 {
     imports = [ 
         ./ignore-hardware.nix # auto generated on install
+        ./hardware.nix
         ./apps.nix
-        ./environment.nix # desktop environemnt setup basically
+        ./environment.nix
         ./fonts.nix
         ./locale.nix
         ./peripheral.nix

@@ -13,7 +13,8 @@ function open() {
     [ "$(hyprctl activewindow -j | jq .class)" == "\"$BROWSER\"" ] || return
 
     wtype -M ctrl -k t -m ctrl
-    wtype "$@"
+    wtype "$@ "
+    wtype -k Backspace
     wtype -k Return
 }
 
