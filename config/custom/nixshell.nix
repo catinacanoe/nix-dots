@@ -7,7 +7,7 @@ let
 in
 pkgs.writeShellScriptBin "nixshell" ''
 function printhelp() {
-    echo "'nixshell' interactive shell to run nix switch and hm quickly (please run as root)"
+    echo "'nixshell' interactive shell to run nix switch and hm quickly"
     echo
     echo "help"
     echo "    prints out this help menu with a list of commands"
@@ -96,7 +96,7 @@ if [ -n "$1" ]; then
 fi
 
 while true ; do
-    printf "\033[0;36mnix\033[0;34m > \033[0m"
+    printf "\033[0;31mnix\033[0;35m > \033[0m"
     read response
     handle_response
     echo

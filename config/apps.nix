@@ -12,6 +12,7 @@
         browsepad = (import ./custom/browsepad.nix args);
         browse = (import ./custom/browse.nix args);
         nixshell = (import ./custom/nixshell.nix args);
+        nmshell = (import ./custom/nixshell.nix args);
         drop = (import ./custom/drop.nix args);
         menu = (import ./custom/menu.nix args);
         launcher = (import ./custom/launcher.nix args);
@@ -19,7 +20,7 @@
         manpager = (import ./custom/manpager.nix args);
     in [
         # custom apps
-        vp drop browsepad nixshell browse yargs menu.ui menu.wrap launcher manpager
+        vp drop browsepad nixshell browse yargs menu.ui menu.wrap launcher manpager nmshell
 
         # cli utils
         ansifilter

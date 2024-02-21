@@ -47,7 +47,7 @@ if [ -n "$1" ]; then
 fi
 
 while true ; do
-    printf "\033[0;36mvpn\033[0;34m > \033[0m"
+    printf "\033[0;35mvpn\033[0;31m > \033[0m"
     read response
 
     ${cases}
