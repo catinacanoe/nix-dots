@@ -32,20 +32,24 @@ function printhelp() {
 }
 
 function homeman() {
+    echo
     echo "activating home manager"
     home-manager switch --show-trace --flake path:${repos}/nix-dots/ || notify-send "nixshell" "ERROR in home manager activation"
 }
 
 function nixos() {
+    echo
     echo "rebuilding the nixos system"
     sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/#default || notify-send "nixshell" "ERROR in nixos rebuild"
 }
 
 function hm_news() {
+    echo
     home-manager news --flake path:${repos}/nix-dots/
 }
 
 function activate_ff() {
+    echo
     echo "running firefox preactivation"
     killall .firefox-wrapped
 
@@ -57,6 +61,7 @@ function activate_ff() {
 }
 
 function activate_xx() {
+    echo
     echo "activating xioxide"
     source ${repos}/xioxide/main.sh reload
 }
