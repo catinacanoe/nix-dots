@@ -206,22 +206,5 @@ in
     }
 
     # hyprctl output create headless (see wiki)
-
-    plugin:hyprfocus {
-        enabled = yes
-
-        keyboard_focus_animation = shrink
-        mouse_focus_animation = shrink
-
-        shrink {
-            shrink_percentage = 1.015
-    
-            in_bezier = easeout
-            in_speed = 0.7
-
-            out_bezier = linear
-            out_speed = 1
-        }
-    }
     '';
 }
