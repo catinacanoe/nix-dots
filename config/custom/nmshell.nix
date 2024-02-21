@@ -45,7 +45,7 @@ if [ -n "$1" ]; then
 fi
 
 while true ; do
-    printf "\033[0;31mnet\033[0;35m > \033[0m"
+    printf "\033[0;35mnet\033[0;31m > \033[0m"
     read response
     handle_response
     echo
