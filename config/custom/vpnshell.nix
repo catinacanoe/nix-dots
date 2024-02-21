@@ -4,7 +4,7 @@ let
     case "$response" in
         h|help)
             echo
-            echo "'vp' interactive shell for proton vpn (please run as root)"
+            echo "'vpnshell' interactive shell for proton vpn (please run as root)"
             echo
             echo "help | h"
             echo "    prints out this help menu with a list of commands"
@@ -37,7 +37,7 @@ let
     esac
     '';
 in
-pkgs.writeShellScriptBin "vp" ''
+pkgs.writeShellScriptBin "vpnshell" ''
 if [ -n "$1" ]; then
     response="$1"
 

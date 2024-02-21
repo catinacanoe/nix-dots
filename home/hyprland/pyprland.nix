@@ -30,14 +30,12 @@
         termpad = name: command: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
-            unfocus = "hide"
             ${size.term}
         '';
 
         browserpad = name: args: sizing: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.BROWSER} --no-remote -P ${args}"
-            unfocus = "hide"
             ${sizing}
         '';
     in /* toml */ ''
@@ -46,19 +44,20 @@
 
     # TERMINAL #
     ${termpad "term" ""}
-    ${termpad "network" "nmtui"}
-    ${termpad "news" "newsboat"}
-    ${termpad "vpn" "sudo vp"}
+
+    ${termpad "network" "netshell"}
+    ${termpad "vpn" "sudo vpnshell"}
     ${termpad "nix" "nixshell"}
-    ${termpad "qalc" "qalc"}
-    ${termpad "browsepad" "bp"}
-    ${termpad "bluetooth" "bluetoothctl"}
-    ${termpad "menu" "menuui"}
+    ${termpad "browsepad" "browsepad"}
     ${termpad "launcher" "launcher"}
+    ${termpad "menu" "menuui"}
+
+    ${termpad "news" "newsboat"}
+    ${termpad "qalc" "qalc"}
+    ${termpad "bluetooth" "bluetoothctl"}
 
     [scratchpads.top]
     command = "${config.home.sessionVariables.TERMINAL} --class scratchpad gotop"
-    unfocus = "hide"
     ${size.browser}
 
     # BROWSER #

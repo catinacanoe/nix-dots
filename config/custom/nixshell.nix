@@ -41,6 +41,10 @@ function nixos() {
     sudo nixos-rebuild switch --show-trace --flake path:${repos}/nix-dots/#default || notify-send "nixshell" "ERROR in nixos rebuild"
 }
 
+function hm_news() {
+    home-manager news --flake path:${repos}/nix-dots/
+}
+
 function activate_ff() {
     echo "running firefox preactivation"
     killall .firefox-wrapped
@@ -62,10 +66,11 @@ function handle_response() {
         echo
         printhelp
         return
-    fi
-
-    if [ "$response" == "quit" ]; then
+    elif [ "$response" == "quit" ]; then
         exit
+    elif [ "$response" == "news" ]; then
+        hm_news
+        return
     fi
 
     for (( i=0; i<${"\${#response}"}; i++ )); do

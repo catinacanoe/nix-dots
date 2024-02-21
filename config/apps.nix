@@ -8,19 +8,19 @@
     let
         hypr = writeShellScriptBin "hypr" "Hyprland";
 
-        vp = (import ./custom/vpnshell.nix args);
+        browse =    (import ./custom/browse.nix args);
         browsepad = (import ./custom/browsepad.nix args);
-        browse = (import ./custom/browse.nix args);
-        nixshell = (import ./custom/nixshell.nix args);
-        nmshell = (import ./custom/nixshell.nix args);
-        drop = (import ./custom/drop.nix args);
-        menu = (import ./custom/menu.nix args);
-        launcher = (import ./custom/launcher.nix args);
-        yargs = (import ./custom/yargs.nix args);
-        manpager = (import ./custom/manpager.nix args);
+        drop =      (import ./custom/drop.nix args);
+        launcher =  (import ./custom/launcher.nix args);
+        manpager =  (import ./custom/manpager.nix args);
+        menu =      (import ./custom/menu.nix args);
+        netshell =  (import ./custom/netshell.nix args);
+        nixshell =  (import ./custom/nixshell.nix args);
+        vpnshell =  (import ./custom/vpnshell.nix args);
+        yargs =     (import ./custom/yargs.nix args);
     in [
         # custom apps
-        vp drop browsepad nixshell browse yargs menu.ui menu.wrap launcher manpager nmshell
+        vpnshell drop browsepad nixshell browse yargs menu.ui menu.wrap launcher manpager netshell
 
         # cli utils
         ansifilter

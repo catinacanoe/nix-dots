@@ -1,4 +1,4 @@
-{ pkgs, ... }: pkgs.writeShellScriptBin "bp" ''
+{ pkgs, ... }: pkgs.writeShellScriptBin "browsepad" ''
 
 BROWSEPAD_HIST="/tmp/browsepad.hist"
 
