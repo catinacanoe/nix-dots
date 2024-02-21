@@ -5,7 +5,6 @@ let
 in
 {
     networking.networkmanager.wifi.powersave = false;
-
 } // (if hostname == "nixbox" then {
     hardware.nvidia = {
         modesetting.enable = true;
@@ -30,7 +29,12 @@ in
     # options nvidia NVreg_RegistryDwords="OverrideMaxPerf=0x1"
     # options nvidia NVreg_PreserveVideoMemoryAllocations=1
     # '';
-
 } else if hostname == "nixpad" then {
+    networking.networkmanager.wifi.macAddress = "stable"; # default preserve
 
+    # sound stuff
+    boot.extraModprobeConfig = ''
+        options snd slots=snd-hda-intel
+        options snd_hda_intel enable=0,1
+    '';
 } else {})
