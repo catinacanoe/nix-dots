@@ -40,7 +40,7 @@
 
             bind-key ; hard-quit
 
-            browser ${config.home.sessionVariables.BROWSER}
+            browser "drop && ${config.home.sessionVariables.BROWSER}"
         '';
 
         urls = [
