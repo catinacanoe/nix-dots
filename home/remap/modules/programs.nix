@@ -15,6 +15,6 @@ in
                 ${mod}-d:
                     ${launchdir direction "discord"}
                 ${mod}-w:
-                    ${launchdir direction "firefox -P main --new-window about:blank && sleep 0.3 && pypr show browseshell"}
+                    ${launchdir direction "firefox -P main --new-window about:blank && sleep 0.7 && pypr show browseshell"}
 # programs.nix ${direction}
 ''

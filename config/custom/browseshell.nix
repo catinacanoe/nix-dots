@@ -12,7 +12,16 @@ function open() {
 
     [ "$(hyprctl activewindow -j | jq .class)" == "\"$BROWSER\"" ] || return
 
-    wtype -M ctrl -k t -m ctrl
+    title="$(hyprctl activewindow -j | jq .title)"
+
+    if [ "$BROWSER" == "firefox" ] && [ "$title" == '"Mozilla Firefox"' ]; then
+        wtype -M ctrl -k l -m ctrl
+    elif [ "$BROWSER" == "chromium" ] && [ "$title" == '"New Tab - Chromium"' ]; then
+        wtype -M ctrl -k l -m ctrl
+    else
+        wtype -M ctrl -k t -m ctrl
+    fi
+
     wtype "$@ "
     wtype -k Backspace
     wtype -k Return

@@ -11,7 +11,13 @@ if [ "$1" == "init" ]; then
     echo > "$CURRENTFILE"
     exit
 elif [ "$1" == "focus" ]; then
-    [ -n "$current"] && pypr hide "$current" && pypr show "$current" && exit
+    if [ "$(hyprctl activewindow -j | jq .floating)" == "true" ]; then
+        hyprctl dispatch cyclenext
+    else
+        [ -z "$current" ] && exit
+        hyprctl dispatch focuswindow floating
+    fi
+    exit
 fi
 
 function hide() {
