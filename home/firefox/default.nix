@@ -15,7 +15,11 @@ let
             --focus-outline-color: transparent !important;
 
             --lwt-toolbar-field-highlight: var(--rcol-t2) !important;
+            --urlbar-box-bgcolor: rgba(var(--rrgb-fg), 0.1) !important;
         }
+
+        toolbarspring, /* the wierd padding right of zoom level */
+        xxx { display: none !important; }
 
         browser#webext-panels-browser {
             background-image: var(--rwall-blur);
@@ -427,6 +431,7 @@ let
             display: none !important
         }
     '';
+
     userchrome-nodecor = /* css */ ''
         :root {
             ${import ./modules/vars.nix rice}
