@@ -36,6 +36,8 @@
         # cli utils
         ansifilter
         ascii-image-converter
+        asciiquarium-transparent
+        aalib
         at
         audiowaveform
         bat
@@ -47,6 +49,7 @@
         catdoc
         catimg
         cbonsai
+        cmatrix
         cdrtools
         diff-so-fancy
         expect
@@ -83,6 +86,7 @@
         pipx
         poppler_utils
         procps
+        pipes
         psmisc
         ripgrep
         shellcheck
@@ -136,7 +140,6 @@
             withVencord = true;
         })
         cava
-        lunar-client
         kitty
         mpv-unwrapped
         tofi

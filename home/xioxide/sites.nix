@@ -42,6 +42,9 @@ h hhs.fuhsd.org/
     b about-us/general-information/bell-schedule/
 hc drive.google.com/file/d/1YfxX1gKARWyNuz-1dtAQt7TUT-89epSY/view
 
+krn secure4.saashr.com/ta/6154193.login?rnd=LYJ&NoRedirect=1/
+cap verified.capitalone.com/auth/signin/
+
 o fuhsd.schoology.com/
 ob bessy.io/
 og fuhsd.schoology.com/grades/grades/

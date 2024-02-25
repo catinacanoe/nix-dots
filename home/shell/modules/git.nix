@@ -2,11 +2,11 @@
 {
     g = "git";
     gy = "sshkey && gitutils sync";
-    gs = "gitutils status";
     gd = "gitutils diff";
     gii = "gitutils init";
 
-    ga = "echo 'git add %%% && gitutils status' | yargs";
+    gs = "g status";
+    ga = "echo 'git add %%% && gs' | yargs";
     gaa = "ga .";
     gau = "ga -u";
     gc = "g commit";

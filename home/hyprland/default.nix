@@ -34,7 +34,7 @@ in {
     '' else ""}
 
     exec-once = waybar
-    exec-once = sleep 3 && swww init
+    exec-once = sleep 1 && swww init
     exec-once = mpd && mpc volume 70
     exec-once = drop init
 

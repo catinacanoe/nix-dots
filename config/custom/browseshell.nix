@@ -22,6 +22,8 @@ function open() {
         wtype -M ctrl -k t -m ctrl
     fi
 
+    sleep 0.2
+
     wtype "$@ "
     wtype -k Backspace
     wtype -k Return

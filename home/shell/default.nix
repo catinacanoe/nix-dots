@@ -128,7 +128,7 @@ in
         done
 
         # TTY colors
-        if [ "$TERM" = "linux" ]; then
+        if [ "$TERM" == "linux" ]; then
             echo -en "\e]P0${col.bg.hex}" #black
             echo -en "\e]P8${col.t2.hex}" #darkgrey
             echo -en "\e]P1${col.brown.hex}" #darkred
