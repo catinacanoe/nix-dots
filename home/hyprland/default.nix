@@ -201,8 +201,8 @@ in {
     # name, res@fps, pos of monitor's TpLft corner in layout, scale
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
-    ${if host == "nixbox" then "monitor=DP-3, 3840x2160@60, 0x0, 1.2"
-    else if host == "nixpad" then "monitor=eDP-1, 2560x1600@60, 0x0, 1.333333"
+    ${if host == "nixbox" then "monitor=DP-3, ${toString rice.monitor.width}x${toString rice.monitor.height}@60, 0x0, ${toString rice.monitor.scale}"
+    else if host == "nixpad" then "monitor=eDP-1, ${toString rice.monitor.width}x${toString rice.monitor.height}@60, 0x0, ${toString rice.monitor.scale}"
     else ""}
     monitor=,preferred,auto,1 # auto rule for random monitors
 

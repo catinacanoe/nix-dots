@@ -49,8 +49,8 @@ r ${repos}/
                 br browse.nix
                 bs browseshell.nix
                 dr drop.nix
-                hy hypr.nix
                 la launcher.nix
+                hy hypr.nix
                 ma manpager.nix
                 me menu.nix
                 ms netshell.nix
@@ -94,6 +94,8 @@ r ${repos}/
                 d default.nix
                 a activate.nix
             dy dye/
+                d default.nix
+            ew eww/
                 d default.nix
             fi firefox/
                 d default.nix

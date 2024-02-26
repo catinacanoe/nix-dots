@@ -34,6 +34,7 @@ in
         ./crypt
         ./discord
         ./dye
+        ./eww
         ./firefox
         ./fzf
         ./git

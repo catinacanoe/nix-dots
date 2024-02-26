@@ -1,5 +1,5 @@
 let host = import ../ignore-hostname.nix; in {
-    # remember to regenerate wallpapers if you change scheme
+    # remember to regenerate wallpapers if you change colorscheme
     col = import ./colors "gruvbox";
     wall = import ./wall;
     test = "test";
@@ -14,6 +14,16 @@ let host = import ../ignore-hostname.nix; in {
             bold-italic = "${family} Bold Italic";
         };
     };
+
+    monitor = if host == "nixbox" then {
+        scale = 1.2;
+        width = 3840;
+        height = 2160;
+    } else if host == "nixpad" then {
+        scale = 1.333333;
+        width = 2560;
+        height = 1600;
+    } else {};
 
     window = let
         gaps = 7;
