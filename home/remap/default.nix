@@ -65,10 +65,10 @@ keymap:
     bindl=,switch:on:Lid Switch,exec,power suspend
     bind=,XF86PowerOff,exec,power suspend
 
-    bind = , XF86MonBrightnessUp, exec, brightnessctl set 5%+
-    bind = , XF86MonBrightnessDown, exec, brightnessctl set 5%-
-    bind = CTRL, XF86MonBrightnessUp, exec, brightnessctl set 1%+
-    bind = CTRL, XF86MonBrightnessDown, exec, brightnessctl set 1%-
+    bind = , XF86MonBrightnessUp, exec, setbright 5%+
+    bind = , XF86MonBrightnessDown, exec, setbright 5%-
+    bind = CTRL, XF86MonBrightnessUp, exec, setbright 1%+
+    bind = CTRL, XF86MonBrightnessDown, exec, setbright 1%-
 
     bind = SUPER, mouse:274, killactive # super+mmb
     bindm = SUPER, mouse:272, movewindow # super+lmb

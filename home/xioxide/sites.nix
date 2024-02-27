@@ -25,6 +25,7 @@ rh robinhood.com/
 
 gh github.com/
 gpt chat.openai.com/
+ee deepl.com/
 
 ic fuhsd.infinitecampus.org/campus/portal/fremont.jsp
 des desmos.com/graphing/
@@ -74,7 +75,7 @@ ge docs.google.com/spreadsheets/
 ga myaccount.google.com/
     ${googleusers}
 
-gd drive.google.com/drive/
+gv drive.google.com/drive/
     ${googleusers}
     s search?q=
     '';

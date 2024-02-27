@@ -1,63 +1,22 @@
-{ ... }: let rice = (import ../../rice); in {
-    xdg.configFile."eww/eww.yuck".text = ''
-    (defwindow dock
-        :monitor 0
-        :geometry (geometry :x "0px"
-                            :y "${toString (rice.window.gaps-out + rice.window.border)}px"
-                            :width "${toString (rice.monitor.width / rice.monitor.scale - 2*(rice.window.gaps-out + rice.window.border))}px"
-                            :height "35px"
-                            :anchor "top center")
-        :exclusive true
-        :windowtype "dock"
-        :stacking "fg"
-        :wm-ignore false
-        (dock_layout)
-    )
+{ ... }:
+let
+    rice = (import ../../rice);
+    hostname = (import ../../ignore-hostname.nix);
+    args = { inherit rice hostname; };
+in {
+    xdg.configFile."eww/eww.yuck".text = (import ./yuck.nix args);
 
-    (defwidget dock_layout []
-        (box :orientation "horizontal" :class "dock-layout" (dock_left) (dock_middle) (dock_right))
-    )
+    xdg.configFile."eww/eww.scss".text = (import ./scss.nix args);
 
-    (defwidget dock_left []
-        (box :orientation "horizontal" :class "dock-left" :hexpand false :halign "start"
-            "music stuff"
-        )
-    )
+    xdg.configFile."eww/script/battery.sh".executable = true;
+    xdg.configFile."eww/script/battery.sh".text = (import ./script/battery.nix);
 
-    (defwidget dock_middle []
-        (box :orientation "horizontal" :class "dock-left" :hexpand false :halign "center"
-            "workspaces"
-        )
-    )
+    xdg.configFile."eww/script/workspaces.sh".executable = true;
+    xdg.configFile."eww/script/workspaces.sh".text = (import ./script/workspaces.nix);
 
-    (defwidget dock_right []
-        (box :orientation "horizontal" :class "dock-left" :hexpand false :halign "end"
-            "time and sys info"
-        )
-    )
-    '';
+    xdg.configFile."eww/script/active.sh".executable = true;
+    xdg.configFile."eww/script/active.sh".text = (import ./script/active.nix);
 
-
-    xdg.configFile."eww/eww.scss".text = ''
-    * {
-        all: unset;
-    }
-
-    .dock-layout {
-        color: ${rice.col.fg.h};
-        background: rgba(0, 0, 0, 0)
-    }
-
-    .dock-left,
-    .dock-middle,
-    .dock-right,
-    .label {
-        border-radius: ${toString rice.window.radius}px;
-        background: rgba(${rice.col.bg.rgb}, 0.7);
-    }
-
-    .padding {
-        background: rgba(0, 0, 0, 0)
-    }
-    '';
+    xdg.configFile."eww/script/init.sh".executable = true;
+    xdg.configFile."eww/script/init.sh".text = (import ./script/init.nix);
 }

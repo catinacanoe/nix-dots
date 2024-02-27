@@ -1,0 +1,112 @@
+;; FUCL FUCK FUCK FUCK FUCK
+(defwidget dock_block [halign]
+    (box :orientation "horizontal" :class "dock-block"
+         :hexpand false :halign halign :spacing 7 :space-evenly false
+        (children)
+    )
+)
+
+(defwidget dock_layout []
+    (box :orientation "horizontal" :class "dock-layout" :valign "center"
+        (dock_left) (dock_middle) (dock_right)
+    )
+)
+
+(defwidget dock_left []
+    (dock_block :halign "start"
+        "music stuff"
+    )
+)
+
+(deflisten listen_test `tail -F ./listen/test`)
+(deflisten listen_active `tail -F ./listen/active`)
+(deflisten listen_workspaces :initial "[]" `./script/workspaces.sh`)
+
+(deflisten listen_net_vpn `tail -F ./listen/net-vpn`)
+(defpoll poll_net_name :interval "5s" `nmcli -t device wifi list --rescan no | grep '^*' | awk -F ':' '{ print $8 }' | grep -o '^..' | tr '[:upper:]' '[:lower:]'`)
+(deflisten listen_net_speed `tail -F ./listen/net-speed`)
+
+(deflisten listen_audio_device `tail -F ./listen/audio-device`)
+(deflisten listen_volume `tail -F ./listen/volume`)
+
+(defpoll poll_battery :interval "5s" `./script/battery.sh`)
+
+(deflisten listen_brightness `tail -F ./listen/brightness`)
+
+(defpoll poll_time :interval "1s" `date +'%d.%m ~ %H:%M:%S'`)
+
+(defwidget dock_middle []
+    (dock_block :halign "center"
+        (box :class "dock-widget" :space-evenly false
+            (for workspace in listen_workspaces
+                (box :orientation "vertical" :space-evenly false
+                    (box :class "dock-workspace-pad")
+                    (box :class "dock-workspaces ${workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty")}")
+                    (box :class "dock-workspace-pad")
+                )
+            )
+        )
+    )
+)
+
+(defwidget dock_right []
+    (dock_block :halign "end" :valign "center"
+        (dock_volume)
+        (dock_brightness)
+        (dock_net)
+        (dock_battery :visible laptop)
+        (dock_time)
+    )
+)
+
+(defwidget dock_widget []
+    (box :class "dock-widget" :valign "center"
+        (children)
+    )
+)
+
+(defwidget dock_net []
+    (dock_widget
+        (label
+            :text "${listen_net_vpn}${poll_net_name}${listen_net_speed}"
+            :class "dock-net"
+        )
+    )
+)
+
+(defwidget dock_volume []
+    (dock_widget
+        (label
+            :text "${listen_volume}%${listen_audio_device}"
+            :class "dock-volume"
+        )
+    )
+)
+
+(defwidget dock_brightness []
+    (dock_widget
+        (label
+            :text "${listen_brightness}%"
+            :class "dock-brightness"
+        )
+    )
+)
+
+(defwidget dock_battery [visible]
+    (dock_widget
+        (label
+            :text poll_battery
+            :visible visible
+            :class "dock-battery"
+        )
+    )
+)
+
+(defwidget dock_time []
+    (dock_widget
+        (label
+            :text poll_time
+            :class "dock-time"
+        )
+    )
+)

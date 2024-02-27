@@ -16,6 +16,8 @@
         netshell    = (import ./custom/netshell.nix args);
         nixshell    = (import ./custom/nixshell.nix args);
         sshkey      = (import ./custom/sshkey.nix args);
+        setbright   = (import ./custom/setbright.nix args);
+        setvol      = (import ./custom/setvol.nix args);
         vpnshell    = (import ./custom/vpnshell.nix args);
         yargs       = (import ./custom/yargs.nix args);
     in [
@@ -30,10 +32,13 @@
         netshell
         nixshell
         sshkey
+        setbright
+        setvol
         vpnshell
         yargs
 
         # cli utils
+        acpi
         ansifilter
         ascii-image-converter
         asciiquarium-transparent
@@ -56,6 +61,7 @@
         exiftool
         eza
         fd
+        socat
         ffmpeg
         ffmpegthumbnailer
         file

@@ -33,7 +33,8 @@ in {
     env = WLR_DRM_NO_ATOMIC,1
     '' else ""}
 
-    exec-once = waybar
+    # exec-once = eww open dock
+    # exec-once = ${config.xdg.configHome}/eww/script/init.sh
     exec-once = sleep 1 && swww init
     exec-once = mpd && mpc volume 70
     exec-once = drop init

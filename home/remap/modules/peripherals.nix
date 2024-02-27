@@ -7,8 +7,8 @@ let
     vol-small    = "1%";
     bright-small = "1%";
 
-    vol = incr: "${launch "wpctl set-volume @DEFAULT_SINK@ ${incr}"}";
-    bright = incr: "${launch "brightnessctl set ${incr}"}";
+    vol = incr: launch "setvol ${incr}";
+    bright = incr: launch "setbright ${incr}";
 in
 /* yaml */ ''
 # peripherals.nix

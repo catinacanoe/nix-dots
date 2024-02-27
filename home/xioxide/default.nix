@@ -55,6 +55,7 @@ r ${repos}/
                 me menu.nix
                 ms netshell.nix
                 ns nixshell.nix
+                sb setbright.nix
                 ss sshkey.nix
                 vs vpnshell.nix
                 ya yargs.nix
@@ -97,6 +98,10 @@ r ${repos}/
                 d default.nix
             ew eww/
                 d default.nix
+                y yuck.nix
+                s scss.nix
+                i init.nix
+                b script-brightness.nix
             fi firefox/
                 d default.nix
                 a activate.nix

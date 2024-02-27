@@ -55,7 +55,7 @@
     # TERMINAL #
     ${termpad "term" ""}
 
-    ${termpad "network" "netshell"}
+    ${termpad "network" "sudo netshell"}
     ${termpad "vpn" "sudo vpnshell"}
     ${termpad "nix" "nixshell"}
 

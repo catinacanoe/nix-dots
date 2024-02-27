@@ -34,6 +34,9 @@ function printhelp() {
     echo
     echo "credentials|c"
     echo "    print out the credentials to the current network"
+    echo
+    echo "vpn|v"
+    echo "    passes its arguments through to the vpnshell command"
 }
 
 function vpn-network() { echo "$@" | grep -q '^fuhsd$'; }
@@ -106,6 +109,7 @@ function handle_response() {
         'ping'|'p') ping google.com ;;
         'test'|'t') speedtest ;;
         'credentials'|'c') credentials ;;
+        'vpn'|'v') vpnshell "$arguments" ;;
         *) printhelp ;;
     esac
 }
