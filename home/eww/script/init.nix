@@ -1,5 +1,6 @@
 /* bash */ ''
 dir=/home/canoe/.config/eww/listen
+mkdir -p "$dir"
 
 function net_vpn() {
     echo > "$dir/net-vpn"
@@ -12,13 +13,18 @@ function net_vpn() {
 }
 
 function net_speed() {
-    echo > "$dir/net-speed"
+    echo > "$dir/net-check"
 
     while true; do
-        speedtest --no-upload | grep '^Download: ' \
-        | sed -e 's|^Download: |(|' -e 's|\.[0-9]* Mbit/s$|)|' -e 's|^| |' >> "$dir/net-speed"
+        wget -q --spider http://google.com
 
-    sleep 300; done # 5 min
+        if [ $? -eq 0 ]; then
+            echo "" > "$dir/net-check"
+        else
+            echo " -" > "$dir/net-check"
+        fi
+
+    sleep 5; done # 5 min
 }
 
 function vol() {
@@ -53,4 +59,6 @@ net_speed &
 vol &
 bright &
 active &
+
+eww open dock
 ''

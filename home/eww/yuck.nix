@@ -13,7 +13,15 @@
     (dock_layout)
 )
 
-(defvar laptop ${if hostname == "nixpad" then "true" else "false"})
-
 ${builtins.readFile ./yuck.yuck}
+
+(defwidget dock_right []
+    (dock_block :halign "end" :valign "center"
+        (dock_volume)
+        ${if hostname == "nixpad" then "(dock_brightness)" else ""}
+        (dock_net)
+        ${if hostname == "nixpad" then "(dock_battery)" else ""}
+        (dock_time)
+    )
+)
 ''

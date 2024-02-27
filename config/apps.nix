@@ -110,6 +110,7 @@
         viu
         wev
         wirelesstools
+        wget
         wl-clipboard
         wtype
         xdg-utils

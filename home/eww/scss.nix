@@ -22,9 +22,10 @@
 .dock-workspaces {
     padding-top: 15px;
     border-radius: 9999px;
-    margin-right: ${toString rice.window.radius}px;
-    margin-left: ${toString rice.window.radius}px;
     background: ${rice.col.fg.h};
+
+    margin-left: ${toString (4*rice.window.border)}px;
+    margin-right: ${toString (4*rice.window.border)}px;
 }
 
 .dock-workspaces.active { padding-right: 40px; }
@@ -40,8 +41,7 @@
     padding-top: 10px;
 }
 
-.dock-block,
-xxx {
+.dock-block {
     border-radius: ${toString rice.window.radius}px;
     background: rgba(${rice.col.bg.rgb}, 0.7);
     padding-left: ${toString (rice.window.radius)}px;
@@ -49,7 +49,7 @@ xxx {
 }
 
 .dock-widget {
-    padding-left: ${toString (rice.window.radius)}px;
-    padding-right: ${toString (rice.window.radius)}px;
+    margin-left: ${toString rice.window.gaps-in}px;
+    margin-right: ${toString rice.window.gaps-in}px;
 }
 ''

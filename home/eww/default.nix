@@ -14,9 +14,6 @@ in {
     xdg.configFile."eww/script/workspaces.sh".executable = true;
     xdg.configFile."eww/script/workspaces.sh".text = (import ./script/workspaces.nix);
 
-    xdg.configFile."eww/script/active.sh".executable = true;
-    xdg.configFile."eww/script/active.sh".text = (import ./script/active.nix);
-
     xdg.configFile."eww/script/init.sh".executable = true;
     xdg.configFile."eww/script/init.sh".text = (import ./script/init.nix);
 }

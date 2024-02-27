@@ -97,11 +97,14 @@ r ${repos}/
             dy dye/
                 d default.nix
             ew eww/
+                s script/
+                    i init.nix
+                    b battery.nix
+                    w workspaces.nix
                 d default.nix
-                y yuck.nix
+                y yuck.yuck
+                yn yuck.nix
                 s scss.nix
-                i init.nix
-                b script-brightness.nix
             fi firefox/
                 d default.nix
                 a activate.nix
