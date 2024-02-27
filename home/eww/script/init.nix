@@ -45,10 +45,25 @@ function bright() {
 }
 
 function active() {
-    hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id' > "$dir/active"
+    hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id' > "$dir/workspace-active"
+    hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id' > "$dir/workspace-prev"
+    echo false > "$dir/workspace-switching"
+
+    local prev
+    prev=""
 
     socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
-        stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' >> "$dir/active"
+        stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
+        while read -r line; do
+            if [ "$line" != "$prev" ]; then
+                prev="$line"
+                echo "$line" >> "$dir/workspace-active"
+                echo "$prev" >> "$dir/workspace-prev"
+
+                echo true >> "$dir/workspace-switching"
+                sleep 0.5 && echo false >> "$dir/workspace-switching" &
+            fi
+        done
 }
 
 setbright 100%

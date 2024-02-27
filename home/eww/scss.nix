@@ -28,6 +28,10 @@
     margin-right: ${toString (4*rice.window.border)}px;
 }
 
+.dock-workspaces.active.switching { background: #0f0; }
+.dock-workspaces.occupied.switching { background: #f00; }
+.dock-workspaces.empty.switching { border-color: #f00; }
+
 .dock-workspaces.active { padding-right: 40px; }
 .dock-workspaces.occupied { padding-right: 15px; }
 .dock-workspaces.empty {

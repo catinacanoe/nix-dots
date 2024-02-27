@@ -18,7 +18,9 @@
     )
 )
 
-(deflisten listen_active `tail -F ./listen/active`)
+(deflisten listen_switching `tail -F ./listen/workspace-switching`)
+(deflisten listen_active `tail -F ./listen/workspace-active`)
+(deflisten listen_prev `tail -F ./listen/workspace-prev`)
 (deflisten listen_workspaces :initial "[]" `./script/workspaces.sh`)
 (defwidget dock_middle []
     (dock_block :halign "center"
@@ -27,6 +29,7 @@
                 (box :orientation "vertical" :space-evenly false
                     (box :class "dock-workspace-pad")
                     (box :class "dock-workspaces ${workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty")}")
+                    (box :class "dock-workspaces ${listen_switching ? (workspace.id == listen_active ? "active switching" : (workspace.id == listen_prev ? (workspace.windows > 0 ? "occupied switching" : "empty switching") : "")) : (workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )
