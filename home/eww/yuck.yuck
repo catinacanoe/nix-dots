@@ -28,8 +28,7 @@
             (for workspace in listen_workspaces
                 (box :orientation "vertical" :space-evenly false
                     (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty")}")
-                    (box :class "dock-workspaces ${listen_switching ? (workspace.id == listen_active ? "active switching" : (workspace.id == listen_prev ? (workspace.windows > 0 ? "occupied switching" : "empty switching") : "")) : (workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                    (box :class "dock-workspaces ${listen_switching ? (workspace.id == listen_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == listen_prev ? " switching" : ""))) : (workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )

@@ -24,7 +24,7 @@ function net_speed() {
             echo " -" > "$dir/net-check"
         fi
 
-    sleep 5; done # 5 min
+    sleep 3; done
 }
 
 function vol() {
@@ -56,9 +56,9 @@ function active() {
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
         while read -r line; do
             if [ "$line" != "$prev" ]; then
+                echo "$prev" >> "$dir/workspace-prev"
                 prev="$line"
                 echo "$line" >> "$dir/workspace-active"
-                echo "$prev" >> "$dir/workspace-prev"
 
                 echo true >> "$dir/workspace-switching"
                 sleep 0.5 && echo false >> "$dir/workspace-switching" &
