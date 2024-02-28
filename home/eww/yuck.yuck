@@ -18,7 +18,7 @@
     )
 )
 
-(deflisten listen_switching `tail -F ./listen/workspace-switching`)
+(deflisten listen_switching `tail -F ./listen/workspace-switching | awk '{ print $1 }'`)
 (deflisten listen_active `tail -F ./listen/workspace-active`)
 (deflisten listen_prev `tail -F ./listen/workspace-prev`)
 (deflisten listen_workspaces :initial "[]" `./script/workspaces.sh`)

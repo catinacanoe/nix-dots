@@ -26,7 +26,8 @@ else
 fi
 )"
 
-if [ "$direction" == "Not charging" ]; then
+if [ "$direction" == "Not charging" ] || [ "$direction" == "Full" ]; then
+    [ "$percent" == "99" ] && percent=100
     echo "$percent"
 else
     echo "$percent ($timeinfo)"

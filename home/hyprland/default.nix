@@ -33,7 +33,7 @@ in {
     env = WLR_DRM_NO_ATOMIC,1
     '' else ""}
 
-    exec-once = ${config.xdg.configHome}/eww/script/init.sh
+    exec = ${config.xdg.configHome}/eww/script/init.sh
     exec-once = sleep 1 && swww init
     exec-once = mpd && mpc volume 70
     exec-once = drop init
@@ -41,7 +41,6 @@ in {
     exec-once = kitty
     exec-once = discord --start-minimized ${if host == "nixbox" then "--enable-features=UseOzonePlatform --ozone-platform=wayland" else ""}
 
-    exec = eww open dock
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
     env = XCURSOR_SIZE,${toString config.home.pointerCursor.size} # affected by scale (i think)

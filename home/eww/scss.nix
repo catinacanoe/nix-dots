@@ -26,11 +26,29 @@
 
     margin-left: ${toString (4*rice.window.border)}px;
     margin-right: ${toString (4*rice.window.border)}px;
+
+    animation-duration: 0.2s;
+    animation-timing-function: ease-out;
 }
 
-.dock-workspaces.active.switching { background: #0f0; }
-.dock-workspaces.occupied.switching { background: #f00; }
-.dock-workspaces.empty.switching { border-color: #f00; }
+@keyframes open {
+    from { padding-right: 15px; }
+    to   { padding-right: 40px; }
+}
+
+@keyframes close {
+    from { padding-right: 40px; }
+    to   { padding-right: 15px; }
+}
+
+@keyframes close-empty {
+    from { padding-right: 36px; }
+    to   { padding-right: 9px; }
+}
+
+.dock-workspaces.active.switching { animation-name: open; }
+.dock-workspaces.occupied.switching { animation-name: close; }
+.dock-workspaces.empty.switching { animation-name: close-empty; }
 
 .dock-workspaces.active { padding-right: 40px; }
 .dock-workspaces.occupied { padding-right: 15px; }

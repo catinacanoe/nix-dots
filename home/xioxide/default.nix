@@ -104,7 +104,7 @@ r ${repos}/
                 d default.nix
                 y yuck.yuck
                 yn yuck.nix
-                s scss.nix
+                c scss.nix
             fi firefox/
                 d default.nix
                 a activate.nix

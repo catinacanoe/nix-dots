@@ -2,6 +2,12 @@
 dir=/home/canoe/.config/eww/listen
 mkdir -p "$dir"
 
+echo "kill" > "$dir/kill"
+sleep 0.4
+echo "" > "$dir/kill"
+
+eww open dock --restart
+
 function net_vpn() {
     echo > "$dir/net-vpn"
 
@@ -12,7 +18,7 @@ function net_vpn() {
     sleep 5; done
 }
 
-function net_speed() {
+function net_check() {
     echo > "$dir/net-check"
 
     while true; do
@@ -45,35 +51,35 @@ function bright() {
 }
 
 function active() {
-    hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id' > "$dir/workspace-active"
-    hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id' > "$dir/workspace-prev"
-    echo false > "$dir/workspace-switching"
+    eww update "listen_active=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
+    eww update "listen_prev=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
+    eww update listen_switching=false
+
+    echo line > "$dir/workspace-switching"
 
     local prev
     prev=""
 
     socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
-        while read -r line; do
-            if [ "$line" != "$prev" ]; then
-                echo "$prev" >> "$dir/workspace-prev"
-                prev="$line"
-                echo "$line" >> "$dir/workspace-active"
+        while read -r active; do
+            if [ "$active" != "$prev" ]; then
+                eww update "listen_switching=true" "listen_prev=$prev" "listen_active=$active"
 
-                echo true >> "$dir/workspace-switching"
-                sleep 0.5 && echo false >> "$dir/workspace-switching" &
+                prev="$active"
+
+                sleep 0.2 && eww update "listen_switching=false" &
             fi
         done
 }
 
-setbright 100%
-setvol 0%
-
 net_vpn &
-net_speed &
+net_check &
 vol &
 bright &
 active &
 
-eww open dock
+while true; do
+    [ -n "$(cat "$dir/kill")" ] && eww kill && pkill -P $$ && sleep 0.1 && exit
+sleep 0.3; done
 ''
