@@ -33,7 +33,7 @@ in {
     env = WLR_DRM_NO_ATOMIC,1
     '' else ""}
 
-    exec = ${config.xdg.configHome}/eww/script/init.sh
+    exec = ${config.xdg.configHome}/eww/init.sh
     exec-once = sleep 1 && swww init
     exec-once = mpd && mpc volume 70
     exec-once = drop init

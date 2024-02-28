@@ -8,12 +8,6 @@ in {
 
     xdg.configFile."eww/eww.scss".text = (import ./scss.nix args);
 
-    xdg.configFile."eww/script/battery.sh".executable = true;
-    xdg.configFile."eww/script/battery.sh".text = (import ./script/battery.nix);
-
-    xdg.configFile."eww/script/workspaces.sh".executable = true;
-    xdg.configFile."eww/script/workspaces.sh".text = (import ./script/workspaces.nix);
-
-    xdg.configFile."eww/script/init.sh".executable = true;
-    xdg.configFile."eww/script/init.sh".text = (import ./script/init.nix);
+    xdg.configFile."eww/init.sh".executable = true;
+    xdg.configFile."eww/init.sh".text = (import ./init.nix);
 }

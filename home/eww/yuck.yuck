@@ -1,4 +1,3 @@
-;; FUCL FUCK FUCK FUCK FUCK
 (defwidget dock_block [halign]
     (box :orientation "horizontal" :class "dock-block"
          :hexpand false :halign halign :spacing 7 :space-evenly false
@@ -18,17 +17,17 @@
     )
 )
 
-(deflisten listen_switching `tail -F ./listen/workspace-switching | awk '{ print $1 }'`)
-(deflisten listen_active `tail -F ./listen/workspace-active`)
-(deflisten listen_prev `tail -F ./listen/workspace-prev`)
-(deflisten listen_workspaces :initial "[]" `./script/workspaces.sh`)
+(defvar var_switching false)
+(defvar var_active 1)
+(defvar var_prev 1)
+(defvar var_workspaces '[{"id":"1","windows":0}]')
 (defwidget dock_middle []
     (dock_block :halign "center"
         (box :class "dock-widget" :space-evenly false
-            (for workspace in listen_workspaces
+            (for workspace in var_workspaces
                 (box :orientation "vertical" :space-evenly false
                     (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${listen_switching ? (workspace.id == listen_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == listen_prev ? " switching" : ""))) : (workspace.id == listen_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                    (box :class "dock-workspaces ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )
@@ -42,44 +41,44 @@
     )
 )
 
-(deflisten listen_net_vpn `tail -F ./listen/net-vpn`)
-(defpoll poll_net_name :interval "5s" `nmcli -t device wifi list --rescan no | grep '^*' | awk -F ':' '{ print $8 }' | grep -o '^..' | tr '[:upper:]' '[:lower:]'`)
-(deflisten listen_net_check `tail -F ./listen/net-check`)
+(defpoll poll_net_vpn :interval "5s" `protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||'`)
+(defpoll poll_net_name :interval "2s" `nmcli -t device wifi list --rescan no | grep '^*' | awk -F ':' '{ print $8 }' | tr '[:upper:]' '[:lower:]'`)
+(defvar var_net_check "")
 (defwidget dock_net []
     (dock_widget
         (label
-            :text "${listen_net_vpn}${poll_net_name}${listen_net_check}"
+            :text "${poll_net_vpn}${poll_net_name}${var_net_check}"
             :class "dock-net"
         )
     )
 )
 
-(deflisten listen_audio_device `tail -F ./listen/audio-device`)
-(deflisten listen_volume `tail -F ./listen/volume`)
+(defvar var_audio_device "")
+(defvar var_volume "0")
 (defwidget dock_volume []
     (dock_widget
         (label
-            :text "${listen_volume}%${listen_audio_device}"
+            :text "${var_volume}%${var_audio_device}"
             :class "dock-volume"
         )
     )
 )
 
-(deflisten listen_brightness `tail -F ./listen/brightness`)
+(defvar var_brightness "100")
 (defwidget dock_brightness []
     (dock_widget
         (label
-            :text "${listen_brightness}%"
+            :text "${var_brightness}%"
             :class "dock-brightness"
         )
     )
 )
 
-(defpoll poll_battery :interval "5s" `./script/battery.sh`)
+(defvar var_battery "100%")
 (defwidget dock_battery []
     (dock_widget
         (label
-            :text poll_battery
+            :text var_battery
             :class "dock-battery"
         )
     )

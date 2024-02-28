@@ -56,6 +56,7 @@ r ${repos}/
                 ms netshell.nix
                 ns nixshell.nix
                 sb setbright.nix
+                sv setvol.nix
                 ss sshkey.nix
                 vs vpnshell.nix
                 ya yargs.nix
