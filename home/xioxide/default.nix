@@ -98,10 +98,7 @@ r ${repos}/
             dy dye/
                 d default.nix
             ew eww/
-                s script/
-                    i init.nix
-                    b battery.nix
-                    w workspaces.nix
+                i init.nix
                 d default.nix
                 y yuck.yuck
                 yn yuck.nix

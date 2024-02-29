@@ -27,8 +27,8 @@ let
 in
 /* yaml */ ''
 # workspaces.nix
-        ${wsbind { key = "c"; ws = "e-1"; pad = "        "; }}
-        ${wsbind { key = "y"; ws = "e+1"; pad = "        "; }}
+        ${wsbind { key = "c"; ws = "r-1"; pad = "        "; }}
+        ${wsbind { key = "y"; ws = "r+1"; pad = "        "; }}
         ${wsbind { key = "f"; ws = "previous"; pad = "        "; }}
 
         ${mod}-h:

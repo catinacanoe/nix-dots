@@ -33,13 +33,13 @@ in {
     env = WLR_DRM_NO_ATOMIC,1
     '' else ""}
 
-    exec = ${config.xdg.configHome}/eww/init.sh
     exec-once = sleep 1 && swww init
     exec-once = mpd && mpc volume 70
     exec-once = drop init
 
     exec-once = kitty
     exec-once = discord --start-minimized ${if host == "nixbox" then "--enable-features=UseOzonePlatform --ozone-platform=wayland" else ""}
+    exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
@@ -151,8 +151,7 @@ in {
     }#input
 
     gestures {
-        # workspace_swipe_numbered = false
-        # workspace_swipe_use_r = false # see wiki
+        workspace_swipe_use_r = true
         workspace_swipe = true
         workspace_swipe_distance = 700 # basically just sens
         workspace_swipe_min_speed_to_force = 10 # force switch @ speed

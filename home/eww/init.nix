@@ -1,20 +1,11 @@
 /* bash */ ''
-dir=/home/canoe/.config/eww/state
-mkdir -p "$dir"
-[ -f "$dir/current" ] || touch "$dir/current"
-
-oldid="$(cat "$dir/current")"
-[ -n "$oldid" ] && touch "$dir/$oldid" && sleep 0.4
-
-id="$(date +%s)"
-echo "$id" > "$dir/current"
-
+eww kill
+kill $(ps aux | grep 'eww/init.sh' | grep -v $$)
+kill $(pgrep eww)
 eww open dock --restart
 
 function net_check() {
     while true; do
-        [ -f "$dir/$id" ] && return
-
         wget -q --spider http://google.com
 
         if [ $? -eq 0 ]; then
@@ -28,33 +19,29 @@ net_check &
 
 function vol() {
     while true; do
-        [ -f "$dir/$id" ] && return
         setvol
-    sleep 1; done # 5 min
+    sleep 1; done
 }
 vol &
 
 function bright() {
     while true; do
-        [ -f "$dir/$id" ] && return
         setbright
-    sleep 60; done # 5 min
+    sleep 60; done
 }
 bright &
 
 function active() {
-    eww update "var_active=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
-    eww update "var_prev=$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
-    eww update "var_switching=false"
-
     local prev
-    prev="1"
+    prev="$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
+
+    eww update "var_active=$prev"
+    eww update "var_prev=$prev"
+    eww update "var_switching=false"
 
     socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
         while read -r active; do
-            [ -f "$dir/$id" ] && return
-
             if [ "$active" != "$prev" ]; then
                 eww update "var_switching=true" "var_prev=$prev" "var_active=$active"
 
@@ -68,8 +55,6 @@ active &
 
 function battery() {
     while true; do
-        [ -f "$dir/$id" ] && return
-
         percent="$(acpi -b | awk -F ', ' '{ print $2 }')"
         timestamp="$(acpi -b | awk -F ', ' '{ print $3 }' | awk '{ print $1 }' )"
         hour="$(echo "$timestamp" | awk -F ':' '{ print $1 }')"
@@ -108,9 +93,10 @@ function battery() {
 battery &
 
 function workspaces() {
-    socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
-        [ -f "$dir/$id" ] && return
+    local prev
+    prev=""
 
+    socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
         local workspaces
         local start
         local end
@@ -126,12 +112,30 @@ function workspaces() {
             echo "}"
         )"
 
-        eww update "var_workspaces=$(seq "1" "$end" | jq --argjson windows "$workspaces" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})')"
+        final="$(seq "1" "$end" | jq --argjson windows "$workspaces" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})')"
+
+        if [ -z "$prev" ] || [ "$final" != "$prev" ]; then
+            prev="$final"
+            eww update "var_workspaces=$final"
+        fi
     done
 }
 workspaces &
 
-while true; do
-    [ -f "$dir/$id" ] && eww kill && pkill -P $$ && sleep 0.1 && exit
-sleep 0.3; done
+function music() {
+    while true; do
+        stat="$(mpc status)"
+
+        if [ "$(echo "$stat" | wc -l)" == "1" ]; then
+            name="nothing playing"
+            time="0:00/0:00"
+        else
+            name="$(basename "$(echo "$stat" | head -n 1)" | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            time="$(echo "$stat" | sed -n 2p | awk '{ print $3 }')"
+        fi
+
+        eww update "var_current=$name" "var_time=$time"
+    sleep 0.5; done
+}
+music &
 ''

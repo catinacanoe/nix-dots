@@ -16,11 +16,13 @@
 ${builtins.readFile ./yuck.yuck}
 
 (defwidget dock_right []
-    (dock_block :halign "end" :valign "center"
+    (dock_block :halign "end"
         (dock_volume)
-        ${if hostname == "nixpad" then "(dock_brightness)" else ""}
+        ${if hostname == "nixpad" then ''
+        (dock_brightness)
+        (dock_battery)
+        '' else ""}
         (dock_net)
-        ${if hostname == "nixpad" then "(dock_battery)" else ""}
         (dock_time)
     )
 )

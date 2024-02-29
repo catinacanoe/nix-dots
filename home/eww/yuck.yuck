@@ -1,5 +1,5 @@
-(defwidget dock_block [halign]
-    (box :orientation "horizontal" :class "dock-block"
+(defwidget dock_block [halign ?class]
+    (box :orientation "horizontal" :class "dock-block ${class}"
          :hexpand false :halign halign :spacing 7 :space-evenly false
         (children)
     )
@@ -8,12 +8,6 @@
 (defwidget dock_layout []
     (box :orientation "horizontal" :class "dock-layout" :valign "center"
         (dock_left) (dock_middle) (dock_right)
-    )
-)
-
-(defwidget dock_left []
-    (dock_block :halign "start"
-        "music stuff"
     )
 )
 
@@ -27,11 +21,18 @@
             (for workspace in var_workspaces
                 (box :orientation "vertical" :space-evenly false
                     (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                    (box :class "dock-workspaces n${workspace.windows >= 5 ? "5" : workspace.windows} ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )
         )
+    )
+)
+
+(defvar var_mus_color "purple-orange")
+(defwidget dock_left []
+    (dock_block :halign "start" :class "music ${var_mus_color}"
+        (dock_current)
     )
 )
 
@@ -40,6 +41,18 @@
         (children)
     )
 )
+
+(defvar var_current "nothing playing")
+(defvar var_time "0:00/0:00")
+(defwidget dock_current []
+    (dock_widget
+        (label
+            :text "${var_current}"
+            :class "dock-current"
+        )
+    )
+)
+
 
 (defpoll poll_net_vpn :interval "5s" `protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||'`)
 (defpoll poll_net_name :interval "2s" `nmcli -t device wifi list --rescan no | grep '^*' | awk -F ':' '{ print $8 }' | tr '[:upper:]' '[:lower:]'`)
