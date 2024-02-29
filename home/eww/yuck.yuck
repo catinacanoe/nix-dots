@@ -29,10 +29,11 @@
     )
 )
 
-(defvar var_mus_color "purple-orange")
+(defvar var_mus_color "")
 (defwidget dock_left []
     (dock_block :halign "start" :class "music ${var_mus_color}"
-        (dock_current)
+        (dock_mus_current)
+        (dock_mus_progress)
     )
 )
 
@@ -42,17 +43,22 @@
     )
 )
 
-(defvar var_current "nothing playing")
-(defvar var_time "0:00/0:00")
-(defwidget dock_current []
+(defvar var_mus_current "nothing playing")
+(defwidget dock_mus_current []
     (dock_widget
         (label
-            :text "${var_current}"
-            :class "dock-current"
+            :text "${var_mus_current}"
+            :class "dock-mus-current"
         )
     )
 )
 
+(defvar var_mus_progress 0)
+(defwidget dock_mus_progress []
+    (progress :valign "center" :class "dock-mus-progress"
+        :value var_mus_progress
+    )
+)
 
 (defpoll poll_net_vpn :interval "5s" `protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||'`)
 (defpoll poll_net_name :interval "2s" `nmcli -t device wifi list --rescan no | grep '^*' | awk -F ':' '{ print $8 }' | tr '[:upper:]' '[:lower:]'`)

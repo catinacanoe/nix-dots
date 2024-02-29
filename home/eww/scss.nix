@@ -24,6 +24,16 @@ in /* scss */ ''
 .dock-volume { color: ${toString rice.col.red.h}; }
 .dock-net { color: ${toString rice.col.purple.h}; }
 
+.dock-mus-progress, .left {
+    border-radius: 9999px;
+    background: rgba(${rice.col.bg.rgb}, 0.6);
+}
+.left { min-width: 6px; }
+progressbar > trough {
+    min-width: 60px;
+    min-height: 6px;
+}
+
 .dock-workspace-pad {
     background: rgba(0,0,0,0);
     padding-top: 10px;

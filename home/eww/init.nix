@@ -128,13 +128,15 @@ function music() {
 
         if [ "$(echo "$stat" | wc -l)" == "1" ]; then
             name="nothing playing"
-            time="0:00/0:00"
+            progress="0:00/0:00"
+            color=""
         else
-            name="$(basename "$(echo "$stat" | head -n 1)" | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
-            time="$(echo "$stat" | sed -n 2p | awk '{ print $3 }')"
+            name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
+            color="aqua-blue"
         fi
 
-        eww update "var_current=$name" "var_time=$time"
+        eww update "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color"
     sleep 0.5; done
 }
 music &
