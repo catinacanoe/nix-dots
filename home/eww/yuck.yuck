@@ -1,6 +1,6 @@
-(defwidget dock_block [halign ?class]
+(defwidget dock_block [halign ?class ?visible]
     (box :orientation "horizontal" :class "dock-block ${class}"
-         :hexpand false :halign halign :spacing 7 :space-evenly false
+         :hexpand false :halign halign :spacing 7 :space-evenly false :visible {visible?:true}
         (children)
     )
 )
@@ -31,9 +31,12 @@
 
 (defvar var_mus_color "")
 (defwidget dock_left []
-    (dock_block :halign "start" :class "music ${var_mus_color}"
-        (dock_mus_current)
-        (dock_mus_progress)
+    (box :hexpand false :space-evenly false :spacing 7
+        (dock_block :halign "start" :class "music ${var_mus_color}"
+            (dock_mus_current)
+            (dock_mus_progress :visible {var_mus_current != var_mus_na})
+        )
+        (dock_block :halign "start" :class "music" :visible {var_mus_current != var_mus_na && var_mus_next != "*"} (dock_mus_next))
     )
 )
 
@@ -43,20 +46,34 @@
     )
 )
 
+(defvar var_mus_na "nothing playing")
 (defvar var_mus_current "nothing playing")
+(defvar var_mus_indicator "")
 (defwidget dock_mus_current []
     (dock_widget
         (label
-            :text "${var_mus_current}"
+            :text "${var_mus_indicator}${var_mus_current}"
             :class "dock-mus-current"
         )
     )
 )
 
 (defvar var_mus_progress 0)
-(defwidget dock_mus_progress []
-    (progress :valign "center" :class "dock-mus-progress"
+(defwidget dock_mus_progress [visible]
+    (progress
+        :valign "center"
+        :class "dock-mus-progress"
+        :visible visible
         :value var_mus_progress
+    )
+)
+
+(defvar var_mus_next "-")
+(defwidget dock_mus_next []
+    (dock_widget
+        (label
+            :text "${var_mus_next}"
+        )
     )
 )
 

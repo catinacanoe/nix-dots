@@ -1,10 +1,64 @@
 { rice, hostname, ... }: let
-    music-gradient = left: right: /* css */ ''
-        .dock-block.music.${right}-${left},
-        .dock-block.music.${left}-${right} {
-            background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, 0.85), rgba(${rice.col."${right}".h}, 0.85));
+    music-gradient-opacity = "0.85";
+
+    music-single-col = col: /* css */ ''
+        .dock-block.music.${col} {
+            background-color: rgba(${rice.col."${col}".rgb}, ${music-gradient-opacity});
             color: ${rice.col.bg.h};
         }
+    '';
+
+    music-double-gradient = left: right: /* css */ ''
+        .dock-block.music.${left}-${right} {
+            background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".h}, ${music-gradient-opacity}));
+            color: ${rice.col.bg.h};
+        }
+    '';
+    music-double-fill-right = left: ''
+    ${music-double-gradient left "fg"}
+    ${music-double-gradient left "mg"}
+    ${music-double-gradient left "bg"}
+    ${music-double-gradient left "red"}
+    ${music-double-gradient left "orange"}
+    ${music-double-gradient left "yellow"}
+    ${music-double-gradient left "green"}
+    ${music-double-gradient left "aqua"}
+    ${music-double-gradient left "blue"}
+    ${music-double-gradient left "purple"}
+    ${music-double-gradient left "brown"}
+    '';
+
+    music-triple-gradient = left: middle: right: /* css */ ''
+        .dock-block.music.${left}-${middle}-${right} {
+            background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${middle}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".rgb}, ${music-gradient-opacity}));
+            color: ${rice.col.bg.h};
+        }
+    '';
+    music-triple-fill-right = left: middle: ''
+    ${music-triple-gradient left middle "fg"}
+    ${music-triple-gradient left middle "mg"}
+    ${music-triple-gradient left middle "bg"}
+    ${music-triple-gradient left middle "red"}
+    ${music-triple-gradient left middle "orange"}
+    ${music-triple-gradient left middle "yellow"}
+    ${music-triple-gradient left middle "green"}
+    ${music-triple-gradient left middle "aqua"}
+    ${music-triple-gradient left middle "blue"}
+    ${music-triple-gradient left middle "purple"}
+    ${music-triple-gradient left middle "brown"}
+    '';
+    music-triple-fill-middle-right = left: ''
+    ${music-triple-fill-right left "fg"}
+    ${music-triple-fill-right left "mg"}
+    ${music-triple-fill-right left "bg"}
+    ${music-triple-fill-right left "red"}
+    ${music-triple-fill-right left "orange"}
+    ${music-triple-fill-right left "yellow"}
+    ${music-triple-fill-right left "green"}
+    ${music-triple-fill-right left "aqua"}
+    ${music-triple-fill-right left "blue"}
+    ${music-triple-fill-right left "purple"}
+    ${music-triple-fill-right left "brown"}
     '';
 
     bg-grad = left: right: /* css */ ''
@@ -40,26 +94,19 @@ progressbar > trough {
 }
 
 .dock-workspaces {
-    padding-top: 15px;
     border-radius: 9999px;
+    padding-top: 15px;
 
     margin-left: ${toString (4*rice.window.border)}px;
     margin-right: ${toString (4*rice.window.border)}px;
 
-    animation-duration: 0.2s;
+    animation-duration: 0.15s;
     animation-timing-function: ease-out;
 }
 
-.dock-workspaces.n5 ${bg-grad "red" "brown"}
-.dock-workspaces.n4 ${bg-grad "red" "purple"}
-.dock-workspaces.n3 ${bg-grad "blue" "purple"}
-.dock-workspaces.n2 ${bg-grad "blue" "aqua"}
-.dock-workspaces.n1 ${bg-grad "fg" "bg"}
-.dock-workspaces.n0 ${bg-grad "mg" "mg"}
-
 @keyframes open {
-    from { padding-right: 15px; }
-    to   { padding-right: 40px; }
+    from { padding-right: 16px; } /* adding one pixel seems to stablize the animation idk */
+    to   { padding-right: 41px; }
 }
 
 @keyframes close {
@@ -67,26 +114,21 @@ progressbar > trough {
     to   { padding-right: 15px; }
 }
 
-@keyframes close-empty {
-    from { padding-right: 34px; }
-    to   { padding-right: 9px; }
-}
-
 .dock-workspaces.active.switching { animation-name: open; }
-.dock-workspaces.occupied.switching { animation-name: close; }
-.dock-workspaces.empty.switching { animation-name: close-empty; }
+.dock-workspaces.occupied.switching, .dock-workspaces.empty.switching { animation-name: close; }
 
-.dock-workspaces.active { padding-right: 40px; }
-.dock-workspaces.occupied { padding-right: 15px; }
-.dock-workspaces.empty.n0 {
-    background: rgba(0,0,0,0);
+.dock-workspaces.active {
+    padding-right: 40px;
+}
+.dock-workspaces.occupied {
+    padding-right: 15px;
+}
+.dock-workspaces.empty {
+    padding-right: 15px;
+    padding-top: 9px;
 
-    border-style: solid;
-    border-width: 3px;
-    border-color: ${rice.col.mg.h};
-
-    padding-right: 9px;
-    padding-top: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 .dock-block {
@@ -101,80 +143,46 @@ progressbar > trough {
     margin-right: ${toString rice.window.gaps-in}px;
 }
 
-${music-gradient "mg" "mg"}
-${music-gradient "mg" "fg"}
-${music-gradient "mg" "bg"}
-${music-gradient "mg" "red"}
-${music-gradient "mg" "orange"}
-${music-gradient "mg" "yellow"}
-${music-gradient "mg" "green"}
-${music-gradient "mg" "aqua"}
-${music-gradient "mg" "blue"}
-${music-gradient "mg" "purple"}
-${music-gradient "mg" "brown"}
+.dock-workspaces.n5 ${bg-grad "red" "brown"}
+.dock-workspaces.n4 ${bg-grad "red" "purple"}
+.dock-workspaces.n3 ${bg-grad "blue" "purple"}
+.dock-workspaces.n2 ${bg-grad "blue" "aqua"}
+.dock-workspaces.n1 ${bg-grad "fg" "t2"}
+.dock-workspaces.n0 ${bg-grad "mg" "t2"}
 
-${music-gradient "fg" "fg"}
-${music-gradient "fg" "bg"}
-${music-gradient "fg" "red"}
-${music-gradient "fg" "orange"}
-${music-gradient "fg" "yellow"}
-${music-gradient "fg" "green"}
-${music-gradient "fg" "aqua"}
-${music-gradient "fg" "blue"}
-${music-gradient "fg" "purple"}
-${music-gradient "fg" "brown"}
+${music-single-col "fg"}
+${music-single-col "mg"}
+${music-single-col "bg"}
+${music-single-col "red"}
+${music-single-col "orange"}
+${music-single-col "yellow"}
+${music-single-col "green"}
+${music-single-col "aqua"}
+${music-single-col "blue"}
+${music-single-col "purple"}
+${music-single-col "brown"}
 
-${music-gradient "bg" "bg"}
-${music-gradient "bg" "red"}
-${music-gradient "bg" "orange"}
-${music-gradient "bg" "yellow"}
-${music-gradient "bg" "green"}
-${music-gradient "bg" "aqua"}
-${music-gradient "bg" "blue"}
-${music-gradient "bg" "purple"}
-${music-gradient "bg" "brown"}
+${music-double-fill-right "fg"}
+${music-double-fill-right "mg"}
+${music-double-fill-right "bg"}
+${music-double-fill-right "red"}
+${music-double-fill-right "orange"}
+${music-double-fill-right "yellow"}
+${music-double-fill-right "green"}
+${music-double-fill-right "aqua"}
+${music-double-fill-right "blue"}
+${music-double-fill-right "purple"}
+${music-double-fill-right "brown"}
 
-${music-gradient "red" "red"}
-${music-gradient "red" "orange"}
-${music-gradient "red" "yellow"}
-${music-gradient "red" "green"}
-${music-gradient "red" "aqua"}
-${music-gradient "red" "blue"}
-${music-gradient "red" "purple"}
-${music-gradient "red" "brown"}
-
-${music-gradient "orange" "orange"}
-${music-gradient "orange" "yellow"}
-${music-gradient "orange" "green"}
-${music-gradient "orange" "aqua"}
-${music-gradient "orange" "blue"}
-${music-gradient "orange" "purple"}
-${music-gradient "orange" "brown"}
-
-${music-gradient "yellow" "yellow"}
-${music-gradient "yellow" "green"}
-${music-gradient "yellow" "aqua"}
-${music-gradient "yellow" "blue"}
-${music-gradient "yellow" "purple"}
-${music-gradient "yellow" "brown"}
-
-${music-gradient "green" "green"}
-${music-gradient "green" "aqua"}
-${music-gradient "green" "blue"}
-${music-gradient "green" "purple"}
-${music-gradient "green" "brown"}
-
-${music-gradient "aqua" "aqua"}
-${music-gradient "aqua" "blue"}
-${music-gradient "aqua" "purple"}
-${music-gradient "aqua" "brown"}
-
-${music-gradient "blue" "blue"}
-${music-gradient "blue" "purple"}
-${music-gradient "blue" "brown"}
-
-${music-gradient "purple" "purple"}
-${music-gradient "purple" "brown"}
-
-${music-gradient "brown" "brown"}
+${music-triple-fill-middle-right "fg"}
+${music-triple-fill-middle-right "mg"}
+${music-triple-fill-middle-right "bg"}
+${music-triple-fill-middle-right "red"}
+${music-triple-fill-middle-right "orange"}
+${music-triple-fill-middle-right "yellow"}
+${music-triple-fill-middle-right "green"}
+${music-triple-fill-middle-right "aqua"}
+${music-triple-fill-middle-right "blue"}
+${music-triple-fill-middle-right "purple"}
+${music-triple-fill-middle-right "brown"}
 ''

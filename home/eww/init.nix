@@ -47,7 +47,7 @@ function active() {
 
                 prev="$active"
 
-                sleep 0.2 && eww update "var_switching=false" &
+                sleep 0.15 && eww update "var_switching=false" &
             fi
         done
 }
@@ -123,20 +123,40 @@ function workspaces() {
 workspaces &
 
 function music() {
+    local stat
+    local na
+    local name
+    local next
+    local progress
+    local indicator
+    local color
+
     while true; do
         stat="$(mpc status)"
 
-        if [ "$(echo "$stat" | wc -l)" == "1" ]; then
-            name="nothing playing"
-            progress="0:00/0:00"
-            color=""
-        else
+        na="nothing playing"
+
+        name="$na"
+        next=""
+        indicator=""
+        color=""
+        progress="0"
+
+        if [ "$(echo "$stat" | wc -l)" != "1" ]; then
             name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            next="$(mpc queue | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            [ "$name" == "$next" ] && next="*"
+
             progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
-            color="aqua-blue"
+
+            color="purple-orange-yellow"
+
+            echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
+            echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
+            echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
         fi
 
-        eww update "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color"
+        eww update "var_mus_na=$na" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
 }
 music &

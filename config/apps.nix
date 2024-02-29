@@ -111,6 +111,7 @@
         wev
         wirelesstools
         wget
+        playerctl
         wl-clipboard
         wtype
         xdg-utils
