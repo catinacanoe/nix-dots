@@ -173,7 +173,11 @@ function music() {
             )"
             
             if [ -n "$name" ]; then
-                echo "$name" | grep -q " - " || name="$(playerctl metadata artist | sed 's| - Topic$||') - $name"
+                if echo "$name" | grep -q " - "; then true
+                elif echo "$name" | grep -q " — "; then true
+                else
+                    name="$(playerctl metadata artist | sed 's| - Topic$||') - $name"
+                fi
 
                 color="red-purple-orange"
                 progress="0"
