@@ -1,4 +1,4 @@
-/* bash */ ''
+{ hostname, ... }: /* bash */ ''
 eww kill
 kill $(ps aux | grep 'eww/init.sh' | grep -v $$)
 kill $(pgrep eww)
@@ -165,12 +165,7 @@ function music() {
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
             echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
         elif [ "$pctl" == "Playing" ]; then
-            name="$(playerctl metadata title | sed \
-            -e 's|\[.*\]\s*$||' \
-            -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
-            -e 's|\(....................................................[^$]\).*|\1 ...|' \
-            -e 's|\s*$||'
-            )"
+            name="$(playerctl metadata title)"
             
             if [ -n "$name" ]; then
                 if echo "$name" | grep -q " - "; then true
@@ -178,6 +173,13 @@ function music() {
                 else
                     name="$(playerctl metadata artist | sed 's| - Topic$||') - $name"
                 fi
+
+                name="$(echo "$name" | sed \
+                -e 's|\[.*\]\s*$||' \
+                -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
+                -e 's|\s*$||' \
+                -e 's|\(.\{${if hostname == "nixbox" then "150" else "75"}\}[^$]\).*|\1 ...|'
+                )"
 
                 color="red-purple-orange"
                 progress="0"

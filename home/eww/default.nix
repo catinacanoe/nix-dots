@@ -9,5 +9,5 @@ in {
     xdg.configFile."eww/eww.scss".text = (import ./scss.nix args);
 
     xdg.configFile."eww/init.sh".executable = true;
-    xdg.configFile."eww/init.sh".text = (import ./init.nix);
+    xdg.configFile."eww/init.sh".text = (import ./init.nix args);
 }

@@ -6,8 +6,10 @@
 )
 
 (defwidget dock_layout []
-    (box :orientation "horizontal" :class "dock-layout" :valign "center"
-        (dock_left) (dock_middle) (dock_right)
+    (centerbox :orientation "horizontal" :class "dock-layout" :valign "center" :space-evenly false
+        (dock_left)
+        (dock_middle)
+        (dock_right)
     )
 )
 
@@ -32,7 +34,7 @@
 (defvar var_mus_color "")
 (defvar var_mus_type "mpd")
 (defwidget dock_left []
-    (box :hexpand false :space-evenly false :spacing 7
+    (box :hexpand false :space-evenly false :spacing 7 :halign "start"
         (dock_block :halign "start" :class "music ${var_mus_color}"
             (dock_mus_current)
             (dock_mus_progress :visible {var_mus_current != var_mus_na && var_mus_type == "mpd"})
