@@ -13,9 +13,17 @@ function net_check() {
         else
             eww update "var_net_check= -"
         fi
-    sleep 3; done
+    sleep 1; done
 }
 net_check &
+
+function net_vpn() {
+    while true; do
+        vpn="$(protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||')"
+        eww update "var_net_vpn=$vpn"
+    sleep 3; done
+}
+net_vpn &
 
 function vol() {
     while true; do
@@ -133,6 +141,7 @@ function music() {
 
     while true; do
         stat="$(mpc status)"
+        pctl="$(playerctl status)"
 
         na="nothing playing"
 
@@ -141,11 +150,12 @@ function music() {
         indicator=""
         color=""
         progress="0"
+        type="mpd"
 
         if [ "$(echo "$stat" | wc -l)" != "1" ]; then
             name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
             next="$(mpc queue | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
-            [ "$name" == "$next" ] && next="*"
+            [ "$name" == "$next" ] && next=""
 
             progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
 
@@ -154,9 +164,24 @@ function music() {
             echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
             echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
+        elif [ "$pctl" == "Playing" ]; then
+            name="$(playerctl metadata title | sed \
+            -e 's|\[.*\]\s*$||' \
+            -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
+            -e 's|\(....................................................[^$]\).*|\1 ...|' \
+            -e 's|\s*$||'
+            )"
+            
+            if [ -n "$name" ]; then
+                echo "$name" | grep -q " - " || name="$(playerctl metadata artist | sed 's| - Topic$||') - $name"
+
+                color="red-purple-orange"
+                progress="0"
+                type="playerctl"
+            fi
         fi
 
-        eww update "var_mus_na=$na" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
+        eww update "var_mus_type=$type" "var_mus_na=$na" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
 }
 music &

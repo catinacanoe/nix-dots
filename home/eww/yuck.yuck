@@ -30,13 +30,14 @@
 )
 
 (defvar var_mus_color "")
+(defvar var_mus_type "mpd")
 (defwidget dock_left []
     (box :hexpand false :space-evenly false :spacing 7
         (dock_block :halign "start" :class "music ${var_mus_color}"
             (dock_mus_current)
-            (dock_mus_progress :visible {var_mus_current != var_mus_na})
+            (dock_mus_progress :visible {var_mus_current != var_mus_na && var_mus_type == "mpd"})
         )
-        (dock_block :halign "start" :class "music" :visible {var_mus_current != var_mus_na && var_mus_next != "*"} (dock_mus_next))
+        (dock_block :halign "start" :class "music" :visible {var_mus_current != var_mus_na && var_mus_next != ""} (dock_mus_next))
     )
 )
 
@@ -77,13 +78,13 @@
     )
 )
 
-(defpoll poll_net_vpn :interval "5s" `protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||'`)
-(defpoll poll_net_name :interval "2s" `nmcli -t device wifi list --rescan no | grep '^*' | awk -F ':' '{ print $8 }' | tr '[:upper:]' '[:lower:]'`)
+(defvar var_net_vpn "")
+(defpoll poll_net_name :interval "2s" `nmcli -t connection show --active | grep -v 'loopback' | head -n 1 | awk -F : '{ print $1 }' | tr '[:upper:]' '[:lower:]'`)
 (defvar var_net_check "")
 (defwidget dock_net []
     (dock_widget
         (label
-            :text "${poll_net_vpn}${poll_net_name}${var_net_check}"
+            :text "${var_net_vpn}${poll_net_name == "" ? "no wifi" : poll_net_name}${var_net_check}"
             :class "dock-net"
         )
     )

@@ -4,14 +4,18 @@
     music-single-col = col: /* css */ ''
         .dock-block.music.${col} {
             background-color: rgba(${rice.col."${col}".rgb}, ${music-gradient-opacity});
-            color: ${rice.col.bg.h};
+            ${ if col == "bg"
+            then "color: ${rice.col.fg.h};"
+            else "color: ${rice.col.bg.h};" }
         }
     '';
 
     music-double-gradient = left: right: /* css */ ''
         .dock-block.music.${left}-${right} {
             background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".h}, ${music-gradient-opacity}));
-            color: ${rice.col.bg.h};
+            ${ if left=="bg" || right=="bg"
+            then "color: ${rice.col.fg.h};"
+            else "color: ${rice.col.bg.h};" }
         }
     '';
     music-double-fill-right = left: ''
@@ -31,7 +35,9 @@
     music-triple-gradient = left: middle: right: /* css */ ''
         .dock-block.music.${left}-${middle}-${right} {
             background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${middle}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".rgb}, ${music-gradient-opacity}));
-            color: ${rice.col.bg.h};
+            ${ if left=="bg" || middle=="bg" || right=="bg"
+            then "color: ${rice.col.fg.h};"
+            else "color: ${rice.col.bg.h};" }
         }
     '';
     music-triple-fill-right = left: middle: ''
