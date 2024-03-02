@@ -141,12 +141,10 @@ function music() {
         stat="$(mpc status)"
         pctl="$(playerctl status)"
 
-        na="nothing playing"
-
-        name="$na"
+        name=""
         next=""
         indicator=""
-        color=""
+        color="red-purple-orange"
         progress="0"
         type="mpd"
 
@@ -168,7 +166,6 @@ function music() {
                 -e 's|\s*$||'
                 )"
 
-                color="red-purple-orange"
                 progress="0"
                 type="playerctl"
             fi
@@ -188,7 +185,7 @@ function music() {
 
         name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "60"}\}[^$]\).*|\1 ...|')"
 
-        eww update "var_mus_type=$type" "var_mus_na=$na" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
+        eww update "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
 }
 music &

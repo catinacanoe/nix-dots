@@ -36,12 +36,12 @@
 (defwidget dock_left []
     (box :hexpand false :space-evenly false :spacing 7 :halign "start"
         (dock_block :halign "end" :class "music ${var_mus_color}" (dock_volume))
-        (dock_block :halign "start" :class "music ${var_mus_color}" :spacing 10 :visible {var_mus_current != var_mus_na}
+        (dock_block :halign "start" :class "music ${var_mus_color}" :spacing 10 :visible {var_mus_current != ""}
             (dock_mus_current)
             (dock_mus_progress :visible {var_mus_type == "mpd"})
         )
-        (dock_block :halign "start" :class "music ${var_mus_color}" :visible {var_mus_current != var_mus_na} (dock_mus_cava))
-        (dock_block :halign "start" :class "music" :visible {var_mus_current != var_mus_na && var_mus_next != ""} (dock_mus_next))
+        (dock_block :halign "start" :class "music ${var_mus_color}" :visible {var_mus_current != ""} (dock_mus_cava))
+        (dock_block :halign "start" :class "music" :visible {var_mus_current != "" && var_mus_next != ""} (dock_mus_next))
     )
 )
 
@@ -59,8 +59,7 @@
     )
 )
 
-(defvar var_mus_na "nothing playing")
-(defvar var_mus_current "nothing playing")
+(defvar var_mus_current "")
 (defvar var_mus_indicator "")
 (defwidget dock_mus_current []
     (dock_widget
