@@ -1,6 +1,6 @@
 { hostname, ... }: /* bash */ ''
 eww kill
-kill $(ps aux | grep 'eww/init.sh' | grep -v $$)
+kill $(ps aux | grep 'eww/init.sh' | awk '{ print $2 }' | grep -v $$)
 kill $(pgrep eww)
 eww open dock --restart
 
@@ -91,8 +91,7 @@ function battery() {
         )"
 
         if [ "$direction" == "Not charging" ] || [ "$direction" == "Full" ]; then
-            [ "$percent" == "99" ] && percent=100
-            eww update "var_battery=$percent"
+            eww update "var_battery="
         else
             eww update "var_battery=$percent ($timeinfo)"
         fi
@@ -106,7 +105,6 @@ function workspaces() {
 
     socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
         local workspaces
-        local start
         local end
 
         workspaces=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries' | grep -v ' *"-' | sed '/{\|}/d' | sort)
@@ -152,19 +150,7 @@ function music() {
         progress="0"
         type="mpd"
 
-        if [ "$(echo "$stat" | wc -l)" != "1" ]; then
-            name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
-            next="$(mpc queue | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
-            [ "$name" == "$next" ] && next=""
-
-            progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
-
-            color="purple-orange-yellow"
-
-            echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
-            echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
-            echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
-        elif [ "$pctl" == "Playing" ]; then
+        if [ "$pctl" == "Playing" ] && echo "$stat" | sed -n 2p | grep -q '[paused]'; then
             name="$(playerctl metadata title)"
             
             if [ -n "$name" ]; then
@@ -177,15 +163,30 @@ function music() {
                 name="$(echo "$name" | sed \
                 -e 's|\[.*\]\s*$||' \
                 -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
-                -e 's|\s*$||' \
-                -e 's|\(.\{${if hostname == "nixbox" then "150" else "60"}\}[^$]\).*|\1 ...|'
+                -e 's|\s*(.*lyric.*)\s*||i' \
+                -e 's|\s*(.*video.*)\s*||i' \
+                -e 's|\s*$||'
                 )"
 
                 color="red-purple-orange"
                 progress="0"
                 type="playerctl"
             fi
+        elif [ "$(echo "$stat" | wc -l)" != "1" ]; then
+            name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            next="$(mpc queue | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            [ "$name" == "$next" ] && next=""
+
+            progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
+
+            color="purple-orange-yellow"
+
+            echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
+            echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
+            echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
         fi
+
+        name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "60"}\}[^$]\).*|\1 ...|')"
 
         eww update "var_mus_type=$type" "var_mus_na=$na" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
@@ -193,7 +194,37 @@ function music() {
 music &
 
 function visualizer() {
-${builtins.readFile ./cava.bash}
+    ${builtins.readFile ./cava.bash}
+
+    # write cava config
+    local config_file="/tmp/eww_cava_config"
+    echo "
+    [general]
+    autosens=1
+    bars=${if hostname=="nixbox" then "24" else "12"}
+    framerate=30
+    higher_cutoff_freq=10000
+    lower_cutoff_freq=35
+
+    [output]
+    channels=mono
+    method=raw
+    raw_target=$pipe
+    data_format=ascii
+        ascii_max_range=$(echo "$bar" | wc -m | sed 's|$| - 2|' | bc)
+    mono_option=average
+    orientation=bottom
+    " > $config_file
+
+    # run cava in the background
+    kill "$(ps aux | grep "cava -p $config_file" | awk '{ print $2 }')"
+    sleep 0.5
+    cava -p "$config_file" &
+
+    # reading data from fifo
+    while read -r cmd; do
+        eww update "var_cava=$(echo "$cmd" | sed "$dict")"
+    done < $pipe
 }
 visualizer &
 ''

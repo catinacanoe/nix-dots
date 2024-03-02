@@ -13,17 +13,7 @@
     (dock_layout)
 )
 
-${builtins.readFile ./yuck.yuck}
+(defvar var_hostname "${hostname}")
 
-(defwidget dock_right []
-    (dock_block :halign "end"
-        (dock_volume)
-        ${if hostname == "nixpad" then ''
-        (dock_brightness)
-        (dock_battery)
-        '' else ""}
-        (dock_net)
-        (dock_time)
-    )
-)
+${builtins.readFile ./yuck.yuck}
 ''

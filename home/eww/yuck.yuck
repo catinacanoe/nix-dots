@@ -6,7 +6,7 @@
 )
 
 (defwidget dock_layout []
-    (centerbox :orientation "horizontal" :class "dock-layout" :valign "center" :space-evenly false
+    (centerbox :orientation "horizontal" :class "dock-layout" :valign "center"
         (dock_left)
         (dock_middle)
         (dock_right)
@@ -35,6 +35,7 @@
 (defvar var_mus_type "mpd")
 (defwidget dock_left []
     (box :hexpand false :space-evenly false :spacing 7 :halign "start"
+        (dock_block :halign "end" :class "music ${var_mus_color}"  :visible {var_mus_current != var_mus_na} (dock_volume))
         (dock_block :halign "start" :class "music ${var_mus_color}" :spacing 10
             (dock_mus_current)
             (dock_mus_progress :visible {var_mus_current != var_mus_na && var_mus_type == "mpd"})
@@ -44,8 +45,16 @@
     )
 )
 
-(defwidget dock_widget []
-    (box :class "dock-widget" :valign "center"
+(defwidget dock_right []
+    (box :hexpand false :space-evenly false :spacing 7 :halign "end"
+        (dock_block :halign "end" :class "yellow-orange-red" :visible {var_hostname == "nixpad"} (dock_brightness) (dock_battery :visible {var_battery != ""}))
+        (dock_block :halign "end" :class "blue-purple-red" (dock_net))
+        (dock_block :halign "end" :class "blue-aqua-green" (dock_time))
+    )
+)
+
+(defwidget dock_widget [?visible]
+    (box :class "dock-widget" :valign "center" :visible {visible?:true}
         (children)
     )
 )
@@ -127,8 +136,8 @@
 )
 
 (defvar var_battery "100%")
-(defwidget dock_battery []
-    (dock_widget
+(defwidget dock_battery [visible]
+    (dock_widget :visible visible
         (label
             :text var_battery
             :class "dock-battery"

@@ -78,12 +78,6 @@ in /* scss */ ''
     background: rgba(0,0,0,0);
 }
 
-.dock-time { color: ${toString rice.col.green.h}; }
-.dock-battery { color: ${toString rice.col.blue.h}; }
-.dock-brightness { color: ${toString rice.col.yellow.h}; }
-.dock-volume { color: ${toString rice.col.red.h}; }
-.dock-net { color: ${toString rice.col.purple.h}; }
-
 .dock-mus-progress, .left {
     border-radius: 9999px;
     background: rgba(${rice.col.bg.rgb}, 0.6);
@@ -145,8 +139,8 @@ progressbar > trough {
 }
 
 .dock-widget {
-    margin-left: ${toString rice.window.gaps-in}px;
-    margin-right: ${toString rice.window.gaps-in}px;
+    margin-left: ${toString (rice.window.gaps-in / 3)}px;
+    margin-right: ${toString (rice.window.gaps-in / 3)}px;
 }
 
 .dock-workspaces.n5 ${bg-grad "red" "brown"}
