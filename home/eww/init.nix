@@ -178,7 +178,7 @@ function music() {
                 -e 's|\[.*\]\s*$||' \
                 -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
                 -e 's|\s*$||' \
-                -e 's|\(.\{${if hostname == "nixbox" then "150" else "75"}\}[^$]\).*|\1 ...|'
+                -e 's|\(.\{${if hostname == "nixbox" then "150" else "60"}\}[^$]\).*|\1 ...|'
                 )"
 
                 color="red-purple-orange"
@@ -191,4 +191,9 @@ function music() {
     sleep 0.5; done
 }
 music &
+
+function visualizer() {
+${builtins.readFile ./cava.bash}
+}
+visualizer &
 ''

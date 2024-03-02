@@ -2,7 +2,7 @@
     music-gradient-opacity = "0.85";
 
     music-single-col = col: /* css */ ''
-        .dock-block.music.${col} {
+        .${col} {
             background-color: rgba(${rice.col."${col}".rgb}, ${music-gradient-opacity});
             ${ if col == "bg"
             then "color: ${rice.col.fg.h};"
@@ -11,7 +11,7 @@
     '';
 
     music-double-gradient = left: right: /* css */ ''
-        .dock-block.music.${left}-${right} {
+        .${left}-${right} {
             background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".h}, ${music-gradient-opacity}));
             ${ if left=="bg" || right=="bg"
             then "color: ${rice.col.fg.h};"
@@ -33,7 +33,7 @@
     '';
 
     music-triple-gradient = left: middle: right: /* css */ ''
-        .dock-block.music.${left}-${middle}-${right} {
+        .${left}-${middle}-${right} {
             background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${middle}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".rgb}, ${music-gradient-opacity}));
             ${ if left=="bg" || middle=="bg" || right=="bg"
             then "color: ${rice.col.fg.h};"

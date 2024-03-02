@@ -1,6 +1,6 @@
-(defwidget dock_block [halign ?class ?visible]
+(defwidget dock_block [halign ?class ?visible ?spacing]
     (box :orientation "horizontal" :class "dock-block ${class}"
-         :hexpand false :halign halign :spacing 7 :space-evenly false :visible {visible?:true}
+         :hexpand false :halign halign :spacing {spacing?:7} :space-evenly false :visible {visible?:true}
         (children)
     )
 )
@@ -35,10 +35,11 @@
 (defvar var_mus_type "mpd")
 (defwidget dock_left []
     (box :hexpand false :space-evenly false :spacing 7 :halign "start"
-        (dock_block :halign "start" :class "music ${var_mus_color}"
+        (dock_block :halign "start" :class "music ${var_mus_color}" :spacing 10
             (dock_mus_current)
             (dock_mus_progress :visible {var_mus_current != var_mus_na && var_mus_type == "mpd"})
         )
+        (dock_block :halign "start" :class "music ${var_mus_color}" :visible {var_mus_current != var_mus_na} (dock_mus_cava))
         (dock_block :halign "start" :class "music" :visible {var_mus_current != var_mus_na && var_mus_next != ""} (dock_mus_next))
     )
 )
@@ -70,6 +71,18 @@
         :value var_mus_progress
     )
 )
+
+(defvar var_cava "")
+(defwidget dock_mus_cava []
+    (dock_widget
+        (label
+            :valign "center"
+            :class "dock-mus-cava"
+            :text var_cava
+        )
+    )
+)
+
 
 (defvar var_mus_next "-")
 (defwidget dock_mus_next []

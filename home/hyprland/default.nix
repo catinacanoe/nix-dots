@@ -33,13 +33,13 @@ in {
     env = WLR_DRM_NO_ATOMIC,1
     '' else ""}
 
-    exec-once = sleep 1 && swww init
     exec-once = mpd && mpc volume 70 && mpc repeat on && mpc shuffle on && mpc single off
     exec-once = drop init
 
     exec-once = kitty
     exec-once = discord --start-minimized ${if host == "nixbox" then "--enable-features=UseOzonePlatform --ozone-platform=wayland" else ""}
     exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
+    exec = sleep 1 && swww init
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
