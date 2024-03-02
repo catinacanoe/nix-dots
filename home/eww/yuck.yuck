@@ -47,7 +47,9 @@
     (box :hexpand false :space-evenly false :spacing 7 :halign "end"
         (dock_block :class "yellow-orange-red" :visible {var_hostname == "nixpad"}
             (dock_brightness)
+            (box :width 8 :visible {var_battery != ""})
             (label :visible {var_battery != ""} :text "~")
+            (box :width 8 :visible {var_battery != ""})
             (dock_battery :visible {var_battery != ""})
         )
         (dock_block :class "blue-purple-red" (dock_net))

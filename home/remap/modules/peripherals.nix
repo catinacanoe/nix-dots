@@ -3,7 +3,7 @@ let
     launch = (import ../fn/launch.nix);
 
     vol-def      = "3%";
-    bright-def   = "5%";
+    bright-def   = "3%";
     vol-small    = "1%";
     bright-small = "1%";
 
