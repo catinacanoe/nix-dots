@@ -143,13 +143,6 @@ progressbar > trough {
     margin-right: ${toString (rice.window.gaps-in / 3)}px;
 }
 
-.dock-workspaces.n5 ${bg-grad "red" "brown"}
-.dock-workspaces.n4 ${bg-grad "red" "purple"}
-.dock-workspaces.n3 ${bg-grad "blue" "purple"}
-.dock-workspaces.n2 ${bg-grad "blue" "aqua"}
-.dock-workspaces.n1 ${bg-grad "fg" "t2"}
-.dock-workspaces.n0 ${bg-grad "mg" "t2"}
-
 ${music-single-col "fg"}
 ${music-single-col "mg"}
 ${music-single-col "bg"}
