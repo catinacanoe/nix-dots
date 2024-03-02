@@ -148,7 +148,7 @@ function music() {
         progress="0"
         type="mpd"
 
-        if [ "$pctl" == "Playing" ] && echo "$stat" | sed -n 2p | grep -q '[paused]'; then
+        if [ "$pctl" == "Playing" ] && echo "$stat" | sed -n 2p | grep -q '\[paused\]'; then
             name="$(playerctl metadata title)"
             
             if [ -n "$name" ]; then
