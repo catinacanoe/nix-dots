@@ -148,7 +148,7 @@ function music() {
         progress="0"
         type="mpd"
 
-        if [ "$pctl" == "Playing" ] && echo "$stat" | sed -n 2p | grep -q '\[paused\]'; then
+        if [ "$pctl" == "Playing" ] && [ -z "$(echo "$stat" | sed -n 2p | grep -v '\[playing\]')" ]; then
             name="$(playerctl metadata title)"
             
             if [ -n "$name" ]; then
@@ -183,7 +183,7 @@ function music() {
             echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
         fi
 
-        name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "60"}\}[^$]\).*|\1 ...|')"
+        name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "55"}\}[^$]\).*|\1 ...|')"
 
         eww update "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
@@ -198,7 +198,7 @@ function visualizer() {
     echo "
     [general]
     autosens=1
-    bars=${if hostname=="nixbox" then "24" else "12"}
+    bars=${if hostname=="nixbox" then "24" else "20"}
     framerate=30
     higher_cutoff_freq=10000
     lower_cutoff_freq=35
