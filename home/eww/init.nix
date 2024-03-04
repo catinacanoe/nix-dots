@@ -149,7 +149,7 @@ function music() {
         progress="0"
         type="mpd"
 
-        if [ "$pctl" == "Playing" ] && [ -z "$(echo "$stat" | sed -n 2p | grep -v '\[playing\]')" ]; then
+        if [ "$pctl" == "Playing" ] && [ -z "$(echo "$stat" | sed -n 2p | grep '\[playing\]')" ]; then
             name="$(playerctl metadata title)"
             
             if [ -n "$name" ]; then
@@ -180,8 +180,8 @@ function music() {
 
             color="purple-orange-yellow"
 
-            echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
+            echo "$stat" | tail -n 1 | grep -q 'random: on' && indicator+="~ "
             echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
 
             echo "$stat" | sed -n 2p | grep -q '\[playing\]' && playing="true"

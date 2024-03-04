@@ -1,5 +1,5 @@
 { rice, hostname, ... }: let
-    music-gradient-opacity = "0.85";
+    music-gradient-opacity = "1";
 
     music-single-col = col: /* css */ ''
         .${col} {

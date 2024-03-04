@@ -111,6 +111,7 @@ button,
 .problem_number.selected { background: rgba(var(--rrgb-bg), 0.6) !important; color: var(--rcol-fg) !important; }
 .problem_number.incorrect { background: rgba(var(--rrgb-red), 0.3) !important; color: var(--rcol-red) !important; }
 .problem_number.correct { background: rgba(var(--rrgb-green), 0.3) !important; color: var(--rcol-green) !important; }
+.problem_number.changed_by_teacher { background: rgba(var(--rrgb-blue), 0.3) !important; color: var(--rcol-blue) !important; }
 .problem_number.half_credit { background: rgba(var(--rrgb-yellow), 0.3) !important; color: var(--rcol-yellow) !important; }
 
 .problem_number:hover,
