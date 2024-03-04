@@ -49,6 +49,7 @@
         (dock_block :visible {var_hostname == "nixpad"} (dock_brightness))
         (dock_block :visible {var_hostname == "nixpad"} (dock_battery :visible {var_battery != ""}))
         (dock_block :visible {poll_net_name != ""} (dock_net))
+        (dock_block :class var_mus_color (dock_date))
         (dock_block :class var_mus_color (dock_time))
     )
 )
@@ -143,12 +144,22 @@
     )
 )
 
-(defpoll poll_time :interval "1s" `date +'%d.%m.%Y ~ %H:%M'`)
+(defpoll poll_time :interval "1s" `date +'%H:%M'`)
 (defwidget dock_time []
     (dock_widget
         (label
             :text poll_time
             :class "dock-time"
+        )
+    )
+)
+
+(defpoll poll_date :interval "1s" `date +'%d.%m.%Y'`)
+(defwidget dock_date []
+    (dock_widget
+        (label
+            :text poll_date
+            :class "dock-date"
         )
     )
 )
