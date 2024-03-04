@@ -47,7 +47,7 @@
 (defwidget dock_right []
     (box :hexpand false :space-evenly false :spacing 7 :halign "end"
         (dock_block :visible {var_hostname == "nixpad"} (dock_brightness))
-        (dock_block :visible {var_hostname == "nixpad"} (dock_battery :visible {var_battery != ""}))
+        (dock_block :visible {var_hostname == "nixpad" && var_battery != ""} (dock_battery))
         (dock_block :visible {poll_net_name != ""} (dock_net))
         (dock_block :class var_mus_color (dock_date))
         (dock_block :class var_mus_color (dock_time))
@@ -135,8 +135,8 @@
 )
 
 (defvar var_battery "100%")
-(defwidget dock_battery [visible]
-    (dock_widget :visible visible
+(defwidget dock_battery []
+    (dock_widget
         (label
             :text var_battery
             :class "dock-battery"
