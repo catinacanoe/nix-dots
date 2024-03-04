@@ -143,6 +143,7 @@ function music() {
 
         name=""
         next=""
+        playing="false"
         indicator=""
         color="red-purple-orange"
         progress="0"
@@ -168,6 +169,7 @@ function music() {
 
                 progress="0"
                 type="playerctl"
+                playing="true"
             fi
         elif [ "$(echo "$stat" | wc -l)" != "1" ]; then
             name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
@@ -181,11 +183,13 @@ function music() {
             echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
             echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
+
+            echo "$stat" | sed -n 2p | grep -q '\[playing\]' && playing="true"
         fi
 
         name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "55"}\}[^$]\).*|\1 ...|')"
 
-        eww update "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
+        eww update "var_mus_playing=$playing" "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
 }
 music &

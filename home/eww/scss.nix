@@ -66,10 +66,6 @@
     ${music-triple-fill-right left "purple"}
     ${music-triple-fill-right left "brown"}
     '';
-
-    bg-grad = left: right: /* css */ ''
-        { background-image: linear-gradient(to bottom right, ${rice.col."${left}".h}, ${rice.col."${right}".h}); }
-    '';
 in /* scss */ ''
 * { all: unset; }
 
@@ -78,14 +74,18 @@ in /* scss */ ''
     background: rgba(0,0,0,0);
 }
 
-.dock-mus-progress, .left {
+.dock-mus-progress,
+.left {
     border-radius: 9999px;
-    background: rgba(${rice.col.bg.rgb}, 0.6);
+    min-width: 6px; 
 }
-.left { min-width: 6px; }
+.left {
+    background-image: linear-gradient(to bottom right, ${rice.col.mg.h}, ${rice.col.bg.h});
+}
 progressbar > trough {
     min-width: 60px;
     min-height: 6px;
+    background: rgba(0,0,0,0);
 }
 
 .dock-workspace-pad {
