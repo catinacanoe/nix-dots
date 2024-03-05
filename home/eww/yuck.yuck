@@ -46,6 +46,7 @@
 
 (defwidget dock_right []
     (box :hexpand false :space-evenly false :spacing 7 :halign "end"
+        (dock_block :visible {var_test != ""} :class var_test (dock_test))
         (dock_block :visible {var_hostname == "nixpad"} (dock_brightness))
         (dock_block :visible {var_hostname == "nixpad" && var_battery != ""} (dock_battery))
         (dock_block :visible {poll_net_name != ""} (dock_net))
@@ -109,6 +110,16 @@
         (label
             :text "${var_net_vpn}${poll_net_name}${var_net_check}"
             :class "dock-net"
+        )
+    )
+)
+
+(defvar var_test "")
+(defwidget dock_test []
+    (dock_widget
+        (label
+            :text "gradient"
+            :class "dock-test"
         )
     )
 )

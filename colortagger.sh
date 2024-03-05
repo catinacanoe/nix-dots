@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 
-file="$(find ~/mus/ -maxdepth 1 -name '*.mp3' | head -n 1)"
+file="$(find ~/mus/new/ -maxdepth 1 | sed -n 2p)"
 [ -z "$file" ] && exit 1
 
 mpdname="$(echo "$file" | sed "s|$XDG_MUSIC_DIR/||")"
-splitfile="$(echo "$file" | sed 's|} {|\n|g' | sed 's| {|\n|' | sed 's|}.mp3$||')"
+echo "$mpdname"
+
+mpc insert "$mpdname"
+mpc single on
+mpc play
+mpc next
+
+exit
 name="$(echo "$splitfile" | head -n 1)"
 name="$(basename "$name")"
 tags="$(echo "$splitfile" | tail -n +2 | sed -e 's|^\(.\)-|\1=|' -e 's|_|-|g')"
@@ -16,10 +23,6 @@ while IFS= read -r tag; do
         if [ "$tag" == "l=0" ]; then
             tag="l=na"
         else
-            mpc insert "$mpdname"
-            mpc single on
-            mpc play
-            mpc next
 
             options="$(grep '^l=' ~/mus/meta/tags | grep -v '^l=na$' | sed 's|^l=||' ; echo "What language is: $name")"
             response="$(echo "$options" | fzf --print-query | tail -n 1)"
