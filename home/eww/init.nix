@@ -137,6 +137,8 @@ function music() {
     local indicator
     local color
 
+    local old_color
+
     while true; do
         stat="$(mpc status)"
         pctl="$(playerctl status)"
@@ -172,13 +174,14 @@ function music() {
                 playing="true"
             fi
         elif [ "$(echo "$stat" | wc -l)" != "1" ]; then
-            name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
-            next="$(mpc queue | sed 's|\.[^.]*$||' | grep -o '^[^{]*[^ {]')"
+            name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||')"
+            next="$(mpc queue | sed 's|\.[^.]*$||')"
             [ "$name" == "$next" ] && next=""
 
             progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
 
-            color="purple-orange-yellow"
+            color="$(grep "$(basename "$name") /// " "$XDG_MUSIC_DIR/meta/index" | grep -o 't=[^ ]\+' | sed 's|^t=||')"
+            [ -z "$color" ] && color="purple-orange-yellow"
 
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
             echo "$stat" | tail -n 1 | grep -q 'random: on' && indicator+="~ "
@@ -189,7 +192,12 @@ function music() {
 
         name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "55"}\}[^$]\).*|\1 ...|')"
 
-        eww update "var_mus_playing=$playing" "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_color=$color" "var_mus_indicator=$indicator" "var_mus_next=$next"
+        if [ "$old_color" != "$color" ] || [ -z "$(eww get var_mus_color)" ]; then
+            old_color="$color"
+            eww update "var_mus_color=$color"
+        fi
+
+        eww update "var_mus_playing=$playing" "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
 }
 music &

@@ -1,52 +1,29 @@
 #!/usr/bin/env bash
 
-file="$(find ~/mus/new/ -maxdepth 1 | sed -n 2p)"
-[ -z "$file" ] && exit 1
+line="$(grep -v ' t=.' ~/mus/meta/index | head -n 1)"
+[ -z "$line" ] && exit 1
 
-mpdname="$(echo "$file" | sed "s|$XDG_MUSIC_DIR/||")"
-echo "$mpdname"
+name="$(echo "$line" | sed 's| /// .*$||')"
 
-mpc insert "$mpdname"
+mpc insert "new/$name.mp3"
 mpc single on
 mpc play
 mpc next
 
-exit
-name="$(echo "$splitfile" | head -n 1)"
-name="$(basename "$name")"
-tags="$(echo "$splitfile" | tail -n +2 | sed -e 's|^\(.\)-|\1=|' -e 's|_|-|g')"
+echo "" > /tmp/muscolorfile
 
-finaltags=""
+function update() {
+    while true; do
+        col="$(cat /tmp/muscolorfile)"
+        [ -n "$col" ] && eww update "var_mus_color=$col"
+        sleep 0.1 
+    done
+}; update &
 
-while IFS= read -r tag; do
-    if echo "$tag" | grep -q '^l='; then
-        if [ "$tag" == "l=0" ]; then
-            tag="l=na"
-        else
-
-            options="$(grep '^l=' ~/mus/meta/tags | grep -v '^l=na$' | sed 's|^l=||' ; echo "What language is: $name")"
-            response="$(echo "$options" | fzf --print-query | tail -n 1)"
-
-            tag="l=$response"
-        fi
-    fi
-
-    if grep -q "$tag" ~/mus/meta/tags; then true; else
-        echo "$tag" >> ~/mus/meta/tags
-        sort --output=~/mus/meta/tags ~/mus/meta/tags 
-    fi
-
-    finaltags="$(
-    [ -n "$finaltags" ] && echo "$finaltags"
-    echo "$tag"
-    )"
-done <<< "$tags"
-
-finaltags="$(echo "$finaltags" | sort | tr '\n' ' ')"
-index="$name /// $finaltags"
-
-echo "$index"
-echo "$index" >> "$XDG_MUSIC_DIR/meta/index"
-mv -v "$file" "$XDG_MUSIC_DIR/new/$name"
+nvim /tmp/muscolorfile
+newtag="t=$(cat /tmp/muscolorfile)"
 
 mpc single off
+sed -i "/^$name/s|$| $newtag|" ~/mus/meta/index
+
+kill $(ps aux | grep 'bash ./colortagger.sh' | awk '{ print $2 }' | grep -v $$)

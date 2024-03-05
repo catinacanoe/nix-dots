@@ -1,49 +1,39 @@
 { rice, hostname, ... }: let
     music-gradient-opacity = "1";
 
-    music-single-col = col: /* css */ ''
-        .${col} {
-            background-color: rgba(${rice.col."${col}".rgb}, ${music-gradient-opacity});
-            ${ if col == "bg"
-            then "color: ${rice.col.fg.h};"
-            else "color: ${rice.col.bg.h};" }
-        }
-    '';
-
-    music-double-gradient = left: right: /* css */ ''
-        .${left}-${right} {
-            background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".h}, ${music-gradient-opacity}));
-            ${ if left=="bg" || right=="bg"
-            then "color: ${rice.col.fg.h};"
-            else "color: ${rice.col.bg.h};" }
-        }
-    '';
-    music-double-fill-right = left: ''
-    ${music-double-gradient left "fg"}
-    ${music-double-gradient left "mg"}
-    ${music-double-gradient left "bg"}
-    ${music-double-gradient left "red"}
-    ${music-double-gradient left "orange"}
-    ${music-double-gradient left "yellow"}
-    ${music-double-gradient left "green"}
-    ${music-double-gradient left "aqua"}
-    ${music-double-gradient left "blue"}
-    ${music-double-gradient left "purple"}
-    ${music-double-gradient left "brown"}
-    '';
-
     music-triple-gradient = left: middle: right: /* css */ ''
         .${left}-${middle}-${right} {
             background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${middle}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".rgb}, ${music-gradient-opacity}));
-            ${ if left=="bg" || middle=="bg" || right=="bg"
+            ${ if middle=="bg" || middle=="t0" || middle=="t1" || middle=="t2"
+            then "color: ${rice.col.fg.h};"
+            else "color: ${rice.col.bg.h};" }
+        }
+        .${left}-${right} {
+            background-image: linear-gradient(to bottom right, rgba(${rice.col."${left}".rgb}, ${music-gradient-opacity}), rgba(${rice.col."${right}".h}, ${music-gradient-opacity}));
+            ${ if left=="bg" || right=="bg" || left=="t0" || right=="t0" || left=="t1" || right=="t1" || left=="t2" || right=="t2"
+            then "color: ${rice.col.fg.h};"
+            else "color: ${rice.col.bg.h};" }
+        }
+        .${left} {
+            background-color: rgba(${rice.col."${right}".rgb}, ${music-gradient-opacity});
+            ${ if left == "bg"
             then "color: ${rice.col.fg.h};"
             else "color: ${rice.col.bg.h};" }
         }
     '';
+
     music-triple-fill-right = left: middle: ''
     ${music-triple-gradient left middle "fg"}
     ${music-triple-gradient left middle "mg"}
     ${music-triple-gradient left middle "bg"}
+    ${music-triple-gradient left middle "t0"}
+    ${music-triple-gradient left middle "t1"}
+    ${music-triple-gradient left middle "t2"}
+    ${music-triple-gradient left middle "t3"}
+    ${music-triple-gradient left middle "t4"}
+    ${music-triple-gradient left middle "t5"}
+    ${music-triple-gradient left middle "t6"}
+    ${music-triple-gradient left middle "t7"}
     ${music-triple-gradient left middle "red"}
     ${music-triple-gradient left middle "orange"}
     ${music-triple-gradient left middle "yellow"}
@@ -53,10 +43,19 @@
     ${music-triple-gradient left middle "purple"}
     ${music-triple-gradient left middle "brown"}
     '';
+
     music-triple-fill-middle-right = left: ''
     ${music-triple-fill-right left "fg"}
     ${music-triple-fill-right left "mg"}
     ${music-triple-fill-right left "bg"}
+    ${music-triple-fill-right left "t0"}
+    ${music-triple-fill-right left "t1"}
+    ${music-triple-fill-right left "t2"}
+    ${music-triple-fill-right left "t3"}
+    ${music-triple-fill-right left "t4"}
+    ${music-triple-fill-right left "t5"}
+    ${music-triple-fill-right left "t6"}
+    ${music-triple-fill-right left "t7"}
     ${music-triple-fill-right left "red"}
     ${music-triple-fill-right left "orange"}
     ${music-triple-fill-right left "yellow"}
@@ -143,33 +142,17 @@ progressbar > trough {
     margin-right: ${toString (rice.window.gaps-in / 3)}px;
 }
 
-${music-single-col "fg"}
-${music-single-col "mg"}
-${music-single-col "bg"}
-${music-single-col "red"}
-${music-single-col "orange"}
-${music-single-col "yellow"}
-${music-single-col "green"}
-${music-single-col "aqua"}
-${music-single-col "blue"}
-${music-single-col "purple"}
-${music-single-col "brown"}
-
-${music-double-fill-right "fg"}
-${music-double-fill-right "mg"}
-${music-double-fill-right "bg"}
-${music-double-fill-right "red"}
-${music-double-fill-right "orange"}
-${music-double-fill-right "yellow"}
-${music-double-fill-right "green"}
-${music-double-fill-right "aqua"}
-${music-double-fill-right "blue"}
-${music-double-fill-right "purple"}
-${music-double-fill-right "brown"}
-
 ${music-triple-fill-middle-right "fg"}
 ${music-triple-fill-middle-right "mg"}
 ${music-triple-fill-middle-right "bg"}
+${music-triple-fill-middle-right "t0"}
+${music-triple-fill-middle-right "t1"}
+${music-triple-fill-middle-right "t2"}
+${music-triple-fill-middle-right "t3"}
+${music-triple-fill-middle-right "t4"}
+${music-triple-fill-middle-right "t5"}
+${music-triple-fill-middle-right "t6"}
+${music-triple-fill-middle-right "t7"}
 ${music-triple-fill-middle-right "red"}
 ${music-triple-fill-middle-right "orange"}
 ${music-triple-fill-middle-right "yellow"}

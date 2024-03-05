@@ -3,7 +3,7 @@
         music_directory "${config.xdg.userDirs.music}"
 
         replaygain "off"
-        volume_normalization "yes"
+        volume_normalization "no"
         restore_paused "yes"
 
         input {
