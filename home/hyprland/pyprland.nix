@@ -56,7 +56,6 @@
     ${termpad "term" ""}
 
     ${termpad "network" "sudo netshell"}
-    ${termpad "vpn" "sudo vpnshell"}
     ${termpad "nix" "nixshell"}
 
     ${focustermpad "browseshell" "browseshell"}

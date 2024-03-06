@@ -6,38 +6,32 @@ eww open dock --restart
 
 function net_check() {
     while true; do
-        wget -q --spider http://google.com
+        local result=""
+        wget -q --spider http://google.com || result=" -"
 
-        if [ $? -eq 0 ]; then
-            eww update "var_net_check="
-        else
-            eww update "var_net_check= -"
-        fi
+        eww update "var_net_check=$result"
+        echo "$result" > /tmp/net-check
     sleep 1; done
-}
-net_check &
+}; net_check &
 
 function net_vpn() {
     while true; do
         vpn="$(protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||')"
         eww update "var_net_vpn=$vpn"
     sleep 3; done
-}
-net_vpn &
+}; net_vpn &
 
 function vol() {
     while true; do
         setvol
     sleep 1; done
-}
-vol &
+}; vol &
 
 function bright() {
     while true; do
         setbright
     sleep 60; done
-}
-bright &
+}; bright &
 
 function active() {
     local prev
@@ -58,8 +52,7 @@ function active() {
                 sleep 0.15 && eww update "var_switching=false" &
             fi
         done
-}
-active &
+}; active &
 
 function battery() {
     while true; do
@@ -96,8 +89,7 @@ function battery() {
             eww update "var_battery=$percent ($timeinfo)"
         fi
     sleep 5; done
-}
-battery &
+}; battery &
 
 function workspaces() {
     local prev
@@ -125,8 +117,7 @@ function workspaces() {
             eww update "var_workspaces=$final"
         fi
     done
-}
-workspaces &
+}; workspaces &
 
 function music() {
     local stat
@@ -199,8 +190,7 @@ function music() {
 
         eww update "var_mus_playing=$playing" "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_indicator=$indicator" "var_mus_next=$next"
     sleep 0.5; done
-}
-music &
+}; music &
 
 function visualizer() {
     ${builtins.readFile ./cava.bash}
@@ -234,6 +224,5 @@ function visualizer() {
     while read -r cmd; do
         eww update "var_cava=$(echo "$cmd" | sed "$dict")"
     done < $pipe
-}
-visualizer &
+}; visualizer &
 ''
