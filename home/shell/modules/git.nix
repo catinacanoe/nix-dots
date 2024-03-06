@@ -6,7 +6,7 @@
     gii = "gitutils init";
 
     gs = "g status";
-    ga = "echo 'git add %%% && gs' | yargs";
+    ga = "echo 'git add %%% && git status' | yargs";
     gaa = "ga .";
     gau = "ga -u";
     gc = "g commit";

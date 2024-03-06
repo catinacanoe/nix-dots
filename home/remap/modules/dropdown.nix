@@ -22,8 +22,6 @@ in
                     ${drop "news"}
                 ${mod}-m:
                     ${drop "network"}
-                ${mod}-v:
-                    ${drop "vpn"}
                 ${mod}-n:
                     ${drop "nix"}
                 ${mod}-q:
