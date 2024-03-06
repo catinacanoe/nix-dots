@@ -73,20 +73,18 @@ function battery() {
 }; battery &
 
 function active() {
-    local prev
-    prev="$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
+    local ws
+    ws="$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
 
-    eww update "var_active=$prev"
-    eww update "var_prev=$prev"
+    eww update "var_active=$ws"
+    eww update "var_prev=$ws"
     eww update "var_switching=false"
 
     socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
         while read -r active; do
-            if [ "$active" != "$prev" ]; then
-                eww update "var_switching=true" "var_prev=$prev" "var_active=$active"
-
-                prev="$active"
+            if [ "$active" != "$(eww get var_active)" ]; then
+                eww update "var_switching=true" "var_prev=$(eww get var_active)" "var_active=$active"
 
                 sleep 0.15 && eww update "var_switching=false" &
             fi
@@ -188,6 +186,11 @@ function change_mus_color() {
     )"
 
     echo "$newcss" > "$XDG_CONFIG_HOME/eww/eww.scss"
+
+    sleep 0.3
+    local ws="$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
+    notify-send "switching $ws"
+    eww update "var_switching=false" "var_prev=$ws" "var_active=$ws"
 }
 
 function music() {
