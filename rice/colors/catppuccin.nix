@@ -1,4 +1,4 @@
-{
+{ # catppuccin
     t0 = {
         hex = "1e1e2e"; h = "#1e1e2e";
         r = 30; g = 30; b = 46;

@@ -1,6 +1,6 @@
 let host = import ../ignore-hostname.nix; in {
     # remember to regenerate wallpapers if you change colorscheme
-    col = import ./colors "gruvbox";
+    col = import ./colors/gruvbox.nix;
     wall = import ./wall;
     test = "test";
 

@@ -36,7 +36,7 @@ in="$1"
 
 out="$(
 
-echo "{"
+echo "{ # $in"
 while read line; do
     name="${line// */}"
     hex="${line//* /}"
@@ -54,4 +54,4 @@ echo "}"
 
 )"
 
-echo "$out" > "./out/$in.nix"
+echo "$out" > ".$in.nix"

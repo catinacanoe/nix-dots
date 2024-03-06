@@ -31,7 +31,7 @@
     )
 )
 
-(defvar var_mus_color "")
+(defvar var_mus_color "mus-gradient")
 (defvar var_mus_playing false)
 (defvar var_mus_type "mpd")
 (defwidget dock_left []
@@ -51,7 +51,6 @@
         (dock_block :visible {var_hostname == "nixpad" && var_battery != ""} (dock_battery))
         (dock_block :visible {poll_net_name != ""} (dock_net))
         (dock_block :class var_mus_color (dock_date))
-        (dock_block :class var_mus_color (dock_time))
     )
 )
 
@@ -155,17 +154,7 @@
     )
 )
 
-(defpoll poll_time :interval "1s" `date +'%H:%M'`)
-(defwidget dock_time []
-    (dock_widget
-        (label
-            :text poll_time
-            :class "dock-time"
-        )
-    )
-)
-
-(defpoll poll_date :interval "1s" `date +'%d.%m.%Y'`)
+(defpoll poll_date :interval "1s" `date +'%d.%m.%Y ~ %H:%M'`)
 (defwidget dock_date []
     (dock_widget
         (label

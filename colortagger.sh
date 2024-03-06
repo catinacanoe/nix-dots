@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+TEST_FILE="/tmp/eww-test-color"
+
 line="$(grep -v ' t=.' ~/mus/meta/index | head -n 1)"
 [ -z "$line" ] && exit 1
 
@@ -10,18 +12,10 @@ mpc single on
 mpc play
 mpc next
 
-echo "" > /tmp/muscolorfile
-
-function update() {
-    while true; do
-        col="$(cat /tmp/muscolorfile)"
-        [ -n "$col" ] && eww update "var_mus_color=$col"
-        sleep 0.1 
-    done
-}; update &
-
-nvim /tmp/muscolorfile
-newtag="t=$(cat /tmp/muscolorfile)"
+echo "" > "$TEST_FILE"
+nvim "$TEST_FILE"
+newtag="t=$(cat "$TEST_FILE")"
+echo "" > "$TEST_FILE"
 
 mpc single off
 sed -i "/^$name/s|$| $newtag|" ~/mus/meta/index
