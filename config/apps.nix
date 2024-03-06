@@ -154,6 +154,7 @@
         neomutt
         sioyek
         zsh
+        zoom-us
 
         # core system apps
         hyprland

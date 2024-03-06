@@ -189,7 +189,6 @@ function change_mus_color() {
 
     sleep 0.3
     local ws="$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
-    notify-send "switching $ws"
     eww update "var_switching=false" "var_prev=$ws" "var_active=$ws"
 }
 
