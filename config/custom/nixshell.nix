@@ -53,8 +53,8 @@ function activate_ff() {
     echo "running firefox preactivation"
     killall .firefox-wrapped
 
-    rm -rv ~/.mozilla/firefox/gpt/
-    rm -rv ~/.mozilla/firefox/scratch/
+    rm -rvf ~/.mozilla/firefox/gpt/
+    rm -rvf ~/.mozilla/firefox/scratch/
 
     cp -r ~/.mozilla/firefox/main/ ~/.mozilla/firefox/gpt/
     cp -r ~/.mozilla/firefox/main/ ~/.mozilla/firefox/scratch/
