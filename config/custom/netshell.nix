@@ -5,19 +5,17 @@ function auto_vpn() { # convenient place to put this
             local net="$(nmcli -t connection show --active | grep -v 'loopback' | head -n 1 | awk -F : '{ print $1 }' | tr '[:upper:]' '[:lower:]')"
 
             if [ "$net" == "fuhsd" ]; then
-                notify-send "auto connecting to vpn"
                 nmcli connection down "$net" &> /dev/null
                 nmcli connection up "$net" &> /dev/null
                 vpnshell reload &> /dev/null
             else
-                notify-send "auto disconnecting from vpn"
                 nmcli connection down "$net" &> /dev/null
                 nmcli connection up "$net" &> /dev/null
                 vpnshell disconnect &> /dev/null
             fi
         fi
     sleep 1; done
-}; auto_vpn &
+};
 
 function printhelp() {
     echo "'nmshell' interactive shell to interface with nmcli network manager"

@@ -11,6 +11,9 @@
     border-radius: 9999px;
     min-width: 6px; 
 }
+.left {
+    background: ${rice.col.bg.h};
+}
 progressbar > trough {
     min-width: 60px;
     min-height: 6px;
