@@ -115,6 +115,7 @@
         wl-clipboard
         wtype
         xdg-utils
+        system-config-printer
         xdragon
         xz
         yt-dlp

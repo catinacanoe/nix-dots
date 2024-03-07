@@ -17,7 +17,16 @@
     };
 
     # printing
-    services.printing.enable = true;
+    services.printing = {
+        enable = true;
+        drivers = [
+            pkgs.gutenprint
+            pkgs.gutenprintBin
+            pkgs.hplip
+            pkgs.hplipWithPlugin
+            (pkgs.writeTextDir "share/cups/model/brother-hl-2170w.ppd" (builtins.readFile ./etc/brother-hl-2170w.ppd))
+        ];
+    };
     services.avahi = {
         enable = true;
         nssmdns4 = true;
