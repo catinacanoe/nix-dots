@@ -119,7 +119,7 @@ function workspaces() {
     done
 }; workspaces &
 
-function get_col_rgb() {
+function get_col_hex() {
     case "$1" in
         "fg") echo "${rice.col.fg.h}" ;;
         "mg") echo "${rice.col.mg.h}" ;;
@@ -144,6 +144,47 @@ function get_col_rgb() {
         "brown")  echo "${rice.col.brown.h}" ;;
         *) echo "ERROR" ;;
     esac
+}
+
+function gen_gradient_css() {
+    local name="$1"
+    local out=".$name {"
+
+    local colors="$(echo "$name" | tr '-' '\n')"
+
+    local text='bg'
+    if [ "$(echo "$colors" | grep 'bg\|t0\|t1\|t2' | wc -l)" -gt "$(echo "$colors" | grep 'fg\|t7\|t6' | wc -l)" ]; then
+        text='fg'
+    fi
+
+    local hashes="$(
+    while IFS= read -r line; do
+        hash="$(get_col_hex  "$line")"
+        [ "$hash" == "ERROR" ] && return 1
+        echo -n "$hash, "
+    done <<< "$newcol"
+    echo
+    )"
+    hashes="$(echo "$hashes" | sed 's|, $||' )"
+
+    local texthash="$(get_col_hex "$text")"
+
+    echo "/* autogen */ .$name { background-image: linear-gradient(115deg, $hashes); color: $texthash; }"
+}
+
+function css_updater() {
+    local pipe="/tmp/eww_index_colors.fifo"
+    [ -p "$pipe" ] && unlink "$pipe"
+    mkfifo "$pipe"
+
+}; css_updater &
+
+function update_css_from_index() {
+    sed -i '/^\/\* autogen \*\//d' "$XDG_CONFIG_HOME/eww/eww.scss"
+
+    while IFS= read -r colname; do
+        gen_gradient_css "$colname" >> "$XDG_CONFIG_HOME/eww/eww.scss"
+    done <<< "$(grep -o ' t=[^ ]*' "$XDG_MUSIC_DIR/meta/index" | sed 's|^ t=||')"
 }
 
 function change_mus_color() {

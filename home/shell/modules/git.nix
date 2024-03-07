@@ -19,8 +19,8 @@
 
     cry = "crypt";
     yy = "sshkey && crypt sync";
-    ys = "crypt status";
-    yii = "crypt init";
+    ys = "sshkey && crypt status";
+    yii = "sshkey && crypt init";
     ycl = "sshkey && crypt clone";
 
     yll = "sshkey && crypt pull";
