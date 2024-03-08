@@ -20,11 +20,10 @@
     services.printing = {
         enable = true;
         drivers = [
-            pkgs.gutenprint
+            pkgs.gutenprint # brother uses the hl1250 drivers
             pkgs.gutenprintBin
             pkgs.hplip
             pkgs.hplipWithPlugin
-            (pkgs.writeTextDir "share/cups/model/brother-hl-2170w.ppd" (builtins.readFile ./etc/brother-hl-2170w.ppd))
         ];
     };
     services.avahi = {

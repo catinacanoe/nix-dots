@@ -18,7 +18,7 @@ y youtube.com/
     s results?q=
     l playlist?list=LL
 
-ibkr cdcdyn.interactivebrokers.com/sso/Login/
+ibkr portal.interactivebrokers.com/
 rh robinhood.com/
     s stocks/
     o options/chains/
