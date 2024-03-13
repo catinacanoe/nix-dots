@@ -60,12 +60,14 @@ r ${repos}/
                 ss sshkey.nix
                 vs vpnshell.nix
                 ya yargs.nix
+                mu mustagger.nix
             d default.nix
             f fonts.nix
             e environment.nix
             l locale.nix
             a apps.nix
             p peripheral.nix
+            t hosts.nix
             s services.nix
             i ignore-hardware.nix
             h hardware.nix

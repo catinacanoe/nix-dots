@@ -10,6 +10,7 @@
         ./locale.nix
         ./peripheral.nix
         ./services.nix
+        ./hosts.nix
     ];
 
     networking.hostName = import ../ignore-hostname.nix;

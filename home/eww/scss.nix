@@ -75,12 +75,12 @@ progressbar > trough {
     margin-right: ${toString (rice.window.gaps-in / 3)}px;
 }
 
-.mg-bg {
+/* autogen */ .mg-bg {
     background-image: linear-gradient(to bottom right, ${rice.col.mg.h}, ${rice.col.bg.h});
     color: ${rice.col.bg.h};
 }
 
-.fg-bg {
+/* autogen */ .fg-bg {
     background-image: linear-gradient(to bottom right, ${rice.col.fg.h}, ${rice.col.bg.h});
     color: ${rice.col.bg.h};
 }
