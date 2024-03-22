@@ -64,7 +64,7 @@ function current() {
 }
 
 function list() {
-    nmcli -t device wifi list | grep -v '::' | awk -F ':' '{ print $8 }' | sort | uniq
+    nmcli -t device wifi list --rescan yes | grep -v '::' | awk -F ':' '{ print $8 }' | sort | uniq
 }
 
 function network_menu() {
