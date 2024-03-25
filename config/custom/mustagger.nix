@@ -58,9 +58,17 @@ function mk_taglist() {
             local query="$(echo "$response" | head -n 1)"
             local selected="$(echo "$response" | sed -n 2p)"
 
-            if [ -z "$selected" ]
+            if echo "$query" | grep -q "\*$"; then
+                # the user is tryna enter sm new
+            elif [ -z "$selected" ]; then
+                # nothing selected
+            else
+                # we use the selection
+            fi
+
 
         elif echo "$multi_letters" | grep -q "$letter"; then
+            true
         fi
     done
 }
