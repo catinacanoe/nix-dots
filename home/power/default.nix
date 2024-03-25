@@ -1,5 +1,5 @@
 # also configures swaylock
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 with (import ../../rice);
 {
     home.packages = 
@@ -17,13 +17,17 @@ with (import ../../rice);
         choice="$(echo "$options" | grep "^$1" | head -n 1)"
     fi
 
-    delay() { sleep 0.2; }
+    delay() { sleep 0.8; }
 
     lock() { ${swaylock} --image="$(swww query | sed 's|^.*image: ||')" "$@"; }
 
     case "$choice" in
         lock) delay && lock ;;
-        suspend) delay && lock && delay && systemctl suspend ;;
+        ${if (import ../../ignore-hostname.nix) == "nixbox" then ''
+            suspend) lock && sleep 2 && systemctl suspend ;;
+        '' else ''
+            suspend) delay && lock && delay && systemctl suspend ;;
+        ''}
         reload) ${hyprctl} dispatch forcerendererreload ;;
         logout) ${hyprctl} dispatch exit ;;
         cycle) reboot ;;
@@ -40,8 +44,6 @@ with (import ../../rice);
 
             font = font.name;
             font-size = "300";
-
-            fade-in = "0.2";
 
             text-color = col.fg.hex;
             text-clear-color = col.purple.hex;
