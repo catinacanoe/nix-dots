@@ -13,6 +13,7 @@
         launcher    = (import ./custom/launcher.nix args);
         manpager    = (import ./custom/manpager.nix args);
         menu        = (import ./custom/menu.nix args);
+        mustagger   = (import ./custom/mustagger.nix args);
         netshell    = (import ./custom/netshell.nix args);
         nixshell    = (import ./custom/nixshell.nix args);
         sshkey      = (import ./custom/sshkey.nix args);
@@ -29,6 +30,7 @@
         manpager
         menu.ui
         menu.wrap
+        mustagger
         netshell
         nixshell
         sshkey
@@ -114,6 +116,9 @@
         playerctl
         wl-clipboard
         wtype
+        gdb
+        crunch
+        ghidra
         xdg-utils
         system-config-printer
         xdragon
