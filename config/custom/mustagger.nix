@@ -34,13 +34,15 @@ function start_playback() {
 }
 
 function rename_file() {
-    local original="$1"
+    local original="$(basename "$1" | sed -s 's|\.[^.]*$||')"
 
     local file="/tmp/$original.tmp"
-    echo "Rename this file (leave only one line):" > "$file"
-    echo "$(basename "$original" | sed -s 's|\.[^.]*$||')" >> "$file"
+    echo "Rename this file (output will be read from bottom line):" > "$file"
+    echo "$original" >> "$file"
 
-    cat "$file" | head -n 1
+    nvim "$file"
+
+    tail -n 1 "$file"
 }
 
 function mk_tag() {
@@ -103,8 +105,8 @@ function mk_taglist() {
 
     local doublecheck="$(mktemp)"
     echo "$taglist" | tr '\n' ' ' > "$doublecheck"
-    nvim "$doublecheck"
-    cat "$doublecheck"
+    $EDITOR "$doublecheck"
+    head -n 1 "$doublecheck"
 }
 
 function handle_request() {
@@ -114,6 +116,7 @@ function handle_request() {
 
     # setup the file
     filename="$(get_file "$input")"
+    notify-send "gotfile"
     if echo "$filename" | grep -q "^ERROR: "; then
         echo "$filename"
         return
@@ -137,4 +140,6 @@ function handle_request() {
     local taglist="$(mk_taglist)"
     echo "$targetstem /// $taglist" >> "$INDEXFILE"
 }
+
+handle_request "$1"
 ''
