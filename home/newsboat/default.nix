@@ -23,8 +23,6 @@
 
             highlight feedlist "^.*~~.*~~~.*$"            magenta  default  bold
 
-            auto-reload no
-
             bind-key n quit
             bind-key a up
             bind-key i down
@@ -40,7 +38,8 @@
 
             bind-key ; hard-quit
 
-            browser "drop && ${config.home.sessionVariables.BROWSER}"
+            bind-key TAB macro-prefix
+            macro l set browser "open(){ echo $1 > /tmp/mustagger.in && drop mtag ;}; open" ; open-in-browser-and-mark-read ; set browser "drop && ${config.home.sessionVariables.BROWSER}"
         '';
 
         urls = [

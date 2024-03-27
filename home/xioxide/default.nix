@@ -49,18 +49,19 @@ r ${repos}/
                 br browse.nix
                 bs browseshell.nix
                 dr drop.nix
-                la launcher.nix
                 hy hypr.nix
+                la launcher.nix
                 ma manpager.nix
                 me menu.nix
                 ms netshell.nix
+                mu mustagger.nix
                 ns nixshell.nix
+                pl player.nix
                 sb setbright.nix
-                sv setvol.nix
                 ss sshkey.nix
+                sv setvol.nix
                 vs vpnshell.nix
                 ya yargs.nix
-                mu mustagger.nix
             d default.nix
             f fonts.nix
             e environment.nix

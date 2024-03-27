@@ -33,7 +33,7 @@ in {
     env = WLR_DRM_NO_ATOMIC,1
     '' else ""}
 
-    exec-once = mpd && mpc volume 70 && mpc repeat on && mpc random off && mpc single off
+    exec-once = mpd && mpc volume 70 && mpc repeat on && mpc random off && mpc single off && mpc crossfade 1
     exec-once = drop init
 
     exec-once = kitty

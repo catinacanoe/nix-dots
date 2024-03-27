@@ -8,7 +8,15 @@ case "$type" in
     inode/directory) lf --remote "send $id cd \"$f\"" ;;
     image/*) imv "$f" ;;
     video/*) mpv "$f" ;;
-    audio/*) mpv "$f" ;;
+    audio/*) 
+        if [ -f "$XDG_MUSIC_DIR/$(basename "$f")" ]; then
+            mpc update
+            mpc insert "$(basename "$f")"
+            mpc play
+            mpc next
+        else
+            mpv "$f"
+        fi ;;
     */pdf) ${config.programs.zsh.shellAliases.sio} "$f" ;;
     *) lf --remote "send $id \$nvim \"$f\"" ;;
 esac

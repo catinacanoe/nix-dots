@@ -1,8 +1,7 @@
 { pkgs, ... }: pkgs.writeShellScriptBin "mustagger" ''
-TARGETFOLDER="new"
-TARGETPATH="$XDG_MUSIC_DIR/$TARGETFOLDER"
-INDEXFILE="$XDG_MUSIC_DIR/meta/index"
-TAGFILE="$XDG_MUSIC_DIR/meta/tags"
+TARGETPATH="$XDG_MUSIC_DIR"
+INDEXFILE="$XDG_MUSIC_DIR/.index"
+TAGFILE="$XDG_MUSIC_DIR/.tags"
 
 function get_file() {
     local input="$1"
@@ -45,9 +44,28 @@ function rename_file() {
 
 function mk_tag() {
     local letter="$1"
+    local preview="$2"
+
+    if [ "$letter" == "e" ]; then
+        preview="$(
+            echo "$preview"
+            echo "
+0 - binaural beats; shit u could fall asleep to
+1 - low amount of percussion, like some celeste songs
+2 - stuff like tanger's bossanova or lofi; has percussion but still chill
+3 - acoustic songs
+4 - chillish edm with some drops (instinct type beat) (or chill rock)
+5 - edm with louder drops, stuff like future bass
+6 - things like dnb: hits hard but still ok
+7 - melodic dubstep, other lower level forms of dubstep
+8 - dubsteppppppp or heavy metal ig but i don't have any lmao
+9 - TEAROUT / DEATHSTEP
+            "
+        )"
+    fi
 
     local tag
-    local response="$(cat "$INDEXFILE" | sed 's|^.* /// ||' | tr ' ' '\n' | grep "^$letter=" | sed "s|^$letter=||" | sort | uniq | fzf --print-query)"
+    local response="$(cat "$INDEXFILE" | sed 's|^.* /// ||' | tr ' ' '\n' | grep "^$letter=" | sed "s|^$letter=||" | sort | uniq | fzf --print-query --preview "echo \"$preview\"")"
     local query="$(echo "$response" | head -n 1)"
     local selected="$(echo "$response" | sed -n 2p)"
 
@@ -76,11 +94,11 @@ function mk_taglist() {
             letterlist="$(echo -e "$single_letters\n$multi_letters" | grep -v "$(echo "$done_letters" | tr '\n' ' ' | sed 's+ \(.\)+\\\|\1+g' | tr ' ' '\n')")"
         fi
 
-        local letter="$(echo "$letterlist" | sort | fzf | sed 's|^\(.\) *$|\1|')"
+        local letter="$(echo "$letterlist" | sort | fzf --preview "echo \"$taglist\"" | sed 's|^\(.\) *$|\1|')"
         [ -z "$letter" ] && break
 
         if echo "$single_letters" | grep -q "$letter"; then
-            local tag="$(mk_tag "$letter")"
+            local tag="$(mk_tag "$letter" "$taglist")"
             [ -z "$tag" ] && continue
             taglist="$(
                 [ -n "$taglist" ] && echo "$taglist"
@@ -93,7 +111,7 @@ function mk_taglist() {
             )"; done_letters="$(echo "$done_letters" | sort | uniq)"
         elif echo "$multi_letters" | grep -q "$letter"; then
             while true; do
-                local tag="$(mk_tag "$letter")"
+                local tag="$(mk_tag "$letter" "$taglist")"
                 [ -z "$tag" ] && break
                 taglist="$(
                     [ -n "$taglist" ] && echo "$taglist"
@@ -134,18 +152,28 @@ function handle_request() {
     fi
     mv "$filename" "$targetname"
 
-    start_playback "$TARGETFOLDER/$targetstem.mp3"
+    start_playback "$targetstem.mp3"
 
     # get all the tags
     local taglistfile="$(mk_taglist)"
     $EDITOR "$taglistfile"
     local taglist="$(head -n 1 "$taglistfile" | sed -e 's|\s*$||' -e 's|^\s*||')"
+    if [ -z "$taglist" ]; then
+        rm "$targetname"
+        mpc del 0
+        return
+    fi
+
+    # colortagging
+    TEST_FILE="/tmp/eww-test-color"
+    nvim "$TEST_FILE"
+    taglist+=" t=$(cat "$TEST_FILE")"
+
     echo "$targetstem /// $taglist" >> "$INDEXFILE"
+    echo "" > "$TEST_FILE"
 
     mpc single off
 }
-
-handle_request "$1"
 
 INFILE="/tmp/mustagger.in"
 [ -f "$INFILE" ] || touch "$INFILE"
@@ -154,9 +182,11 @@ while true; do
     input="$(head -n 1 "$INFILE")"
 
     if [ -n "$input" ]; then
+        echo "got input $input"
         handle_request "$input"
         sed -i 1d "$INFILE"
         echo "awaiting input from '$INFILE'"
+        drop
     else
         sleep 1
     fi

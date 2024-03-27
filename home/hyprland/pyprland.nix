@@ -64,6 +64,7 @@
 
     ${termpad "news" "newsboat"}
     ${termpad "mtag" "mustagger"}
+    ${termpad "player" "player"}
     ${termpad "qalc" "qalc"}
     ${termpad "bluetooth" "bluetoothctl"}
 

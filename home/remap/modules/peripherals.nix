@@ -35,6 +35,15 @@ in
         ${mod}-equal:
             ${vol "0"}
 
+        ${mod}-5:
+            ${launch "mpc prev"}
+        ${mod}-6:
+            ${launch "mpc toggle"}
+        ${mod}-7:
+            ${launch "mpc del 0"}
+        ${mod}-8:
+            ${launch "mpc next"}
+
         ${mod}-shift-equal: # plus
             ${bright "${bright-def}+"}
         ${mod}-minus:

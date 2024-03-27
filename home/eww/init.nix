@@ -178,7 +178,7 @@ function add_gradient_css() {
 }
 
 function update_css_from_index() {
-    local colors="$(grep -o ' t=[^ ]*' "$XDG_MUSIC_DIR/meta/index" | sed 's|^ t=||')"
+    local colors="$(grep -o ' t=[^ ]*' "$XDG_MUSIC_DIR/.index" | sed 's|^ t=||')"
 
     while IFS= read -r colname; do
         add_gradient_css "$colname"
@@ -239,7 +239,7 @@ function music() {
 
             progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
 
-            color="$(grep "$(basename "$name") /// " "$XDG_MUSIC_DIR/meta/index" | grep -o 't=[^ ]\+' | sed 's|^t=||')"
+            color="$(grep "$(basename "$name") /// " "$XDG_MUSIC_DIR/.index" | grep -o 't=[^ ]\+' | sed 's|^t=||')"
             [ -z "$color" ] && color="purple-orange-yellow"
 
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
