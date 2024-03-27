@@ -53,6 +53,7 @@ r ${repos}/
                 la launcher.nix
                 ma manpager.nix
                 me menu.nix
+                mp mptoggle.nix
                 ms netshell.nix
                 mu mustagger.nix
                 ns nixshell.nix

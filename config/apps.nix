@@ -13,6 +13,7 @@
         launcher    = (import ./custom/launcher.nix args);
         manpager    = (import ./custom/manpager.nix args);
         menu        = (import ./custom/menu.nix args);
+        mptoggle    = (import ./custom/mptoggle.nix args);
         mustagger   = (import ./custom/mustagger.nix args);
         netshell    = (import ./custom/netshell.nix args);
         nixshell    = (import ./custom/nixshell.nix args);
@@ -31,6 +32,7 @@
         manpager
         menu.ui
         menu.wrap
+        mptoggle
         mustagger
         netshell
         nixshell

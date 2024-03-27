@@ -38,7 +38,7 @@ in
         ${mod}-5:
             ${launch "mpc prev"}
         ${mod}-6:
-            ${launch "mpc toggle"}
+            ${launch "mptoggle"}
         ${mod}-7:
             ${launch "mpc del 0"}
         ${mod}-8:

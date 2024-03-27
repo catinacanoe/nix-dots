@@ -12,6 +12,7 @@ function get_file() {
         local name="$(yt-dlp --skip-download --get-title --no-warnings "$input")"
         target="$TARGETPATH/$name.mp3"
         yt-dlp -o "$target" -x --audio-format mp3 --audio-quality 0 "$input" &> /dev/null
+        notify-send "music download complete"
 
     elif [ -f "$input" ]; then
         target="$TARGETPATH/$(basename "$input")"
@@ -122,7 +123,7 @@ function mk_taglist() {
     done
 
     local doublecheck="$(mktemp)"
-    echo "$taglist" | tr '\n' ' ' > "$doublecheck"
+    echo "$taglist" | sort | tr '\n' ' ' > "$doublecheck"
     echo "$doublecheck"
 }
 
