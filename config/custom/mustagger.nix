@@ -1,8 +1,8 @@
 { pkgs, ... }: pkgs.writeShellScriptBin "mustagger" ''
-TARGETFOLDER="dl"
+TARGETFOLDER="new"
 TARGETPATH="$XDG_MUSIC_DIR/$TARGETFOLDER"
-TAGFILE="$XDG_MUSIC_DIR/meta/tag"
 INDEXFILE="$XDG_MUSIC_DIR/meta/index"
+TAGFILE="$XDG_MUSIC_DIR/meta/tags"
 
 function get_file() {
     local input="$1"
@@ -40,9 +40,7 @@ function rename_file() {
     echo "Rename this file (output will be read from bottom line):" > "$file"
     echo "$original" >> "$file"
 
-    nvim "$file"
-
-    tail -n 1 "$file"
+    echo "$file"
 }
 
 function mk_tag() {
@@ -56,14 +54,16 @@ function mk_tag() {
     if echo "$query" | grep -q "\*$"; then
         [ "$query" == "*" ] && return
         echo "$query" | sed 's/\*$//'
+    elif [ -z "$selected" ]; then
+        echo "$query"
     else
         echo "$selected"
     fi
 }
 
 function mk_taglist() {
-    local single_letters="$(echo 'l b c e r' | tr ' ' '\n')"
-    local multi_letters="$(echo 'a g' | tr ' ' '\n')"
+    local single_letters="$(cat "$TAGFILE" | grep '^single' | sed 's|^single ||' | tr ' ' '\n')"
+    local multi_letters="$(cat "$TAGFILE" | grep '^multi' | sed 's|^multi ||' | tr ' ' '\n')"
     local done_letters=""
     local taglist
 
@@ -105,8 +105,7 @@ function mk_taglist() {
 
     local doublecheck="$(mktemp)"
     echo "$taglist" | tr '\n' ' ' > "$doublecheck"
-    $EDITOR "$doublecheck"
-    head -n 1 "$doublecheck"
+    echo "$doublecheck"
 }
 
 function handle_request() {
@@ -116,17 +115,18 @@ function handle_request() {
 
     # setup the file
     filename="$(get_file "$input")"
-    notify-send "gotfile"
     if echo "$filename" | grep -q "^ERROR: "; then
         echo "$filename"
         return
     elif ! echo "$filename" | grep -q "\.mp3$"; then
-        echo "ERROR: file not in mp3 format"
+        echo "ERROR: handle_request: file not in mp3 format"
         return
     fi
 
     # rename file
-    local targetstem="$(rename_file "$filename")" # the result of the renaming
+    local renamefile="$(rename_file "$filename")" # the result of the renaming
+    $EDITOR "$renamefile"
+    local targetstem="$(tail -n 1 "$renamefile")"
     local targetname="$TARGETPATH/$targetstem.mp3" # the new full path
     if [ -z "$targetstem" ]; then
         echo "ERROR: handle_request: renamed filename is empty"
@@ -137,9 +137,28 @@ function handle_request() {
     start_playback "$TARGETFOLDER/$targetstem.mp3"
 
     # get all the tags
-    local taglist="$(mk_taglist)"
+    local taglistfile="$(mk_taglist)"
+    $EDITOR "$taglistfile"
+    local taglist="$(head -n 1 "$taglistfile" | sed -e 's|\s*$||' -e 's|^\s*||')"
     echo "$targetstem /// $taglist" >> "$INDEXFILE"
+
+    mpc single off
 }
 
 handle_request "$1"
+
+INFILE="/tmp/mustagger.in"
+[ -f "$INFILE" ] || touch "$INFILE"
+
+while true; do
+    input="$(head -n 1 "$INFILE")"
+
+    if [ -n "$input" ]; then
+        handle_request "$input"
+        sed -i 1d "$INFILE"
+        echo "awaiting input from '$INFILE'"
+    else
+        sleep 1
+    fi
+done
 ''

@@ -63,6 +63,7 @@
     ${focustermpad "menu" "menuui"}
 
     ${termpad "news" "newsboat"}
+    ${termpad "mtag" "mustagger"}
     ${termpad "qalc" "qalc"}
     ${termpad "bluetooth" "bluetoothctl"}
 

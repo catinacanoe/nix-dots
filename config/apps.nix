@@ -6,19 +6,20 @@
 
     environment.systemPackages = with pkgs;
     let
-        hypr        = (import ./custom/hypr.nix args);
         browse      = (import ./custom/browse.nix args);
         browseshell = (import ./custom/browseshell.nix args);
         drop        = (import ./custom/drop.nix args);
+        hypr        = (import ./custom/hypr.nix args);
         launcher    = (import ./custom/launcher.nix args);
         manpager    = (import ./custom/manpager.nix args);
         menu        = (import ./custom/menu.nix args);
         mustagger   = (import ./custom/mustagger.nix args);
         netshell    = (import ./custom/netshell.nix args);
         nixshell    = (import ./custom/nixshell.nix args);
-        sshkey      = (import ./custom/sshkey.nix args);
+        player      = (import ./custom/player.nix args);
         setbright   = (import ./custom/setbright.nix args);
         setvol      = (import ./custom/setvol.nix args);
+        sshkey      = (import ./custom/sshkey.nix args);
         vpnshell    = (import ./custom/vpnshell.nix args);
         yargs       = (import ./custom/yargs.nix args);
     in [
@@ -33,9 +34,10 @@
         mustagger
         netshell
         nixshell
-        sshkey
+        player
         setbright
         setvol
+        sshkey
         vpnshell
         yargs
 

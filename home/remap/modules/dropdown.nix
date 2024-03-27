@@ -20,6 +20,8 @@ in
                     ${drop "top"}
                 ${mod}-s:
                     ${drop "news"}
+                ${mod}-u:
+                    ${drop "mtag"}
                 ${mod}-m:
                     ${drop "network"}
                 ${mod}-n:

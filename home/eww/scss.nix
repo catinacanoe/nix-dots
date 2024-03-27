@@ -52,15 +52,9 @@ progressbar > trough {
 .dock-workspaces.active {
     padding-right: 40px;
 }
+.dock-workspaces.empty,
 .dock-workspaces.occupied {
     padding-right: 15px;
-}
-.dock-workspaces.empty {
-    padding-right: 15px;
-    padding-top: 9px;
-
-    margin-top: 3px;
-    margin-bottom: 3px;
 }
 
 .dock-block {
