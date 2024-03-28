@@ -81,6 +81,7 @@ in
         BROWSER = "firefox";
         TERMINAL = "kitty";
         DMENU_PROGRAM = "menu";
+        NIX_BUILD_SHELL = "zsh";
         MANPAGER = "manpager";
     };
 }

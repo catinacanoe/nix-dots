@@ -8,10 +8,16 @@
             dirstyle = "cyan italic";
             gitstyle = "blue";
             gitstylealt = "yellow bold";
+            nixshellstyle = "red italic";
         in
         {
             add_newline = true;
-            format = "$git_status$directory";
+            format = "$env_var$git_status$directory";
+
+            env_var = {
+                variable = "IN_NIX_SHELL";
+                format = "[$env_value](${nixshellstyle}) ";
+            };
 
             directory = {
                 truncation_length = 0;
