@@ -141,6 +141,8 @@
 
         clang_15 boost183 ncurses
 
+        lua
+
         zulu # java
 
         # manpages ???

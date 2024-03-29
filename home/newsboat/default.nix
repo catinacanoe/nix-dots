@@ -39,7 +39,7 @@
             bind-key ; hard-quit
 
             bind-key TAB macro-prefix
-            macro l set browser "open(){ echo $1 > /tmp/mustagger.in && drop mtag ;}; open" ; open-in-browser-and-mark-read ; set browser "drop && ${config.home.sessionVariables.BROWSER}"
+            macro l set browser "open(){ echo $1 >> /tmp/mustagger.in;}; open" ; open-in-browser-and-mark-read ; set browser "drop && ${config.home.sessionVariables.BROWSER}"
         '';
 
         urls = [

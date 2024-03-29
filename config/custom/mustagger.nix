@@ -1,7 +1,6 @@
 { pkgs, ... }: pkgs.writeShellScriptBin "mustagger" ''
 TARGETPATH="$XDG_MUSIC_DIR"
 INDEXFILE="$XDG_MUSIC_DIR/.index"
-TAGFILE="$XDG_MUSIC_DIR/.tags"
 
 function get_file() {
     local input="$1"
@@ -81,8 +80,7 @@ function mk_tag() {
 }
 
 function mk_taglist() {
-    local single_letters="$(cat "$TAGFILE" | grep '^single' | sed 's|^single ||' | tr ' ' '\n')"
-    local multi_letters="$(cat "$TAGFILE" | grep '^multi' | sed 's|^multi ||' | tr ' ' '\n')"
+    local letters="$(cat "$INDEXFILE" | sed -e 's|^.* /// ||' -e 's|=[^ ]*| |g' | tr ' ' '\n' | sort | uniq | grep . | grep -v t)"
     local done_letters=""
     local taglist
 
@@ -90,35 +88,28 @@ function mk_taglist() {
         # select a letter
         local letterlist
         if [ -z "$done_letters" ]; then
-            letterlist="$(echo -e "$single_letters\n$multi_letters")"
+            letterlist="$(echo "$letters")"
         else
-            letterlist="$(echo -e "$single_letters\n$multi_letters" | grep -v "$(echo "$done_letters" | tr '\n' ' ' | sed 's+ \(.\)+\\\|\1+g' | tr ' ' '\n')")"
+            letterlist="$(
+                echo "$letters" | grep -v "$done_letters"
+                echo "$letters" | grep "$done_letters" | sed 's|$|>|'
+            )"
         fi
 
-        local letter="$(echo "$letterlist" | sort | fzf --preview "echo \"$taglist\"" | sed 's|^\(.\) *$|\1|')"
+        local letter="$(echo "$letterlist" | sort | fzf --preview "echo \"$taglist\"" | grep -o '^.')"
         [ -z "$letter" ] && break
 
-        if echo "$single_letters" | grep -q "$letter"; then
-            local tag="$(mk_tag "$letter" "$taglist")"
-            [ -z "$tag" ] && continue
-            taglist="$(
-                [ -n "$taglist" ] && echo "$taglist"
-                echo "$letter=$tag"
-            )"
+        local tag="$(mk_tag "$letter" "$taglist")"
+        [ -z "$tag" ] && continue
+        taglist="$(
+            [ -n "$taglist" ] && echo "$taglist"
+            echo "$letter=$tag"
+        )"
 
-            done_letters="$(
-                [ -n "$done_letters" ] && echo "$done_letters"
-                echo "$letter"
-            )"; done_letters="$(echo "$done_letters" | sort | uniq)"
-        elif echo "$multi_letters" | grep -q "$letter"; then
-            while true; do
-                local tag="$(mk_tag "$letter" "$taglist")"
-                [ -z "$tag" ] && break
-                taglist="$(
-                    [ -n "$taglist" ] && echo "$taglist"
-                    echo "$letter=$tag"
-                )"
-            done
+        if [ -n "$done_letters" ]; then
+            done_letters+="\|$letter"
+        else
+            done_letters="$letter"
         fi
     done
 
@@ -184,12 +175,15 @@ while true; do
 
     if [ -n "$input" ]; then
         echo "got input $input"
+
         handle_request "$input"
-        sed -i 1d "$INFILE"
-        echo "awaiting input from '$INFILE'"
+
         drop
+        echo "awaiting input from '$INFILE'"
     else
         sleep 1
     fi
+
+    sed -i 1d "$INFILE"
 done
 ''

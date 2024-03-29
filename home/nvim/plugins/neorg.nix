@@ -87,6 +87,7 @@ let
 
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "vhyrro/luarocks.nvim",
         },
 
     }'';

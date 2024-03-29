@@ -36,6 +36,7 @@ in {
         (import ./plugins/lspconfig.nix    args).plugin //
         (import ./plugins/lualine.nix      args).plugin //
         (import ./plugins/luasnip.nix      args).plugin //
+        (import ./plugins/luarocks.nix     args).plugin //
         (import ./plugins/mini.nix         args).plugin //
         (import ./plugins/neorg.nix        args).plugin //
         (import ./plugins/noice.nix        args).plugin //

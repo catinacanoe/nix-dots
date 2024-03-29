@@ -1,8 +1,7 @@
 { pkgs, ... }: pkgs.writeShellScriptBin "player" ''
-TAGFILE="$XDG_MUSIC_DIR/.tags"
 INDEXFILE="$XDG_MUSIC_DIR/.index"
 
-letters="$(cat "$TAGFILE" | sed 's|[^ ]* ||' | tr ' ' '\n' | sort)"
+letters="$(cat "$INDEXFILE" | sed -e 's|^.* /// ||' -e 's|=[^ ]*| |g' | tr ' ' '\n' | sort | uniq | grep . | grep -v t)"
 songlist="$(cat "$INDEXFILE")"
 tags="$(echo "$letters" | sed 's|^.|&:|')"
 

@@ -32,6 +32,9 @@ keymap:
         ${(import ./modules/peripherals.nix) { inherit mod; }}
         ${(import ./modules/dropdown.nix) { inherit mod; }}
 
+        ${mod}-enter:
+            ${launch "sleep 0.7 && wtype -M ctrl -k l -k c && sleep 0.7 && wl-paste >> /tmp/mustagger.in"}
+
         ${mod}-p:
             ${launch "pw"}
         ${mod}-shift-p:

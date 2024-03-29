@@ -37,10 +37,14 @@ in
 
         ${mod}-5:
             ${launch "mpc prev"}
+        ${mod}-ctrl-5:
+            ${launch "mpc seek -5"}
         ${mod}-6:
             ${launch "mptoggle"}
         ${mod}-7:
             ${launch "mpc del 0"}
+        ${mod}-ctrl-8:
+            ${launch "mpc seek +5"}
         ${mod}-8:
             ${launch "mpc next"}
 
