@@ -155,10 +155,6 @@
         neovim nvimpager
         firefox ungoogled-chromium
         networkmanagerapplet wireguard-tools
-        # protonvpn-cli_2
-        # protonvpn-cli
-        # protonvpn-gui
-        # protonvpn-gui_legacy
         lf libqalculate
         (discord.override { # https://nixos.wiki/wiki/Discord
             withVencord = true;

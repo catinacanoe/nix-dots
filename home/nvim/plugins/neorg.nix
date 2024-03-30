@@ -2,6 +2,7 @@
 let
     config = /* lua */ ''{
         "nvim-neorg/neorg",
+        version = "v7.0.0", -- b/c rn 8.0 breaks me
         
         lazy = false,
         cmd = "Neorg",
@@ -86,7 +87,7 @@ let
         },
 
         dependencies = {
-            "nvim-lua/plenary.nvim",
+            -- "nvim-lua/plenary.nvim",
             "vhyrro/luarocks.nvim",
         },
 
