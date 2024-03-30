@@ -42,9 +42,6 @@ r ${repos}/
     n nix-dots/
         f flake.nix
         c config/
-            p packages/
-                n nsxiv/
-                    d default.nix
             c custom/
                 br browse.nix
                 bs browseshell.nix

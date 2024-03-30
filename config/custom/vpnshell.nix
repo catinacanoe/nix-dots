@@ -27,11 +27,11 @@ let
             echo "quit | q"
             echo "    quit this interactive shell"
             ;;
-        connect|up|c|u) protonvpn connect -f ;;
-        choose|ch) protonvpn connect ;;
-        disconnect|down|d) protonvpn disconnect ;;
-        reload|restart|r) protonvpn reconnect ;;
-        status|s) protonvpn status ;;
+        connect|up|c|u) wg-quick up vpn ;;
+        choose|ch) wg-quick up vpn ;; # can't pick and choose server :/
+        disconnect|down|d) wg-quick down vpn ;;
+        reload|restart|r) wg-quick down vpn && wg-quick up vpn ;;
+        status|s) wg ;;
         q) exit ;;
         *) echo "command not found. access the help menu with 'help' or 'h'" ;;
     esac

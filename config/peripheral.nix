@@ -23,11 +23,23 @@
     # wifi
     networking = {
         networkmanager.enable = true;
-	#nameservers = [ "1.0.0.1" ];
-#        wireless.iwd = {
-#	    enable = true;
-#	};
     };
+    environment.etc."wireguard/vpn.conf".text = ''
+        [Interface]
+        # Key for wireguard
+        # Bouncing = 0
+        # NAT-PMP (Port Forwarding) = off
+        # VPN Accelerator = on
+        PrivateKey = OJeGm+7t5t43XWIpGofsDA7niRAOEEdpQErjQgauqVM=
+        Address = 10.2.0.2/32
+        DNS = 10.2.0.1
+
+        [Peer]
+        # US-FREE#810029
+        PublicKey = EsmkJYLr6SaALk5nGw3oVeuu2DqGVr3VNdo7zK/or0Y=
+        AllowedIPs = 0.0.0.0/0
+        Endpoint = 143.244.44.166:51820
+    '';
 
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # Configure network proxy if necessary

@@ -17,10 +17,11 @@ function net_check() {
 }; net_check &
 
 function net_vpn() {
+    local vpn
     while true; do
-        vpn="$(protonvpn status | grep '^Status: ' | awk '{ print $2 }' | grep -o '^.' | sed -e 's|C|v |' -e 's|D||')"
+        [ -z "$(wg 2>&1)" ] && vpn="" || vpn="v "
         eww update "var_net_vpn=$vpn"
-    sleep 3; done
+    sleep 1; done
 }; net_vpn &
 
 function vol() {
