@@ -26,19 +26,19 @@
     };
     environment.etc."wireguard/vpn.conf".text = ''
         [Interface]
-        # Key for wireguard
-        # Bouncing = 0
+        # Key for main
+        # Bouncing = 1
         # NAT-PMP (Port Forwarding) = off
         # VPN Accelerator = on
-        PrivateKey = OJeGm+7t5t43XWIpGofsDA7niRAOEEdpQErjQgauqVM=
+        PrivateKey = EGSPUQLc1QwLSPRcctR23ow1M9KCqaFh4QTTQeR8r2k=
         Address = 10.2.0.2/32
         DNS = 10.2.0.1
 
         [Peer]
-        # US-FREE#810029
-        PublicKey = EsmkJYLr6SaALk5nGw3oVeuu2DqGVr3VNdo7zK/or0Y=
+        # US-FREE#415060
+        PublicKey = oGVahl/rkt0i22DILrVpPSmYZmqcmSup/HQ/upVf2Vg=
         AllowedIPs = 0.0.0.0/0
-        Endpoint = 143.244.44.166:51820
+        Endpoint = 138.199.35.120:51820
     '';
 
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
