@@ -9,7 +9,7 @@ eww open dock --restart
 function net_check() {
     while true; do
         local result=""
-        ping -c 1 gosdle.com &> /dev/null || result=" -"
+        ping -c 1 google.com &> /dev/null || result=" -"
 
         eww update "var_net_check=$result"
         echo "$result" > /tmp/net-check
