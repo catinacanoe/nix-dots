@@ -23,7 +23,7 @@
             (for workspace in var_workspaces
                 (box :orientation "vertical" :space-evenly false
                     (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${workspace.windows == 0 ? "mg-bg" : ""} ${workspace.windows == 1 ? "fg-bg" : ""} ${workspace.windows >= 2 ? var_mus_color : ""} ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                    (box :class "dock-workspaces ${workspace.windows == 0 ? "t3-bg" : ""} ${workspace.windows == 1 ? "fg-bg" : ""} ${workspace.windows >= 2 ? var_mus_color : ""} ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )

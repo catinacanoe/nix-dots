@@ -14,6 +14,7 @@ let
                 vim.cmd "Neorg inject-metadata"
                 vim.cmd("%s/^created: .*$/created: " .. os.date("%d.%m.%Y"))
                 vim.cmd("%s/^updated: .*$/updated: " .. os.date("%d.%m.%Y"))
+                vim.cmd("w!")
             end)
 
             vim.keymap.set("n", "<leader>rg", function()

@@ -11,13 +11,14 @@ function get_file() {
         local name="$(yt-dlp --skip-download --get-title --no-warnings "$input")"
         target="$TARGETPATH/$name.mp3"
         yt-dlp -o "$target" -x --audio-format mp3 --audio-quality 0 "$input" &> /dev/null
-        notify-send "music download complete"
 
     elif [ -f "$input" ]; then
         target="$TARGETPATH/$(basename "$input")"
         mv "$input" "$target" &> /dev/null
 
     else echo "ERROR: get_file: unrecognized input: $input" && return; fi
+
+    notify-send 'mustagger' 'music file ready for tagging'
 
     echo "$target"
 }
@@ -36,7 +37,7 @@ function rename_file() {
     local original="$(basename "$1" | sed -s 's|\.[^.]*$||')"
 
     local file="/tmp/$original.tmp"
-    echo "Rename this file (output will be read from bottom line):" > "$file"
+    echo "Rename this file (Output will be read from bottom line) (You'll have another opportunity to rename later):" > "$file"
     echo "$original" >> "$file"
 
     echo "$file"
@@ -161,29 +162,52 @@ function handle_request() {
     nvim "$TEST_FILE"
     taglist+=" t=$(cat "$TEST_FILE")"
 
-    echo "$targetstem /// $taglist" >> "$INDEXFILE"
-    echo "" > "$TEST_FILE"
+    # last rename
+    local finalrenamefile="$(mktemp)"
+    echo "Final opportunity to rename (leave empty to delete)" > "$finalrenamefile"
+    echo "$targetstem" >> "$finalrenamefile"
+    nvim "$finalrenamefile"
+    local finalstem="$(tail -n 1 "$finalrenamefile")"
 
+    echo "" > "$TEST_FILE"
     mpc single off
+
+    if [ -n "$finalstem" ] && [ "$finalstem" != "$targetstem" ]; then
+        mpc del 0
+        mv "$targetname" "$TARGETPATH/$finalstem.mp3"
+    elif [ -z "$finalstem" ]; then
+        mpc del 0
+        rm "$targetname"
+        return
+    else
+        finalstem="$targetstem"
+    fi
+
+    echo "$finalstem /// $taglist" >> "$INDEXFILE"
 }
 
 INFILE="/tmp/mustagger.in"
 [ -f "$INFILE" ] || touch "$INFILE"
 
+echo -n "awaiting input from '$INFILE' "
+
 while true; do
     input="$(head -n 1 "$INFILE")"
+    sed -i 1d "$INFILE"
 
     if [ -n "$input" ]; then
+        echo
         echo "got input $input"
+        echo
 
         handle_request "$input"
 
-        drop
-        echo "awaiting input from '$INFILE'"
+        echo
+        echo
+        echo -n "awaiting input from '$INFILE' "
     else
         sleep 1
+        echo -n '.'
     fi
-
-    sed -i 1d "$INFILE"
 done
 ''

@@ -48,6 +48,11 @@ in
         ${mod}-8:
             ${launch "mpc next"}
 
+        ${mod}-4:
+            ${launch "drop player"}
+        ${mod}-3:
+            ${launch "drop mtag"}
+
         ${mod}-shift-equal: # plus
             ${bright "${bright-def}+"}
         ${mod}-minus:

@@ -100,6 +100,7 @@
             { title = "Adam Something"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCcvfHa-GHSOHFAjU0-Ie57A"; tags = [ "fun" "yt" ]; }
             { title = "Alpha Phoenix"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCCWeRTgd79JL0ilH0ZywSJA"; tags = [ "fun" "yt" ]; }
             { title = "Vhyrro"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCBKNuaxVlSNvIN139KplUKw"; tags = [ "fun" "yt" ]; }
+            { title = "Vhyrro's Blog"; url = "https://vhyrro.github.io/rss.xml"; tags = [ "fun" ]; }
             { title = "Luke Smith"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA"; tags = [ "fun" "yt" ]; }
             { title = "Revlox"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCCE9OrwUdrrjTDdHOSh_Ntw"; tags = [ "fun" "yt" ]; }
             { title = "Code Aesthetic"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCaSCt8s_4nfkRglWCvNSDrg"; tags = [ "fun" "yt" ]; }

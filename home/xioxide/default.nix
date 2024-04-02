@@ -185,6 +185,8 @@ s ${config.programs.password-store.settings.PASSWORD_STORE_DIR}/
     m .map
 d ${download}/
 m ${music}/
+    i .index
+    s songs/
     d dl/
 v ${videos}/
     m meme/
