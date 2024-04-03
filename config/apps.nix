@@ -153,7 +153,7 @@
     
         # user apps
         neovim nvimpager
-        firefox ungoogled-chromium
+        firefox ungoogled-chromium brave
         networkmanagerapplet wireguard-tools
         lf libqalculate
         (discord.override { # https://nixos.wiki/wiki/Discord
