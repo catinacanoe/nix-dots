@@ -30,7 +30,7 @@ in
     # options nvidia NVreg_PreserveVideoMemoryAllocations=1
     # '';
 } else if hostname == "nixpad" then {
-    networking.networkmanager.wifi.macAddress = "stable"; # default preserve
+    # networking.networkmanager.wifi.macAddress = "stable"; # default preserve
 
     # sound stuff
     boot.extraModprobeConfig = ''
