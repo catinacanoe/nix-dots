@@ -162,7 +162,7 @@
         cava
         kitty
         mpv-unwrapped
-        tofi
+        krita
         neomutt
         sioyek
         zsh
