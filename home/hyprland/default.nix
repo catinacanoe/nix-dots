@@ -54,11 +54,6 @@ in {
     # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
     windowrulev2 = opacity 1.0 override 1.0, class:^(firefox)$
     windowrulev2 = opacity 1.0 override 1.0, class:^(imv)$
-    windowrulev2 = opacity 0.99 override 0.99 override, class:^(Lunar Client)
-    windowrulev2 = fakefullscreen, class:^(Lunar Client)
-    windowrulev2 = maximize, class:^(Lunar Client)
-
-    windowrulev2 = opacity 0.7, class:^(sioyek)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
