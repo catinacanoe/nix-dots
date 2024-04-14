@@ -27,6 +27,9 @@ gh github.com/
 gpt chat.openai.com/
 ee deepl.com/
 
+spo app.goshippo.com/
+bl bricklink.com/v2/main.page/
+
 ic fuhsd.infinitecampus.org/campus/portal/fremont.jsp
 des desmos.com/graphing/
 

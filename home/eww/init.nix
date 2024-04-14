@@ -293,4 +293,23 @@ function visualizer() {
         eww update "var_cava=$(echo "$cmd" | sed "$dict")"
     done < $pipe
 }; visualizer &
+
+function sussy_baka() {
+    while true; do
+        cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
+            notify-send "this nugget is watching paaaaawn" "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 1000; echo)"
+
+        cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
+            notify-send "NO ... BIG NO ... DO NOT" "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 1000; echo)"
+
+        cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
+            notify-send "Get back into the garden ... NEVERRR!!!!?!!!?!!!" "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 1000; echo)"
+
+        cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
+            notify-send "If you don't even help yourself, then you are really alone" "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 1000; echo)"
+
+        cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
+            notify-send "Chasing artificial snowflakes is A THOUSAND TIMES worse than chasing butterflies... and that is already bad" "$(tr -dc A-Za-z0-9 </dev/urandom | head -c 1000; echo)"
+    sleep 3; done
+}; sussy_baka &
 ''
