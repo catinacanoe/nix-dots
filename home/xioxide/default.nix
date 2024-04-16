@@ -273,7 +273,6 @@ x ${documents}/
             s selling.norg
         i .index.norg
     i important/
-    b bricklink/
     m mail/
         c canoe/
         m marklif/

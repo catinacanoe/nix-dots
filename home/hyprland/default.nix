@@ -37,7 +37,6 @@ in {
     exec-once = drop init
 
     exec-once = kitty
-    exec-once = discord --start-minimized ${if host == "nixbox" then "--enable-features=UseOzonePlatform --ozone-platform=wayland" else ""}
     exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
     exec = sleep 1 && swww init
 
