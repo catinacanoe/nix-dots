@@ -22,9 +22,12 @@ function open() {
         wtype -M ctrl -k t -m ctrl
     fi
 
-    sleep 0.2
+    wl-copy "$@"
 
-    wtype "$@ "
+    sleep 0.25
+    wtype -M ctrl -k v -m ctrl
+
+    wtype -k Space
     wtype -k Backspace
     wtype -k Return
 }
