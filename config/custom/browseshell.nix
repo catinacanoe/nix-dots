@@ -8,6 +8,7 @@ function encode() {
 }
 
 function open() {
+    wl-copy "$@"
     hyprctl dispatch focuscurrentorlast &> /dev/null
 
     [ "$(hyprctl activewindow -j | jq .class)" == "\"$BROWSER\"" ] || return
@@ -22,13 +23,9 @@ function open() {
         wtype -M ctrl -k t -m ctrl
     fi
 
-    wl-copy "$@"
-
-    sleep 0.25
+    sleep 0.15
     wtype -M ctrl -k v -m ctrl
-
-    wtype -k Space
-    wtype -k Backspace
+    sleep 0.15
     wtype -k Return
 }
 
