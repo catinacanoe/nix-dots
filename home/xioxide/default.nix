@@ -271,6 +271,7 @@ x ${documents}/
             a airborne.norg
             r rsm.norg
             s selling.norg
+        f fitness/
         i .index.norg
     i important/
     m mail/
