@@ -23,6 +23,6 @@ in
         maxCacheTtl = timeout;
         maxCacheTtlSsh = timeout;
 
-        extraConfig = "";
+        extraConfig = "allow-loopback-pinentry";
     };
 }

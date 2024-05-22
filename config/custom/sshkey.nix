@@ -5,6 +5,6 @@
 
 ssh-add -L | grep -q "$(cat "/home/canoe/.ssh/$name.pub")" && exit
 
-sleep 0.01 && wtype "$(pass "ssh/$name")" && wtype -k Return &
+sleep 0.01 && wtype "$(gpg --pinentry-mode loopback -quiet -d "$PASSWORD_STORE_DIR/ssh/$name.gpg")" && wtype -k Return &
 ssh-add "/home/canoe/.ssh/$name"
 ''

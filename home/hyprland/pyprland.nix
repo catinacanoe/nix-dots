@@ -16,6 +16,11 @@
                 size = "50% 50%"
                 position = "25% 40%"
             '';
+
+            tinyterm = /* toml */ ''
+                size = "50% 20%"
+                position = "25% 40%"
+            '';
         } else let 
             sizing = /* toml */ ''
                 size = "70% 70%"
@@ -25,7 +30,18 @@
             term = sizing;
             browser = sizing;
             gpt = sizing;
+            tinyterm = /* toml */ ''
+                size = "30% 16%"
+                position = "35% 42%"
+            '';
         };
+
+        tinytermpad = name: command: /* toml */ ''
+            [scratchpads.${name}]
+            command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
+            lazy = true
+            ${size.tinyterm}
+        '';
 
         termpad = name: command: /* toml */ ''
             [scratchpads.${name}]
@@ -61,12 +77,15 @@
     ${focustermpad "browseshell" "browseshell"}
     ${focustermpad "launcher" "launcher"}
     ${focustermpad "menu" "menuui"}
+    
 
     ${termpad "news" "newsboat"}
     ${termpad "mtag" "mustagger"}
     ${termpad "player" "player"}
     ${termpad "qalc" "qalc"}
     ${termpad "bluetooth" "bluetoothctl"}
+
+    ${tinytermpad "gpgpass" "$XDG_REPOSITORY_DIR/pw/unlock.sh"}
 
     [scratchpads.top]
     command = "${config.home.sessionVariables.TERMINAL} --class scratchpad gotop"
