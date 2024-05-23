@@ -138,6 +138,7 @@
         python311Full
         python311Packages.docx2txt
         python311Packages.howdoi
+        oraclejdk
 
         clang_15 boost183 ncurses
 
