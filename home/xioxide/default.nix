@@ -22,7 +22,12 @@ with config.xdg.userDirs;
 t /
     m mnt/
 r ${repos}/
-    c crypt/
+    c cadence/
+        s src/
+        d dox/
+        r run/
+        n shell.nix
+    y crypt/
         r README.md
         m main.sh
         f fn/
