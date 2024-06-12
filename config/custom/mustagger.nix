@@ -27,9 +27,13 @@ function start_playback() {
     local name="$1"
 
     mpc update
+    sleep 0.1
     mpc insert "$name"
+    sleep 0.1
     mpc single on
+    sleep 0.1
     mpc play
+    sleep 0.1
     mpc next
 }
 

@@ -63,6 +63,8 @@ in
             q = "qalc";
 
             nt = "~/dox/norgtask/bin/asan";
+
+            ns = "nix-shell";
         };
 
         initExtraFirst = let

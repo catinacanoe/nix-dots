@@ -26,8 +26,15 @@ let
             vim.api.nvim_create_autocmd({"BufRead"}, {
                 pattern = { "*.norg" },
                 callback = function(ev)
-                    vim.cmd("%s/^updated: .*$/updated: " .. os.date("%d.%m.%Y"))
+
+                    local target_folder = "/dox/wiki/"
+                    local file_path = vim.fn.expand("<afile>:p")
+
+                    if string.find(file_path, target_folder, 1, true) then
+                        vim.cmd("%s/^updated: .*$/updated: " .. os.date("%d.%m.%Y"))
+                    end
                 end
+
             })
         end,
 
