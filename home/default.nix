@@ -31,6 +31,7 @@ in
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
         ./bat
         ./cava
+        ./cadence
         ./crypt
         ./discord
         ./dye
