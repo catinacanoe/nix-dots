@@ -12,7 +12,7 @@
     min-width: 6px; 
 }
 .left {
-    background: ${rice.col.bg.h};
+    background: ${rice.col.fg.h};
 }
 progressbar > trough {
     min-width: 60px;
