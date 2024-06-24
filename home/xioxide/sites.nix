@@ -30,7 +30,8 @@ ee deepl.com/
 spo app.goshippo.com/
 bl bricklink.com/v2/main.page
 
-ic fuhsd.infinitecampus.org/campus/portal/fremont.jsp
+ic fuhsd.infinitecampus.org/campus/portal/students/fremont.jsp
+icd fuhsd.infinitecampus.org/campus/nav-wrapper/student/portal/student/documents?appName=fremont
 des desmos.com/graphing/
 
 x moz-extension://

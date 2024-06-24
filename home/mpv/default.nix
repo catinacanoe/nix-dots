@@ -14,6 +14,7 @@ in {
             o = "seek +10";
             O = "seek +30";
             
+            # shift L is loop
             l = "set speed 1";
             TAB = "add speed 0.1";
             u = "add speed -0.1";
