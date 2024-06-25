@@ -139,7 +139,7 @@
         python311Packages.docx2txt
         python311Packages.howdoi
 
-        clang_15 boost183 ncurses
+        clang_15 boost183 ncurses tomlplusplus
 
         lua
 
