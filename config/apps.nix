@@ -140,6 +140,7 @@
         python311Packages.howdoi
 
         clang_15 boost183 ncurses tomlplusplus
+        # qt6ct
 
         lua
 
