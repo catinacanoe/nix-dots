@@ -256,22 +256,17 @@ x ${documents}/
             r room.norg
             v vehicles.norg
         x linux/
-        o school/stanford/
-            c cs.norg
-            d datasci.norg
-            m multivar.norg
-        # o school/
-        #     a .avid.norg
-        #     c .czech.norg
-        #     h .history.norg
-        #     l .literature.norg
-        #     m .math.norg
-        #     o .other.norg
-        #     e .ped.norg
-        #     p .physics.norg
-        #     r .rsm.norg
-        #     s .spanish.norg
-        #     p other-posthigh.norg
+        o school/
+            i .index.norg
+            c .chem.norg
+            h .gov.norg
+            m .stats.norg
+            a .avid.norg
+            s .spanish.norg
+            l .literature.norg
+            r .rsm.norg
+            o .other.norg
+            p other-posthigh.norg
         s softwaredev/
         y style/
             i .index.norg

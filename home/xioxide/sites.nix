@@ -54,13 +54,13 @@ cap verified.capitalone.com/auth/signin/
 
 o fuhsd.schoology.com/
 ob bessy.io/
+oc fuhsd.schoology.com/course/7380220864/
+oh fuhsd.schoology.com/course/7380221161/
+om fuhsd.schoology.com/course/7380220637/
+oa fuhsd.schoology.com/course/7380221323/
+os fuhsd.schoology.com/course/7380220633/
+ol fuhsd.schoology.com/course/7380221254/
 og fuhsd.schoology.com/grades/grades/
-oh fuhsd.schoology.com/course/7058103238/
-os fuhsd.schoology.com/course/7058103074/
-oe fuhsd.schoology.com/course/7058103253/
-om fuhsd.schoology.com/course/7058103542/
-ol fuhsd.schoology.com/course/7058103046/
-op fuhsd.schoology.com/course/7058103604/
 or homework.russianschool.com/
 
 gp google.com/maps
