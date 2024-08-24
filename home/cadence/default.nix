@@ -84,6 +84,8 @@ quit = ";n"
     cancel_rename = ";n"
     clear_rename = "<left>"
 
+    reload = "<c-r>"
+
     undo = "u"
     redo = "U"
 
@@ -102,17 +104,20 @@ quit = ";n"
     extend_bottom_up = "<up>"
     extend_bottom_down = "<down>"
 
-    # move_up_snap = ","
-    # move_down_snap = ":"
+    move_up_snap = "<tab>"
+    move_down_snap = "."
+    extend_top_up_snap = "q"
+    extend_bottom_down_snap = "'"
 
-    # extend_top_up_snap = "w"
-    # extend_top_down_snap = "'"
-    # extend_bottom_up_snap = "."
-    # extend_bottom_down_snap = ";"
+    set_col_white  = "cw" # imitates numpad
+    set_col_red    = "c."
+    set_col_green  = "c;"
+    set_col_yellow = "cn"
+    set_col_blue   = "ca"
+    set_col_purple = "ci"
+    set_col_aqua   = "cl"
+    set_col_gray   = "c<tab>"
 
-        [keybinds.week.highlight_mode]
-
-        highlight = "v"
-        highlight_group = "g"
-        exit_mode = ";n"
+    toggle_important = "cu"
+    toggle_collapsible = "co"
 ''; }
