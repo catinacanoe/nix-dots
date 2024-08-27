@@ -16,10 +16,17 @@ target_gap_width = 6
 frame_time = 40
 
     [ui.colors] # white, red, green, yellow, blue, purple, aqua, gray
-    relative = 3
-    focus = 1
-    cursor = 3
-    background = 7
+    relative = 4 # blue
+    today = 2 # green
+    background = 7 # gray
+    cursor = -1 # mimic relative / focus
+
+    link_http = 20 # 4 + 16 blue
+    link_task = 18 # 2 + 16 green
+    link_file = 21 # 5 + 16 purple
+
+    status_normal = 23 # 7 + 16 gray
+    status_rename = 18 # 2 + 16 gray
 
     [ui.relative_time]
     yesterday = "Ytdy"
@@ -64,6 +71,7 @@ frame_time = 40
     background_hz = " "
     background_vr = "┆"
     background_fill = " "
+    background_focus_fill = "·"
 
 [keybinds]
 timeout = 500
@@ -76,8 +84,8 @@ right = "o"
 quit = ";n"
 
     [keybinds.week]
-    follow_link = "e"
-    open_source_file = "h"
+    follow_link = "<cr>"
+    edit_block_source = "h"
 
     rename = "m"
     confirm_rename = "<cr>"
@@ -108,6 +116,11 @@ quit = ";n"
     move_down_snap = "."
     extend_top_up_snap = "q"
     extend_bottom_down_snap = "'"
+
+    copy_left = "R"
+    copy_down = "S"
+    copy_up = "T"
+    copy_right = "H"
 
     set_col_white  = "cw" # imitates numpad
     set_col_red    = "c."

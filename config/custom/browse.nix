@@ -5,6 +5,6 @@ has_browser="$(hyprctl clients -j | jq "map(if .workspace.id == $current_ws then
 if [ "$has_browser" == "true" ]; then
     hyprctl dispatch exec $BROWSER $@
 else
-    hyprctl dispatch exec $BROWSER --new-window $@
+    hyprctl dispatch exec "$BROWSER --new-window" $@
 fi
 ''

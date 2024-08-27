@@ -169,7 +169,6 @@
         zsh
         zoom-us
         slack
-        qtcreator
 
         # core system apps
         hyprland
