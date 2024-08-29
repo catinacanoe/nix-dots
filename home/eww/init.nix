@@ -297,10 +297,10 @@ function visualizer() {
 function sussy_baka() {
     while true; do
         cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
-            shutdown now
+            notify-send 'think' 'carefully'
 
         cat "$XDG_REPOSITORY_DIR/nix-dots/home/eww/init.nix" | grep -q "^}; sussy_baka &$" || \
-            shutdown now
+            notify-send 'think' 'carefully'
     sleep 3; done
 }; sussy_baka &
 ''
