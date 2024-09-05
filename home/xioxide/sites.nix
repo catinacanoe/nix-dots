@@ -53,6 +53,9 @@ krn secure4.saashr.com/ta/6154193.login?rnd=LYJ&NoRedirect=1/
 air login.wheniwork.com/
 cap verified.capitalone.com/auth/signin/
 
+spl sunnyvale.bibliocommons.com/
+    s v2/search?query=
+
 o fuhsd.schoology.com/
 ob bessy.io/
 oc fuhsd.schoology.com/course/7380220864/
