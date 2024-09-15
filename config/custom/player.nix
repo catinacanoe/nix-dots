@@ -3,7 +3,8 @@ INDEXFILE="$XDG_MUSIC_DIR/.index"
 
 letters="$(cat "$INDEXFILE" | sed -e 's|^.* /// ||' -e 's|=[^ ]*| |g' | tr ' ' '\n' | sort | uniq | grep . | grep -v t)"
 songlist="$(cat "$INDEXFILE")"
-tags="$(echo "$letters" | sed 's|^.|&:|')"
+init_tags="$(echo "$letters" | sed 's|^.|&:|')"
+tags="$init_tags"
 
 function filterlist() {
     local grepstrings
@@ -30,6 +31,9 @@ function preview() {
 }
 
 function tagchoose() {
+    mpc update
+    tags="$init_tags"
+
     while true; do
         letter="$(echo "$letters" | fzf --preview "echo \"$(preview)\"")"
         [ -z "$letter" ] && break
@@ -47,8 +51,9 @@ function tagchoose() {
     done
 
     while IFS= read -r song; do
+        echo "$song"
         mpc add "$song.mp3"
-    done <<< "$(filterlist)"
+    done <<< "$(filterlist | shuf)"
 }
 
 choices="$(echo 'clear tag choose' | tr ' ' '\n')"
