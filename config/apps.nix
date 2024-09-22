@@ -175,7 +175,7 @@
         hypr pyprland
         pulseaudio pipewire
         waybar
-        eww-wayland
+        eww
         swaylock-effects
         mako
         swww

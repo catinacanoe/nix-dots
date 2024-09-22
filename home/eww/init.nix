@@ -244,7 +244,7 @@ function music() {
             [ -z "$color" ] && color="purple-orange-yellow"
 
             echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
-            echo "$stat" | tail -n 1 | grep -q 'random: on' && indicator+="~ "
+            echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
             echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
 
             echo "$stat" | sed -n 2p | grep -q '\[playing\]' && playing="true"

@@ -13,6 +13,8 @@
         ./hosts.nix
     ];
 
+    system.autoUpgrade.enable = true;
+
     networking.hostName = import ../ignore-hostname.nix;
 
     nix.nixPath = [
