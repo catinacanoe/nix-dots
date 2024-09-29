@@ -18,6 +18,7 @@
         netshell    = (import ./custom/netshell.nix args);
         nixshell    = (import ./custom/nixshell.nix args);
         player      = (import ./custom/player.nix args);
+        plyr        = (import ./custom/plyr.nix args);
         setbright   = (import ./custom/setbright.nix args);
         setvol      = (import ./custom/setvol.nix args);
         sshkey      = (import ./custom/sshkey.nix args);
@@ -37,6 +38,7 @@
         netshell
         nixshell
         player
+        plyr
         setbright
         setvol
         sshkey
@@ -175,7 +177,7 @@
         hypr pyprland
         pulseaudio pipewire
         waybar
-        eww
+        eww-wayland
         swaylock-effects
         mako
         swww

@@ -36,17 +36,19 @@ in
             ${vol "0"}
 
         ${mod}-5:
-            ${launch "mpc prev"}
+            ${launch "plyr prev"}
         ${mod}-ctrl-5:
-            ${launch "mpc seek -5"}
+            ${launch "plyr seek -5"}
         ${mod}-6:
-            ${launch "mptoggle"}
+            ${launch "plyr toggle"}
+        ${mod}-ctrl-6:
+            ${launch "plyr switch"}
         ${mod}-7:
             ${launch "mpc del 0"}
         ${mod}-ctrl-8:
-            ${launch "mpc seek +5"}
+            ${launch "plyr seek +5"}
         ${mod}-8:
-            ${launch "mpc next"}
+            ${launch "plyr next"}
 
         ${mod}-4:
             ${launch "drop player"}

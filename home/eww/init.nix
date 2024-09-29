@@ -191,72 +191,19 @@ function update_css_from_index() {
 }; update_css_from_index &
 
 function music() {
-    local stat
-    local na
     local name
-    local next
-    local progress
-    local indicator
     local color
 
     while true; do
-        stat="$(mpc status)"
-        pctl="$(playerctl status)"
+        # char limit
+        name="$(plyr current | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "55"}\}[^$]\).*|\1 ...|')"
 
-        name=""
-        next=""
-        playing="false"
-        indicator=""
-        color="red-purple-orange"
-        progress="0"
-        type="mpd"
-
-        if [ "$pctl" == "Playing" ] && [ -z "$(echo "$stat" | sed -n 2p | grep '\[playing\]')" ]; then
-            name="$(playerctl metadata title)"
-            
-            if [ -n "$name" ]; then
-                if echo "$name" | grep -q " - "; then true
-                elif echo "$name" | grep -q " — "; then true
-                else
-                    name="$(playerctl metadata artist | sed 's| - Topic$||') - $name"
-                fi
-
-                name="$(echo "$name" | sed \
-                -e 's|\[.*\]\s*$||' \
-                -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
-                -e 's|\s*(.*lyric.*)\s*||i' \
-                -e 's|\s*(.*video.*)\s*||i' \
-                -e 's|\s*$||'
-                )"
-
-                progress="0"
-                type="playerctl"
-                playing="true"
-            fi
-        elif [ "$(echo "$stat" | wc -l)" != "1" ]; then
-            name="$(echo "$stat" | head -n 1 | sed 's|\.[^.]*$||')"
-            next="$(mpc queue | sed 's|\.[^.]*$||')"
-            [ "$name" == "$next" ] && next=""
-
-            progress="$(echo "$stat" | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||')"
-
-            color="$(grep "$(basename "$name") /// " "$XDG_MUSIC_DIR/.index" | grep -o 't=[^ ]\+' | sed 's|^t=||')"
-            [ -z "$color" ] && color="purple-orange-yellow"
-
-            echo "$stat" | tail -n 1 | grep -q 'single: on' && indicator+="* "
-            echo "$stat" | tail -n 1 | grep -q 'random: off' && indicator+="~ "
-            echo "$stat" | tail -n 1 | grep -q 'repeat: off' && indicator+="- "
-
-            echo "$stat" | sed -n 2p | grep -q '\[playing\]' && playing="true"
-        fi
-
-        name="$(echo "$name" | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "55"}\}[^$]\).*|\1 ...|')"
-
+        color="$(plyr color)"
         local testcol="$(cat /tmp/eww-test-color)"
         [ -n "$testcol" ] && color="$testcol"
         add_gradient_css "$color" reload
 
-        eww update "var_mus_color=$color" "var_mus_playing=$playing" "var_mus_type=$type" "var_mus_current=$name" "var_mus_progress=$progress" "var_mus_indicator=$indicator" "var_mus_next=$next"
+        eww update "var_mus_color=$color" "var_mus_playing=$(plyr playing)" "var_mus_type=$(plyr client)" "var_mus_current=$name" "var_mus_progress=$(plyr progress)" "var_mus_indicator=$(plyr indicator)" "var_mus_next=$(plyr queue)"
     sleep 0.5; done
 }; music &
 

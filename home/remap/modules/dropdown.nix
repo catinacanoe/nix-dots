@@ -8,7 +8,7 @@ in
         ${mod}-w:
             ${launch "pypr toggle browseshell"}
         ${mod}-comma:
-            ${drop "focus"}
+            ${drop "launcher"}
         ${mod}-dot:
             remap:
                 ${mod}-w:
