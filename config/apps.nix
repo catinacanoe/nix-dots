@@ -130,6 +130,7 @@
         xdragon
         xz
         yt-dlp
+        zip
         zsteg
 
         # nvidia compat
