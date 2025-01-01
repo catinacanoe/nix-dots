@@ -5,6 +5,7 @@ let
 in
 {
     networking.networkmanager.wifi.powersave = false;
+
 } // (if hostname == "nixbox" then {
     hardware.nvidia = {
         modesetting.enable = true;
@@ -36,4 +37,6 @@ in
         options snd slots=snd-hda-intel
         options snd_hda_intel enable=0,1
     '';
+
+    # hardware.opengl.enable = true;
 } else {})

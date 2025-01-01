@@ -38,19 +38,19 @@ in
         mkdir -p "${wppdir}"
 
         echo "generation 1/4 overlaying ${color}"
-        convert "$target" -fill '${color}' -colorize 65% -quality 100 -depth 16 "$DIM"
+        magick "$target" -fill '${color}' -colorize 65% -quality 100 -depth 16 "$DIM"
 
         echo "generation 2/4 blurring dimmed image"
-        convert "$DIM" -blur 0x30 -quality 100 -depth 16 "$DIMBLUR"
+        magick "$DIM" -blur 0x30 -quality 100 -depth 16 "$DIMBLUR"
 
         echo "generation 3/4 blurring original image"
-        convert "$target" -blur 0x30 -quality 100 -depth 16 "$BLUR"
+        magick "$target" -blur 0x30 -quality 100 -depth 16 "$BLUR"
 
         echo "generation 4/4 compressing original image"
         if echo "$target" | grep -q ".jpg$\|.jpeg$"; then
             cp "$target" "$JPEG"
         else
-            convert "$target" -quality 100 -depth 16 "$JPEG"
+            magick "$target" -quality 100 -depth 16 "$JPEG"
         fi
 
         echo

@@ -94,7 +94,7 @@ in {
     plugin."${plugins}/lspconfig.lua".text = "return {${config}}";
 
     dependencies = with pkgs; [
-        nil alejandra nixfmt
+        nil alejandra nixfmt-rfc-style
         lua-language-server stylua lua54Packages.luacheck
         nodePackages_latest.bash-language-server shfmt zsh
     ];

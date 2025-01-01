@@ -19,7 +19,7 @@ in
                 ${mod}-p:
                     ${drop "top"}
                 ${mod}-s:
-                    ${drop "news"}
+                    ${drop "spotify"}
                 ${mod}-m:
                     ${drop "network"}
                 ${mod}-n:

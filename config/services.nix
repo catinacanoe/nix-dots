@@ -11,6 +11,10 @@
         agentTimeout = "5h";
     };
 
+    services.seatd = {
+        enable = true;
+    };
+
     services.atd = {
         enable = true;
         allowEveryone = true;
@@ -26,6 +30,7 @@
             pkgs.hplipWithPlugin
         ];
     };
+
     services.avahi = {
         enable = true;
         nssmdns4 = true;

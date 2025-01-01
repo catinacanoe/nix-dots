@@ -38,11 +38,16 @@ in {
 
     exec-once = kitty
     exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
-    exec = sleep 1 && swww init
+    exec = sleep 1 && swww-daemon
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
     env = XCURSOR_SIZE,${toString config.home.pointerCursor.size} # affected by scale (i think)
+
+    # gtk-layer-shell is the 'namespace' (see `hyprctl layers`)
+    # that contains the eww bar
+    layerrule = ignorezero, gtk-layer-shell # ensures transparent pixels are not blurred
+    layerrule = blur, gtk-layer-shell # blurs the bar
 
     # window rules to make rofi always floating and stuff
     # or to set window opacity
@@ -51,7 +56,7 @@ in {
     # windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
     # windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class:^(firefox)$
     # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
-    windowrulev2 = opacity 1.0 override 1.0, class:^(firefox)$
+    windowrulev2 = opacity 1.0 override 0.9 override, class:^(firefox)$
     windowrulev2 = opacity 1.0 override 1.0, class:^(imv)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
@@ -62,9 +67,13 @@ in {
     bezier=linear, 1, 1, 0, 0
     bezier=easeout, 0.25, 1, 0.5, 1
 
+    debug {
+        disable_logs = false
+        enable_stdout_logs = true
+    }
+
     general {
         # defaults
-        no_cursor_warps = false # allow cursor to be moved by refocus
         border_size = ${toString window.border}
         gaps_in = ${toString window.gaps-in}
         gaps_out = ${toString window.gaps-out}
@@ -74,11 +83,14 @@ in {
         col.active_border         = ${gradient}
         col.nogroup_border_active = ${gradient}
 
-        cursor_inactive_timeout = 30
         layout = dwindle
 
         no_focus_fallback = true # don't wrap around when moving focus into a wall
     }#general
+
+    cursor {
+        inactive_timeout = 30
+    }#cursor
 
     decoration {
         # defaults
@@ -89,7 +101,9 @@ in {
         fullscreen_opacity = 1.0
         active_opacity = 0.9
         inactive_opacity = 0.8
-        drop_shadow = false
+        shadow {
+            enabled = false
+        }#shadow
 
         blur {
             # defaults

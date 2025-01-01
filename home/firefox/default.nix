@@ -7,6 +7,10 @@ let
             ${import ./modules/vars.nix rice}
         }
     '';
+
+    # about:config - browser.fullscreen.autohide
+    # set to false to keep navbar present in fullscreen
+
     userchrome-full = /* css */ ''
         :root {
             ${import ./modules/vars.nix rice}
@@ -22,7 +26,7 @@ let
         xxx { display: none !important; }
 
         browser#webext-panels-browser {
-            background-image: var(--rwall-blur);
+            background-color: var(--rcol-bg);
         }
 
         html|input.findbar-textbox::placeholder,
@@ -141,14 +145,14 @@ let
 
         toolbar#nav-bar {
             box-shadow: none !important;
-            background-image: var(--rwall-blur) !important;
-            ${let host = (import ../../ignore-hostname.nix); in if host == "nixbox" then ''
-            background-size: 3840px;
-            background-position: -19px -259px;
-            '' else if host == "nixpad" then ''
-            background-size: 1920px;
-            background-position: -22px -107px;
-            '' else ""}
+            background-color: var(--rcol-bg) !important;
+            /* ${let host = (import ../../ignore-hostname.nix); in if host == "nixbox" then '' */
+            /* background-size: 3840px; */
+            /* background-position: -19px -259px; */
+            /* '' else if host == "nixpad" then '' */
+            /* background-size: 1920px; */
+            /* background-position: -22px -107px; */
+            /* '' else ""} */
         }
 
         /* Sets the URL bar color */
@@ -169,7 +173,8 @@ let
         }
 
         /* If the window is wider than 1000px, use flex layout */
-        @media (min-width: 500px) {
+        /* @media (min-width: 500px) { */
+        @media (min-width: 1px) {
             #navigator-toolbox {
                 display: flex !important;
                 flex-direction: row !important;
@@ -259,7 +264,7 @@ let
             --positionX1: 48px; /* '48px' for left, '0px' for right sidebar */
             --positionX2: absolute; /* 'absolute' for left, 'none' for right sidebar */
             /* width of the collapsed sidebar in fullscreen mode ('1px' or '48px') */
-            --fullscreen-sidebar-width: 0px;
+            --fullscreen-sidebar-width: 48px;
         }
 
         /* Linux/GTK specific styles */
@@ -353,7 +358,7 @@ let
             max-width: 48px;
             overflow: hidden;
             border-right: none !important;
-            z-index: 1;
+            z-index: 3;
             top: 0;
             bottom: 0;
         }
@@ -367,9 +372,10 @@ let
         #main-window:not([chromehidden~="toolbar"]) #sidebar-box[sidebarcommand*="tabcenter"]:hover #sidebar,
         #main-window:not([chromehidden~="toolbar"]) #sidebar-box[sidebarcommand*="tabcenter"]:hover {
             min-width: 10vw !important;
-            width: 30vw !important;
-            max-width: 200px !important;
-            z-index: 1 !important;
+            width: 20vw !important;
+            /* max-width: 250px !important; */
+            max-width: 20vw !important; /*mark* */ 
+            z-index: 3 !important;
             transition: all var(--transition-time) ease var(--delay);
         }
 
@@ -395,12 +401,12 @@ let
             height: 100%;
         }
 
-        #main-window:not([inFullscreen]):not([chromehidden~="toolbar"]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #appcontent {
-            margin-left: var(--positionX1);
+        #main-window:not([inFullscreen]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #tabbrowser-tabbox {
+            margin-left: var(--positionX1) !important;
         }
 
-        #main-window[inFullscreen]:not([inDOMFullscreen]):not([chromehidden~="toolbar"]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #appcontent {
-            margin-left: var(--fullscreen-sidebar-width);
+        #main-window[inFullscreen]:not([inDOMFullscreen]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #tabbrowser-tabbox {
+            margin-left: var(--fullscreen-sidebar-width) !important;
         }
 
         #main-window[inFullscreen] #sidebar {
@@ -414,7 +420,8 @@ let
 
         [sidebarcommand*="tabcenter"] #sidebar-switcher-target,
         [sidebarcommand*="tabcenter"] #sidebar-close {
-            filter: invert(100%);
+            filter: none;
+            /* filter: invert(100%); */
         }
 
         @media (max-width: 630px) {
@@ -459,7 +466,7 @@ let
         }
 
         browser#webext-panels-browser {
-            background-image: var(--rwall-blur);
+            background-color: var(--rcol-bg);
         }
 
         html|input.findbar-textbox::placeholder,
@@ -577,7 +584,7 @@ let
         }
 
         toolbar#nav-bar {
-            background-image: var(--rwall-blur) !important;
+            background-color: var(--rcol-bg) !important;
             box-shadow: none !important;
         }
 
@@ -599,7 +606,7 @@ let
         }
 
         /* If the window is wider than 1000px, use flex layout */
-        @media (min-width: 500px) {
+        @media (min-width: 1px) {
             #navigator-toolbox {
                 flex-direction: row !important;
                 flex-wrap: wrap !important;
@@ -685,10 +692,10 @@ let
             /* delay before expanding tabs, set to '0' for no delay */
             --delay: 0.3s;
             --transition-time: 0.2s;
-            --positionX1: 0px; /* '48px' for left, '0px' for right sidebar */
+            --positionX1: 48px; /* '48px' for left, '0px' for right sidebar */
             --positionX2: 0px; /* 'absolute' for left, 'none' for right sidebar */
             /* width of the collapsed sidebar in fullscreen mode ('1px' or '48px') */
-            --fullscreen-sidebar-width: 0px;
+            --fullscreen-sidebar-width: 48px;
         }
 
         /* Linux/GTK specific styles */
@@ -782,7 +789,7 @@ let
             max-width: 0px;
             overflow: hidden;
             border-right: none !important;
-            z-index: 1;
+            z-index: 3;
             top: 0;
             bottom: 0;
         }
@@ -798,7 +805,7 @@ let
             min-width: 0px !important;
             width: 0px !important;
             max-width: 0px !important;
-            z-index: 1 !important;
+            z-index: 3 !important;
             transition: all var(--transition-time) ease var(--delay);
         }
 
@@ -824,12 +831,12 @@ let
             height: 100%;
         }
 
-        #main-window:not([inFullscreen]):not([chromehidden~="toolbar"]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #appcontent {
-            margin-left: var(--positionX1);
+        #main-window:not([inFullscreen]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #tabbrowser-tabbox {
+            margin-left: var(--positionX1) !important;
         }
 
-        #main-window[inFullscreen]:not([inDOMFullscreen]):not([chromehidden~="toolbar"]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #appcontent {
-            margin-left: var(--fullscreen-sidebar-width);
+        #main-window[inFullscreen]:not([inDOMFullscreen]) #sidebar-box[sidebarcommand*="tabcenter"]:not([hidden]) ~ #tabbrowser-tabbox {
+            margin-left: var(--fullscreen-sidebar-width) !important;
         }
 
         #main-window[inFullscreen] #sidebar {

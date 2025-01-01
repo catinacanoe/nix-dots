@@ -50,6 +50,13 @@
             ${size.term}
         '';
 
+        focuspad = name: command: /* toml */ ''
+            [scratchpads.${name}]
+            command = "${command}"
+            lazy = true
+            ${size.term}
+        '';
+
         focustermpad = name: command: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
@@ -74,10 +81,10 @@
     ${termpad "network" "sudo netshell"}
     ${termpad "nix" "nixshell"}
 
+    ${focuspad "spotify" "spotify"}
     ${focustermpad "browseshell" "browseshell"}
     ${focustermpad "launcher" "launcher"}
     ${focustermpad "menu" "menuui"}
-    
 
     ${termpad "news" "newsboat"}
     ${termpad "mtag" "mustagger"}

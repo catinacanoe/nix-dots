@@ -30,7 +30,7 @@ in
     imports = [
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
         ./bat
-        ./cava
+        # ./cava
         ./cadence
         ./crypt
         ./discord

@@ -81,12 +81,12 @@ function active() {
     eww update "var_prev=$ws"
     eww update "var_switching=false"
 
-    socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock - |
+
+    socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
         while read -r active; do
             if [ "$active" != "$(eww get var_active)" ]; then
                 eww update "var_switching=true" "var_prev=$(eww get var_active)" "var_active=$active"
-
                 sleep 0.15 && eww update "var_switching=false" &
             fi
         done
@@ -96,7 +96,7 @@ function workspaces() {
     local prev
     prev=""
 
-    socat -u "UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
+    socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
         local workspaces
         local end
 

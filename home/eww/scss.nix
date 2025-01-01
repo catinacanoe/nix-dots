@@ -1,6 +1,10 @@
 { rice, hostname, ... }: /* scss */ ''
 * { all: unset; }
 
+* {
+    border-color: rgba(0,0,0,0);
+}
+
 .dock-layout {
     color: ${rice.col.fg.h};
     background: rgba(0,0,0,0);
@@ -36,6 +40,16 @@ progressbar > trough {
     animation-timing-function: ease-out;
 }
 
+.glass_col { background: rgba(${rice.col.fg.rgb}, 0.15); }
+.dark_col  { background: rgba(${rice.col.bg.rgb}, 0.5); }
+
+/* i dont want a distinction between workspaces with multiple vs one window anymore
+   i forgot what the point even really was. But i dont want to muck with the .yuck file
+   so im just making them the same color her for now until I decide to do that */
+.full_ws,
+.populated_ws { background: rgba(${rice.col.bg.rgb}, 0.8); }
+.empty_ws     { background: rgba(${rice.col.bg.rgb}, 0.4); }
+
 @keyframes open {
     from { padding-right: 16px; } /* adding one pixel seems to stablize the animation idk */
     to   { padding-right: 41px; }
@@ -58,8 +72,7 @@ progressbar > trough {
 }
 
 .dock-block {
-    border-radius: ${toString rice.window.radius}px;
-    background: rgba(${rice.col.bg.rgb}, 0.7);
+    border-radius: ${toString (rice.window.radius + 2)}px;
     padding-left: ${toString (rice.window.radius)}px;
     padding-right: ${toString (rice.window.radius)}px;
 }

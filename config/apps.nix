@@ -60,7 +60,7 @@
         binwalk
         brightnessctl
         catdoc
-        catimg
+        # catimg
         cbonsai
         cmatrix
         cdrtools
@@ -99,11 +99,13 @@
         pciutils
         pipx
         poppler_utils
+        powertop
         procps
         pipes
         psmisc
         ripgrep
         shellcheck
+        seatd
         slurp
         speedtest-cli
         starship
@@ -134,13 +136,13 @@
         zsteg
 
         # nvidia compat
-        qt5ct
+        libsForQt5.qt5ct
         libva
 
         # lib
         python311Full
         python311Packages.docx2txt
-        python311Packages.howdoi
+        # python311Packages.howdoi (breaks 24.11 build)
 
         clang_15 boost183 ncurses tomlplusplus
         # qt6ct
@@ -160,25 +162,32 @@
         firefox ungoogled-chromium brave
         networkmanagerapplet wireguard-tools
         lf libqalculate
-        (discord.override { # https://nixos.wiki/wiki/Discord
-            withVencord = true;
-        })
+        # (discord.override { # https://nixos.wiki/wiki/Discord
+        #     withVencord = true;
+        # })
         cava
-        kitty
+        kitty xterm
         mpv-unwrapped
         krita
         neomutt
         sioyek
         zsh
         zoom-us
-        slack
+        # slack
+        # spotify
 
         # core system apps
-        hyprland
+        # hyprland
+        (pkgs.hyprland.override {
+            legacyRenderer = true;
+            enableXWayland = true;
+            withSystemd = true;
+        })
         hypr pyprland
         pulseaudio pipewire
         waybar
-        eww-wayland
+        # eww-wayland # replace with just eww
+        eww
         swaylock-effects
         mako
         swww

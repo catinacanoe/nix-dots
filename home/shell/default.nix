@@ -15,11 +15,13 @@ in
         dotDir = ".config/zsh";
 
         enableCompletion = true;
-        enableAutosuggestions = true;
+        # enableAutosuggestions = true;
+        autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
 
         sessionVariables = {
             ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
+            AQ_DRM_DEVICES = /dev/dri/card1;
         };
         
         history = {

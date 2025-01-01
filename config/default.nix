@@ -11,6 +11,7 @@
         ./peripheral.nix
         ./services.nix
         ./hosts.nix
+        ./battery.nix
     ];
 
     system.autoUpgrade.enable = true;
@@ -32,7 +33,7 @@
     users.users.canoe = {
         isNormalUser = true;
         description = "canoe";
-        extraGroups = [ "networkmanager" "wheel" "uinput" "input" ];
+        extraGroups = [ "networkmanager" "wheel" "uinput" "input" "seat"]; # "seat", "video"
         shell = pkgs.zsh;
         ignoreShellProgramCheck = true;
     };

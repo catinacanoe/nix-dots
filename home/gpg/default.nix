@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
     gpgdir = "${config.home.homeDirectory}/.gnupg";
     timeout = 60*60*5;
@@ -14,7 +14,7 @@ in
 
     services.gpg-agent = {
         enable = true;
-        pinentryFlavor = "qt"; # see docs
+        pinentryPackage = pkgs.pinentry-qt; # see docs
         enableSshSupport = true; # more research into opt required
         # theres some enable<shell>Integration, see docs ig
 

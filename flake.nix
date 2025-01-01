@@ -3,9 +3,14 @@
     description = "canoe's main configuration flake";
 
     inputs = {
-        nixpkgs.url = "nixpkgs/nixos-unstable";
+        # 23.11 works, hypr runs but terminals don't open
+
+        # https://channels.nixos.org/
+        nixpkgs.url = "nixpkgs/nixos-24.11"; # nixos-unstable / nixos-24.11
+
+        # https://github.com/nix-community/home-manager/branches
         home-manager = {
-            url = "github:nix-community/home-manager/master";
+            url = "github:nix-community/home-manager/release-24.11"; # master / release-24.11
             inputs.nixpkgs.follows = "nixpkgs";
         };
 

@@ -15,6 +15,9 @@ function printhelp() {
     echo "quit"
     echo "    quit this interactive shell"
     echo
+    echo "ew"
+    echo "    prints news"
+    echo
     echo "h"
     echo "    runs home manager"
     echo
@@ -73,7 +76,7 @@ function handle_response() {
         return
     elif [ "$response" == "quit" ]; then
         exit
-    elif [ "$response" == "news" ]; then
+    elif [ "$response" == "s" ]; then
         hm_news
         return
     fi
