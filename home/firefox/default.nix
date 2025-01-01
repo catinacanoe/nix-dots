@@ -7,20 +7,19 @@ let
             ${import ./modules/vars.nix rice}
         }
 
-        /*
-        add a theme for the about:* pages:
-        https://safereddit.com/r/firefox/comments/keb9a2/how_to_change_preferences_page_background_color/
-
-        @-moz-document url(about:preferences) {
+        @-moz-document url-prefix("about:") {
             :root {
-                --in-content-page-background: White !important;
-                --in-content-box-background: White !important;
+                --in-content-page-background: var(--rcol-bg) !important;
+                --background-color-box: var(--rcol-t1) !important;
+                --color-accent-primary: var(--rcol-blue) !important;
+                --color-accent-primary-hover: rgba(var(--rrgb-blue), 0.7) !important;
+                --in-content-page-color: var(--rcol-fg) !important;
             }
+
             #policies-container, #searchInput {
-                background-color: Silver !important;
+                background-color: var(--rcol-t1) !important;
             }
         }
-        */
     '';
 
     # about:config - browser.fullscreen.autohide

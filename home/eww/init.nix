@@ -37,6 +37,8 @@ function bright() {
 }; bright &
 
 function battery() {
+    # can eventually start using `upower -d` instead of `acpi -b`
+
     while true; do
         percent="$(acpi -b | awk -F ', ' '{ print $2 }')"
         timestamp="$(acpi -b | awk -F ', ' '{ print $3 }' | awk '{ print $1 }' )"
