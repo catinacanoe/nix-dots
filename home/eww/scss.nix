@@ -40,13 +40,9 @@ progressbar > trough {
     animation-timing-function: ease-out;
 }
 
-.glass_col { background: rgba(${rice.col.fg.rgb}, 0.15); }
+/* .glass_col { background: rgba(${rice.col.fg.rgb}, 0.15); } /* at this point not used at all (only dark_col is used)*/
 .dark_col  { background: rgba(${rice.col.bg.rgb}, 0.5); }
 
-/* i dont want a distinction between workspaces with multiple vs one window anymore
-   i forgot what the point even really was. But i dont want to muck with the .yuck file
-   so im just making them the same color her for now until I decide to do that */
-.full_ws,
 .populated_ws { background: rgba(${rice.col.bg.rgb}, 0.8); }
 .empty_ws     { background: rgba(${rice.col.bg.rgb}, 0.4); }
 

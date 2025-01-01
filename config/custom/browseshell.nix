@@ -1,6 +1,7 @@
 { pkgs, ... }: pkgs.writeShellScriptBin "browseshell" ''
 
 BROWSESHELL_HIST="/tmp/browseshell.hist"
+touch $BROWSESHELL_HIST
 
 function encode() {
     local escape="$(echo "$@" | sed 's|"|\"|g')"
