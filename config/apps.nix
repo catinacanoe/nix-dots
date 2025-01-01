@@ -100,6 +100,8 @@
         pipx
         poppler_utils
         powertop
+        powerstat
+        upower
         procps
         pipes
         psmisc

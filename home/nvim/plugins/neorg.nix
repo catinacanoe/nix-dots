@@ -2,7 +2,7 @@
 let
     config = /* lua */ ''{
         "nvim-neorg/neorg",
-        version = "v7.0.0", -- b/c rn 8.0 breaks me
+        version = "v7.0.0", -- eventually i will update but i dont wanna update the config
         
         lazy = false,
         cmd = "Neorg",

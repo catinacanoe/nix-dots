@@ -6,6 +6,21 @@ let
         :root {
             ${import ./modules/vars.nix rice}
         }
+
+        /*
+        add a theme for the about:* pages:
+        https://safereddit.com/r/firefox/comments/keb9a2/how_to_change_preferences_page_background_color/
+
+        @-moz-document url(about:preferences) {
+            :root {
+                --in-content-page-background: White !important;
+                --in-content-box-background: White !important;
+            }
+            #policies-container, #searchInput {
+                background-color: Silver !important;
+            }
+        }
+        */
     '';
 
     # about:config - browser.fullscreen.autohide

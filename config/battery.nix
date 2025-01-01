@@ -17,9 +17,12 @@
     # # disable gnome power mgmt
     # services.power-profiles-daemon.enable = false;
 
-    # # cpufreq
-    # services.auto-cpufreq.enable = true;
+    # allow upower battery predictor to run
+    services.upower.enable = true;
 
-    # # enable powertop
-    # powerManagement.powertop.enable = true;
+    # cpufreq
+    services.auto-cpufreq.enable = true;
+
+    # enable powertop
+    powerManagement.powertop.enable = true;
 }
