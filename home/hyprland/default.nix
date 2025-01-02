@@ -56,8 +56,8 @@ in {
     # windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
     # windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class:^(firefox)$
     # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
-    windowrulev2 = opacity 1.0 override 0.9 override, class:^(firefox)$
-    windowrulev2 = opacity 1.0 override 1.0, class:^(imv)$
+    windowrulev2 = opacity 1.0 override 0.93 override, class:^(firefox)$
+    windowrulev2 = opacity 1.0 override 0.93 override, class:^(imv)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key

@@ -91,9 +91,11 @@ function handle_response() {
             homeman
             notify-send "nixshell" "home manager complete"
         elif [ "$char" == "f" ]; then
+            notify-send "nixshell" "firefox preactivation running..."
             activate_ff
             notify-send "nixshell" "firefox preactivation complete"
         elif [ "$char" == "x" ]; then
+            notify-send "nixshell" "xioxide activation running..."
             activate_xx
             notify-send "nixshell" "xioxide activation complete"
         else

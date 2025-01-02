@@ -4,8 +4,11 @@ let
     rice = (import ../../rice);
     usercontent = /* css */ ''
         :root {
+            scrollbar-width: none !important;
             ${import ./modules/vars.nix rice}
         }
+
+        * { scrollbar-width: none !important; }
 
         @-moz-document url-prefix("about:") {
             :root {
@@ -34,7 +37,34 @@ let
 
             --lwt-toolbar-field-highlight: var(--rcol-t2) !important;
             --urlbar-box-bgcolor: rgba(var(--rrgb-fg), 0.1) !important;
+
+            /* ctrl f find in page bar */
+            --toolbar-color: var(--rcol-fg) !important;
+            --toolbar-field-focus-color: var(--rcol-fg) !important;
+            --toolbar-bgcolor: var(--rcol-bg) !important;
+            --input-border-color: var(--rcol-bg) !important;
+            --toolbar-field-focus-background-color: var(--rcol-bg) !important;
         }
+
+        /****************************************************************/
+        /* ctrl f find in page bar */
+        /****************************************************************/
+        .findbar-highlight, .findbar-case-sensitive, .findbar-match-diacritics, .findbar-label,
+        .findbar-entire-word, .findbar-find-previous, .findbar-find-next, .findbar-closebutton,
+        xxx { display: none !important; }
+
+        hbox[anonid="findbar-textbox-wrapper"] { width: 100% !important; }
+        .findbar-textbox {
+            width: 100% !important;
+            border: none !important;
+            border-radius: 5px !important;
+            &[status="notfound"] {
+                background-color: inherit !important;
+                color: var(--rcol-red) !important;
+            }
+        }
+
+        findbar { border: none !important; }
 
         toolbarspring, /* the wierd padding right of zoom level */
         xxx { display: none !important; }
@@ -156,7 +186,10 @@ let
             background: #0000 !important;
             backdrop-filter: blur(5px) blur(5px) blur(5px) !important;
         }
-
+        
+        /*************************************************************/
+        /* SEARCHBAR TOOLBAR NAVBAR (this can be made transparent and it works) */
+        /*************************************************************/
         toolbar#nav-bar {
             box-shadow: none !important;
             background-color: var(--rcol-bg) !important;
@@ -168,6 +201,48 @@ let
             /* background-position: -22px -107px; */
             /* '' else ""} */
         }
+        vbox.urlbarView { display: none !important; } /* some wierd gray box around searchbar */
+
+        /*************************************************************/
+        /* Modifying the right click menu (context menu) */
+        /* https://safereddit.com/r/firefox/comments/7dvtw0/guide_how_to_edit_your_context_menu/ */
+        /*************************************************************/
+        /* right click on page */
+        #context-savepage,
+        #context-selectall,
+        #screenshots_mozilla_org_create-screenshot,
+        #context-inspect-a11y, #context-inspect,
+        #context-navigation,
+        /* right click on image */
+        #context-sendimage,
+        /* right click on link */
+        #context-openlinkintab,
+        #context-openlinkinusercontext-menu,
+        #context-openlink,
+        #context-openlinkprivate,
+        #context-bookmarklink,
+        #context-savelink,
+        #context-savelinktopocket,
+        #context-copy,
+        #context-sendlinktodevice,
+        #context-viewpartialsource-selection,
+        #simple-translate_sienori-menuitem-_translateLink,
+        menu[label="LibRedirect"], menuitem[label="LibRedirect"],
+        /* right click on selection */
+        #context-searchselect,
+        #context-print-selection,
+        /* separators */
+        #context-sep-setbackground,
+        #context-sep-open,
+        #context-sep-selectall,
+        #context-sep-sendlinktodevice,
+        #context-sep-navigation,
+        #context-sep-sendpagetodevice,
+        #context-sep-viewbgimage,
+        #context-sep-viewsource,
+        #context-media-eme-separator,
+        #frame-sep,
+        #inspect-separator { display: none !important; }
 
         /* Sets the URL bar color */
         #urlbar {
