@@ -45,8 +45,10 @@ a about:
 h hhs.fuhsd.org/
     s search-results?q=
     b about-us/general-information/bell-schedule/
-hc drive.google.com/file/d/1YfxX1gKARWyNuz-1dtAQt7TUT-89epSY/view
+hc drive.google.com/file/d/1nKQ4S9xt1h6Ii-2vDfgB-ggf667Tdfjn/view
+
 cb prod.idp.collegeboard.org/signin
+cbm apclassroom.collegeboard.org/33/assignments?status=assigned
 ka khanacademy.org/
 
 krn secure4.saashr.com/ta/6154193.login?rnd=LYJ&NoRedirect=1/
@@ -57,17 +59,20 @@ spl sunnyvale.bibliocommons.com/
     s v2/search?query=
 
 o fuhsd.schoology.com/
+    c course/7613556885/
+    h course/7613557228/
+    m course/7613556663/
+    a course/7613557444/
+    s course/7613556660/
+    l course/7613557341/
+    g grades/grades/
 ob bessy.io/
-oc fuhsd.schoology.com/course/7380220864/
-oh fuhsd.schoology.com/course/7380221161/
-om fuhsd.schoology.com/course/7380220637/
-oa fuhsd.schoology.com/course/7380221323/
-os fuhsd.schoology.com/course/7380220633/
-ol fuhsd.schoology.com/course/7380221254/
-og fuhsd.schoology.com/grades/grades/
 or homework.russianschool.com/
 
 gp google.com/maps
+    ${googleusers}
+
+gn keep.google.com/
     ${googleusers}
 
 gm mail.google.com/mail/
@@ -80,6 +85,12 @@ gs docs.google.com/presentation/
     ${googleusers}
 
 ge docs.google.com/spreadsheets/
+    ${googleusers}
+
+gt tasks.google.com
+    ${googleusers}
+
+gc calendar.google.com
     ${googleusers}
 
 ga myaccount.google.com/

@@ -26,13 +26,13 @@ function net_vpn() {
 
 function vol() {
     while true; do
-        setvol
+        setvol silent
     sleep 1; done
 }; vol &
 
 function bright() {
     while true; do
-        setbright
+        setbright silent
     sleep 60; done
 }; bright &
 
@@ -198,7 +198,14 @@ function music() {
 
     while true; do
         # char limit
-        name="$(plyr current | sed -e 's|\(.\{${if hostname == "nixbox" then "150" else "55"}\}[^$]\).*|\1 ...|')"
+        name="$(plyr current)"
+
+        # maxlen="${if hostname == "nixbox" then "100" else "35"}"
+        # namelen="$(echo "$name" | wc -c)"
+        # if [ $namelen -gt $maxlen ]; then
+        # else
+        # fi
+        name="$(sed -e 's|\(.\{${if hostname == "nixbox" then "100" else "35"}\}[^$]\).*|\1|' <<< "$name")"
 
         color="$(plyr color)"
         local testcol="$(cat /tmp/eww-test-color)"
@@ -210,15 +217,32 @@ function music() {
 }; music &
 
 function visualizer() {
-    ${builtins.readFile ./cava.bash}
+    sleep 1
+
+    numbars=${toString rice.bar.cava.width}
+    chars="▁▂▃▄▅▆▇█"
+    charct="$(echo "$chars" | wc -m | sed 's|$| - 1|' | bc)"
+    linect=${toString rice.bar.cava.height}
+    heightlevels=$((linect*charct-1))
+
+    cavasedfile=/tmp/cava.sed
+    ${builtins.readFile ./cava-sed.bash}
+
+    # make sure to clean pipe
+    pipe="/tmp/cava.fifo"
+    if [ -p $pipe ]; then
+        unlink $pipe
+    fi
+    rm $pipe
+    mkfifo $pipe
 
     # write cava config
     local config_file="/tmp/eww_cava_config"
     echo "
     [general]
     autosens=1
-    bars=${if hostname=="nixbox" then "24" else "20"}
-    framerate=30
+    bars=$numbars
+    framerate=20
     higher_cutoff_freq=10000
     lower_cutoff_freq=35
 
@@ -227,19 +251,28 @@ function visualizer() {
     method=raw
     raw_target=$pipe
     data_format=ascii
-        ascii_max_range=$(echo "$bar" | wc -m | sed 's|$| - 2|' | bc)
+    ascii_max_range=$heightlevels
     mono_option=average
     orientation=bottom
     " > $config_file
 
     # run cava in the background
     kill "$(ps aux | grep "cava -p $config_file" | awk '{ print $2 }')"
+    killall cava
     sleep 0.5
     cava -p "$config_file" &
 
     # reading data from fifo
-    while read -r cmd; do
-        eww update "var_cava=$(echo "$cmd" | sed "$dict")"
+    while read -r line; do
+        result=""
+        while read -r sedcmd; do
+            result="$(
+                [ -n "$result" ] && echo "$result"
+                echo "$line" | sed "$sedcmd"
+            )"
+        done < $cavasedfile 
+        
+        eww update "var_cava=$result"
     done < $pipe
 }; visualizer &
 

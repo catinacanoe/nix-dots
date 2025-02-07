@@ -2,6 +2,7 @@
 let
     home = "/home/canoe";
     repos = "${home}/repos";
+    col = import ./.shellcol.nix;
     private = "${repos}/nix-dots/private";
     confighome = "${home}/.config/";
 in
@@ -54,13 +55,37 @@ function hm_news() {
 function activate_ff() {
     echo
     echo "running firefox preactivation"
+    echo "close all firefox instances, hit enter when done"
+    read
     killall .firefox-wrapped
 
-    rm -rvf ~/.mozilla/firefox/gpt/
-    rm -rvf ~/.mozilla/firefox/scratch/
+    mainffdir="$HOME/.mozilla/firefox/main"
+    profiles="$(echo gpt && echo scratch && echo calendar)" # add profile here and in ~/.moz/ff
+    sleeptime="1.2"
 
-    cp -r ~/.mozilla/firefox/main/ ~/.mozilla/firefox/gpt/
-    cp -r ~/.mozilla/firefox/main/ ~/.mozilla/firefox/scratch/
+    while IFS= read -r line; do
+        tmpdir="$(mktemp -d "firefox-activation-$line.XXXXXXX" --tmpdir)"
+        ffdir="$HOME/.mozilla/firefox/$line"
+        sessfiles="$(find "$ffdir" -maxdepth 1 | grep session | sed 's|.*/||')"
+
+    
+        echo && echo "rebuilding $line profile"
+
+        echo && echo "saving $line session files" && sleep "$sleeptime"
+        while IFS= read -r file; do
+            cp -rv "$ffdir/$file" "$tmpdir/$file"
+        done <<< "$sessfiles"
+
+        echo && echo "copying main profile over to $line" && sleep "$sleeptime"
+        rm -rvf "$ffdir"
+        cp -rv "$mainffdir" "$ffdir"
+
+        echo && echo "restoring $line session files" && sleep "$sleeptime"
+        while IFS= read -r file; do
+            rm -rvf "$ffdir/$file"
+            cp -rv "$tmpdir/$file" "$ffdir/$file"
+        done <<< "$sessfiles"
+    done <<< "$profiles"
 }
 
 function activate_xx() {
@@ -75,6 +100,8 @@ function handle_response() {
         printhelp
         return
     elif [ "$response" == "quit" ]; then
+        exit
+    elif [ "$response" == "z" ]; then
         exit
     elif [ "$response" == "s" ]; then
         hm_news
@@ -111,7 +138,7 @@ if [ -n "$1" ]; then
 fi
 
 while true ; do
-    printf "\033[0;35mnix\033[0;31m > \033[0m"
+    printf "${col.prompt}nix${col.sep} ${col.sepchar} ${col.line}"
     read response
     handle_response
     echo

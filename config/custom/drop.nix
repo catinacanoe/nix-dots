@@ -21,10 +21,11 @@ elif [ "$1" == "focus" ]; then
 fi
 
 function hide() {
-    hyprctl dispatch focuscurrentorlast &> /dev/null
+    numwindows = "$(hyprctl activeworkspace -j | jq .windows)"
+    [ $numwindows -gt 1 ] && hyprctl dispatch focuscurrentorlast &> /dev/null
     pypr hide "$1"
 
-    echo "" > "$CURRENTFILE"
+    echo > "$CURRENTFILE"
 }
 
 function show() {

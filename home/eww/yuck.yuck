@@ -40,8 +40,9 @@
         (dock_block :class "music dark_col" (dock_volume))
         (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_current))
         (dock_block :class "music dark_col" :visible {var_mus_current != "" && var_mus_playing} (dock_mus_cava))
-        (dock_block :class "music dark_col" :visible {var_mus_current != "" && var_mus_type == "mpd"} (dock_mus_progress))
+        (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_progress)) ;; && var_mus_type == "mpd"
         (dock_block :class "music dark_col" :visible {var_mus_current != "" && var_mus_next != ""} (dock_mus_next))
+        ;; (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_test))
     )
 )
 
@@ -75,7 +76,7 @@
 (defwidget dock_mus_progress []
     (progress
         :valign "center"
-        :class "dock-mus-progress ${var_mus_color}"
+        :class "dock-mus-progress"
         :value var_mus_progress
     )
 )
@@ -86,7 +87,7 @@
         (label
             :valign "center"
             :class "dock-mus-cava"
-            :text var_cava
+            :text "${var_cava}"
         )
     )
 )

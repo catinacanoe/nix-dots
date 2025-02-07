@@ -6,6 +6,7 @@
 
     environment.systemPackages = with pkgs;
     let
+        blueshell = (import ./custom/blueshell.nix args);
         browse      = (import ./custom/browse.nix args);
         browseshell = (import ./custom/browseshell.nix args);
         drop        = (import ./custom/drop.nix args);
@@ -22,10 +23,12 @@
         setbright   = (import ./custom/setbright.nix args);
         setvol      = (import ./custom/setvol.nix args);
         sshkey      = (import ./custom/sshkey.nix args);
+        vimit       = (import ./custom/vimit.nix args);
         vpnshell    = (import ./custom/vpnshell.nix args);
         yargs       = (import ./custom/yargs.nix args);
     in [
         # custom apps
+        blueshell
         browse
         browseshell
         drop
@@ -42,6 +45,7 @@
         setbright
         setvol
         sshkey
+        vimit
         vpnshell
         yargs
 
@@ -87,6 +91,7 @@
         iw
         jc jq
         libcaca
+        libinput-gestures
         libnotify
         mediainfo
         mlocate
@@ -162,6 +167,7 @@
         # user apps
         neovim nvimpager
         firefox ungoogled-chromium brave
+        azuredatastudio
         networkmanagerapplet wireguard-tools
         lf libqalculate
         # (discord.override { # https://nixos.wiki/wiki/Discord
@@ -177,6 +183,9 @@
         zoom-us
         # slack
         # spotify
+        qbittorrent
+        gimp
+        lunar-client
 
         # core system apps
         # hyprland

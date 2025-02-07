@@ -1,4 +1,3 @@
-# also configures swaylock
 { config, pkgs, ... }:
 {
     home.packages = 

@@ -18,8 +18,6 @@ in
                     ${drop "term"}
                 ${mod}-p:
                     ${drop "top"}
-                ${mod}-s:
-                    ${drop "spotify"}
                 ${mod}-m:
                     ${drop "network"}
                 ${mod}-n:
@@ -33,5 +31,7 @@ in
                     ${drop "browser"}
                 ${mod}-g:
                     ${drop "gpt"}
+                ${mod}-c:
+                    ${drop "calendar"}
 # dropdown.nix
 ''

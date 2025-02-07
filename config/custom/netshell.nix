@@ -1,22 +1,4 @@
-{ pkgs, ... }: pkgs.writeShellScriptBin "netshell" ''
-function auto_vpn() { # convenient place to put this 
-    while true; do
-        if [ -n "$(cat /tmp/net-check)" ]; then
-            local net="$(nmcli -t connection show --active | grep -v 'loopback' | head -n 1 | awk -F : '{ print $1 }' | tr '[:upper:]' '[:lower:]')"
-
-            if [ "$net" == "fuhsd" ]; then
-                nmcli connection down "$net" &> /dev/null
-                nmcli connection up "$net" &> /dev/null
-                vpnshell reload &> /dev/null
-            else
-                nmcli connection down "$net" &> /dev/null
-                nmcli connection up "$net" &> /dev/null
-                vpnshell disconnect &> /dev/null
-            fi
-        fi
-    sleep 1; done
-};
-
+{ pkgs, ... }: let col = import ./.shellcol.nix; in pkgs.writeShellScriptBin "netshell" ''
 function printhelp() {
     echo "'nmshell' interactive shell to interface with nmcli network manager"
     echo
@@ -57,8 +39,6 @@ function printhelp() {
     echo "    passes its arguments through to the vpnshell command"
 }
 
-function vpn-network() { echo "$@" | grep -q '^fuhsd$'; }
-
 function current() {
     nmcli -t connection show --active | grep -v 'loopback' | head -n 1 | awk -F : '{ print $1 }'
 }
@@ -73,8 +53,6 @@ function network_menu() {
 
     echo "connecting to $connection ..."
     nmcli device wifi connect "$connection"
-
-    vpn-network "$connection" && vpnshell connect
 }
 
 function search_connect() {
@@ -83,8 +61,6 @@ function search_connect() {
 
     echo "connecting to $connection ..."
     nmcli device wifi connect "$connection"
-
-    vpn-network "$connection" && vpnshell connect
 }
 
 function disconnect() {
@@ -92,8 +68,6 @@ function disconnect() {
 
     echo "disconnecting from $connection ..."
     nmcli connection down "$connection"
-    
-    vpn-network "$connection" && vpnshell disconnect
 }
 
 function reload() {
@@ -102,8 +76,7 @@ function reload() {
     echo "reloading $connection ..."
     nmcli connection down "$connection"
     nmcli connection up "$connection"
-    
-    vpn-network "$connection" && vpnshell reload
+    # TODO ensure vpn stays connected here
 }
 
 function credentials() {
@@ -113,10 +86,10 @@ function credentials() {
 
 function handle_response() {
     action="$(echo "$response" | awk '{ print $1 }')"
-    arguments="$(echo "$response" | awk '{ for (i=2;i<NF;i++) printf $i" "; print $NF }')"
+    arguments="$(echo "$response" | sed -e 's|^[^ ]*||' -e 's|^ *||')"
 
     case "$action" in
-        'quit'|'q'|':q') exit ;;
+        'quit'|'q'|':q'|'z') exit ;;
         'help'|'h') printhelp ;;
         'active'|'a') current ;;
         'list'|'l') list ;;
@@ -140,8 +113,8 @@ fi
 
 while true ; do
     prompt="$(current | tr '[:upper:]' '[:lower:]')"
-    [ -z "$prompt" ] && prompt="---"
-    printf "\033[0;35m$prompt\033[0;31m > \033[0m"
+    [ -z "$prompt" ] && prompt="${col.emptyprompt}"
+    printf "${col.prompt}$prompt${col.sep} ${col.sepchar} ${col.line}"
 
     read response
 

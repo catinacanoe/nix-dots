@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
     gpgdir = "${config.home.homeDirectory}/.gnupg";
-    timeout = 60*60*5;
+    timeout = 60*60*12;
 in
 {
     programs.gpg = {

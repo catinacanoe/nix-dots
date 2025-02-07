@@ -35,10 +35,11 @@ in {
 
     exec-once = mpd && mpc volume 70 && mpc repeat on && mpc random off && mpc single off && mpc crossfade 1
     exec-once = drop init
-
     exec-once = kitty
+
     exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
     exec = sleep 1 && swww-daemon
+    exec = killall .libinput-gestures-wrapped ; libinput-gestures
 
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
@@ -57,7 +58,8 @@ in {
     # windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class:^(firefox)$
     # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
     windowrulev2 = opacity 1.0 override 0.93 override, class:^(firefox)$
-    windowrulev2 = opacity 1.0 override 0.93 override, class:^(imv)$
+    windowrulev2 = opacity 1.0 override 1.0 override, class:^(imv)$
+    windowrulev2 = opacity 1.0 override 1.0 override, class:^(mpv)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key

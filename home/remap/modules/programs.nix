@@ -14,6 +14,8 @@ in
                     ${launchdir direction "firefox -P main --new-window"}
                 ${mod}-d:
                     ${launchdir direction "discord"}
+                ${mod}-v:
+                    ${launchdir direction "vimit"}
                 ${mod}-w:
                     ${launchdir direction "firefox -P main --new-window && sleep 0.7 && pypr show browseshell"}
 # programs.nix ${direction}

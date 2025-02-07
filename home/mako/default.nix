@@ -6,14 +6,15 @@ let
 in
 {
     services.mako = {
-    enable = true;
+        enable = true;
+
         font = "monospace ${toString fontsize}";
         icons = false;
         actions = false;
-        layer = "top";
+        layer = "overlay";
         anchor = "bottom-right";
         maxVisible = -1;
-        ignoreTimeout = true;
+        ignoreTimeout = false;
         defaultTimeout = 7*1000; # millis
 
         width = 400;
@@ -24,8 +25,8 @@ in
         padding = toString rice.window.gaps-in;
 
         textColor = "${col.fg.h}ff";
-        borderColor = "${col.fg.h}a0";
+        borderColor = "${col.fg.h}b0";
         backgroundColor = "${col.bg.h}b0";
-        progressColor = "${col.aqua.h}ff";
+        progressColor = "${col.blue.h}ff";
     };
 }

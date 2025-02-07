@@ -78,4 +78,9 @@ keymap:
     bindm = SUPER, mouse:272, movewindow # super+lmb
     bindm = SUPER, mouse:273, resizewindow # super+rmb
     '';
+
+    xdg.configFile."libinput-gestures.conf".text = ''
+        gesture swipe up 4 wtype -M ctrl -M shift -k tab -m ctrl -m shift
+        gesture swipe down 4 wtype -M ctrl -k tab -m ctrl
+    '';
 }

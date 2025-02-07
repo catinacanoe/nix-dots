@@ -81,7 +81,6 @@
     ${termpad "network" "sudo netshell"}
     ${termpad "nix" "nixshell"}
 
-    ${focuspad "spotify" "spotify"}
     ${focustermpad "browseshell" "browseshell"}
     ${focustermpad "launcher" "launcher"}
     ${focustermpad "menu" "menuui"}
@@ -90,7 +89,7 @@
     ${termpad "mtag" "mustagger"}
     ${termpad "player" "player"}
     ${termpad "qalc" "qalc"}
-    ${termpad "bluetooth" "bluetoothctl"}
+    ${termpad "bluetooth" "blueshell"}
 
     ${tinytermpad "gpgpass" "$XDG_REPOSITORY_DIR/pw/unlock.sh"}
 
@@ -100,8 +99,9 @@
     ${size.browser}
 
     # BROWSER #
-    ${browserpad "browser" "scratch about:blank" size.browser}
-    ${browserpad "gpt" "gpt chat.openai.com" size.gpt}
+    ${browserpad "browser" "scratch" size.browser}
+    ${browserpad "calendar" "calendar" size.browser}
+    ${browserpad "gpt" "gpt" size.gpt}
     '';
 
     activation = "$DRY_RUN_CMD ${pkgs.pyprland}/bin/pypr reload > /dev/null";

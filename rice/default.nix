@@ -25,6 +25,15 @@ let host = import ../ignore-hostname.nix; in {
         height = 1600;
     } else {};
 
+    bar = {
+        fontsize = 18;
+        height = 35;
+        cava = let h=3; in{
+            height = h;
+            width = h * (if host=="nixbox" then 20 else 15);
+        };
+    };
+
     window = let
         gaps = 7;
     in {

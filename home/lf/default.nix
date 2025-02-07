@@ -131,6 +131,7 @@ in
                 for file in "$fx"; do
                     chmod "$ans" "$file"
                 done
+                lf -remote 'send reload'
             }}'';
 
             custom_drag = /* bash */ ''%{{

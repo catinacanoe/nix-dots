@@ -12,7 +12,12 @@ function open() {
     wl-copy "$@"
     hyprctl dispatch focuscurrentorlast &> /dev/null
 
-    [ "$(hyprctl activewindow -j | jq .class)" == "\"$BROWSER\"" ] || return
+    local class="$(hyprctl activewindow -j | jq .class)"
+    if [ "$class" == "\"$BROWSER\"" ] || echo "$class" | grep -qi 'browser'; then
+        true
+    else
+        return
+    fi
 
     title="$(hyprctl activewindow -j | jq .title)"
 

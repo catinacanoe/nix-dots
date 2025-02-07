@@ -24,22 +24,11 @@
     networking = {
         networkmanager.enable = true;
     };
-    environment.etc."wireguard/vpn.conf".text = ''
-        [Interface]
-        # Key for main
-        # Bouncing = 1
-        # NAT-PMP (Port Forwarding) = off
-        # VPN Accelerator = on
-        PrivateKey = EGSPUQLc1QwLSPRcctR23ow1M9KCqaFh4QTTQeR8r2k=
-        Address = 10.2.0.2/32
-        DNS = 10.2.0.1
+    # vpn configurations (folder copy)
+    environment.etc."wireguard" = {
+        source = ../private/wireguard;
+    };
 
-        [Peer]
-        # US-FREE#415060
-        PublicKey = oGVahl/rkt0i22DILrVpPSmYZmqcmSup/HQ/upVf2Vg=
-        AllowedIPs = 0.0.0.0/0
-        Endpoint = 138.199.35.120:51820
-    '';
 
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     # Configure network proxy if necessary
@@ -50,5 +39,5 @@
     # networking.firewall.allowedTCPPorts = [ ... ];
     # networking.firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
-    # networking.firewall.enable = false;
+    # networking.firewall.enable = false; DANGEROUS
 }

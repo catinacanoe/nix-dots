@@ -8,6 +8,10 @@ current=""
 file="/tmp/plyr.dat"
 [ -f "$file" ] || echo 'mpc' > "$file"
 
+function processname() {
+    echo "$1" | tr '[:upper:]' '[:lower:]'
+}
+
 #######################
 # FIND CURRENT PLAYER #
 #######################
@@ -39,6 +43,10 @@ case "$cmd" in
         then mptoggle >> /dev/null
         else playerctl play-pause; fi
         ;;
+    "play"):
+        [ "$(plyr playing)" = "false" ] && plyr toggle ;;
+    "pause"):
+        [ "$(plyr playing)" = "true" ] && plyr toggle ;;
     "prev"):
         if [ "$current" == "mpc" ];
         then mpc prev
@@ -79,27 +87,33 @@ case "$cmd" in
             name="$(playerctl metadata title)"
             
             if [ -n "$name" ]; then
-                if echo "$name" | grep -q " - "; then true
-                elif echo "$name" | grep -q " — "; then true
-                else
-                    name="$(playerctl metadata artist | sed 's| - Topic$||') - $name"
+                # this code adds the artist name if player is spotify
+                if echo "$(playerctl metadata xesam:url)" | grep -q 'spotify'; then
+                    name="$(echo "$name" | sed -e 's| (.*)$||')" # remove ending parentheses (features and stuff)
+                    name="$(playerctl metadata artist | sed 's|,.*||') - $name" # add in the first artist in the list
                 fi
 
-                name="$(echo "$name" | sed \
+                name="$(echo "$name" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | LC_COLLATE=C sed \
                 -e 's|\[.*\]\s*$||' \
+                -e 's|feat\.|ft\.|' \
                 -e 's+ | .* | NCS - Copyright Free Music\s*$++' \
                 -e 's|\s*(.*lyric.*)\s*||i' \
                 -e 's|\s*(.*video.*)\s*||i' \
-                -e 's|\s*$||'
+                -e "s/[^ 0-9a-zA-Z':().,-]//g" \
+                -e 's| \+| |g' \
+                -e 's|^\s*||' \
+                -e 's|\s*$||' # trailing whitespace
                 )"
             fi
         fi
-        echo "$name"
+        processname "$name"
         ;;
     "progress"):
-        if [ "$current" == "mpc" ];
-        then mpc status | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||'
-        else echo "0"; fi
+        if [ "$current" == "mpc" ]; then
+            mpc status | sed -n 2p | sed -e 's|.*(||' -e 's|%)$||'
+        else
+            echo "100000000 * $(playerctl position) / $(playerctl metadata mpris:length)" | bc
+        fi
         ;;
     "indicator"):
         if [ "$current" == "mpc" ]; then
@@ -116,7 +130,7 @@ case "$cmd" in
         ;;
     "queue"):
         if [ "$current" == "mpc" ];
-        then mpc queue | sed 's|\.[^.]*$||'
+        then processname "$(mpc queue | sed 's|\.[^.]*$||')"
         else echo ""; fi
         ;;
     "color"):
