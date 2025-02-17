@@ -180,6 +180,7 @@
         kitty xterm
         mpv-unwrapped
         krita
+        discord
         neomutt
         sioyek
         zsh
