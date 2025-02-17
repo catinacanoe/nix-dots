@@ -70,6 +70,7 @@
         cdrtools
         diff-so-fancy
         expect
+        exfat
         exiftool
         eza
         fd
@@ -100,6 +101,8 @@
         newsboat
         odt2txt
         p7zip
+        parted
+        gparted
         pavucontrol
         pciutils
         pipx
