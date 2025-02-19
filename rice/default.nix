@@ -15,19 +15,9 @@ let host = import ../ignore-hostname.nix; in {
         };
     };
 
-    monito = if host == "nixbox" then {
-        scale = 1;
-        width = 3840;
-        height = 2160;
-    } else if host == "nixpad" then {
-        scale = 1.333333;
-        width = 2560;
-        height = 1600;
-    } else {};
-
     monitor = let
         benq-pd3200u- = if host != "nixpad" then {
-            scale = 1;
+            scale = 1.2;
             width = 3840;
             height = 2160;
             fps = 60;
@@ -58,7 +48,7 @@ let host = import ../ignore-hostname.nix; in {
                     else default-;
 
         port = if host == "nixbox" then {
-            default = "DP-3";
+            default = "DP-1";
             # secondary = "not installed yet"
         } else if host == "nixpad" then {
             default = "eDP-1";

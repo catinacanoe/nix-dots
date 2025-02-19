@@ -213,11 +213,11 @@ in {
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
     ${if host == "nixbox" then let m = rice.monitor; in ''
-    monitor=DP-3, ${monitor-specs m.default "0x0"}
+    monitor=${m.port.default}, ${monitor-specs m.default "0x0"}
     ''
     else if host == "nixpad" then let m = rice.monitor; in ''
-    monitor=eDP-1, ${monitor-specs m.default "0x0"}
-    monitor=HDMI-A-1, ${monitor-specs m.secondary "${toString ((m.default.width / m.default.scale - m.secondary.width / m.secondary.scale) / 2)}x${toString (-m.secondary.height / m.secondary.scale)}"}
+    monitor=${m.port.default}, ${monitor-specs m.default "0x0"}
+    monitor=${m.port.secondary}, ${monitor-specs m.secondary "${toString ((m.default.width / m.default.scale - m.secondary.width / m.secondary.scale) / 2)}x${toString (-m.secondary.height / m.secondary.scale)}"}
     ''
     else ""}
 
