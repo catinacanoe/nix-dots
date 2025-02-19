@@ -57,7 +57,7 @@ function activate_ff() {
     echo "running firefox preactivation"
     echo "close all firefox instances, hit enter when done"
     read # wait until enter
-    killall .firefox-wrapped
+    killall .firefox-wrapped && echo "killed stragglers"
 
     mainffdir="$HOME/.mozilla/firefox/main"
     profiles="$(echo gpt && echo scratch && echo calendar)" # add profile here and in ~/.moz/ff
@@ -72,13 +72,19 @@ function activate_ff() {
     echo -n "-> "
     read response
     
-    preffiles="$(find "$mainffdir" -maxdepth 1 | grep -e extension -e addon -e prefs -e settings | sed 's|.*/||')"
-
     case "$response" in
         "1")
             echo && echo "clearing nixdots ff prefs dir: $nixprefsdir"
             rm -rfv "$nixprefsdir"
-            mkdir "$nixprefsdir"
+            mkdir -p "$nixprefsdir/storage/default"
+
+            preffiles="$(
+                find "$mainffdir" -maxdepth 1 | grep -e extension | sed 's|.*/||'
+                find "$mainffdir" -maxdepth 1 | grep -e addon | sed 's|.*/||'
+                find "$mainffdir" -maxdepth 1 | grep -e prefs | sed 's|.*/||'
+                find "$mainffdir" -maxdepth 1 | grep -e settings | sed 's|.*/||'
+                find "$mainffdir/storage/default" -maxdepth 1 | grep -e extension | sed -e 's|.*/||' -e 's|^|storage/default/|'
+            )"
 
             echo && echo "saving preferences from main profile to nixdots@$nixprefsdir"
             echo "files/folders to be saved:"
@@ -86,15 +92,11 @@ function activate_ff() {
             while IFS= read -r file; do
                 cp -rv "$mainffdir/$file" "$nixprefsdir/$file"
             done <<< "$preffiles"
+            read # TODO remove
             ;;
         "2")
-            echo && echo "loading preferences from nixdots to main profile"
-            echo "files/folders to be saved:"
-            echo "$preffiles" && sleep "$sleeptime"
-            while IFS= read -r file; do
-                rm -rvf "$mainffdir/$file"
-                cp -rv "$nixprefsdir/$file" "$mainffdir/$file"
-            done <<< "$preffiles"
+            echo && echo "loading preferences from nixdots to main profile" && sleep "$sleeptime"
+            rsync -av "$nixprefsdir/" "$mainffdir/"
             ;;
         *)
             echo "got response: '$response'"
@@ -102,6 +104,16 @@ function activate_ff() {
             ;;
     esac
 
+    echo "done"
+    
+    echo && echo "did you also wish to export settings from maindir to other profiles? (1 or 2)"
+    echo "1. yes"
+    echo "2. no"
+    echo
+    echo -n "-> "
+    read response
+
+    [ "$response" == "2" ] && return
 
     echo && echo "duplicating all settings from main profile to all others:"
     echo "$profiles"
