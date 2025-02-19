@@ -70,7 +70,7 @@ function activate_ff() {
     echo "3. continue without doing either"
     read response
     
-    preffiles="$(find "$mainffdir" -maxdepth 1 | grep -e extension -e addon -e prefs | sed 's|.*/||')"
+    preffiles="$(find "$mainffdir" -maxdepth 1 | grep -e extension -e addon -e prefs -e settings | sed 's|.*/||')"
 
     case "$response" in
         "1")
