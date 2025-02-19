@@ -13,6 +13,8 @@ let
     altcol = "rgba(00000000)";
     strip = "${maincol} ${maincol} ${altcol}";
     gradient = "${strip} ${strip} ${strip} 45deg";
+
+    monitor-specs = mon: pos: "${toString mon.width}x${toString mon.height}@${toString mon.fps}, ${pos}, ${toString mon.scale}";
 in {
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD ${pkgs.hyprland}/bin/hyprctl reload > /dev/null";
@@ -210,9 +212,15 @@ in {
     # name, res@fps, pos of monitor's TpLft corner in layout, scale
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
-    ${if host == "nixbox" then "monitor=DP-3, ${toString rice.monitor.width}x${toString rice.monitor.height}@60, 0x0, ${toString rice.monitor.scale}"
-    else if host == "nixpad" then "monitor=eDP-1, ${toString rice.monitor.width}x${toString rice.monitor.height}@60, 0x0, ${toString rice.monitor.scale}"
+    ${if host == "nixbox" then let m = rice.monitor; in ''
+    monitor=DP-3, ${monitor-specs m.default "0x0"}
+    ''
+    else if host == "nixpad" then let m = rice.monitor; in ''
+    monitor=eDP-1, ${monitor-specs m.default "0x0"}
+    monitor=HDMI-A-1, ${monitor-specs m.secondary "${toString ((m.default.width / m.default.scale - m.secondary.width / m.secondary.scale) / 2)}x${toString (-m.secondary.height / m.secondary.scale)}"}
+    ''
     else ""}
+
     monitor=,preferred,auto,1 # auto rule for random monitors
 
     dwindle {

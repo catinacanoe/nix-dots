@@ -23,6 +23,7 @@
     # wifi
     networking = {
         networkmanager.enable = true;
+        nameservers = ["1.1.1.1"];
     };
     # vpn configurations (folder copy)
     environment.etc."wireguard" = {

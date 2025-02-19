@@ -56,12 +56,54 @@ function activate_ff() {
     echo
     echo "running firefox preactivation"
     echo "close all firefox instances, hit enter when done"
-    read
+    read # wait until enter
     killall .firefox-wrapped
 
     mainffdir="$HOME/.mozilla/firefox/main"
     profiles="$(echo gpt && echo scratch && echo calendar)" # add profile here and in ~/.moz/ff
     sleeptime="1.2"
+    nixprefsdir="$XDG_REPOSITORY_DIR/nix-dots/home/firefox/etc/extensions-prefs"
+
+    echo && echo "do you want to: (enter 1 2 or 3)"
+    echo "1. save preferences and extensions"
+    echo "2. load them from the nix-dots folder"
+    echo "3. continue without doing either"
+    read response
+    
+    preffiles="$(find "$mainffdir" -maxdepth 1 | grep -e extension -e addon -e prefs | sed 's|.*/||')"
+
+    case "$response" in
+        "1")
+            echo && echo "clearing nixdots ff prefs dir: $nixprefsdir"
+            rm -rfv "$nixprefsdir"
+            mkdir "$nixprefsdir"
+
+            echo && echo "saving preferences from main profile to nixdots@$nixprefsdir"
+            echo "files/folders to be saved:"
+            echo "$preffiles" && sleep "$sleeptime"
+            while IFS= read -r file; do
+                cp -rv "$mainffdir/$file" "$nixprefsdir/$file"
+            done <<< "$preffiles"
+            ;;
+        "2")
+            echo && echo "loading preferences from nixdots to main profile"
+            echo "files/folders to be saved:"
+            echo "$preffiles" && sleep "$sleeptime"
+            while IFS= read -r file; do
+                rm -rvf "$mainffdir/$file"
+                cp -rv "$nixprefsdir/$file" "$mainffdir/$file"
+            done <<< "$preffiles"
+            ;;
+        *)
+            echo "got response: '$response'"
+            echo "doing neither and continuing" && sleep $sleeptime
+            ;;
+    esac
+
+
+    echo && echo "duplicating all settings from main profile to all others:"
+    echo "$profiles"
+    echo "(while preserving session data)"
 
     while IFS= read -r line; do
         tmpdir="$(mktemp -d "firefox-activation-$line.XXXXXXX" --tmpdir)"
@@ -69,18 +111,18 @@ function activate_ff() {
         sessfiles="$(find "$ffdir" -maxdepth 1 | grep session | sed 's|.*/||')"
 
     
-        echo && echo "rebuilding $line profile"
+        echo && echo "rebuilding $line"
 
-        echo && echo "saving $line session files" && sleep "$sleeptime"
+        echo && echo "saving $line session" && sleep "$sleeptime"
         while IFS= read -r file; do
             cp -rv "$ffdir/$file" "$tmpdir/$file"
         done <<< "$sessfiles"
 
-        echo && echo "copying main profile over to $line" && sleep "$sleeptime"
+        echo && echo "copying main -> $line" && sleep "$sleeptime"
         rm -rvf "$ffdir"
         cp -rv "$mainffdir" "$ffdir"
 
-        echo && echo "restoring $line session files" && sleep "$sleeptime"
+        echo && echo "restoring $line session" && sleep "$sleeptime"
         while IFS= read -r file; do
             rm -rvf "$ffdir/$file"
             cp -rv "$tmpdir/$file" "$ffdir/$file"
