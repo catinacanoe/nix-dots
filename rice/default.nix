@@ -16,7 +16,7 @@ let host = import ../ignore-hostname.nix; in {
     };
 
     monitor = if host == "nixbox" then {
-        scale = 1.2;
+        scale = 1;
         width = 3840;
         height = 2160;
     } else if host == "nixpad" then {

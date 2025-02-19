@@ -3,8 +3,7 @@
     :monitor 0
     :geometry (geometry :x "0px"
                         :y "${toString (rice.window.gaps-out + rice.window.border)}px"
-                        ;; :width "${toString (rice.monitor.width / rice.monitor.scale - 2*(rice.window.gaps-out + rice.window.border))}px"
-                        :width "${toString (rice.monitor.width - 2*(rice.window.gaps-out + rice.window.border))}px"
+                        :width "${toString (rice.monitor.width / rice.monitor.scale - 2*(rice.window.gaps-out + rice.window.border))}px"
                         :height "${toString rice.bar.height}px"
                         :anchor "top center")
     :exclusive true
