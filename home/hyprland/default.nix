@@ -162,6 +162,12 @@ in {
         }#touchpad
     }#input
 
+    device {
+        name = glorious-model-o-wireless
+        sensitivity = -0.6
+        accel_profile = flat
+    }#device
+
     gestures {
         workspace_swipe_use_r = true
         workspace_swipe = true
