@@ -68,6 +68,8 @@ function activate_ff() {
     echo "1. save preferences and extensions"
     echo "2. load them from the nix-dots folder"
     echo "3. continue without doing either"
+    echo
+    echo -n "-> "
     read response
     
     preffiles="$(find "$mainffdir" -maxdepth 1 | grep -e extension -e addon -e prefs -e settings | sed 's|.*/||')"
