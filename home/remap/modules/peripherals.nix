@@ -2,8 +2,8 @@
 let
     launch = (import ../fn/launch.nix);
 
-    vol-def      = "3%";
-    bright-def   = "3%";
+    vol-def      = "2%";
+    bright-def   = "2%";
     vol-small    = "1%";
     bright-small = "1%";
 
