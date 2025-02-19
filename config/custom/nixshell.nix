@@ -92,7 +92,6 @@ function activate_ff() {
             while IFS= read -r file; do
                 cp -rv "$mainffdir/$file" "$nixprefsdir/$file"
             done <<< "$preffiles"
-            read # TODO remove
             ;;
         "2")
             echo && echo "loading preferences from nixdots to main profile" && sleep "$sleeptime"
