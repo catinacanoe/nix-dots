@@ -21,15 +21,32 @@ elif [ "$1" == "focus" ]; then
 fi
 
 function hide() {
-    numwindows = "$(hyprctl activeworkspace -j | jq .windows)"
-    [ $numwindows -gt 1 ] && hyprctl dispatch focuscurrentorlast &> /dev/null
+    # only focus last if dropdown is focused AND there are other windows in the workspace (so that refocusing wont change the workspace)
+    numwindows="$(hyprctl activeworkspace -j | jq .windows)"
+    focusid="$(hyprctl clients -j | jq ".[] | select(.workspace.name == \"special:scratch_$1\") | .focusHistoryID")"
+
+    [ $numwindows -gt 1 ] && [ $focusid == 0 ] && hyprctl dispatch focuscurrentorlast &> /dev/null
+
     pypr hide "$1"
 
     echo > "$CURRENTFILE"
 }
 
 function show() {
-    pypr show "$1"
+    drop_mon="$(hyprctl clients -j | jq ".[] | select(.workspace.name == \"special:scratch_$1\") | .monitor")"
+    current_mon="$(hyprctl activeworkspace -j | jq .monitorID)"
+
+    # drop_mon will be empty if this dropdown has never opened before (in which case we simply open it)
+    if [ -z "$drop_mon" ] || [ "$drop_mon" == "$current_mon" ]; then
+        pypr show "$1"
+    else
+        # if the drop is on another monitor we need to cycle it once before opening (for it to position correctly)
+        hyprctl keyword animations:enabled false # to prevent visual annoyance
+        pypr show "$1"
+        pypr hide "$1"
+        pypr show "$1"
+        hyprctl keyword animations:enabled true
+    fi
 
     echo "$1" > "$CURRENTFILE"
     echo "$1" > "$LASTFILE"

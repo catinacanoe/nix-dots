@@ -24,7 +24,7 @@ in {
 
     xdg.configFile."hypr/pyprland.toml" = pypr.pypr;
 
-    wayland.windowManager.hyprland.extraConfig = /* bash */ ''
+    wayland.windowManager.hyprland.extraConfig = /* hyprlang */ ''
     ${pypr.hypr.text}
 
     ${if host == "nixbox" then ''
@@ -129,16 +129,16 @@ in {
     animations {
         enabled = true
 
-        animation = windowsIn,1,   5, easeout, slide # spawning
-        animation = windowsOut,1,  2, linear,  slide # closing
-        animation = windowsMove,1, 4, easeout, slide # resizing dragging moving
-        animation = fadeIn,1,      5, easeout # fade on opening stuff
-        animation = fadeOut,1,     2, linear  # fade on closing stuff
-        animation = fadeSwitch,1,  7, easeout # fade on changing focus
-        animation = border,1,      7,   easeout      # border color changes
-        animation = borderangle,1, 100, linear, loop # changing the gradient angle
-        animation = workspaces,1,       4, easeout, slidefade 15%
-        animation = specialWorkspace,1, 5, easeout, slidevert
+        animation = windowsIn, 1,   5, easeout, slide # spawning
+        animation = windowsOut, 1,  2, linear,  slide # closing
+        animation = windowsMove, 1, 4, easeout, slide # resizing dragging moving
+        animation = fadeIn, 1,      5, easeout # fade on opening stuff
+        animation = fadeOut, 1,     2, linear  # fade on closing stuff
+        animation = fadeSwitch, 1,  7, easeout # fade on changing focus
+        animation = border, 1,      7,   easeout      # border color changes
+        animation = borderangle, 1, 100, linear, loop # changing the gradient angle
+        animation = workspaces, 1,       4, easeout, slidefade 15%
+        animation = specialWorkspace, 1, 5, easeout, slidevert
     }#animations
 
     # per device input settings exist (see wiki)
@@ -153,8 +153,8 @@ in {
       
         repeat_rate = 60
         repeat_delay = 160
-        sensitivity = 0.35 # (-1 - 1)
-        accel_profile = flat # {adaptive, flat, custom} unset=>defers to libinput
+        sensitivity = 0.2 # (-1 - 1)
+        accel_profile = adaptive # {adaptive, flat, custom} unset=>defers to libinput
 
         touchpad {
             scroll_factor = 0.4
@@ -162,11 +162,18 @@ in {
         }#touchpad
     }#input
 
+    ${let
+    model-o = suffix: /* hyprlang */ ''
     device {
-        name = glorious-model-o-wireless
-        sensitivity = -0.6
-        accel_profile = flat
-    }#device
+        name=glorious-model-o-wireless${suffix}
+        sensitivity=-0.7
+        accel_profile=adaptive
+    }
+    '';
+    in ''
+    ${model-o ""}
+    ${model-o "-1"}
+    ''}
 
     gestures {
         workspace_swipe_use_r = true
@@ -218,12 +225,20 @@ in {
     # name, res@fps, pos of monitor's TpLft corner in layout, scale
     # position is calculated WITH the scaled & transformed resolution
     # use ,transform to rotate, see wiki
+
+    # bind ws ranges to monitors
+    workspace = 1, monitor:${rice.monitor.primary.port}, default:true, persistent:true
+    workspace = r[1-8], monitor:${rice.monitor.primary.port}
+
     ${if host == "nixbox" then let m = rice.monitor; in ''
-    monitor=${m.port.default}, ${monitor-specs m.default "0x0"}
+    monitor = ${m.primary.port}, ${monitor-specs m.primary "0x0"}
     ''
     else if host == "nixpad" then let m = rice.monitor; in ''
-    monitor=${m.port.default}, ${monitor-specs m.default "0x0"}
-    monitor=${m.port.secondary}, ${monitor-specs m.secondary "${toString ((m.default.width / m.default.scale - m.secondary.width / m.secondary.scale) / 2)}x${toString (-m.secondary.height / m.secondary.scale)}"}
+    monitor = ${m.primary.port}, ${monitor-specs m.primary "${toString (-m.primary.width / m.primary.scale / 2)}x${toString (-m.primary.height / m.primary.scale)}"}
+    monitor = ${m.secondary.port}, ${monitor-specs m.secondary "${toString (-m.secondary.width / m.secondary.scale / 2)}x0"}
+
+    workspace = 11, monitor:${rice.monitor.secondary.port}, default:true, persistent:true
+    workspace = r[11-18], monitor:${rice.monitor.secondary.port}
     ''
     else ""}
 

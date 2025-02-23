@@ -1,70 +1,64 @@
 { mod, ...}:
 let
     hypr = (import ../fn/hypr.nix);
+    rice = (import ../../../rice);
 
-    wsbind = { key, ws, pad ? "                " }: /* yaml */ ''
+    hypr-movetomon = cmd: mon: (hypr "${cmd} && hyprctl dispatch movecurrentworkspacetomonitor ${mon}");
+
+    wsbind = { key, ws, mon, pad ? "                " }: /* yaml */ ''
     # wsbind
     ${pad}${mod}-${key}:
-        ${pad}${hypr "workspace ${ws}"}
+        ${pad}${hypr-movetomon "workspace ${ws}" mon}
     ${pad}${mod}-shift-${key}:
-        ${pad}${hypr "movetoworkspace ${ws}"}
+        ${pad}${hypr-movetomon "movetoworkspace ${ws}" mon}
+    ${pad}${mod}-ctrl-${key}:
+        ${pad}${hypr-movetomon "movetoworkspacesilent ${ws}" mon}
     # wsbind'';
 
-    wsbindctrl = { key, ws, pad ? "                " }: /* yaml */ ''
-    # wsbindctrl
-    ${pad}${mod}-ctrl-${key}:
-        ${pad}${hypr "movetoworkspacesilent ${ws}"}
-    # wsbindctrl'';
-
-    wsmon = { offset }: /* yaml */ ''
+    wsmon = { offset, mon }: /* yaml */ ''
     # wsmon
-                    ${wsbind { key = "r"; ws = "${offset}1"; }}
-                    ${wsbindctrl { key = "r"; ws = "${offset}1"; }}
+                    ${wsbind { key = "r"; ws = "${offset}1"; inherit mon; }}
+                    ${wsbind { key = "s"; ws = "${offset}2"; inherit mon; }}
+                    ${wsbind { key = "t"; ws = "${offset}3"; inherit mon; }}
+                    ${wsbind { key = "h"; ws = "${offset}4"; inherit mon; }}
+                    ${wsbind { key = "n"; ws = "${offset}5"; inherit mon; }}
+                    ${wsbind { key = "a"; ws = "${offset}6"; inherit mon; }}
+                    ${wsbind { key = "i"; ws = "${offset}7"; inherit mon; }}
+                    ${wsbind { key = "o"; ws = "${offset}8"; inherit mon; }}
 
-                    ${wsbind { key = "s"; ws = "${offset}2"; }}
-                    ${wsbindctrl { key = "s"; ws = "${offset}2"; }}
+                    ${mod}-esc: # for keyboard which has some ctrl-key combos mapped to other inputs
+                        ${hypr-movetomon "movetoworkspacesilent ${offset}4" mon}
 
-                    ${wsbind { key = "t"; ws = "${offset}3"; }}
-                    ${wsbindctrl { key = "t"; ws = "${offset}3"; }}
+                    ${mod}-left: # for keyboard which has some ctrl-key combos mapped to other inputs
+                        ${hypr-movetomon "movetoworkspacesilent ${offset}5" mon}
 
-                    ${wsbind { key = "h"; ws = "${offset}4"; }}
-                    ${mod}-esc:
-                        ${hypr "movetoworkspacesilent ${offset}4"}
+                    ${mod}-up: # for keyboard which has some ctrl-key combos mapped to other inputs
+                        ${hypr-movetomon "movetoworkspacesilent ${offset}6" mon}
 
-                    ${wsbind { key = "n"; ws = "${offset}5"; }}
-                    ${mod}-left:
-                        ${hypr "movetoworkspacesilent ${offset}5"}
+                    ${mod}-down: # for keyboard which has some ctrl-key combos mapped to other inputs
+                        ${hypr-movetomon "movetoworkspacesilent ${offset}7" mon}
 
-                    ${wsbind { key = "a"; ws = "${offset}6"; }}
-                    ${mod}-up:
-                        ${hypr "movetoworkspacesilent ${offset}6"}
-
-                    ${wsbind { key = "i"; ws = "${offset}7"; }}
-                    ${mod}-down:
-                        ${hypr "movetoworkspacesilent ${offset}7"}
-
-                    ${wsbind { key = "o"; ws = "${offset}8"; }}
-                    ${mod}-right:
-                        ${hypr "movetoworkspacesilent ${offset}8"}
+                    ${mod}-right: # for keyboard which has some ctrl-key combos mapped to other inputs
+                        ${hypr-movetomon "movetoworkspacesilent ${offset}8" mon}
     # wsmon'';
 in
 /* yaml */ ''
 # workspaces.nix
-        ${wsbind { key = "c"; ws = "r-1"; pad = "        "; }}
-        ${wsbind { key = "y"; ws = "r+1"; pad = "        "; }}
-        ${wsbind { key = "f"; ws = "previous"; pad = "        "; }}
+        ${wsbind { key = "c"; ws = "r-1"; pad = "        "; mon = "current"; }}
+        ${wsbind { key = "y"; ws = "r+1"; pad = "        "; mon = "current"; }}
+        ${wsbind { key = "f"; ws = "previous"; pad = "        "; mon = "current"; }}
 
         ${mod}-h:
             remap:
-                ${wsmon { offset = "0"; }}
+                ${wsmon { offset = "0"; mon = rice.monitor.primary.port; }}
         ${mod}-t:
             remap:
-                ${wsmon { offset = "1"; }}
+                ${wsmon { offset = "1"; mon = rice.monitor.secondary.port; }}
         ${mod}-s:
             remap:
-                ${wsmon { offset = "2"; }}
+                ${wsmon { offset = "2"; mon = "";}}
         ${mod}-r:
             remap:
-                ${wsmon { offset = "3"; }}
+                ${wsmon { offset = "3"; mon = "";}}
 # workspaces.nix
 ''

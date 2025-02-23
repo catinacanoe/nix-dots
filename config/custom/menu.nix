@@ -1,3 +1,4 @@
+# my version of dmenu, written with 
 { pkgs, ... }:
 let
     infile = "/tmp/menu-in.fifo";

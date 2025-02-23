@@ -17,13 +17,13 @@
 
     delay() { sleep 0.8; }
 
-    lock() { ${swaylock} --image="$(swww query | sed 's|^.*image: ||')" "$@"; }
+    lock() { ${swaylock} --image="$(swww query | sed 's|^.*image: ||' | head -n 1)"; }
 
     case "$choice" in
         lock) delay && lock ;;
-        ${if (import ../../ignore-hostname.nix) == "nixbox" then ''
+        ${if (import ../../ignore-hostname.nix) == "nixbox" then /*sh*/ ''
             suspend) lock && sleep 2 && systemctl suspend ;;
-        '' else ''
+        '' else /*sh*/ ''
             suspend) delay && lock && delay && systemctl suspend ;;
         ''}
         reload) ${hyprctl} dispatch forcerendererreload ;;

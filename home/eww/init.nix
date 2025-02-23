@@ -4,7 +4,10 @@ kill $(ps aux | grep 'eww/init.sh' | awk '{ print $2 }' | grep -v $$)
 kill $(pgrep eww)
 
 cat "$XDG_CONFIG_HOME/eww/eww.scss.gen" > "$XDG_CONFIG_HOME/eww/eww.scss"
-eww open dock --restart
+eww open dock-0 --restart
+eww open dock-1
+
+hyprctl dispatch event eww,init,start
 
 function net_check() {
     while true; do
@@ -75,45 +78,82 @@ function battery() {
     sleep 5; done
 }; battery &
 
-function active() {
-    local ws
-    ws="$(hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id')"
+# opens the corresponding dock when a monitor is connected
+function watch_monitors() {
+    # socat watches the hyprland ipc, listens for events
+    # events are formatted like so: $eventname>>$1,$2,$3
+    # so using awk we select for the events we want, then split by >> or , and select the argument we want, which is passed into the loop var
 
-    eww update "var_active=$ws"
-    eww update "var_prev=$ws"
-    eww update "var_switching=false"
-
-
+    # this watches for monitoradded event and selects the portname of the monitor (ie eDP-1)
     socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
-        stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}' |
-        while read -r active; do
-            if [ "$active" != "$(eww get var_active)" ]; then
-                eww update "var_switching=true" "var_prev=$(eww get var_active)" "var_active=$active"
-                sleep 0.15 && eww update "var_switching=false" &
+        stdbuf -o0 awk -F '>>|,' -e '/^monitoradded>>/ {print $2}' |
+        while read -r port; do
+            case "$port" in
+                "${rice.monitor.primary.port}")   sleep 1 && eww open dock-0 ;;
+                "${rice.monitor.secondary.port}") sleep 1 && eww open dock-1 ;;
+            esac
+        done
+}; watch_monitors &
+
+ws_switch_time=0.15
+
+# watches for changes in active workspace and updates eww accordingly
+function active() {
+    # watches for change in focused workspace or monitor, and end of eww init (also a periodic event, because sometimes changes are missed)
+    socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
+        stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/' -e '/^focusedmon>>/' -e '/^custom>>eww,init,end/' -e '/^custom>>periodic,1/' |
+        while read -r line; do
+            active="$(hyprctl monitors -j | jq '.[] | {"mon": .name, "active": .activeWorkspace.id}' | sed -e 's|${rice.monitor.primary.port}|0|' -e 's|${rice.monitor.secondary.port}|1|' | jq -s 'sort_by(.mon) | .[].active' | jq -s)"
+
+            if [ "$active" != "$(eww get var_active_ws)" ]; then
+                eww update "var_switching_ws=true" "var_prev_ws=$(eww get var_active_ws)" "var_active_ws=$active"
+                sleep $ws_switch_time && eww update "var_switching_ws=false" &
             fi
         done
 }; active &
 
+# updates eww on which workspaces are open and how many windows each contains
 function workspaces() {
     local prev
     prev=""
 
-    socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
+    local wsrange_start=1
+    local wsrange_end=40
+
+    # loop only runs on openwindow, closewindow, activewindow, workspace, or focusedmon event
+    socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
+    stdbuf -o0 awk -F '>>|,' -e '/^openwindow>>/' -e '/^closewindow>>/' -e '/^createworkspace>>/' -e '/^destroyworkspace>>/' -e '/^custom>>eww,init,end/' | # -e '/^focsedmon>>/' |
+    while read -r line; do
         local workspaces
         local end
 
-        workspaces=$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries' | grep -v ' *"-' | sed '/{\|}/d' | sort)
+        # grep removes negative entries
+        # sed removes the brackets at top and bottom
+        workspaces="$(hyprctl workspaces -j | jq 'map({key: .id | tostring, value: .windows}) | from_entries' | grep -v ' *"-' | sed '/{\|}/d')"
 
-        end="$(echo "$workspaces" | tail -n 1 | awk -F '"' '{ print $2 }')"
+        # get the highest open id for each monitor
+        max0=0
+        max1=0
+        max2=0
+        max3=0
+        while IFS= read -r id; do
+            [ $id -lt 9 ] && max0=$id
+            [ $id -lt 19 ] && max1=$id
+            [ $id -lt 29 ] && max2=$id
+            [ $id -lt 39 ] && max3=$id
+        done <<< "$(echo "$workspaces" | awk -F '"' '{print $2}' | sed 's|^\(.\)$|0\1|' | sort | sed 's|^0||')"
 
+        # 1st sed adds comma to lines that lack one
+        # 2nd sed removes comma from last line
         workspaces="$(
             echo "{"
-            echo "$workspaces" | head -n -1 | sed 's|\([^,]\)$|\1,|'
+            echo "$workspaces" | head -n -1 | sed 's|\([^,]\)$|\1,|' 
             echo "$workspaces" | tail -n 1 | sed 's|,$||'
             echo "}"
         )"
 
-        final="$(seq "1" "$end" | jq --argjson windows "$workspaces" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})')"
+        range="$(seq 1 $max0 && seq 11 $max1 && seq 21 $max2 && seq 31 $max3)"
+        final="$(echo "$range" | jq --argjson windows "$workspaces" --slurp -Mc 'map(tostring) | map({id: ., windows: ($windows[.]//0)})')"
 
         if [ -z "$prev" ] || [ "$final" != "$prev" ] || [ "$final" != "$(eww get var_workspaces)" ]; then
             prev="$final"
@@ -122,6 +162,7 @@ function workspaces() {
     done
 }; workspaces &
 
+# converts color names to hex
 function get_col_hex() {
     case "$1" in
         "fg") echo "${rice.col.fg.h}" ;;
@@ -167,7 +208,7 @@ function add_gradient_css() {
     done <<< "$colors"
     echo
     )"
-    echo "$hashes" | grep "ERROR" && return
+    echo "$hashes" | grep "ERROR" && return # if any hex code was not possible to locate
     hashes="$(echo "$hashes" | sed 's|, $||' )"
 
     local texthash="$(get_col_hex "$text")"
@@ -276,13 +317,12 @@ function visualizer() {
     done < $pipe
 }; visualizer &
 
-function sussy_baka() {
+function periodic_event() {
     while true; do
-        cat "$XDG_REPOSITORY_DIR/nix-dots/config/default.nix" | grep -q "^ *./hosts.nix *$" || \
-            notify-send 'think' 'carefully'
+        hyprctl dispatch event periodic,1 # the 1 indicates one second period
+    sleep 1; done
+}
 
-        cat "$XDG_REPOSITORY_DIR/nix-dots/home/eww/init.nix" | grep -q "^}; sussy_baka &$" || \
-            notify-send 'think' 'carefully'
-    sleep 3; done
-}; sussy_baka &
+sleep 0.5
+hyprctl dispatch event eww,init,end
 ''

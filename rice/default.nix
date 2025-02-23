@@ -16,48 +16,41 @@ let host = import ../ignore-hostname.nix; in {
     };
 
     monitor = let
-        benq-pd3200u- = if host != "nixpad" then {
-            scale = 1.2;
+        benq-pd3200u- = {
+            name = "BenQ PD3200U";
+            scale = 1.06666;
             width = 3840;
             height = 2160;
             fps = 60;
-        } else { # on laptop because apparently hdmi doesnt support 4k60
-            scale = 1;
-            width = 2560;
-            height = 1440;
-            fps = 60;
+            priority = 0;
         };
         thinkpad-e16- = {
+            name = "0x160E";
             scale = 1.33333;
             width = 2560;
             height = 1600;
             fps = 60;
+            priority = 1;
         };
-        default- = {
-            scale = 1;
-            width = 1920;
-            height = 1080;
-            fps = 60;
+    in if host == "nixbox" then {
+        primary = benq-pd3200u-//{
+            port = "DP-1";
         };
-    in {
-        default = if host == "nixbox" then benq-pd3200u-
-                  else if host == "nixpad" then thinkpad-e16-
-                  else default-;
-        secondary = if host == "nixbox" then thinkpad-e16-
-                    else if host == "nixpad" then benq-pd3200u-
-                    else default-;
 
-        port = if host == "nixbox" then {
-            default = "DP-1";
-            # secondary = "not installed yet"
-        } else if host == "nixpad" then {
-            default = "eDP-1";
-            secondary = "HDMI-A-1";
-        } else {};
+        secondary = thinkpad-e16-//{
+            port = "ERROR-in-rice-default-nix";
+            name = "ERROR-in-rice-default-nix"; # name will be diff: the headless plug
+        };
+    } else if host == "nixpad" then {
+        primary = benq-pd3200u-//{
+            port = "HDMI-A-1";
+            fps = 30; # if we want 60fps over HDMI we must use 1440p 
+        };
 
-        benq-pd3200u = benq-pd3200u-;
-        thinkpad-e16 = thinkpad-e16-;
-    };
+        secondary = thinkpad-e16-//{
+            port = "eDP-1";
+        };
+    } else {};
 
     bar = {
         fontsize = 18;

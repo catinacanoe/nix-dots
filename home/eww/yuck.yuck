@@ -5,26 +5,25 @@
     )
 )
 
-(defwidget dock_layout []
+(defwidget dock_layout [mon]
     (centerbox :orientation "horizontal" :class "dock-layout" :valign "center"
         (dock_left)
-        (dock_middle)
+        (dock_middle :mon mon)
         (dock_right)
     )
 )
 
-(defvar var_switching false)
-(defvar var_active 1)
-(defvar var_prev 1)
-(defvar var_workspaces '[{"id":"1","windows":0}]')
-(defwidget dock_middle []
+(defvar var_switching_ws false)
+(defvar var_active_ws '[1, 11]')
+(defvar var_prev_ws   '[1, 11]')
+(defvar var_workspaces '[{"id":"1","windows":0}, {"id":"11","windows":0}]')
+(defwidget dock_middle [mon]
     (dock_block :class "dark_col"
         (box :class "dock-widget" :space-evenly false
             (for workspace in var_workspaces
-                (box :orientation "vertical" :space-evenly false
+                (box :orientation "vertical" :space-evenly false :visible {mon*10 < workspace.id && workspace.id <= mon*10+8}
                     (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
-                    ;; (box :class "dock-workspaces ${workspace.windows == 0 ? "t3-bg" : ""} ${workspace.windows == 1 ? "fg-bg" : ""} ${workspace.windows >= 2 ? var_mus_color : ""} ${var_switching ? (workspace.id == var_active ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev ? " switching" : ""))) : (workspace.id == var_active ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                    (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching_ws ? (workspace.id == var_active_ws[mon] ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev_ws[mon] ? " switching" : ""))) : (workspace.id == var_active_ws[mon] ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )

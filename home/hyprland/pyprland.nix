@@ -46,7 +46,7 @@
         termpad = name: command: /* toml */ ''
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
-            lazy = true
+            lazy = false
             ${size.term}
         '';
 
