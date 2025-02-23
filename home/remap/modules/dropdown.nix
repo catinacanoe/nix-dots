@@ -7,8 +7,6 @@ in
 # dropdown.nix
         ${mod}-w:
             ${launch "pypr toggle browseshell"}
-        ${mod}-comma:
-            ${drop "launcher"}
         ${mod}-dot:
             remap:
                 ${mod}-w:

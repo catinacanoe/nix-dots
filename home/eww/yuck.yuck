@@ -33,15 +33,12 @@
 
 (defvar var_mus_color "mus-gradient")
 (defvar var_mus_playing false)
-(defvar var_mus_type "mpd")
 (defwidget dock_left []
     (box :hexpand false :space-evenly false :spacing 7 :halign "start"
         (dock_block :class "music dark_col" (dock_volume))
         (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_current))
-        (dock_block :class "music dark_col" :visible {var_mus_current != "" && var_mus_playing} (dock_mus_cava))
-        (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_progress)) ;; && var_mus_type == "mpd"
-        (dock_block :class "music dark_col" :visible {var_mus_current != "" && var_mus_next != ""} (dock_mus_next))
-        ;; (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_test))
+        (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_progress))
+        (dock_block :class "music dark_col" :visible {var_cava != var_cava_flatline} (dock_mus_cava))
     )
 )
 
@@ -81,22 +78,13 @@
 )
 
 (defvar var_cava "")
+(defvar var_cava_flatline "")
 (defwidget dock_mus_cava []
     (dock_widget
         (label
             :valign "center"
             :class "dock-mus-cava"
             :text "${var_cava}"
-        )
-    )
-)
-
-
-(defvar var_mus_next "-")
-(defwidget dock_mus_next []
-    (dock_widget
-        (label
-            :text "${var_mus_next}"
         )
     )
 )

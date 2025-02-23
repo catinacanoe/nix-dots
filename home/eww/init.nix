@@ -270,6 +270,13 @@ function visualizer() {
     linect=${toString rice.bar.cava.height}
     heightlevels=$((linect*charct-1))
 
+    flatline="$(
+        seq 2 $linect | sed "s|.*|$(seq 1 $numbars | tr '\n' ' ' | sed "s|[^ ]* | |g" && echo)|"
+        seq 1 $numbars | tr '\n' ' ' | sed "s|[^ ]* |$(sed 's|\(.\).*|\1|' <<< "$chars")|g" && echo
+    )"
+    
+    eww update "var_cava_flatline=$flatline"
+
     cavasedfile=/tmp/cava.sed
     ${builtins.readFile ./cava-sed.bash}
 

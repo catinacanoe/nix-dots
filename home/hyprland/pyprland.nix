@@ -82,7 +82,6 @@
     ${termpad "nix" "nixshell"}
 
     ${focustermpad "browseshell" "browseshell"}
-    ${focustermpad "launcher" "launcher"}
     ${focustermpad "menu" "menuui"}
 
     ${termpad "news" "newsboat"}

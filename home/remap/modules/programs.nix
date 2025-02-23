@@ -7,7 +7,7 @@ in
                 ${mod}-space:
                     ${launchdir direction "echo"}
                 ${mod}-l:
-                    ${launchdir direction "pypr show launcher"}
+                    ${launchdir direction "kitty launcher"}
                 ${mod}-t:
                     ${launchdir direction "kitty ~"}
                 ${mod}-h:

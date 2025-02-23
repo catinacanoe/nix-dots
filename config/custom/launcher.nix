@@ -1,5 +1,4 @@
 { pkgs, ... }: pkgs.writeShellScriptBin "launcher" ''
-RECENT_LAUNCHES=""
 MAX_RECENTS=7
 
 function update_recents() {
@@ -28,12 +27,16 @@ function construct_list() {
     fi
 }
 
-while true; do
-    program="$(construct_list | tac | fzf)"
-    [ -z "$program" ] && exit
+SAVE_FILE=/tmp/launcher.recents
 
-    hyprctl dispatch exec "$TERMINAL -e $program" > /dev/null
+touch $SAVE_FILE
+RECENT_LAUNCHES="$(cat $SAVE_FILE)"
 
-    update_recents
-done
+program="$(construct_list | tac | fzf)"
+[ -z "$program" ] && exit
+
+update_recents
+echo "$RECENT_LAUNCHES" > $SAVE_FILE
+
+"$program"
 ''
