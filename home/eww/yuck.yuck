@@ -13,7 +13,7 @@
     )
 )
 
-(defvar var_switching_ws false)
+(defvar var_switching_ws '[false, false]')
 (defvar var_active_ws '[1, 11]')
 (defvar var_prev_ws   '[1, 11]')
 (defvar var_workspaces '[{"id":"1","windows":0}, {"id":"11","windows":0}]')
@@ -23,7 +23,7 @@
             (for workspace in var_workspaces
                 (box :orientation "vertical" :space-evenly false :visible {mon*10 < workspace.id && workspace.id <= mon*10+8}
                     (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching_ws ? (workspace.id == var_active_ws[mon] ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev_ws[mon] ? " switching" : ""))) : (workspace.id == var_active_ws[mon] ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                    (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching_ws[mon] ? (workspace.id == var_active_ws[mon] ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev_ws[mon] ? " switching" : ""))) : (workspace.id == var_active_ws[mon] ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
                     (box :class "dock-workspace-pad")
                 )
             )

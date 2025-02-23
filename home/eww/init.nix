@@ -104,10 +104,14 @@ function active() {
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/' -e '/^focusedmon>>/' -e '/^custom>>eww,init,end/' -e '/^custom>>periodic,1/' |
         while read -r line; do
             active="$(hyprctl monitors -j | jq '.[] | {"mon": .name, "active": .activeWorkspace.id}' | sed -e 's|${rice.monitor.primary.port}|0|' -e 's|${rice.monitor.secondary.port}|1|' | jq -s 'sort_by(.mon) | .[].active' | jq -s)"
+            prev="$(eww get var_active_ws)"
+            switch="$(jq -n --argjson a "$active" --argjson b "$prev" '[$a, $b] | transpose | .[] | .[0] != .[1]' | jq -s)"
 
-            if [ "$active" != "$(eww get var_active_ws)" ]; then
-                eww update "var_switching_ws=true" "var_prev_ws=$(eww get var_active_ws)" "var_active_ws=$active"
-                sleep $ws_switch_time && eww update "var_switching_ws=false" &
+            falselist="$(echo "$active" | jq '.[] | false' | jq -s)"
+
+            if [ "$active" != "$prev" ]; then
+                eww update "var_switching_ws=$switch" "var_prev_ws=$prev" "var_active_ws=$active"
+                sleep $ws_switch_time && eww update "var_switching_ws=$falselist" &
             fi
         done
 }; active &
