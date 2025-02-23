@@ -245,11 +245,6 @@ function music() {
         # char limit
         name="$(plyr current)"
 
-        # maxlen="${if hostname == "nixbox" then "100" else "35"}"
-        # namelen="$(echo "$name" | wc -c)"
-        # if [ $namelen -gt $maxlen ]; then
-        # else
-        # fi
         name="$(sed -e 's|\(.\{${if hostname == "nixbox" then "100" else "35"}\}[^$]\).*|\1|' <<< "$name")"
 
         color="$(plyr color)"
