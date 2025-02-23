@@ -1,3 +1,5 @@
+# script that unifies interaction with mpd and playerctl
+# supports pause/play, skip, get current song etc
 { pkgs, ... }: pkgs.writeShellScriptBin "plyr" ''
 #########
 # SETUP #
@@ -90,7 +92,7 @@ case "$cmd" in
                 # this code adds the artist name if player is spotify
                 if echo "$(playerctl metadata xesam:url)" | grep -q 'spotify'; then
                     name="$(echo "$name" | sed -e 's| (.*)$||')" # remove ending parentheses (features and stuff)
-                    name="$(playerctl metadata artist | sed 's|,.*||') - $name" # add in the first artist in the list
+                    # name="$(playerctl metadata artist | sed 's|,.*||') - $name" # add in the first artist in the list
                 fi
 
                 name="$(echo "$name" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | LC_COLLATE=C sed \
