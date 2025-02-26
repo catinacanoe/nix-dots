@@ -20,11 +20,13 @@ elif [ "$1" == "focus" ]; then
 fi
 
 function hide() {
-    # only focus last if dropdown is focused AND there are other windows in the workspace (so that refocusing wont change the workspace)
-    numwindows="$(hyprctl activeworkspace -j | jq .windows)"
-    focusid="$(hyprctl clients -j | jq ".[] | select(.workspace.name == \"special:scratch_$1\") | .focusHistoryID")"
+    # only run focuslast IF
+    # - dropdown is focused
+    # - there are other windows in the workspace to recofus onto
+    numwindows="$(hyprctl activeworkspace -j | jq .windows)" # number of windows in workspace
+    scratchfocused="$(hyprctl activewindow -j | grep -e '"class": "scratchpad",' -e '"title": "\[scratch\]')" # -n if a scratch window is focused
 
-    [ $numwindows -gt 1 ] && [ $focusid == 0 ] && hyprctl dispatch focuscurrentorlast &> /dev/null
+    [ $numwindows -gt 1 ] && [ -n "$scratchfocused" ] && hyprctl dispatch focuscurrentorlast &> /dev/null
 
     pypr hide "$1"
 
