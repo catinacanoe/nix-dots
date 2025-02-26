@@ -113,6 +113,7 @@
         procps
         pipes
         psmisc
+        qastools
         ripgrep
         shellcheck
         seatd

@@ -10,7 +10,8 @@ function encode() {
 
 function open() {
     wl-copy "$@"
-    hyprctl dispatch focuscurrentorlast &> /dev/null
+    # hyprctl dispatch focuscurrentorlast &> /dev/null
+    drop browseshell nohistory
 
     local class="$(hyprctl activewindow -j | jq .class)"
     if [ "$class" == "\"$BROWSER\"" ] || echo "$class" | grep -qi 'browser'; then

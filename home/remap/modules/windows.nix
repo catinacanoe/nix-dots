@@ -43,6 +43,7 @@ in
         ${mod}-shift-right:
             ${hypr "resizeactive ${resize-small} 0"}
 
+        # moveactive is for floating windows (doesn't affect non floating)
         ${mod}-shift-n:
             ${hypr "swapwindow l && hyprctl dispatch moveactive -${resize} 0"}
         ${mod}-shift-a:
@@ -55,9 +56,9 @@ in
         ${mod}-shift-l:
             ${hypr "movewindow l"}
         ${mod}-shift-tab:
-            ${hypr "movewindow u"}
+            ${hypr "movewindow mon:u"} # because windows arent often moved up and down, except between monitors
         ${mod}-shift-u:
-            ${hypr "movewindow d"}
+            ${hypr "movewindow mon:d"}
         ${mod}-shift-q:
             ${hypr "movewindow r"}
 # windows.nix

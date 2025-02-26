@@ -6,7 +6,7 @@ in
 /* yaml */ ''
 # dropdown.nix
         ${mod}-w:
-            ${launch "pypr toggle browseshell"}
+            ${drop "browseshell nohistory"}
         ${mod}-dot:
             remap:
                 ${mod}-w:

@@ -91,9 +91,45 @@ case "$cmd" in
             if [ -n "$name" ]; then
                 # this code adds the artist name if player is spotify
                 if echo "$(playerctl metadata xesam:url)" | grep -q 'spotify'; then
-                    name="$(echo "$name" | sed -e 's| (.*)$||')" # remove ending parentheses (features and stuff)
-                    # name="$(playerctl metadata artist | sed 's|,.*||') - $name" # add in the first artist in the list
+                    name="$(echo "$name" | sed -e 's| (.*)$||' -e 's|\s*-.*$||')" # remove ending parentheses (features and stuff), and also anything after a dash
                 fi
+
+                # transliterate russian
+                name="$(echo "$name" | sed \
+                    -e 's|[Аа]|a|g' \
+                    -e 's|[Бб]|b|g' \
+                    -e 's|[Вв]|v|g' \
+                    -e 's|[Гг]|g|g' \
+                    -e 's|[Дд]|d|g' \
+                    -e 's|[Ее]|e|g' \
+                    -e 's|[Ёё]|yo|g' \
+                    -e 's|[Жж]|zh|g' \
+                    -e 's|[Зз]|z|g' \
+                    -e 's|[Ии]|i|g' \
+                    -e 's|[Йй]|i|g' \
+                    -e 's|[Кк]|k|g' \
+                    -e 's|[Лл]|l|g' \
+                    -e 's|[Мм]|m|g' \
+                    -e 's|[Нн]|n|g' \
+                    -e 's|[Оо]|o|g' \
+                    -e 's|[Пп]|p|g' \
+                    -e 's|[Рр]|r|g' \
+                    -e 's|[Сс]|s|g' \
+                    -e 's|[Тт]|t|g' \
+                    -e 's|[Уу]|u|g' \
+                    -e 's|[Фф]|f|g' \
+                    -e 's|[Хх]|x|g' \
+                    -e 's|[Цц]|c|g' \
+                    -e 's|[Чч]|ch|g' \
+                    -e 's|[Шш]|sh|g' \
+                    -e 's|[Щщ]|sh|g' \
+                    -e 's|[Ъъ]||g' \
+                    -e 's|[Ыы]|i|g' \
+                    -e 's|[Ьь]||g' \
+                    -e 's|[Ээ]|e|g' \
+                    -e 's|[Юю]|yu|g' \
+                    -e 's|[Яя]|ya|g'
+                )"
 
                 name="$(echo "$name" | iconv -f utf8 -t ascii//TRANSLIT//IGNORE | LC_COLLATE=C sed \
                 -e 's|\[.*\]\s*$||' \

@@ -11,6 +11,7 @@
         alsa.enable = true;
         alsa.support32Bit = true;
         pulse.enable = true; # pulse-pw compat layer
+        wireplumber.enable = true;
     };
 
 

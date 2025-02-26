@@ -4,7 +4,6 @@ CURRENTFILE="/tmp/pypr-drop-current.save"
 
 last="$(cat "$LASTFILE")"
 current="$(cat "$CURRENTFILE")"
-alt="$2"
 
 if [ "$1" == "init" ]; then
     echo > "$LASTFILE"
@@ -49,6 +48,8 @@ function show() {
     fi
 
     echo "$1" > "$CURRENTFILE"
+
+    [ "$2" == "nohistory" ] && return
     echo "$1" > "$LASTFILE"
 }
 
@@ -62,10 +63,11 @@ else
     if [ "$current" == "$1" ]; then
         hide "$current"
     elif [ -n "$current" ]; then
-        [ -z "$alt" ] && hide "$current"
-        show "$1"
+        # [ -z "$alt" ] && hide "$current"
+        hide "$current"
+        show "$1" "$2"
     else
-        show "$1"
+        show "$1" "$2"
     fi
 fi
 ''

@@ -103,7 +103,14 @@ function active() {
     socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
         stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/' -e '/^focusedmon>>/' -e '/^custom>>eww,init,end/' -e '/^custom>>periodic,1/' |
         while read -r line; do
-            active="$(hyprctl monitors -j | jq '.[] | {"mon": .name, "active": .activeWorkspace.id}' | sed -e 's|${rice.monitor.primary.port}|0|' -e 's|${rice.monitor.secondary.port}|1|' | jq -s 'sort_by(.mon) | .[].active' | jq -s)"
+            monlist="$(hyprctl monitors -j | jq '.[] | {"mon": .name, "active": .activeWorkspace.id}' | sed -e 's|"${rice.monitor.primary.port}"|0|' -e 's|"${rice.monitor.secondary.port}"|1|' | jq -s 'sort_by(.mon)')"
+            mons="$(echo "$monlist" | jq '.[].mon')"
+            maxmon="$(echo "$mons" | sort | tail -n 1)"
+            [ "$mons" != "$(seq 0 $maxmon)" ] && monlist="$(echo "$monlist" | jq '.[]' | cat - <(echo '{ "mon": 0, "active": 0 }') | jq -s 'sort_by(.mon)')"
+            # the above basically makes sure that all monitors are present (ie if mon 0 is disconnected, we still want the id of mon 1 to appear second in list, so we create a dummy mon 0 value)
+            # the code will have to be rewritten if it needs to support more than 2 monitors (because here the only monitor disconnect that messes things up is mon0, this will not be the case with >2 monitors)
+
+            active="$(echo "$monlist" | jq '.[].active' | jq -s)"
             prev="$(eww get var_active_ws)"
             switch="$(jq -n --argjson a "$active" --argjson b "$prev" '[$a, $b] | transpose | .[] | .[0] != .[1]' | jq -s)"
 
@@ -126,7 +133,7 @@ function workspaces() {
 
     # loop only runs on openwindow, closewindow, activewindow, workspace, or focusedmon event
     socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
-    stdbuf -o0 awk -F '>>|,' -e '/^openwindow>>/' -e '/^closewindow>>/' -e '/^createworkspace>>/' -e '/^destroyworkspace>>/' -e '/^custom>>eww,init,end/' | # -e '/^focsedmon>>/' |
+    stdbuf -o0 awk -F '>>|,' -e '/^openwindow>>/' -e '/^closewindow>>/' -e '/^movewindow>>/' -e '/^createworkspace>>/' -e '/^destroyworkspace>>/' -e '/^custom>>eww,init,end/' | # -e '/^focsedmon>>/' |
     while read -r line; do
         local workspaces
         local end

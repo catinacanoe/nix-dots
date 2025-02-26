@@ -63,6 +63,8 @@ in {
     windowrulev2 = opacity 1.0 override 1.0 override, class:^(imv)$
     windowrulev2 = opacity 1.0 override 1.0 override, class:^(mpv)$
 
+    windowrulev2 = float, class:firefox, title:([scratch])(.*)
+
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
     # bindl=,switch:[switch name],exec,swaylock # see wiki, bind#switches

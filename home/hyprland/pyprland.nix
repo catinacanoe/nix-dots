@@ -61,7 +61,7 @@
             [scratchpads.${name}]
             command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
             unfocus = "hide"
-            lazy = true
+            lazy = false
             ${size.term}
         '';
 
@@ -80,10 +80,8 @@
 
     ${termpad "network" "sudo netshell"}
     ${termpad "nix" "nixshell"}
-
-    ${focustermpad "browseshell" "browseshell"}
-    ${focustermpad "menu" "menuui"}
-
+    ${termpad "menu" "menuui"}
+    ${termpad "browseshell" "browseshell"}
     ${termpad "news" "newsboat"}
     ${termpad "mtag" "mustagger"}
     ${termpad "player" "player"}
