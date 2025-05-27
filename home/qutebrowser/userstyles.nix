@@ -25,3 +25,8 @@ let
         };
     };
 in builtins.listToAttrs (map composeJavascript files)
+
+# i'm honestly super proud of this file
+# its my first time actually using nix as a full language
+# rather than just as a config language like toml
+# i think its super cool
