@@ -61,7 +61,7 @@ keymap:
 # default.nix
     '';
 
-    wayland.windowManager.hyprland.extraConfig = ''
+    wayland.windowManager.hyprland.extraConfig = /* hyprlang */ ''
     exec = xremap-start
     bind = SUPER_ALT, F4, exit,
 
@@ -70,9 +70,17 @@ keymap:
 
     bind = , XF86MonBrightnessUp, exec, setbright 2%+
     bind = , XF86MonBrightnessDown, exec, setbright 2%-
-    bind = , XF86AudioPlay, exec, plyr toggle
     bind = CTRL, XF86MonBrightnessUp, exec, setbright 1%+
     bind = CTRL, XF86MonBrightnessDown, exec, setbright 1%-
+
+    bind = , XF86AudioRaiseVolume, exec, setvol 2%+
+    bind = , XF86AudioLowerVolume, exec, setvol 2%-
+    bind = CTRL, XF86AudioRaiseVolume, exec, setvol 1%+
+    bind = CTRL, XF86AudioLowerVolume, exec, setvol 1%-
+
+    # bind = , XF86AudioPlay, exec, plyr toggle
+    bind = , XF86AudioPlay, exec, doubletap airpod 300 "plyr toggle" "plyr next" "plyr prev"
+    # bind = , XF86AudioPlay, exec, notify-send "$(date +'%S.%3N')" # to test timeout
 
     bind = SUPER, mouse:274, killactive # super+mmb
     bindm = SUPER, mouse:272, movewindow # super+lmb

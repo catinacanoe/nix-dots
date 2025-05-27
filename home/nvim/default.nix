@@ -30,7 +30,8 @@ in {
         (import ./plugins/comment.nix      args).plugin //
         (import ./plugins/gitblame.nix     args).plugin //
         (import ./plugins/gitsigns.nix     args).plugin //
-        (import ./plugins/gruvbox.nix      args).plugin //
+        # (import ./plugins/gruvbox.nix      args).plugin //
+        (import ./plugins/catppuccin.nix      args).plugin //
         (import ./plugins/indent.nix       args).plugin //
         (import ./plugins/leap.nix         args).plugin //
         (import ./plugins/lspconfig.nix    args).plugin //
@@ -90,7 +91,7 @@ in {
             ${(import ./config/set.nix args)}
 
             require("lazy").setup("plugins", {
-                install = { colorscheme = { "gruvbox" } },
+                install = { colorscheme = { "${col.name}" } },
                 ui = {
                     size = { with = 0.7, height = 0.7 },
                     border = "rounded",

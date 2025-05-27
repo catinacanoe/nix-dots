@@ -7,6 +7,9 @@ cat "$XDG_CONFIG_HOME/eww/eww.scss.gen" > "$XDG_CONFIG_HOME/eww/eww.scss"
 eww open dock-0 --restart
 eww open dock-1
 
+kill $(ps aux | grep 'bash [^ ]*qutebrowser/userscripts' | awk '{ print $2 }' | grep -v $$)
+qutebrowser ":spawn --userscript urlupdater.sh"
+
 hyprctl dispatch event eww,init,start
 
 function net_check() {
@@ -70,8 +73,14 @@ function battery() {
         fi
         )"
 
-        if [ "$direction" == "Not charging" ] || [ "$direction" == "Full" ]; then
+        if [ "$direction" == "Full" ]; then
             eww update "var_battery="
+        elif [ "$direction" == "Not charging" ]; then
+            if [ "$percent" == "100%" ]; then
+                eww update "var_battery="
+            else
+                eww update "var_battery=$percent"
+            fi
         else
             eww update "var_battery=$percent ($timeinfo)"
         fi
@@ -263,72 +272,72 @@ function music() {
     sleep 0.5; done
 }; music &
 
-function visualizer() {
-    sleep 1
+# function visualizer() {
+#     sleep 1
 
-    numbars=${toString rice.bar.cava.width}
-    chars="▁▂▃▄▅▆▇█"
-    charct="$(echo "$chars" | wc -m | sed 's|$| - 1|' | bc)"
-    linect=${toString rice.bar.cava.height}
-    heightlevels=$((linect*charct-1))
+#     numbars=${toString rice.bar.cava.width}
+#     chars="▁▂▃▄▅▆▇█"
+#     charct="$(echo "$chars" | wc -m | sed 's|$| - 1|' | bc)"
+#     linect=${toString rice.bar.cava.height}
+#     heightlevels=$((linect*charct-1))
 
-    flatline="$(
-        seq 2 $linect | sed "s|.*|$(seq 1 $numbars | tr '\n' ' ' | sed "s|[^ ]* | |g" && echo)|"
-        seq 1 $numbars | tr '\n' ' ' | sed "s|[^ ]* |$(sed 's|\(.\).*|\1|' <<< "$chars")|g" && echo
-    )"
-    
-    eww update "var_cava_flatline=$flatline"
+#     flatline="$(
+#         seq 2 $linect | sed "s|.*|$(seq 1 $numbars | tr '\n' ' ' | sed "s|[^ ]* | |g" && echo)|"
+#         seq 1 $numbars | tr '\n' ' ' | sed "s|[^ ]* |$(sed 's|\(.\).*|\1|' <<< "$chars")|g" && echo
+#     )"
+#     
+#     eww update "var_cava_flatline=$flatline"
 
-    cavasedfile=/tmp/cava.sed
-    ${builtins.readFile ./cava-sed.bash}
+#     cavasedfile=/tmp/cava.sed
+#     $${builtins.readFile ./cava-sed.bash}
 
-    # make sure to clean pipe
-    pipe="/tmp/cava.fifo"
-    if [ -p $pipe ]; then
-        unlink $pipe
-    fi
-    rm $pipe
-    mkfifo $pipe
+#     # make sure to clean pipe
+#     pipe="/tmp/cava.fifo"
+#     if [ -p $pipe ]; then
+#         unlink $pipe
+#     fi
+#     rm $pipe
+#     mkfifo $pipe
 
-    # write cava config
-    local config_file="/tmp/eww_cava_config"
-    echo "
-    [general]
-    autosens=1
-    bars=$numbars
-    framerate=20
-    higher_cutoff_freq=10000
-    lower_cutoff_freq=35
+#     # write cava config
+#     local config_file="/tmp/eww_cava_config"
+#     echo "
+#     [general]
+#     autosens=1
+#     bars=$numbars
+#     framerate=20
+#     higher_cutoff_freq=10000
+#     lower_cutoff_freq=35
 
-    [output]
-    channels=mono
-    method=raw
-    raw_target=$pipe
-    data_format=ascii
-    ascii_max_range=$heightlevels
-    mono_option=average
-    orientation=bottom
-    " > $config_file
+#     [output]
+#     channels=mono
+#     method=raw
+#     raw_target=$pipe
+#     data_format=ascii
+#     ascii_max_range=$heightlevels
+#     mono_option=average
+#     orientation=bottom
+#     " > $config_file
 
-    # run cava in the background
-    kill "$(ps aux | grep "cava -p $config_file" | awk '{ print $2 }')"
-    killall cava
-    sleep 0.5
-    cava -p "$config_file" &
+#     # run cava in the background
+#     kill "$(ps aux | grep "cava -p $config_file" | awk '{ print $2 }')"
+#     killall cava
+#     sleep 0.5
+#     cava -p "$config_file" &
 
-    # reading data from fifo
-    while read -r line; do
-        result=""
-        while read -r sedcmd; do
-            result="$(
-                [ -n "$result" ] && echo "$result"
-                echo "$line" | sed "$sedcmd"
-            )"
-        done < $cavasedfile 
-        
-        eww update "var_cava=$result"
-    done < $pipe
-}; visualizer &
+#     # reading data from fifo
+#     while read -r line; do
+#         result=""
+#         while read -r sedcmd; do
+#             result="$(
+#                 [ -n "$result" ] && echo "$result"
+#                 echo "$line" | sed "$sedcmd"
+#             )"
+#         done < $cavasedfile 
+#         
+#         eww update "var_cava=$result"
+#     done < $pipe
+# }; visualizer &
 
 function periodic_event() {
     while true; do

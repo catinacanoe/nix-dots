@@ -1,4 +1,4 @@
-{ config, pkgs, ... }@args:
+{ config, pkgs, inputs, ... }@args:
 {
     environment.pathsToLink = [ "/share/zsh" ]; # ZSH comp requirement
 
@@ -7,8 +7,9 @@
     environment.systemPackages = with pkgs;
     let
         blueshell = (import ./custom/blueshell.nix args);
-        browse      = (import ./custom/browse.nix args);
+        browser     = (import ./custom/browser.nix args);
         browseshell = (import ./custom/browseshell.nix args);
+        doubletap   = (import ./custom/doubletap.nix args);
         drop        = (import ./custom/drop.nix args);
         hypr        = (import ./custom/hypr.nix args);
         launcher    = (import ./custom/launcher.nix args);
@@ -26,11 +27,14 @@
         vimit       = (import ./custom/vimit.nix args);
         vpnshell    = (import ./custom/vpnshell.nix args);
         yargs       = (import ./custom/yargs.nix args);
+        notion-app-custom  = (callPackage ./custom/notion-app.nix {});
+        # spicetify = inputs.spicetify-nix.lib.mkSpicetify pkgs (import ./spicetify.nix args);
     in [
         # custom apps
         blueshell
-        browse
+        browser
         browseshell
+        doubletap
         drop
         launcher
         manpager
@@ -128,6 +132,7 @@
         unrar
         unzip
         unzip
+        mysql80
         viu
         wev
         wirelesstools
@@ -170,7 +175,8 @@
     
         # user apps
         neovim nvimpager
-        firefox ungoogled-chromium brave
+        obsidian anytype notion-app-custom # (doesn't work, repo seems abandoned so likely never will)
+        firefox google-chrome brave qutebrowser
         azuredatastudio
         networkmanagerapplet wireguard-tools
         lf libqalculate
@@ -179,7 +185,7 @@
         # })
         cava
         kitty xterm
-        mpv-unwrapped
+        mpv-unwrapped mpvc
         krita
         discord
         neomutt
@@ -187,10 +193,12 @@
         zsh
         zoom-us
         # slack
-        # spotify
+        spotify-cli-linux # spicetify is managed by the homemanager config
         qbittorrent
         gimp
-        lunar-client
+
+        # bloat, arguably
+        dysk # df enhancement
 
         # core system apps
         # hyprland
@@ -202,11 +210,12 @@
         hypr pyprland
         pulseaudio pipewire
         waybar
-        # eww-wayland # replace with just eww
+        xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal-kde
         eww
         swaylock-effects
         mako
         swww
         mpd
+        gtk3
     ];
 }

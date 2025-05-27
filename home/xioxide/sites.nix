@@ -69,7 +69,9 @@ o fuhsd.schoology.com/
 ob bessy.io/
 or homework.russianschool.com/
 
-gp google.com/maps
+gg messages.google.com/web/u/0/conversations
+
+gp google.com/maps/
     ${googleusers}
 
 gn keep.google.com/
@@ -87,10 +89,10 @@ gs docs.google.com/presentation/
 ge docs.google.com/spreadsheets/
     ${googleusers}
 
-gt tasks.google.com
+gt tasks.google.com/
     ${googleusers}
 
-gc calendar.google.com
+gc calendar.google.com/
     ${googleusers}
 
 ga myaccount.google.com/

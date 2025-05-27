@@ -41,8 +41,6 @@ in
             ${launch "plyr seek -5"}
         ${mod}-6:
             ${launch "plyr toggle"}
-        ${mod}-ctrl-6:
-            ${launch "plyr switch"}
         ${mod}-7:
             ${launch "mpc del 0"}
         ${mod}-ctrl-8:

@@ -26,7 +26,7 @@
         '' else /*sh*/ ''
             suspend) delay && lock && delay && systemctl suspend ;;
         ''}
-        reload) ${hyprctl} dispatch forcerendererreload ;;
+        reload) ${hyprctl} reload ;;
         logout) ${hyprctl} dispatch exit ;;
         cycle) reboot ;;
         shutdown) shutdown now ;;

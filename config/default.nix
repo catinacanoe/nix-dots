@@ -10,10 +10,11 @@
         ./locale.nix
         ./peripheral.nix
         ./services.nix
-        ./hosts.nix
+        # ./hosts.nix
         ./battery.nix
     ];
 
+    # nixpkgs.config.allowUnfree = true;
     system.autoUpgrade.enable = true;
 
     networking.hostName = import ../ignore-hostname.nix;

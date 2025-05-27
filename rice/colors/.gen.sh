@@ -36,8 +36,22 @@ in="$1"
 
 out="$(
 
-echo "{ # $in"
+echo "{"
 while read line; do
+    if [ "${line:0:1}" == "#" ]; then
+        echo "    $line"
+        continue
+    fi
+
+    if [ "${line:0:1}" == "!" ]; then
+        line="${line//! /}" # remove leading bang
+        field="${line// */}"
+        value="${line//* /}"
+
+        echo "    $field = \"$value\";"
+        continue
+    fi
+
     name="${line// */}"
     hex="${line//* /}"
 

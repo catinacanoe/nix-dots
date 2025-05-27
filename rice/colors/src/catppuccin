@@ -1,10 +1,15 @@
-t0 1e1e2e
-t1 181825
+# catpuccin mocha: https://catppuccin.com/palette/
+
+! name catppuccin
+! flavor mocha
+
+t0 11111b
+t1 1e1e2e
 t2 313244
 t3 45475a
-t4 585b70
-t5 868cb7
-t6 b4befe
+t4 5b6078
+t5 7f849c
+t6 a6adc8
 t7 cdd6f4
 
 red    f38ba8
@@ -12,6 +17,6 @@ orange fab387
 yellow f9e2af
 green  a6e3a1
 aqua   94e2d5
-blue   89b4fa
+blue   74c7ec
 purple cba6f7
-brown  f2cdcd
+brown  f5c2e7

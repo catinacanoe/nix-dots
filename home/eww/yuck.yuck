@@ -38,7 +38,7 @@
         (dock_block :class "music dark_col" (dock_volume))
         (dock_block :class "music dark_col" :visible {var_mus_current != ""} (dock_mus_current))
         (dock_block :class "music dark_col" :visible {var_mus_playing} (dock_mus_progress))
-        (dock_block :class "music dark_col" :visible {var_cava != var_cava_flatline} (dock_mus_cava))
+        ;; (dock_block :class "music dark_col" :visible {var_cava != var_cava_flatline} (dock_mus_cava))
     )
 )
 
@@ -77,17 +77,17 @@
     )
 )
 
-(defvar var_cava "")
-(defvar var_cava_flatline "")
-(defwidget dock_mus_cava []
-    (dock_widget
-        (label
-            :valign "center"
-            :class "dock-mus-cava"
-            :text "${var_cava}"
-        )
-    )
-)
+;; (defvar var_cava "")
+;; (defvar var_cava_flatline "")
+;; (defwidget dock_mus_cava []
+;;     (dock_widget
+;;         (label
+;;             :valign "center"
+;;             :class "dock-mus-cava"
+;;             :text "${var_cava}"
+;;         )
+;;     )
+;; )
 
 (defvar var_net_vpn "")
 (defpoll poll_net_name :interval "2s" `nmcli -t connection show --active | grep -v 'loopback' | head -n 1 | awk -F : '{ print $1 }' | tr '[:upper:]' '[:lower:]'`)

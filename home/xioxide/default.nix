@@ -157,6 +157,8 @@ r ${repos}/
                 d default.nix
             pw pw/
                 d default.nix
+            qb qutebrowser/
+                d default.nix
             re remap/
                 d default.nix
                 f fn/
@@ -194,7 +196,8 @@ m ${music}/
     s songs/
     d dl/
 v ${videos}/
-    m meme/
+    m mnt/
+    c cache/
 p ${pictures}/
     t troll/
     g grim/

@@ -12,15 +12,14 @@ let
 
         config = function()
             local highlight = {
-                "indent_gray",
-                "indent_dark_gray",
+                "indent_1",
+                "indent_2",
             }
 
             local hooks = require "ibl.hooks"
             hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-                vim.api.nvim_set_hl(0, "indent_purple", { fg = "#${col.purple.hex}" })
-                vim.api.nvim_set_hl(0, "indent_gray", { fg = "#${col.t3.hex}" })
-                vim.api.nvim_set_hl(0, "indent_dark_gray", { fg = "#${col.t2.hex}" })
+                vim.api.nvim_set_hl(0, "indent_1", { fg = "${col.t3.h}" })
+                vim.api.nvim_set_hl(0, "indent_2", { fg = "${col.t4.h}" })
             end)
 
             -- charlist: ▎ ▏ ║ ╎ ╏ ┆ ┇ ┊ ┋

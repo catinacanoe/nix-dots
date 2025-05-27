@@ -11,7 +11,7 @@ in
             remap:
                 ${mod}-w:
                     ${launch "drop"}
-                    
+
                 ${mod}-t:
                     ${drop "term"}
                 ${mod}-p:
@@ -25,6 +25,9 @@ in
                 ${mod}-b:
                     ${drop "bluetooth"}
 
+                ${mod}-s:
+                    ${drop "spotify"}
+                    
                 ${mod}-h:
                     ${drop "browser"}
                 ${mod}-g:

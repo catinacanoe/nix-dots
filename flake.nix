@@ -3,7 +3,7 @@
     description = "canoe's main configuration flake";
 
     inputs = {
-        # 23.11 works, hypr runs but terminals don't open
+        # as of 23.05.2025 I have been running nixos-24.11 and home: release-24.11 for multiple months with no issue
 
         # https://channels.nixos.org/
         nixpkgs.url = "nixpkgs/nixos-24.11"; # nixos-unstable / nixos-24.11
@@ -16,6 +16,7 @@
 
         hyprland.url = "github:hyprwm/Hyprland";
         xremap-flake.url = "github:xremap/nix-flake";
+        spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
 
         vimplugin-cellular-automaton = {
             url = "github:Eandrju/cellular-automaton.nvim";

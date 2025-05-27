@@ -81,36 +81,37 @@ let
                         tabline = 700,
                     },
 
+                    -- theme = 'solarized_light', -- just uncomment this, reload config and then lualine will properly reprocess new custom theme after that
                     theme = {
                         normal = {
-                          a = {bg = "#${col.t4.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
+                          a = {bg = "#${col.t5.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
                           b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
-                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'italic'},
                         },
                         insert = {
                           a = {bg = "#${col.blue.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
                           b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
-                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'italic'},
                         },
                         visual = {
                           a = {bg = "#${col.purple.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
                           b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
-                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'italic'},
                         },
                         replace = {
                           a = {bg = "#${col.red.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
                           b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
-                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'italic'},
                         },
                         command = {
                           a = {bg = "#${col.aqua.hex}", fg = "#${col.bg.hex}", gui = 'bold'},
                           b = {bg = "#${col.t2.hex}", fg = "#${col.fg.hex}"},
-                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'italic'},
                         },
                         inactive = {
-                          a = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'bold'},
+                          a = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'bold'},
                           b = {bg = "#${col.t1.hex}", fg = "#${col.fg.hex}"},
-                          c = {bg = "#${col.t1.hex}", fg = "#${col.t4.hex}", gui = 'italic'},
+                          c = {bg = "#${col.t1.hex}", fg = "#${col.t5.hex}", gui = 'italic'},
                         },
                     }
                 }

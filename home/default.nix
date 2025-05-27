@@ -14,6 +14,7 @@ in
         stateVersion = "23.05";
     };
 
+    nixpkgs.config.allowUnfree = true;
     nixpkgs = { overlays = [(final: prev: {
         vimPlugins = prev.vimPlugins // {
             cellular-automaton-nvim = prev.vimUtils.buildVimPlugin {
@@ -29,6 +30,7 @@ in
 
     imports = [
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
+        inputs.spicetify-nix.homeManagerModules.default
         ./bat
         ./cava
         ./cadence
@@ -55,10 +57,12 @@ in
         ./pass
         ./power
         ./pw
+        ./qutebrowser
         ./remap
         ./scrot
         ./shell
         ./sioyek
+        ./spicetify
         ./starship
         ./swaylock
         ./thefuck
@@ -80,8 +84,11 @@ in
     home.sessionVariables = {
         VISUAL = "nvim";
         EDITOR = "nvim";
-        BROWSER = "firefox";
+        EDITORS = "nvim";
+        BROWSER = "org.qutebrowser.qutebrowser";
+        BROWSERS = "firefox\nBrave-browser\norg.qutebrowser.qutebrowser";
         TERMINAL = "kitty";
+        TERMINALS = "kitty";
         DMENU_PROGRAM = "menu";
         NIX_BUILD_SHELL = "zsh";
         MANPAGER = "manpager";

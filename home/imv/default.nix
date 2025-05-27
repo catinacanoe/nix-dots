@@ -12,6 +12,9 @@ with (import ../../rice/default.nix).col;
                 a = "pan 0 ${pan}";
                 i = "pan 0 -${pan}";
                 o = "pan -${pan} 0";
+
+                y = "rotate by 90";
+                c = "rotate by -90";
                 
                 l = "zoom actual";
                 "<Tab>" = "zoom +${zoom}";

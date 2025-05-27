@@ -1,106 +1,5 @@
 { config, pkgs, ... }:
 {
-    pypr.text = let
-        size = if (import ../../ignore-hostname.nix) == "nixbox" then {
-            term = /* toml */ ''
-                size = "50% 50%"
-                position = "25% 40%"
-            '';
-
-            browser = /* toml */ ''
-                size = "60% 65%"
-                position = "20% 28%"
-            '';
-
-            gpt = /* toml */ ''
-                size = "50% 50%"
-                position = "25% 40%"
-            '';
-
-            tinyterm = /* toml */ ''
-                size = "50% 20%"
-                position = "25% 40%"
-            '';
-        } else let 
-            sizing = /* toml */ ''
-                size = "70% 70%"
-                position = "15% 15%"
-            '';
-        in {
-            term = sizing;
-            browser = sizing;
-            gpt = sizing;
-            tinyterm = /* toml */ ''
-                size = "30% 16%"
-                position = "35% 42%"
-            '';
-        };
-
-        tinytermpad = name: command: /* toml */ ''
-            [scratchpads.${name}]
-            command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
-            lazy = true
-            ${size.tinyterm}
-        '';
-
-        termpad = name: command: /* toml */ ''
-            [scratchpads.${name}]
-            command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
-            lazy = false
-            ${size.term}
-        '';
-
-        focuspad = name: command: /* toml */ ''
-            [scratchpads.${name}]
-            command = "${command}"
-            lazy = true
-            ${size.term}
-        '';
-
-        focustermpad = name: command: /* toml */ ''
-            [scratchpads.${name}]
-            command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${command}"
-            unfocus = "hide"
-            lazy = false
-            ${size.term}
-        '';
-
-        browserpad = name: args: sizing: /* toml */ ''
-            [scratchpads.${name}]
-            command = "${config.home.sessionVariables.BROWSER} --no-remote -P ${args}"
-            lazy = true
-            ${sizing}
-        '';
-    in /* toml */ ''
-    [pyprland]
-    plugins = [ "scratchpads" ]
-
-    # TERMINAL #
-    ${termpad "term" ""}
-
-    ${termpad "network" "sudo netshell"}
-    ${termpad "nix" "nixshell"}
-    ${termpad "menu" "menuui"}
-    ${termpad "browseshell" "browseshell"}
-    ${termpad "news" "newsboat"}
-    ${termpad "mtag" "mustagger"}
-    ${termpad "player" "player"}
-    ${termpad "qalc" "qalc"}
-    ${termpad "bluetooth" "blueshell"}
-
-    ${tinytermpad "gpgpass" "$XDG_REPOSITORY_DIR/pw/unlock.sh"}
-
-    [scratchpads.top]
-    command = "${config.home.sessionVariables.TERMINAL} --class scratchpad gotop"
-    lazy = true
-    ${size.browser}
-
-    # BROWSER #
-    ${browserpad "browser" "scratch" size.browser}
-    ${browserpad "calendar" "calendar" size.browser}
-    ${browserpad "gpt" "gpt" size.gpt}
-    '';
-
     activation = "$DRY_RUN_CMD ${pkgs.pyprland}/bin/pypr reload > /dev/null";
 
     hypr.text = let
@@ -113,5 +12,60 @@
 
         ${rules "class:^(scratchpad)$"}
     '';
+
+    pypr = let
+        sizes = let
+            size = width: height: /* toml */ ''
+                size = "${toString width}% ${toString height}%"
+                position = "${toString ((100 - width) / 2)}% ${toString ((100 - height) / 2)}%"
+            '';
+        in {
+            default = size 70 70;
+            mini = size 30 10;
+        };
+
+        pad = { name, command, lazy, size?sizes.default }: /*toml*/ ''
+            [scratchpads.${name}]
+            command = "${command}"
+            lazy = ${if lazy then "true" else "false"}
+            ${size}
+        '';
+
+        term_pad = { name, shellscript, lazy?false, size?sizes.default }: pad {
+            inherit name lazy size;
+            command = "${config.home.sessionVariables.TERMINAL} --class scratchpad ${shellscript}";
+        };
+
+        # TODO make the browserpad actually work with qutebrowser
+        browser_pad = { name, url, lazy?true, size?sizes.default  }: pad {
+            inherit name lazy size;
+            command = "browser new-tab ${url}";
+        };
+    in {
+        text = /*toml*/ ''
+            [pyprland]
+            plugins = [ "scratchpads" ]
+
+            # remember to add a keybind to ../remap/modules/dropdown.nix
+            ${term_pad { name = "term";        shellscript = ""; }}
+            ${term_pad { name = "network";     shellscript = "sudo netshell"; }}
+            ${term_pad { name = "nix";         shellscript = "nixshell"; }}
+            ${term_pad { name = "menu";        shellscript = "menuui"; }}
+            ${term_pad { name = "browseshell"; shellscript = "browseshell"; }}
+            ${term_pad { name = "news";        shellscript = "newsboat"; }}
+            ${term_pad { name = "mtag";        shellscript = "mustagger"; }}
+            ${term_pad { name = "player";      shellscript = "player"; }}
+            ${term_pad { name = "qalc";        shellscript = "qalc"; }}
+            ${term_pad { name = "bluetooth";   shellscript = "blueshell"; }}
+            ${term_pad { name = "gpgpass";     shellscript = "$XDG_REPOSITORY_DIR/pw/unlock.sh"; size = sizes.mini; }}
+            ${term_pad { name = "top";         shellscript = "gotop"; lazy = true; }}
+
+            ${browser_pad { name = "browser";  url = "about:blank"; }}
+            ${browser_pad { name = "calendar"; url = "calendar.google.com"; }}
+            ${browser_pad { name = "gpt";      url = "chatgpt.com"; }}
+
+            ${pad { name = "spotify"; command = "spotify"; lazy = true; }}
+        '';
+    };
 }
 

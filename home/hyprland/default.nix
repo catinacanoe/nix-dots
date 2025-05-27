@@ -63,8 +63,6 @@ in {
     windowrulev2 = opacity 1.0 override 1.0 override, class:^(imv)$
     windowrulev2 = opacity 1.0 override 1.0 override, class:^(mpv)$
 
-    windowrulev2 = float, class:firefox, title:([scratch])(.*)
-
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key
     # bindl=,switch:[switch name],exec,swaylock # see wiki, bind#switches
@@ -155,8 +153,8 @@ in {
       
         repeat_rate = 60
         repeat_delay = 160
-        sensitivity = 0.2 # (-1 - 1)
-        accel_profile = adaptive # {adaptive, flat, custom} unset=>defers to libinput
+        sensitivity = 0.8 # (-1 - 1)
+        accel_profile = flat # {adaptive, flat, custom} unset=>defers to libinput
 
         touchpad {
             scroll_factor = 0.4
@@ -168,8 +166,8 @@ in {
     model-o = suffix: /* hyprlang */ ''
     device {
         name=glorious-model-o-wireless${suffix}
-        sensitivity=-0.7
-        accel_profile=adaptive
+        sensitivity=-0.2
+        accel_profile=flat
     }
     '';
     in ''
