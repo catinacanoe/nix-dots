@@ -25,7 +25,6 @@ in {
     xdg.configFile."hypr/pyprland.toml" = pypr.pypr;
 
     wayland.windowManager.hyprland.extraConfig = /* hyprlang */ ''
-    ${pypr.hypr.text}
 
     ${if host == "nixbox" then ''
     env = LIBVA_DRIVER_NAME,nvidia
@@ -38,6 +37,7 @@ in {
     exec-once = mpd && mpc volume 70 && mpc repeat on && mpc random off && mpc single off && mpc crossfade 1
     exec-once = drop init
     exec-once = kitty
+    exec-once = pypr
 
     exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
     exec = sleep 1 && swww-daemon
@@ -62,6 +62,12 @@ in {
     windowrulev2 = opacity 1.0 override 0.93 override, class:^(firefox)$
     windowrulev2 = opacity 1.0 override 1.0 override, class:^(imv)$
     windowrulev2 = opacity 1.0 override 1.0 override, class:^(mpv)$
+
+    windowrulev2 = float,class:^(scratchpad)$
+    windowrulev2 = workspace special silent,class:^(scratchpad)$
+
+    windowrulev2 = float,class:^(Spotify)$
+    windowrulev2 = workspace special silent,class:^(Spotify)$
 
     # bind=mods, key, dispatcher, args | unbind=mods, key
     # can use code:## for key

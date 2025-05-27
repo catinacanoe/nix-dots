@@ -2,17 +2,6 @@
 {
     activation = "$DRY_RUN_CMD ${pkgs.pyprland}/bin/pypr reload > /dev/null";
 
-    hypr.text = let
-        rules = match: ''
-        windowrulev2 = float,${match}
-        windowrulev2 = workspace special silent,${match}
-        '';
-    in /* bash */ ''
-        exec-once = pypr
-
-        ${rules "class:^(scratchpad)$"}
-    '';
-
     pypr = let
         sizes = let
             size = width: height: /* toml */ ''
