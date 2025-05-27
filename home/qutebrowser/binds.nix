@@ -26,6 +26,7 @@
         l = "cmd-set-text -s :open";
         L = "cmd-set-text -s :open -t";
         "<ctrl-l>" = "spawn drop browseshell nohistory";
+        "<ctrl-h>" = "history -t";
         j = "search-next";
         J = "search-prev";
 
@@ -50,6 +51,7 @@
         "<tab>" = "hint";
         "<shift-tab>" = "hint all tab-bg";
 
+        d = "devtools";
         # interesting stuff
         v = "spawn mpv --input-ipc-server=~/.config/mpvc/mpvsocket0 {url}"; # open current yt vid in mpv
         t = "spawn --userscript translate.sh";

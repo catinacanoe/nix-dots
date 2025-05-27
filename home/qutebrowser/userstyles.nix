@@ -1,4 +1,3 @@
-{ pkgs, ... }:
 let
     files = map (basename: ./userstyles + "/${basename}") (builtins.attrNames (builtins.readDir ./userstyles));
 
@@ -10,7 +9,6 @@ let
         name = "qutebrowser/greasemonkey/style-${name}.js";
 
         value = let attrs = import file; in {
-            onChange = "$DRY_RUN_CMD ${pkgs.qutebrowser}/bin/qutebrowser ':greasemonkey-reload'";
             text = /*js*/ ''
                 // ==UserScript==
                 // @name ${name} userstyle

@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-    xdg.configFile = (import ./userscripts.nix) // (import ./userstyles.nix { inherit pkgs; });
+{ ... }: {
+    xdg.configFile = (import ./userscripts.nix) // (import ./userstyles.nix);
 
     programs.qutebrowser = {
         enable = true;

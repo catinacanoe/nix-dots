@@ -54,6 +54,7 @@ while read line; do
 
     name="${line// */}"
     hex="${line//* /}"
+    hex="${hex//#/}"
 
     [ -z "$name" ] && continue
     [ -z "$hex" ] && continue

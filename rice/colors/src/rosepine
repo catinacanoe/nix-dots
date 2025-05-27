@@ -1,20 +1,22 @@
+# rosepine
+
 ! name rosepine
 ! flavor dark
 
-t0 191724
-t1 1f1d2e
-t2 26233a
-t3 524f67
-t4 6e6a86
-t5 908caa
-t6 e0def4
-t7 e0def4
+t0 #191724
+t1 #1f1d2e
+t2 #26233a
+t3 #524f67
+t4 #6e6a86
+t5 #908caa
+t6 #e0def4
+t7 #e0def4
 
-red    eb6f92
-orange f6c177
-yellow ebbcba
-green  31748f
-aqua   9ccfd8
-blue   c4a7e7
-purple f6c177
-brown  524f67
+red    #eb6f92
+orange #f6c177
+yellow #ebbcba
+green  #31748f
+aqua   #9ccfd8
+blue   #c4a7e7
+purple #f6c177
+brown  #524f67
