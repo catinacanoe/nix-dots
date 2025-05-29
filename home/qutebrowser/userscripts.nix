@@ -1,4 +1,7 @@
 {
+    # TODO add a userscript for pass integration
+    # TODO add a userscript for browseshell integration
+
     "qutebrowser/userscripts/urlupdater.sh" = {
         executable = true;
         text = ''

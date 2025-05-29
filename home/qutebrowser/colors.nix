@@ -9,7 +9,7 @@ with (import ../../rice).col; {
     tooltip = { fg=fg.h; bg=bg.h; };
     hints = {
         fg = fg.h;
-        bg = "rgba(${bg.rgb}, 0.8)";
+        bg = "rgba(${t2.rgb}, 0.8)";
         match.fg = blue.h;
     };
 
@@ -54,8 +54,8 @@ with (import ../../rice).col; {
         even = { fg = fg.h; bg = bg.h; };
         odd  = { fg = fg.h; bg = bg.h; };
         selected = {
-            even = { fg = fg.h; bg = t1.h; };
-            odd  = { fg = fg.h; bg = t1.h; };
+            even = { fg = fg.h; bg = t2.h; };
+            odd  = { fg = fg.h; bg = t2.h; };
         };
     };
 

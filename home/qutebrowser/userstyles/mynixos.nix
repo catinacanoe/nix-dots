@@ -1,5 +1,5 @@
 with (import ../../../rice).col; {
-    urls.include = [ "*google.com/search*" ];
+    urls.include = [ "*mynixos.com*" ];
     css = /*css*/ ''
         * {
             border: none !important;

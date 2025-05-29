@@ -40,6 +40,8 @@
             default_page = "about:blank";
             start_pages = "catppuccin.com";
         };
+
+        content.pdfjs = true; # view pdf files in browser
     };
 
     extraConfig = /* py */ ''

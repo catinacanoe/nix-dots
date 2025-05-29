@@ -38,7 +38,7 @@
         r = "reload";
         R = "greasemonkey-reload ;; reload";
         f = "fullscreen";
-        "<space>" = "config-cycle tabs.show always never ;; config-cycle statusbar.show always in-mode"; # cycle tabs open close
+        "<space>" = "config-cycle tabs.show always never"; # ;; config-cycle statusbar.show always in-mode"; # cycle tabs open close
         "<ctrl-space>" = "clear-messages ;; download-clear";
         "+" = "zoom-in";
         "-" = "zoom-out";
@@ -88,5 +88,6 @@
     prompt = {
         "<esc>" = "mode-leave";
         "<return>" = "prompt-accept";
+        p = "prompt-open-download --pdfjs"; # TODO make pdf viewing work
     };
 }

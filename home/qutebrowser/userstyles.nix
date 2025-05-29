@@ -16,11 +16,13 @@ let
                 ${if attrs?urls.exclude then builtins.concatStringsSep "\n" (map (url: "// @exclude ${url}") attrs.urls.exclude) else ""}
                 // ==/UserScript==
 
+                console.log("userstyle for ${name} starting load");
                 ${if attrs?js.pre then attrs.js.pre else ""}
                 GM_addStyle(`
                 ${if attrs?css then attrs.css else ""}
                 `)
                 ${if attrs?js.post then attrs.js.post else ""}
+                console.log("userstyle for ${name} finished load");
             '';
         };
     };
