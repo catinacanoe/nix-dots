@@ -71,7 +71,6 @@ r ${repos}/
             l locale.nix
             a apps.nix
             p peripheral.nix
-            t hosts.nix
             s services.nix
             i ignore-hardware.nix
             h hardware.nix
@@ -159,6 +158,10 @@ r ${repos}/
                 d default.nix
             qb qutebrowser/
                 d default.nix
+                b binds.nix
+                c colors.nix
+                o options.nix
+                u userstyles/
             re remap/
                 d default.nix
                 f fn/
@@ -177,6 +180,8 @@ r ${repos}/
                 p plugins/
                 g modules/git.nix
             si sioyek/
+                d default.nix
+            sp spicetify/
                 d default.nix
             st starship/
                 d default.nix
