@@ -131,27 +131,6 @@ in
         for plugin in $ZDOTDIR/plugins/*.plugin.zsh; do
             zsh-defer source "$plugin"
         done
-
-        # TTY colors
-        if [ "$TERM" = "linux" ]; then
-            echo -en "\e]P0${col.bg.hex}" #black
-            echo -en "\e]P8${col.t2.hex}" #darkgrey
-            echo -en "\e]P1${col.brown.hex}" #darkred
-            echo -en "\e]P9${col.red.hex}" #red
-            echo -en "\e]P2${col.green.hex}" #darkgreen
-            echo -en "\e]PA${col.green.hex}" #green
-            echo -en "\e]P3${col.orange.hex}" #brown
-            echo -en "\e]PB${col.yellow.hex}" #yellow
-            echo -en "\e]P4${col.blue.hex}" #darkblue
-            echo -en "\e]PC${col.blue.hex}" #blue
-            echo -en "\e]P5${col.purple.hex}" #darkmagenta
-            echo -en "\e]PD${col.purple.hex}" #magenta
-            echo -en "\e]P6${col.aqua.hex}" #darkcyan
-            echo -en "\e]PE${col.aqua.hex}" #cyan
-            echo -en "\e]P7${col.t4.hex}" #lightgrey
-            echo -en "\e]PF${col.fg.hex}" #white
-            clear #for background artifacting
-        fi
         '';
 
         completionInit = /* bash */ ''
