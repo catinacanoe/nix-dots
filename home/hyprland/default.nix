@@ -56,12 +56,11 @@ in {
     # or to set window opacity
     # idle inhibit, (youtube windows for example)
 
-    # windowrulev2 = opacity 1.0 override 1.0, title:^(.*)( - YouTube)(.*)$,class:^(firefox)$
-    # windowrulev2 = opacity 1.0 override 1.0, title:^(Mozilla Firefox)$,class:^(firefox)$
-    # windowrulev2 = opacity 1.0 1.0, title:^(?!.*( - Youtube|Mozilla Firefox)),class^(firefox)$
-    windowrulev2 = opacity 1.0 override 0.93 override, class:^(firefox)$
-    windowrulev2 = opacity 1.0 override 1.0 override, class:^(imv)$
-    windowrulev2 = opacity 1.0 override 1.0 override, class:^(mpv)$
+    windowrulev2 = opacity 0.90 0.90, class:^(${config.home.sessionVariables.TERMINAL})$
+    windowrulev2 = opacity 0.95 1.00, class:^(Spotify)$
+    # windowrulev2 = opacity 1.0 override 0.9 override, class:^(${config.home.sessionVariables.BROWSER})$
+    # windowrulev2 = opacity 1.0 override 1.0 override, class:^(imv)$
+    # windowrulev2 = opacity 1.0 override 1.0 override, class:^(mpv)$
 
     windowrulev2 = float,class:^(scratchpad)$
     windowrulev2 = workspace special silent,class:^(scratchpad)$
@@ -109,8 +108,8 @@ in {
         # screen_shader (custom shader to apply @ end of pipeline)
         rounding = ${toString window.radius}
         fullscreen_opacity = 1.0
-        active_opacity = 0.9
-        inactive_opacity = 0.8
+        active_opacity = 1.0
+        inactive_opacity = 0.9
         shadow {
             enabled = false
         }#shadow
