@@ -2,7 +2,6 @@
 let
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
   
-    inherit (import ../../rice) col;
 in
 {
     xdg.configFile."zsh/plugins" = {
@@ -36,8 +35,6 @@ in
         (import ./modules/git.nix args) //
         {
             hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
-
-            tp = "gotop";
 
             o = "e ../";
             oo = "e ../..";
@@ -131,6 +128,10 @@ in
         for plugin in $ZDOTDIR/plugins/*.plugin.zsh; do
             zsh-defer source "$plugin"
         done
+
+        # auto fill "hypr" after login
+        # if [ "$TERM" = "linux" ]; then
+        # fi
         '';
 
         completionInit = /* bash */ ''

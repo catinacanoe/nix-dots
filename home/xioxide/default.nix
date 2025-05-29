@@ -66,6 +66,7 @@ r ${repos}/
                 vs vpnshell.nix
                 ya yargs.nix
             d default.nix
+            b boot.nix
             f fonts.nix
             e environment.nix
             l locale.nix

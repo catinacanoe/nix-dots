@@ -103,6 +103,7 @@
         mpc-cli
         neofetch
         newsboat
+        nurl
         odt2txt
         p7zip
         parted
