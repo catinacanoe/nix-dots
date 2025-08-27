@@ -6,7 +6,8 @@
         executable = true;
         text = ''
         #!/usr/bin/env bash
-        ps aux | grep 'bash [^ ]*qutebrowser/userscripts/urlupdater.sh' | grep -qv $$ && exit
+        # ps aux | grep 'bash [^ ]*qutebrowser/userscripts/urlupdater.sh' | grep -qv $$ && exit
+        kill $(ps aux | grep 'bash [^ ]*qutebrowser/userscripts/urlupdater.sh' | grep -v $$ | awk '{ print $2 }')
 
         infile="/tmp/qute_geturl.out"
         outfile="/tmp/qute_url"
