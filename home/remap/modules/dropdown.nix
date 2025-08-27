@@ -24,6 +24,8 @@ in
                     ${drop "qalc"}
                 ${mod}-b:
                     ${drop "bluetooth"}
+                ${mod}-e:
+                    ${drop "news"}
 
                 ${mod}-s:
                     ${drop "spotify"}

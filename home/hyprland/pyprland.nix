@@ -10,7 +10,7 @@
             '';
         in {
             default = size 70 70;
-            mini = size 30 10;
+            mini = size 30 16;
         };
 
         pad = { name, command, lazy, size?sizes.default }: /*toml*/ ''

@@ -1,4 +1,4 @@
-{
+{ config, ... }: {
     normal = {
         "." = "cmd-repeat-last";
         ":" = "cmd-set-text :";
@@ -53,7 +53,7 @@
 
         d = "devtools";
         # interesting stuff
-        v = "spawn mpv --input-ipc-server=~/.config/mpvc/mpvsocket0 {url}"; # open current yt vid in mpv
+        v = "spawn ${config.home.sessionVariables.TERMINAL} mpv --input-ipc-server=~/.config/mpvc/mpvsocket0 '{url}'"; # open current yt vid in mpv
         t = "spawn --userscript translate.sh";
     };
 
@@ -88,6 +88,5 @@
     prompt = {
         "<esc>" = "mode-leave";
         "<return>" = "prompt-accept";
-        p = "prompt-open-download --pdfjs"; # TODO make pdf viewing work
     };
 }

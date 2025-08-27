@@ -58,16 +58,7 @@ cap verified.capitalone.com/auth/signin/
 spl sunnyvale.bibliocommons.com/
     s v2/search?query=
 
-o fuhsd.schoology.com/
-    c course/7613556885/
-    h course/7613557228/
-    m course/7613556663/
-    a course/7613557444/
-    s course/7613556660/
-    l course/7613557341/
-    g grades/grades/
-ob bessy.io/
-or homework.russianschool.com/
+o my.ucla.edu/
 
 gg messages.google.com/web/u/0/conversations
 

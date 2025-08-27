@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, ... }@args: {
     xdg.configFile = (import ./userscripts.nix) // (import ./userstyles.nix);
 
     programs.qutebrowser = {
@@ -11,7 +11,7 @@
             colors = import ./colors.nix;
         };
         
-        keyBindings = import ./binds.nix;
+        keyBindings = import ./binds.nix args;
 
         aliases = {};
         quickmarks = {};

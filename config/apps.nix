@@ -107,6 +107,7 @@
         odt2txt
         p7zip
         parted
+        pdftk
         gparted
         pavucontrol
         pciutils
@@ -176,8 +177,10 @@
     
         # user apps
         neovim nvimpager
-        obsidian anytype notion-app-custom # (doesn't work, repo seems abandoned so likely never will)
-        firefox google-chrome brave qutebrowser
+        obsidian notion-app-custom # (doesn't work, repo seems abandoned so likely never will)
+        # firefox google-chrome brave
+        brave
+        qutebrowser
         azuredatastudio
         networkmanagerapplet wireguard-tools
         lf libqalculate
@@ -190,7 +193,7 @@
         krita
         discord
         neomutt
-        sioyek
+        sioyek mcomix
         zsh
         zoom-us
         # slack

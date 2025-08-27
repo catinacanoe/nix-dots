@@ -23,7 +23,7 @@ case "$1" in
         ;;
     "get-url")
         case "$BROWSER" in
-            "org.qutebrowser.qutebrowser") cat /tmp/qute_geturl.out ;;
+            "org.qutebrowser.qutebrowser") cat /tmp/qute_url ;;
             "firefox") 
                 if [ "$(hyprctl activewindow -j | jq .class)" == '"firefox"' ]; then
                     wtype -M ctrl -k l -m ctrl

@@ -10,11 +10,26 @@
                 device = "nodev";
                 efiSupport = true;
                 gfxmodeEfi = "${toString monitor.primary.width}x${toString monitor.primary.height}";
-                # theme = pkgs.catppuccin-grub;
-                theme = pkgs.stdenv.mkDerivation {
-                    pname = "grub-theme-catpuccin";
+                # splashImage = ./black.jpg;
+                splashImage = pkgs.stdenv.mkDerivation {
+                    pname = "grub-splash-img";
                     version = "0";
-                    src = pkgs. fetchFromGitHub {
+                    src = pkgs.fetchFromGitHub {
+                        owner = "make-github-pseudonymous-again";
+                        repo = "pixels";
+                        rev = "d843c2714d32e15b48b8d7eeb480295af537f877";
+                        hash = "sha256-kXYGO0qn2PfyOYCrRA49BHIgTzdmKhI8SNO1ZKfUYEE=";
+                    };
+                    installPhase = /*sh*/ ''
+                        ${pkgs.imagemagick}/bin/magick "1x1#000000.png" -fill "${col.bg.h}" -draw "point 0,0" output.png
+                        cp output.png $out
+                    '';
+                };
+
+                theme = pkgs.stdenv.mkDerivation {
+                    pname = "grub-theme";
+                    version = "0";
+                    src = pkgs.fetchFromGitHub {
                         owner = "catppuccin";
                         repo = "grub";
                         rev = "2a5c8be8185dae49dd22030df45860df8c796312";
