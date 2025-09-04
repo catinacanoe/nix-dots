@@ -99,6 +99,7 @@
         libinput-gestures
         libnotify
         mediainfo
+        mkvtoolnix
         mlocate
         mpc-cli
         neofetch

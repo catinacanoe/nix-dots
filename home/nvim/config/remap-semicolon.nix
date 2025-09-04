@@ -19,4 +19,5 @@ vim.keymap.set("i", ";.", ".<Esc>")
 vim.keymap.set("i", ";l", "<Esc>o")
 vim.keymap.set("i", ";L", "<Esc>O")
 vim.keymap.set("i", ";k", "<Esc>A")
+vim.keymap.set("i", ";h", "<Esc>I")
 ''
