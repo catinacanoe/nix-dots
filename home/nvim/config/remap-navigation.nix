@@ -36,7 +36,7 @@ vim.keymap.set({"n", "v"}, "<leader>ti", "<cmd>tabmove -<CR>")
 vim.keymap.set({"n", "v"}, "<leader>to", vim.cmd.tabnext)
 
 -- buffers
-vim.keymap.set("n", ";h", vim.cmd.bdel)
+-- vim.keymap.set("n", ";h", vim.cmd.bdel)
 vim.keymap.set("n", "<leader>hn", vim.cmd.bprev)
 vim.keymap.set("n", "<leader>ha", vim.cmd.blast)
 vim.keymap.set("n", "<leader>hi", vim.cmd.bfirst)
