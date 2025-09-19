@@ -239,8 +239,8 @@ in {
     monitor = ${m.primary.port}, ${monitor-specs m.primary "0x0"}
     ''
     else if host == "nixpad" then let m = rice.monitor; in ''
-    monitor = ${m.primary.port}, ${monitor-specs m.primary "${toString (-m.primary.width / m.primary.scale / 2)}x${toString (-m.primary.height / m.primary.scale)}"}
-    monitor = ${m.secondary.port}, ${monitor-specs m.secondary "${toString (-m.secondary.width / m.secondary.scale / 2)}x0"}
+    monitor = ${m.primary.port}, ${monitor-specs m.primary "${toString (-m.primary.width / m.primary.scale)}x${toString (-m.primary.height / m.primary.scale)}"}
+    monitor = ${m.secondary.port}, ${monitor-specs m.secondary "0x${toString (-m.secondary.height / m.secondary.scale)}"}
 
     workspace = 11, monitor:${rice.monitor.secondary.port}, default:true, persistent:true
     workspace = r[11-18], monitor:${rice.monitor.secondary.port}

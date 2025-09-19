@@ -17,14 +17,30 @@
 (defvar var_active_ws '[1, 11]')
 (defvar var_prev_ws   '[1, 11]')
 (defvar var_workspaces '[{"id":"1","windows":0}, {"id":"11","windows":0}]')
+(defvar var_monitor_ct 1)
 (defwidget dock_middle [mon]
-    (dock_block :class "dark_col"
-        (box :class "dock-widget" :space-evenly false
-            (for workspace in var_workspaces
-                (box :orientation "vertical" :space-evenly false :visible {mon*10 < workspace.id && workspace.id <= mon*10+8}
-                    (box :class "dock-workspace-pad")
-                    (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching_ws[mon] ? (workspace.id == var_active_ws[mon] ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev_ws[mon] ? " switching" : ""))) : (workspace.id == var_active_ws[mon] ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
-                    (box :class "dock-workspace-pad")
+    (box :hexpand false :space-evenly false :spacing 7
+        ;; this block is for when laptop is unplugged from monitor, to show the other set of workspaces
+        (dock_block :class "dark_col" :visible {var_monitor_ct == 1 && var_hostname == "nixpad"}
+            (box :class "dock-widget" :space-evenly false
+                (for workspace in var_workspaces
+                    (box :orientation "vertical" :space-evenly false :visible {0 < workspace.id && workspace.id <= 8}
+                        (box :class "dock-workspace-pad")
+                        (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching_ws[mon] ? (workspace.id == var_active_ws[mon] ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev_ws[mon] ? " switching" : ""))) : (workspace.id == var_active_ws[mon] ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                        (box :class "dock-workspace-pad")
+                    )
+                )
+            )
+        )
+        ;; this block is standard per monitor wspaces
+        (dock_block :class "dark_col"
+            (box :class "dock-widget" :space-evenly false
+                (for workspace in var_workspaces
+                    (box :orientation "vertical" :space-evenly false :visible {mon*10 < workspace.id && workspace.id <= mon*10+8}
+                        (box :class "dock-workspace-pad")
+                        (box :class "dock-workspaces ${workspace.windows == 0 ? "empty_ws" : ""} ${workspace.windows >= 1 ? "populated_ws" : ""} ${var_switching_ws[mon] ? (workspace.id == var_active_ws[mon] ? "active switching" : ((workspace.windows > 0 ? "occupied" : "empty") + (workspace.id == var_prev_ws[mon] ? " switching" : ""))) : (workspace.id == var_active_ws[mon] ? "active" : (workspace.windows > 0 ? "occupied" : "empty"))}")
+                        (box :class "dock-workspace-pad")
+                    )
                 )
             )
         )

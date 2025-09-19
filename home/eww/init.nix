@@ -97,12 +97,21 @@ function watch_monitors() {
     socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - |
         stdbuf -o0 awk -F '>>|,' -e '/^monitoradded>>/ {print $2}' |
         while read -r port; do
+
             case "$port" in
                 "${rice.monitor.primary.port}")   sleep 1 && eww open dock-0 ;;
                 "${rice.monitor.secondary.port}") sleep 1 && eww open dock-1 ;;
             esac
         done
 }; watch_monitors &
+
+notify-send "abc"
+function monitor_count() {
+    while true; do
+        sleep 1
+        eww update "var_monitor_ct=$(hyprctl monitors all -j | jq length)"
+    done
+}; monitor_count &
 
 ws_switch_time=0.15
 
