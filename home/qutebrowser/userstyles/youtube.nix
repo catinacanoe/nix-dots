@@ -1,6 +1,6 @@
 with (import ../../../rice).col; {
     urls.include = [ "*youtube.com*" ];
-    urls.exclude = [ "*youtube.com" ];
+    urls.exclude = [ "*youtube.com" "*music.youtube.com*" ];
 
     js.post = /*js*/ ''
         for (let i = 0; i < 5; i++) {

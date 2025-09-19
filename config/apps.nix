@@ -177,12 +177,12 @@
         bibata-cursors phinger-cursors
     
         # user apps
-        neovim nvimpager
-        obsidian notion-app-custom # (doesn't work, repo seems abandoned so likely never will)
-        # firefox google-chrome brave
+        google-chrome
         brave
         qutebrowser
-        azuredatastudio
+        # firefox 
+        obsidian notion-app-custom # (doesn't work, repo seems abandoned so likely never will)
+        neovim nvimpager
         networkmanagerapplet wireguard-tools
         lf libqalculate
         # (discord.override { # https://nixos.wiki/wiki/Discord
