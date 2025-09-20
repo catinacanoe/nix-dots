@@ -105,7 +105,6 @@ function watch_monitors() {
         done
 }; watch_monitors &
 
-notify-send "abc"
 function monitor_count() {
     while true; do
         sleep 1
