@@ -58,7 +58,14 @@ cap verified.capitalone.com/auth/signin/
 spl sunnyvale.bibliocommons.com/
     s v2/search?query=
 
-o my.ucla.edu/
+o bruinlearn.ucla.edu/courses/
+    c 214058
+    m 215905
+    l 215806
+    e 215042
+    s 214068
+
+ob https://ucla.vitalsource.com/home/my-courses
 
 gg messages.google.com/web/u/0/conversations
 

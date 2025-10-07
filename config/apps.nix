@@ -121,6 +121,7 @@
         pipes
         psmisc
         qastools
+        qrcode
         ripgrep
         shellcheck
         seatd
@@ -201,6 +202,7 @@
         spotify-cli-linux # spicetify is managed by the homemanager config
         qbittorrent
         gimp
+            lunar-client
 
         # bloat, arguably
         dysk # df enhancement

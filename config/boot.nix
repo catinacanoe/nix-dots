@@ -9,6 +9,7 @@
                 enable = true;
                 device = "nodev";
                 efiSupport = true;
+                useOSProber = true;
                 gfxmodeEfi = "${toString monitor.primary.width}x${toString monitor.primary.height}";
                 # splashImage = ./black.jpg;
                 splashImage = pkgs.stdenv.mkDerivation {
