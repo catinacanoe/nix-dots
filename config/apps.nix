@@ -104,6 +104,7 @@
         mpc-cli
         neofetch
         newsboat
+        ntfs3g
         nurl
         odt2txt
         p7zip

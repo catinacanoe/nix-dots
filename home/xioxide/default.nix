@@ -226,22 +226,10 @@ p ${pictures}/
             v vehicle/
 x ${documents}/
     s school/
-        c czech/
-        h history/
-        l literature/
-        m math/
-            t textbook.pdf
-        p physics/
-            i ip/
-            l l/
-            r r/
-            t textbook.pdf
-            e equations.pdf
-        r rsm/
-            t textbook.pdf
-        s spanish/
-        t transcript.pdf
-        l calendar.pdf
+        c com-sci-31/
+        e engr-1dr/
+        l ling-1/
+        m math-32a/
     w wiki/
         e engineering/
         g gamedev/

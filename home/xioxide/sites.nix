@@ -59,13 +59,17 @@ spl sunnyvale.bibliocommons.com/
     s v2/search?query=
 
 o bruinlearn.ucla.edu/courses/
-    c 214058
-    m 215905
-    l 215806
-    e 215042
-    s 214068
+    c 214058/
+    m 215905/
+        n files/folder/Notes/
+        p files/folder/Dis%204D/Practice%20Problems
+        s files/folder/Practice%20(Homework)?preview=21978234
+    l 215806/
+    e 215042/
+    s 214068/
 
-ob https://ucla.vitalsource.com/home/my-courses
+ob ucla.vitalsource.com/home/my-courses
+oz learn.zybooks.com/zybook/UCLACS31SmallbergFall2025
 
 gg messages.google.com/web/u/0/conversations
 
