@@ -2,7 +2,9 @@
     settings = { # same tree as running ':set' from inside qb
         new_instance_open_target = "tab-bg-silent"; # prevents config-source from raising focus, see https://l.opnxng.com/r/qutebrowser/comments/mavj50/how_to_configsource_from_terminal_without_raising/
         messages.timeout = 1000;
-        fonts.default_size = "11pt";
+        fonts.default_size = "12pt";
+        zoom.default = 110;
+        qt.highdpi = true;
 
         hints = {
             border = "none";

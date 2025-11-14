@@ -54,6 +54,7 @@ in
         ./mpv
         ./newsboat
         ./nvim
+        ./obsidian
         ./pass
         ./power
         ./pw
