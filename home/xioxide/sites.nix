@@ -58,6 +58,8 @@ cap verified.capitalone.com/auth/signin/
 spl sunnyvale.bibliocommons.com/
     s v2/search?query=
 
+ocs web.cs.ucla.edu/classes/fall25/cs31/
+
 o bruinlearn.ucla.edu/courses/
     c 214058/
     m 215905/
@@ -65,7 +67,10 @@ o bruinlearn.ucla.edu/courses/
         p files/folder/Dis%204D/Practice%20Problems
         s files/folder/Practice%20(Homework)?preview=21978234
     l 215806/
+        m modules/
+        a assignments/
     e 215042/
+        m modules/
     s 214068/
 
 ob ucla.vitalsource.com/home/my-courses

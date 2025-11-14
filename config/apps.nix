@@ -198,7 +198,9 @@
         neomutt
         sioyek mcomix
         zsh
+        rclone
         zoom-us
+        slack
         # slack
         spotify-cli-linux # spicetify is managed by the homemanager config
         qbittorrent

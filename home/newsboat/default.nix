@@ -46,6 +46,7 @@
 
         urls = [
             { title = "Not Even Emily"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UChhyfYkhuVrzmvDr-WqpDSw"; }
+            { title = "Sylvan Franklin";url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC04nROIJrY22Gl2aFqKcdqQ"; }
             { title = "Ben Hoerman";    url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC433I43L6Yz3SnAC9BZxdIQ"; }
             { title = "Jaye Alexander"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC1rhRwPCmoGz_FDJ3nhTQVg"; }
             { title = "oliSUNvia";      url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCVHxJghKAB_kA_5LMM8MD3w"; }
@@ -58,9 +59,7 @@
             { title = "Shoe0nHead";     url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC0aanx5rpr7D1M7KCFYzrLQ"; }
             { title = "Luke Smith";     url = "https://www.youtube.com/feeds/videos.xml?channel_id=UC2eYFnH61tmytImy1mTYvhA"; }
             { title = "TechJoyce";      url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCR4ZpFWX29p4YCajQA5fcfQ"; }
-            { title = "Veronica Vlogs"; url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCQt5ygdMXv-nsNiV2c2hU3w"; }
             { title = "ash callaghan";  url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCSX6zq83jCHK1Y24sdiye-A"; }
-            { title = "t3ssel8r";       url = "https://www.youtube.com/feeds/videos.xml?channel_id=UCIjUIjWig0r5DIixQrt6A3A"; }
         ];
     };
 }

@@ -56,9 +56,9 @@ in
         ${mod}-shift-l:
             ${hypr "movewindow l"}
         ${mod}-shift-tab:
-            ${hypr "movewindow mon:u"} # because windows arent often moved up and down, except between monitors
+            ${hypr "movewindow mon:1"} # because windows arent often moved up and down, except between monitors
         ${mod}-shift-u:
-            ${hypr "movewindow mon:d"}
+            ${hypr "movewindow mon:0"}
         ${mod}-shift-q:
             ${hypr "movewindow r"}
 # windows.nix

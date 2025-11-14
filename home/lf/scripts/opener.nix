@@ -18,7 +18,6 @@ case "$type" in
             mpv "$f"
         fi ;;
     */pdf) ${config.programs.zsh.shellAliases.sio} "$f" ;;
-    application/zip) mcomix "$f" ;; # cbz file
     *) lf --remote "send $id \$nvim \"$f\"" ;;
 esac
 ''

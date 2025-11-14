@@ -140,7 +140,7 @@ in
                 if [ "$num" = "1" ]; then
                     dragon -T -x "$f" &
                 else
-                    dragon -T -a -x "$fx" &
+                    dragon -T -a -x $(echo $fx) &
                 fi
             }}'';
 
