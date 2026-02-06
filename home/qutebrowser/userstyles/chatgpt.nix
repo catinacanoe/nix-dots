@@ -1,6 +1,9 @@
 with (import ../../../rice).col; {
     urls.include = [ "*chatgpt.com*" ];
-    css = /*css*/ ''
+    css = '''';
+
+
+    NOTcss = /*css*/ ''
         * {
             border: none !important;
             box-shadow: none !important;

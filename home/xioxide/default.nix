@@ -226,10 +226,9 @@ p ${pictures}/
             v vehicle/
 x ${documents}/
     s school/
-        c com-sci-31/
-        e engr-1dr/
-        l ling-1/
-        m math-32a/
+        3 math-33b/
+        2 math-32b/
+        6 math-61/
     w wiki/
         e engineering/
         g gamedev/

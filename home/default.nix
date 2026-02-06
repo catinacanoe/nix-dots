@@ -38,7 +38,7 @@ in
         ./discord
         ./dye
         ./eww
-        ./firefox
+        # ./firefox NOTE: COMMENTED OUT BC I DON"T USE FF ANYMORE
         ./fzf
         ./git
         ./gitutils
@@ -75,8 +75,7 @@ in
     services.ssh-agent.enable = true;
     programs.yt-dlp.settings.cookies-from-browser = config.home.sessionVariables.BROWSER;
 
-    home.packages = with pkgs;
-    [
+    home.packages = with pkgs; [
         sutils
         xremap
         xremap-start

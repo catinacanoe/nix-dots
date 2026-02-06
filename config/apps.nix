@@ -30,7 +30,9 @@
         notion-app-custom  = (callPackage ./custom/notion-app.nix {});
         # spicetify = inputs.spicetify-nix.lib.mkSpicetify pkgs (import ./spicetify.nix args);
     in [
-        # custom apps
+        ###############
+        # CUSTOM APPS #
+        ###############
         blueshell
         browser
         browseshell
@@ -53,7 +55,9 @@
         vpnshell
         yargs
 
-        # cli utils
+        #############
+        # CLI UTILS #
+        #############
         acpi
         ansifilter
         ascii-image-converter
@@ -160,7 +164,9 @@
         libsForQt5.qt5ct
         libva
 
-        # lib
+        #############
+        # LIBRARIES #
+        #############
         python311Full
         python311Packages.docx2txt
         # python311Packages.howdoi (breaks 24.11 build)
@@ -178,40 +184,50 @@
         # cursor
         bibata-cursors phinger-cursors
     
-        # user apps
+        #############
+        # USER APPS #
+        #############
+
+        ### BROWSERS
         google-chrome
         brave
         qutebrowser
         # firefox 
-        obsidian notion-app-custom # (doesn't work, repo seems abandoned so likely never will)
-        neovim nvimpager
-        networkmanagerapplet wireguard-tools
-        lf libqalculate
-        # (discord.override { # https://nixos.wiki/wiki/Discord
-        #     withVencord = true;
-        # })
-        cava
+
+        ### CORE TUI APPS
         kitty xterm
-        mpv-unwrapped mpvc
-        krita
-        discord
-        neomutt
-        sioyek mcomix
         zsh
+        neovim nvimpager
+        lf
+        libqalculate
+        neomutt
         rclone
+
+        ### CREATIVE APPS
+        obsidian
+        notion-app-custom
+        kicad
+        spotify spotify-cli-linux
+        krita
+        gimp
+        # lunar-client DOESNT RUN ON WAYLAND
+
+        ### COMMUNICATION
         zoom-us
         slack
-        # slack
-        spotify-cli-linux # spicetify is managed by the homemanager config
         qbittorrent
-        gimp
-            lunar-client
+
+        ### FILE VIEWERS
+        mpv-unwrapped mpvc
+        sioyek mcomix
 
         # bloat, arguably
         dysk # df enhancement
+        cava
 
-        # core system apps
-        # hyprland
+        ####################
+        # CORE SYSTEM APPS #
+        ####################
         (pkgs.hyprland.override {
             legacyRenderer = true;
             enableXWayland = true;
@@ -220,12 +236,12 @@
         hypr pyprland
         pulseaudio pipewire
         waybar
-        xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-desktop-portal-kde
         eww
         swaylock-effects
         mako
         swww
         mpd
         gtk3
+        networkmanagerapplet wireguard-tools
     ];
 }

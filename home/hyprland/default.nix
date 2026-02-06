@@ -39,7 +39,7 @@ in {
     exec-once = kitty
     exec-once = pypr
 
-    exec = sleep 1 && ${config.xdg.configHome}/eww/init.sh
+    exec = sleep 7 && ${config.xdg.configHome}/eww/init.sh
     exec = sleep 1 && swww-daemon
     exec = killall .libinput-gestures-wrapped ; libinput-gestures
 

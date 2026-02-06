@@ -12,8 +12,12 @@ in
                     ${launchdir direction "kitty ~"}
                 ${mod}-h:
                     ${launchdir direction "browser new-window"}
-                ${mod}-d:
-                    ${launchdir direction "discord"}
+                ${mod}-o:
+                    ${launchdir direction "obsidian"}
+                ${mod}-n:
+                    ${launchdir direction "notion-app"}
+                ${mod}-b:
+                    ${launchdir direction "brave"}
                 ${mod}-v:
                     ${launchdir direction "vimit"}
 # programs.nix ${direction}
