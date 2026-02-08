@@ -2,10 +2,10 @@
 let
     lib = inputs.home-manager.lib;
 
-    # rice = (import ../../rice);
-    # col = rice.col; 
-    # window = rice.window;
-    pypr = (import ./pyprland.nix args);
+    rice = (import ../../rice);
+    col = rice.col; 
+    window = rice.window;
+    # pypr = (import ./pyprland.nix args);
 
     host = import ../../ignore-hostname.nix;
 
@@ -19,10 +19,10 @@ in {
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD ${pkgs.hyprland}/bin/hyprctl reload > /dev/null";
 
-    home.activation.pyprland = lib.hm.dag.entryAfter ["onFilesChange"]
-        pypr.activation;
+    # home.activation.pyprland = lib.hm.dag.entryAfter ["onFilesChange"]
+    #     pypr.activation;
 
-    xdg.configFile."hypr/pyprland.toml" = pypr.pypr;
+    # xdg.configFile."hypr/pyprland.toml" = pypr.pypr;
 
     wayland.windowManager.hyprland.extraConfig = /* hyprlang */ ''
         debug {

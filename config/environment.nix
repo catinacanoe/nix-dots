@@ -10,10 +10,10 @@ in {
 
     hardware.graphics = {
         enable = true;
-        package = hypr-pkgs.mesa;
+        package = pkgs.mesa;
 
         enable32Bit = true;
-        package32 = hypr-pkgs.pkgsi686Linux.mesa;
+        package32 = pkgs.pkgsi686Linux.mesa;
     };
 
     services.xserver.videoDrivers = [ "amdgpu" ];
@@ -26,11 +26,11 @@ in {
         opencl.enable = true;
     };
 
-    nixpkgs.overlays = [
-        (final: prev: {
-            mesa = hypr-pkgs.mesa;
-        })
-    ];
+    # nixpkgs.overlays = [
+    #     (final: prev: {
+    #         mesa = hypr-pkgs.mesa;
+    #     })
+    # ];
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

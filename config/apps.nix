@@ -194,7 +194,7 @@
         # CORE SYSTEM APPS #
         ####################
         hyprland
-        hypr pyprland
+        # pyprland
         pulseaudio pipewire
         waybar
         eww
@@ -204,6 +204,8 @@
         mpd
         gtk3
         networkmanagerapplet wireguard-tools
+        mesa
         mesa-demos
+        libgbm
     ];
 }
