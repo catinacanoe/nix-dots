@@ -8,7 +8,8 @@ eww open dock-0 --restart
 eww open dock-1
 
 kill $(ps aux | grep 'bash [^ ]*qutebrowser/userscripts' | awk '{ print $2 }' | grep -v $$)
-qutebrowser ":spawn --userscript urlupdater.sh"
+qutebrowser &
+sleep 5 && qutebrowser ":spawn --userscript urlupdater.sh" &
 
 hyprctl dispatch event eww,init,start
 
@@ -45,8 +46,14 @@ function bright() {
 function battery() {
     # can eventually start using `upower -d` instead of `acpi -b`
 
+    lowbatnum=15
+    exlowbatnum=10
+    lowbat=""
+    exlowbat=""
+
     while true; do
         percent="$(acpi -b | awk -F ', ' '{ print $2 }')"
+        percentnum="$(echo "$percent" | sed 's|%$||')"
         timestamp="$(acpi -b | awk -F ', ' '{ print $3 }' | awk '{ print $1 }' )"
         hour="$(echo "$timestamp" | awk -F ':' '{ print $1 }')"
         min="$(echo "$timestamp" | awk -F ':' '{ print $2 }')"
@@ -83,6 +90,32 @@ function battery() {
             fi
         else
             eww update "var_battery=$percent ($timeinfo)"
+
+            if [ "$direction" == "Charging" ]; then
+                if [ $percentnum -gt $lowbatnum ]; then
+                    lowbat=""
+                fi
+
+                if [ $percentnum -gt $exlowbatnum ]; then
+                    exlowbat=""
+                fi
+            elif [ "$direction" == "Discharging" ]; then
+                if [ $percentnum -le $lowbatnum ]; then
+                    if [ -z "$lowbat" ]; then
+                        notify-send "Warning" "Low battery: $percent"
+                        [ $(eww get var_brightness) -gt $lowbatnum ] && setbright "$lowbatnum%"
+                        lowbat="asd"
+                    fi
+                fi
+
+                if [ $percentnum -le $exlowbatnum ]; then
+                    if [ -z "$exlowbat" ]; then
+                        notify-send "Warning" "Extremely low battery: $percent"
+                        [ $(eww get var_brightness) -gt $exlowbatnum ] && setbright "$exlowbatnum%"
+                        exlowbat="asd"
+                    fi
+                fi
+            fi
         fi
     sleep 5; done
 }; battery &

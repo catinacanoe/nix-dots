@@ -58,23 +58,25 @@ cap verified.capitalone.com/auth/signin/
 spl sunnyvale.bibliocommons.com/
     s v2/search?query=
 
-ocs web.cs.ucla.edu/classes/fall25/cs31/
+u my.ucla.edu/
+    c ClassPlanner/ClassPlan.aspx
+    g IWE/mygrades.aspx
+u myucla.it.ucla.edu/
+    s studylist.aspx
+
+ub myucla.it.ucla.edu/StudentWebMVC/app/financial/account
+uh housing.ucla.edu/my-housing
+ud dars.ucla.edu/
 
 o bruinlearn.ucla.edu/courses/
-    c 214058/
-    m 215905/
-        n files/folder/Notes/
-        p files/folder/Dis%204D/Practice%20Problems
-        s files/folder/Practice%20(Homework)?preview=21978234
-    l 215806/
-        m modules/
-        a assignments/
-    e 215042/
-        m modules/
-    s 214068/
+    2 223215/
+        n files/folder/lecture%20notes
+        g external_tools/408
+    3 223213/
+        n announcements/
+    6 223216/
 
 ob ucla.vitalsource.com/home/my-courses
-oz learn.zybooks.com/zybook/UCLACS31SmallbergFall2025
 
 gg messages.google.com/web/u/0/conversations
 

@@ -3,7 +3,7 @@
     col = (import ../../rice).col;
 in {
     programs.spicetify = {
-        enable = true;
+        enable = false;
         theme = spicePkgs.themes.text;
         colorScheme = "custom";
         customColorScheme = {
