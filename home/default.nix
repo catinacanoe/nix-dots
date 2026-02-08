@@ -30,7 +30,7 @@ in
 
     imports = [
         inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
-        inputs.spicetify-nix.homeManagerModules.default
+        # inputs.spicetify-nix.homeManagerModules.default
         ./bat
         ./cava
         ./cadence
@@ -38,7 +38,7 @@ in
         ./discord
         ./dye
         ./eww
-        ./firefox
+        # ./firefox
         ./fzf
         ./git
         ./gitutils
@@ -63,7 +63,7 @@ in
         ./scrot
         ./shell
         ./sioyek
-        ./spicetify
+        # ./spicetify
         ./starship
         ./swaylock
         ./thefuck
