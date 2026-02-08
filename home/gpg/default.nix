@@ -14,7 +14,7 @@ in
 
     services.gpg-agent = {
         enable = true;
-        pinentryPackage = pkgs.pinentry-qt; # see docs
+        pinentry.package = pkgs.pinentry-qt; # see docs
         enableSshSupport = true; # more research into opt required
         # theres some enable<shell>Integration, see docs ig
 

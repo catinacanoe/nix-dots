@@ -5,8 +5,7 @@ in
 {
     fonts = {
         packages = with pkgs; [
-            (nerdfonts.override { fonts = [ "FiraCode" ]; })
-            # nerd-fonts.fira-code
+            nerd-fonts.fira-code
             victor-mono
             monocraft
             scientifica

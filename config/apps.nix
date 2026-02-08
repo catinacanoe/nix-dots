@@ -105,7 +105,7 @@
         mediainfo
         mkvtoolnix
         mlocate
-        mpc-cli
+        mpc
         neofetch
         newsboat
         ntfs3g
@@ -118,7 +118,7 @@
         pavucontrol
         pciutils
         pipx
-        poppler_utils
+        poppler-utils
         powertop
         powerstat
         upower
@@ -134,7 +134,6 @@
         speedtest-cli
         starship
         sysfsutils
-        thefuck
         tldr
         trash-cli
         tty-clock
@@ -154,7 +153,7 @@
         ghidra
         xdg-utils
         system-config-printer
-        xdragon
+        dragon-drop
         xz
         yt-dlp
         zip
@@ -167,11 +166,11 @@
         #############
         # LIBRARIES #
         #############
-        python311Full
+        # python311Full
         python311Packages.docx2txt
         # python311Packages.howdoi (breaks 24.11 build)
 
-        clang_15 boost183 ncurses tomlplusplus
+        clang boost ncurses tomlplusplus
         # qt6ct
 
         lua
@@ -228,11 +227,11 @@
         ####################
         # CORE SYSTEM APPS #
         ####################
-        (pkgs.hyprland.override {
-            legacyRenderer = true;
-            enableXWayland = true;
-            withSystemd = true;
-        })
+        # (pkgs.hyprland.override {
+        #     # legacyRenderer = true; # not supported in 25.11
+        #     withSystemd = true;
+        # })
+        hyprland
         hypr pyprland
         pulseaudio pipewire
         waybar
@@ -243,5 +242,6 @@
         mpd
         gtk3
         networkmanagerapplet wireguard-tools
+        mesa-demos
     ];
 }

@@ -6,15 +6,19 @@
         # as of 23.05.2025 I have been running nixos-24.11 and home: release-24.11 for multiple months with no issue
 
         # https://channels.nixos.org/
-        nixpkgs.url = "nixpkgs/nixos-24.11"; # nixos-unstable / nixos-24.11
+        nixpkgs.url = "nixpkgs/nixos-25.11"; # nixos-unstable / nixos-xx.xx
 
         # https://github.com/nix-community/home-manager/branches
         home-manager = {
-            url = "github:nix-community/home-manager/release-24.11"; # master / release-24.11
+            url = "github:nix-community/home-manager/release-25.11"; # master / release-xx.xx
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        hyprland.url = "github:hyprwm/Hyprland";
+        hyprland = {
+            url = "github:hyprwm/Hyprland";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
         xremap-flake.url = "github:xremap/nix-flake";
         spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
 

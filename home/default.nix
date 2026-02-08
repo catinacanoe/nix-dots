@@ -66,7 +66,6 @@ in
         ./spicetify
         ./starship
         ./swaylock
-        ./thefuck
         ./wpp
         ./xdg
         ./xioxide

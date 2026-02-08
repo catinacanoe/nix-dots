@@ -118,8 +118,6 @@ r ${repos}/
                 d default.nix
             gu gitutils/
                 d default.nix
-            fu thefuck/
-                d default.nix
             gp gpg/
                 d default.nix
             hy hyprland/
