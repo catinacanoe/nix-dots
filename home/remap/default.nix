@@ -21,7 +21,10 @@ let
     hypr = (import ./fn/hypr.nix);
     launch = (import ./fn/launch.nix);
     programs = (import ./modules/programs.nix);
-in { xdg.configFile."xremap/config.yml".text = ''
+in {
+services.xremap.enable = true;
+
+xdg.configFile."xremap/config.yml".text = ''
 # default.nix
 default_mode: main
 keymap:
