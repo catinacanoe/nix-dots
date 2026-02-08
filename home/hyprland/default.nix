@@ -2,9 +2,9 @@
 let
     lib = inputs.home-manager.lib;
 
-    rice = (import ../../rice);
-    col = rice.col; 
-    window = rice.window;
+    # rice = (import ../../rice);
+    # col = rice.col; 
+    # window = rice.window;
     pypr = (import ./pyprland.nix args);
 
     host = import ../../ignore-hostname.nix;

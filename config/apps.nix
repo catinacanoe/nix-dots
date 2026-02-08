@@ -160,8 +160,6 @@
         zsteg
 
         # nvidia compat
-        libsForQt5.qt5ct
-        libva
 
         #############
         # LIBRARIES #
@@ -182,16 +180,6 @@
 
         # cursor
         bibata-cursors phinger-cursors
-    
-        #############
-        # USER APPS #
-        #############
-
-        ### BROWSERS
-        google-chrome
-        brave
-        qutebrowser
-        # firefox 
 
         ### CORE TUI APPS
         kitty xterm
@@ -202,35 +190,9 @@
         neomutt
         rclone
 
-        ### CREATIVE APPS
-        obsidian
-        notion-app-custom
-        kicad
-        spotify spotify-cli-linux
-        krita
-        gimp
-        # lunar-client DOESNT RUN ON WAYLAND
-
-        ### COMMUNICATION
-        zoom-us
-        slack
-        qbittorrent
-
-        ### FILE VIEWERS
-        mpv-unwrapped mpvc
-        sioyek mcomix
-
-        # bloat, arguably
-        dysk # df enhancement
-        cava
-
         ####################
         # CORE SYSTEM APPS #
         ####################
-        # (pkgs.hyprland.override {
-        #     # legacyRenderer = true; # not supported in 25.11
-        #     withSystemd = true;
-        # })
         hyprland
         hypr pyprland
         pulseaudio pipewire

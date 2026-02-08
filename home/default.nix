@@ -1,84 +1,21 @@
 # home.nix
-{ config, pkgs, inputs, system, hyprfocus, lib, ... }:
+{ config, pkgs, inputs, system, lib, ... }:
 let
     username = "canoe";
     homeDirectory = "/home/${username}";
-  
-    xremap = inputs.xremap-flake.packages.${system}.default;
-    xremap-start = (import ./remap/start.nix { inherit pkgs homeDirectory xremap; });
 in
 {
     programs.home-manager.enable = true;
     home = {
         inherit username homeDirectory;
-        stateVersion = "23.05";
+        stateVersion = "25.11";
     };
 
-    nixpkgs.config.allowUnfree = true;
-    nixpkgs = { overlays = [(final: prev: {
-        vimPlugins = prev.vimPlugins // {
-            cellular-automaton-nvim = prev.vimUtils.buildVimPlugin {
-                name = "cellular-automaton";
-                src = inputs.vimplugin-cellular-automaton;
-            };
-            canoe-mini-nvim = prev.vimUtils.buildVimPlugin {
-                name = "canoe-mini-nvim";
-                src = inputs.vimplugin-canoe-mini-nvim;
-            };
-        };
-    })];};
-
     imports = [
-        inputs.xremap-flake.homeManagerModules.default {services.xremap.config.na="na";}
-        inputs.spicetify-nix.homeManagerModules.default
-        ./bat
-        ./cava
-        ./cadence
-        ./crypt
-        ./discord
-        ./dye
-        ./eww
-        # ./firefox NOTE: COMMENTED OUT BC I DON"T USE FF ANYMORE
-        ./fzf
-        ./git
-        ./gitutils
-        ./gpg
-        ./gui
         ./hyprland
-        ./imv
-        ./kitty
-        ./lf
-        ./mail
-        ./mako
-        ./mpd
-        ./mpv
-        ./newsboat
-        ./nvim
-        ./obsidian
-        ./pass
-        ./power
-        ./pw
-        ./qutebrowser
-        ./remap
-        ./scrot
-        ./shell
-        ./sioyek
-        ./spicetify
-        ./starship
-        ./swaylock
-        ./wpp
-        ./xdg
-        ./xioxide
     ];
 
     services.ssh-agent.enable = true;
-    programs.yt-dlp.settings.cookies-from-browser = config.home.sessionVariables.BROWSER;
-
-    home.packages = with pkgs; [
-        sutils
-        xremap
-        xremap-start
-    ];
 
     home.sessionVariables = {
         VISUAL = "nvim";
