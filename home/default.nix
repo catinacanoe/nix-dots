@@ -72,6 +72,7 @@ in
     ];
 
     programs.yt-dlp.settings.cookies-from-browser = config.home.sessionVariables.BROWSER;
+    services.ssh-agent.enable = true;
 
     home.packages = with pkgs; [
         sutils
