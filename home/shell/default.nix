@@ -1,4 +1,4 @@
-{ config, ... }@args:
+{ config, lib, ... }@args:
 let
     repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
   
@@ -66,10 +66,10 @@ in
             ns = "nix-shell";
         };
 
-        initExtraFirst = let
-            xioxide_fn = ''[ "$1" == "$HOME" ] && return || return 1'';
-        in
-        with config.programs.zsh.shellAliases; /* bash */ ''
+        initContent = 
+        let xioxide_fn = ''[ "$1" == "$HOME" ] && return || return 1''; in
+        with config.programs.zsh.shellAliases;
+        lib.mkBefore /* bash */ ''
         e() { ${xioxide} cd "grep '/$'" pwd '${xioxide_fn}' dirs $@ && ${n}; }
         ee() { e && e "$1" }
         eo() { cd - > /dev/null && ${n}; }
@@ -119,9 +119,7 @@ in
                 yt-dlp -x --audio-format mp3 --audio-quality 0 "$(wl-paste)"
             fi
         }
-        '';
 
-        initExtra = /* bash */ ''
         for plugin in $ZDOTDIR/plugins/pre/*.plugin.zsh; do
             source "$plugin"
         done
@@ -129,10 +127,6 @@ in
         for plugin in $ZDOTDIR/plugins/*.plugin.zsh; do
             zsh-defer source "$plugin"
         done
-
-        # auto fill "hypr" after login
-        # if [ "$TERM" = "linux" ]; then
-        # fi
         '';
 
         completionInit = /* bash */ ''

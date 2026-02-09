@@ -8,7 +8,7 @@ eww open dock-0 --restart
 eww open dock-1
 
 kill $(ps aux | grep 'bash [^ ]*qutebrowser/userscripts' | awk '{ print $2 }' | grep -v $$)
-qutebrowser &
+[ -z $(ps aux | grep 'qutebrowser' | awk '{ print $2 }' | grep -v $$) ] && qutebrowser &
 sleep 5 && qutebrowser ":spawn --userscript urlupdater.sh" &
 
 hyprctl dispatch event eww,init,start
