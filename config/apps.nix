@@ -6,53 +6,17 @@
 
     environment.systemPackages = with pkgs;
     let
-        blueshell = (import ./custom/blueshell.nix args);
-        browser     = (import ./custom/browser.nix args);
-        browseshell = (import ./custom/browseshell.nix args);
-        doubletap   = (import ./custom/doubletap.nix args);
-        drop        = (import ./custom/drop.nix args);
-        hypr        = (import ./custom/hypr.nix args);
-        launcher    = (import ./custom/launcher.nix args);
-        manpager    = (import ./custom/manpager.nix args);
-        menu        = (import ./custom/menu.nix args);
-        mptoggle    = (import ./custom/mptoggle.nix args);
-        mustagger   = (import ./custom/mustagger.nix args);
         netshell    = (import ./custom/netshell.nix args);
         nixshell    = (import ./custom/nixshell.nix args);
-        player      = (import ./custom/player.nix args);
-        plyr        = (import ./custom/plyr.nix args);
         setbright   = (import ./custom/setbright.nix args);
-        setvol      = (import ./custom/setvol.nix args);
-        sshkey      = (import ./custom/sshkey.nix args);
-        vimit       = (import ./custom/vimit.nix args);
-        vpnshell    = (import ./custom/vpnshell.nix args);
         yargs       = (import ./custom/yargs.nix args);
-        notion-app-custom  = (callPackage ./custom/notion-app.nix {});
-        # spicetify = inputs.spicetify-nix.lib.mkSpicetify pkgs (import ./spicetify.nix args);
     in [
         ###############
         # CUSTOM APPS #
         ###############
-        blueshell
-        browser
-        browseshell
-        doubletap
-        drop
-        launcher
-        manpager
-        menu.ui
-        menu.wrap
-        mptoggle
-        mustagger
         netshell
         nixshell
-        player
-        plyr
         setbright
-        setvol
-        sshkey
-        vimit
-        vpnshell
         yargs
 
         #############
@@ -118,7 +82,6 @@
         pavucontrol
         pciutils
         pipx
-        poppler-utils
         powertop
         powerstat
         upower
@@ -193,8 +156,7 @@
         ####################
         # CORE SYSTEM APPS #
         ####################
-        hyprland
-        # pyprland
+        # hyprland
         pulseaudio pipewire
         waybar
         eww
@@ -204,8 +166,5 @@
         mpd
         gtk3
         networkmanagerapplet wireguard-tools
-        mesa
-        mesa-demos
-        libgbm
     ];
 }

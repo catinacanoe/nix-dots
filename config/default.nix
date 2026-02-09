@@ -2,23 +2,13 @@
 { config, pkgs, inputs, ... }: {
     imports = [ 
         ./ignore-hardware.nix # auto generated on install
-        # ./hardware.nix
         ./apps.nix
-        # ./environment.nix
-        # ./fonts.nix
-        # ./locale.nix
-        # ./peripheral.nix
-        # ./services.nix
-        # ./battery.nix
         ./boot.nix
     ];
 
     programs.hyprland.enable = true;
     services.seatd.enable = true;
     networking.networkmanager.enable = true;
-
-    # nixpkgs.config.allowUnfree = true;
-    system.autoUpgrade.enable = true;
 
     networking.hostName = import ../ignore-hostname.nix;
 
