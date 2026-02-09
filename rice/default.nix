@@ -25,7 +25,7 @@ let host = import ../ignore-hostname.nix; in {
             priority = 0;
         };
         thinkpad-e16- = {
-            name = "0x160E";
+            name = "0x41B0";
             scale = 1.33333;
             width = 2560;
             height = 1600;

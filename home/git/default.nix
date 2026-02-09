@@ -2,22 +2,32 @@
 {
     programs.git = {
         enable = true;
-        userName = "catinacanoe";
-        userEmail = "catinacanoe@proton.me";
-        aliases = {}; # see docs
-        includes = []; # see docs
+        settings = {
+            alias = {}; # see docs
+            # includes = []; # see docs
 
-        diff-so-fancy = {
-            enable = true;
-            pagerOpts = [ "--tabs=4" "-R" "-F" ];
-            markEmptyLines = false;
-            useUnicodeRuler = true;
-        };
+            user = {
+                name = "catinacanoe";
+                email = "catinacanoe@proton.me";
+            };
 
-        extraConfig = {
             gpg.format = "ssh";
             user.signingkey = "${config.home.homeDirectory}/.ssh/id-github-canoe.pub";
             init.defaultBranch = "main";
+        };
+    };
+    
+
+    programs.diff-so-fancy = {
+        enable = true;
+        enableGitIntegration = true;
+
+        pagerOpts = [ "--tabs=4" "-R" "-F" ];
+
+        settings = {
+            useUnicodeRuler = true;
+            markEmptyLines = false;
+
         };
     };
 }

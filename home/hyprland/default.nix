@@ -24,6 +24,7 @@ in {
 
     xdg.configFile."hypr/pyprland.toml" = pypr.pypr;
 
+    wayland.windowManager.hyprland.enable = true;
     wayland.windowManager.hyprland.extraConfig = /* hyprlang */ ''
 
     ${if host == "nixbox" then ''
@@ -180,14 +181,15 @@ in {
     ${model-o "-1"}
     ''}
 
-    gestures {
-        workspace_swipe_use_r = true
-        workspace_swipe = true
-        workspace_swipe_distance = 700 # basically just sens
-        workspace_swipe_min_speed_to_force = 10 # force switch @ speed
-        workspace_swipe_cancel_ratio = 0.3 # min amount of screen to cover
-        workspace_swipe_direction_lock = false # change direction anytime
-    }#gestures
+    gesture = 3, horizontal, workspace
+    # gestures {
+    #     workspace_swipe_use_r = true
+    #     workspace_swipe = true
+    #     workspace_swipe_distance = 700 # basically just sens
+    #     workspace_swipe_min_speed_to_force = 10 # force switch @ speed
+    #     workspace_swipe_cancel_ratio = 0.3 # min amount of screen to cover
+    #     workspace_swipe_direction_lock = false # change direction anytime
+    # }#gestures
 
     misc {
         # defaults

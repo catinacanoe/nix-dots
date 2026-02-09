@@ -37,17 +37,17 @@
         openFirewall = true;
     };
 
-    services.logind = {
-        powerKey = "ignore";
-        powerKeyLongPress = "ignore";
-        lidSwitch = "ignore";
-        rebootKey = "ignore";
-        rebootKeyLongPress = "ignore";
-        suspendKey = "ignore";
-        suspendKeyLongPress = "ignore";
-        hibernateKey = "ignore";
-        hibernateKeyLongPress = "ignore";
-        lidSwitchExternalPower = "ignore";
+    services.logind.settings.Login = {
+        HandlePowerKey = "ignore";
+        HandlePowerKeyLongPress = "ignore";
+        HandleLidSwitch = "ignore";
+        HandleRebootKey = "ignore";
+        HandleRebootKeyLongPress = "ignore";
+        HandleSuspendKey = "ignore";
+        HandleSuspendKeyLongPress = "ignore";
+        HandleHibernateKey = "ignore";
+        HandleHibernateKeyLongPress = "ignore";
+        HandleLidSwitchExternalPower = "ignore";
     };
 
     systemd.services."hyprland-suspend" = if (import ../ignore-hostname.nix) == "nixbox" then {
