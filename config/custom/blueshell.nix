@@ -128,6 +128,32 @@ function reload() {
     [ "$playing" = "true" ] && plyr play
 }
 
+function pair() {
+    echo -n "Enter fragment of device name: "
+    read grepstr
+
+    echo "Searching for '$grepstr'"
+
+    result=""
+    bluetoothctl --timeout 5 scan on > /dev/null &
+    while true ; do
+        result="$(bluetoothctl devices | grep -i "$grepstr")"
+        [ -n "$result" ] && break
+    done
+    bluetoothctl scan off
+
+    sleep 0.5
+    choice="$(echo "$result" | fzf)"
+    [ -z "$choice" ] && echo "No device selected, pairing failed" && return
+
+    address="$(echo "$choice" | sed 's| |\n|g' | grep "[0-9A-F]\{2\}:[0-9A-F]\{2\}:[0-9A-F]\{2\}:[0-9A-F]\{2\}:[0-9A-F]\{2\}:[0-9A-F]\{2\}")"
+    [ -z "$choice" ] && echo "Wasn't able to recover address from: $choice" && return
+
+    echo "Adress copied, pair it yourself: $choice"
+    wl-copy "$address"
+    bluetoothctl
+}
+
 function handle_response() {
     action="$(echo "$response" | awk '{ print $1 }')"
     arguments="$(echo "$response" | sed -e 's|^[^ ]*||' -e 's|^ *||')"
@@ -142,6 +168,7 @@ function handle_response() {
         'drop') bluetoothctl && echo ;;
         'sh') /usr/bin/env zsh ;;
         'reload'|'r') reload ;;
+        'pair'|'p') pair ;;
         'menu'|'m') connect_menu ;;
         'rename') bluetoothctl set-alias "$arguments" ;;
         'address') to_address "$arguments" ;;

@@ -226,12 +226,7 @@
         ####################
         # CORE SYSTEM APPS #
         ####################
-        # (pkgs.hyprland.override {
-        #     legacyRenderer = true;
-        #     enableXWayland = true;
-        #     withSystemd = true;
-        # })
-	hyprland
+        hyprland
         hypr pyprland
         pulseaudio pipewire
         waybar
