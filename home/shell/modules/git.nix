@@ -10,6 +10,8 @@
     gaa = "ga .";
     gau = "ga -u";
     gc = "g commit";
+    gco = "g checkout";
+    gb = "g branch";
 
     gll = "sshkey && g pull";
     gsh = "sshkey && g push";

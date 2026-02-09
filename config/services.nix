@@ -5,7 +5,10 @@
     security.pam.services.swaylock = {};
 
     services.openssh.enable = true;
+
+    services.ssh-agent.enable = true;
     programs.ssh = {
+        enable = true;
         startAgent = true;
         # askPassword = ""; see docs
         agentTimeout = "5h";

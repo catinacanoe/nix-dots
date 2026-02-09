@@ -71,7 +71,6 @@ in
         ./xioxide
     ];
 
-    services.ssh-agent.enable = true;
     programs.yt-dlp.settings.cookies-from-browser = config.home.sessionVariables.BROWSER;
 
     home.packages = with pkgs; [
