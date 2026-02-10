@@ -1,4 +1,4 @@
-{ plugins, col, ... }:
+{ plugins, col, rice, ... }:
 let
     config = /* lua */ ''
         "folke/noice.nvim",
@@ -54,6 +54,12 @@ let
                     },
                 },
 
+                views = {
+                    cmdline_popup = { border = {
+                        style = "${if rice.style.rounding then "rounded" else "single"}",
+                    },},
+                },
+
                 commands = {
                     history = { view = "split" },
                     last = { view = "split" },
@@ -65,8 +71,8 @@ let
                     view = "cmdline_popup",
                     format = {
                         cmdline = { icon = ">" },
-                        search_down = { icon = "/" },
-                        search_up = { icon = "\\" },
+                        search_down = { icon = " /" },
+                        search_up = { icon = " \\" },
                         filter = { icon = "$" },
                         lua = { icon = "%" },
                         help = { icon = "?" },
@@ -95,12 +101,12 @@ let
             }
 
             require("notify").setup {
-                background_colour = "#${col.bg.hex}",
-                fps = 60,
+                background_colour = "${col.bg.h}",
+                fps = 10,
                 top_down = false,
-                timeout = 10000,
+                timeout = 5000,
                 render = "minimal",
-                stages = "slide",
+                stages = "${if rice.style.animation then "slide" else "static"}",
                 icons = {
                     DEBUG = "B",
                     ERROR = "E",
@@ -108,6 +114,33 @@ let
                     TRACE = "T",
                     WARN = "W",
                 },
+                on_open = function(win)
+                    local config = vim.api.nvim_win_get_config(win)
+                    config.border = "${if rice.style.rounding then "rounded" else "single"}"
+                    vim.api.nvim_win_set_config(win, config)
+
+                    vim.cmd("syntax off")
+                    local buf = vim.api.nvim_win_get_buf(win)
+                    vim.api.nvim_buf_set_option(buf, "filetype", "txt")
+
+                    vim.api.nvim_set_hl(0, "NotifyERRORBorder", {fg="${col.red.h}"})
+                    vim.api.nvim_set_hl(0,  "NotifyWARNBorder", {fg="${col.orange.h}"})
+                    vim.api.nvim_set_hl(0,  "NotifyINFOBorder", {fg="${col.green.h}"})
+                    vim.api.nvim_set_hl(0, "NotifyDEBUGBorder", {fg="${col.blue.h}"})
+                    vim.api.nvim_set_hl(0, "NotifyTRACEBorder", {fg="${col.purple.h}"})
+
+                    vim.api.nvim_set_hl(0, "NotifyERRORTitle",  {fg="${col.red.h}"})
+                    vim.api.nvim_set_hl(0,  "NotifyWARNTitle",  {fg="${col.orange.h}"})
+                    vim.api.nvim_set_hl(0,  "NotifyINFOTitle",  {fg="${col.green.h}"})
+                    vim.api.nvim_set_hl(0, "NotifyDEBUGTitle",  {fg="${col.blue.h}"})
+                    vim.api.nvim_set_hl(0, "NotifyTRACETitle",  {fg="${col.purple.h}"})
+
+                    vim.api.nvim_set_hl(0, "NotifyERRORBody",   {fg="${col.red.h}"})
+                    vim.api.nvim_set_hl(0,  "NotifyWARNBody",   {fg="${col.orange.h}"})
+                    vim.api.nvim_set_hl(0,  "NotifyINFOBody",   {fg="${col.green.h}"})
+                    vim.api.nvim_set_hl(0, "NotifyDEBUGBody",   {fg="${col.blue.h}"})
+                    vim.api.nvim_set_hl(0, "NotifyTRACEBody",   {fg="${col.purple.h}"})
+                end,
             }
         end,
 

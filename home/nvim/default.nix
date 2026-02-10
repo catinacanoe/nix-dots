@@ -17,8 +17,9 @@
 
 { pkgs, config, ... }:
 let
-    col = (import ../../rice).col;
-    args = { inherit pkgs col; plugins = "nvim/lua/plugins"; };
+    rice = (import ../../rice);
+    col = rice.col;
+    args = { inherit pkgs col rice; plugins = "nvim/lua/plugins"; };
 in {
     xdg.configFile =
         (import ./plugins/autopairs.nix    args).plugin //
@@ -31,7 +32,7 @@ in {
         (import ./plugins/gitblame.nix     args).plugin //
         (import ./plugins/gitsigns.nix     args).plugin //
         # (import ./plugins/gruvbox.nix      args).plugin //
-        (import ./plugins/catppuccin.nix      args).plugin //
+        (import ./plugins/catppuccin.nix   args).plugin //
         (import ./plugins/indent.nix       args).plugin //
         (import ./plugins/leap.nix         args).plugin //
         (import ./plugins/lspconfig.nix    args).plugin //

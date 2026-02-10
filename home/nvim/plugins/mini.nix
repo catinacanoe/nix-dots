@@ -1,4 +1,4 @@
-{ col, plugins, ... }:
+{ col, plugins, rice, ... }:
 let
     config = /* lua */ ''{
         "catinacanoe/mini.nvim",
@@ -86,7 +86,7 @@ let
                 pattern = 'MiniFilesWindowOpen',
                 callback = function(args)
                     local win_id = args.data.win_id
-                    vim.api.nvim_win_set_config(win_id, { border = 'rounded' })
+                    vim.api.nvim_win_set_config(win_id, { border = '${if rice.style.rounding then "rounded" else "single"}' })
                     vim.api.nvim_win_set_option(win_id, 'winhighlight', 'FloatBorder:${col.fg.hex}')
                 end,
             })
