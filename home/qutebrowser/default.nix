@@ -3,7 +3,7 @@
 
     programs.qutebrowser = {
         enable = true;
-        loadAutoconfig = false; # don't allow settings changes inside the app
+        loadAutoconfig = true; # don't allow settings changes inside the app
         enableDefaultBindings = false; # define all bindings urself
 
         extraConfig = (import ./options.nix).extraConfig;
