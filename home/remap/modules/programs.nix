@@ -15,7 +15,7 @@ in
                 ${mod}-o:
                     ${launchdir direction "obsidian"}
                 ${mod}-n:
-                    ${launchdir direction "notion-app"}
+                    ${launchdir direction "lotion"}
                 ${mod}-b:
                     ${launchdir direction "brave"}
                 ${mod}-v:
