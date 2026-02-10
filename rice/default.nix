@@ -66,7 +66,7 @@ let host = import ../ignore-hostname.nix; in {
     };
 
     window = let
-        gaps = 7;
+        gaps = 5; # used 7 when rounding = true
     in {
         border = if host == "nixbox" then 3 else 2;
         radius = if host== "nixbox" then 10 else 7;
