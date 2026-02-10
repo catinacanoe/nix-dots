@@ -13,7 +13,6 @@
         ./boot.nix
     ];
 
-    # nixpkgs.config.allowUnfree = true;
     system.autoUpgrade.enable = true;
 
     networking.hostName = import ../ignore-hostname.nix;

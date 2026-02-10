@@ -27,7 +27,7 @@
         vimit       = (import ./custom/vimit.nix args);
         vpnshell    = (import ./custom/vpnshell.nix args);
         yargs       = (import ./custom/yargs.nix args);
-        notion-app-custom  = (callPackage ./custom/notion-app.nix {});
+        lotion      = (callPackage ./custom/lotion.nix {});
         # spicetify = inputs.spicetify-nix.lib.mkSpicetify pkgs (import ./spicetify.nix args);
     in [
         ###############
@@ -166,6 +166,8 @@
         #############
         # LIBRARIES #
         #############
+        # minimal-bootstrap.python
+        python312
         python311Packages.docx2txt
         # python311Packages.howdoi (breaks 24.11 build)
 
@@ -203,7 +205,7 @@
 
         ### CREATIVE APPS
         obsidian
-        notion-app-custom
+        lotion
         kicad
         spotify spotify-cli-linux
         krita
