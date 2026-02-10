@@ -2,9 +2,9 @@
 let
     # ws_border = rice.window.border;
     ws_border = 0;
-    ws_short = 11 - 2*ws_border; /* must be odd */
-    ws_long = 30 - 2*ws_border;
-    ws_spacing = 4*rice.window.border;
+    ws_short =   if rice.style.rounding then 11 - 2*ws_border     else 9; /* must be odd */
+    ws_long =    if rice.style.rounding then 30 - 2*ws_border     else 25;
+    ws_spacing = if rice.style.rounding then 4*rice.window.border else 4;
 in /* scss */ ''
 * {
     all: unset;
@@ -22,8 +22,8 @@ in /* scss */ ''
 
 .dock-mus-progress, /* #####******====-----  */
 .left {
-    border-radius: 9999px;
-    min-width: 6px; 
+    border-radius: ${if rice.style.rounding then "9999" else "0"}px;
+    min-width: ${if rice.style.rounding then "6" else "2"}px; 
 }
 .left {
     background: ${rice.col.fg.h};
@@ -43,7 +43,7 @@ progressbar > trough {
 }
 
 .dock-workspaces {
-    border-radius: 9999px;
+    border-radius: ${if rice.style.rounding then "9999" else "0"}px;
     padding-top: ${toString ws_short}px;
 
     margin-left: ${toString ws_spacing}px;
@@ -53,7 +53,7 @@ progressbar > trough {
     border-width: ${toString ws_border}px;
 
     animation-duration: 0.15s;
-    animation-timing-function: ease-out;
+    animation-timing-function: linear;
 }
 
 /* .glass_col { background: rgba(${rice.col.fg.rgb}, 0.15); } at this point not used at all (only dark_col is used) */
@@ -68,6 +68,7 @@ progressbar > trough {
     background:   rgba(${rice.col.fg.rgb}, 0.3);
 }
 
+${if rice.style.animation then /*css*/ ''
 @keyframes open {
     from { padding-right: ${toString (ws_short+1)}px; } /* adding one pixel seems to stablize the animation idk */
     to   { padding-right: ${toString (ws_long+1)}px; }
@@ -77,6 +78,17 @@ progressbar > trough {
     from { padding-right: ${toString (ws_long)}px; }
     to   { padding-right: ${toString (ws_short)}px; }
 }
+'' else /*css*/ ''
+@keyframes open {
+    from { padding-right: ${toString (ws_long)}px; } /* adding one pixel seems to stablize the animation idk */
+    to   { padding-right: ${toString (ws_long)}px; }
+}
+
+@keyframes close {
+    from { padding-right: ${toString (ws_short)}px; }
+    to   { padding-right: ${toString (ws_short)}px; }
+}
+''}
 
 .dock-workspaces.active.switching { animation-name: open; }
 .dock-workspaces.occupied.switching, .dock-workspaces.empty.switching { animation-name: close; }
@@ -90,7 +102,7 @@ progressbar > trough {
 }
 
 .dock-block {
-    border-radius: ${toString (rice.window.radius + 2)}px;
+    border-radius: ${if rice.style.rounding then toString (rice.window.radius + 2) else "0"}px;
     padding-left: ${toString (rice.window.radius)}px;
     padding-right: ${toString (rice.window.radius)}px;
 }

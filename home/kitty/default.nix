@@ -45,7 +45,7 @@ with (import ../../rice);
             allow_remote_control = true;
 
             font_size = font.size;
-            window_padding_width = "4.7";
+            window_padding_width = if style.rounding then "4.7" else "2"; # u r d l
             scrollback_lines = 10000;
             update_check_interval = 0;
             mouse_hide_wait = 0;

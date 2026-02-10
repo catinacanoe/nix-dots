@@ -5,17 +5,20 @@ let
     rice = (import ../../rice);
     col = rice.col; 
     window = rice.window;
+    style = rice.style;
+
     pypr = (import ./pyprland.nix args);
 
     host = import ../../ignore-hostname.nix;
 
     maincol = "rgba(${col.fg.hex}b0)";
-    altcol = "rgba(00000000)";
+    altcol = "rgba(${col.fg.hex}50)";
     strip = "${maincol} ${maincol} ${altcol}";
     gradient = "${strip} ${strip} ${strip} 45deg";
 
     monitor-specs = mon: pos: "${toString mon.width}x${toString mon.height}@${toString mon.fps}, ${pos}, ${toString mon.scale}";
-in {
+in
+{
     home.activation.hyprland = lib.hm.dag.entryAfter ["onFilesChange"]
         "$DRY_RUN_CMD ${pkgs.hyprland}/bin/hyprctl reload > /dev/null";
 
@@ -40,7 +43,7 @@ in {
     exec-once = kitty
     exec-once = pypr
 
-    exec = sleep 7 && ${config.xdg.configHome}/eww/init.sh
+    exec = sleep 3 && ${config.xdg.configHome}/eww/init.sh
     exec = sleep 1 && swww-daemon
     exec = killall .libinput-gestures-wrapped ; libinput-gestures
 
@@ -107,10 +110,11 @@ in {
         # drop shadow (see wiki)
         # dim inactive windows (see wiki)
         # screen_shader (custom shader to apply @ end of pipeline)
-        rounding = ${toString window.radius}
+        rounding = ${if style.rounding then toString window.radius else "0"}
         fullscreen_opacity = 1.0
         active_opacity = 1.0
-        inactive_opacity = 0.9
+        inactive_opacity = ${if style.animation then "0.9" else "1.0"}
+
         shadow {
             enabled = false
         }#shadow
@@ -133,18 +137,17 @@ in {
     }#decoration
 
     animations {
-        enabled = true
+        enabled = ${if style.animation then "true" else "false"}
 
-        animation = windowsIn, 1,   5, easeout, slide # spawning
-        animation = windowsOut, 1,  2, linear,  slide # closing
-        animation = windowsMove, 1, 4, easeout, slide # resizing dragging moving
-        animation = fadeIn, 1,      5, easeout # fade on opening stuff
-        animation = fadeOut, 1,     2, linear  # fade on closing stuff
-        animation = fadeSwitch, 1,  7, easeout # fade on changing focus
-        animation = border, 1,      7,   easeout      # border color changes
-        animation = borderangle, 1, 100, linear, loop # changing the gradient angle
+        animation = windowsIn, 1,        5, easeout, slide # spawning
+        animation = windowsOut, 1,       2, linear,  slide # closing
+        animation = windowsMove, 1,      4, easeout, slide # resizing dragging moving
+        animation = fadeIn, 1,           2, easeout # fade on opening stuff
+        animation = fadeOut, 1,          2, easeout  # fade on closing stuff
+        animation = fadeSwitch, 1,       7, easeout # fade on changing focus
+        animation = border, 1,           7,   easeout      # border color changes
+        animation = borderangle, 0,      100, linear, once # changing the gradient angle TERRIBLE FOR BATTERY (2.3h with 'loop', xxh with 'once')
         animation = workspaces, 1,       4, easeout, slidefade 15%
-        animation = specialWorkspace, 1, 5, easeout, slidevert
     }#animations
 
     # per device input settings exist (see wiki)
@@ -184,10 +187,10 @@ in {
     gesture = 3, horizontal, workspace
     gestures {
         workspace_swipe_use_r = true
-        workspace_swipe_distance = 700 # basically just sens
+        workspace_swipe_distance = ${if style.animation then "700" else "20"} # basically just sens
         workspace_swipe_min_speed_to_force = 10 # force switch @ speed
-        workspace_swipe_cancel_ratio = 0.3 # min amount of screen to cover
-        workspace_swipe_direction_lock = false # change direction anytime
+        workspace_swipe_cancel_ratio = ${if style.animation then "0.3" else "0.2"} # min amount of screen to cover
+        workspace_swipe_direction_lock = ${if style.animation then "false" else "true"} # change direction anytime
     }#gestures
 
     misc {

@@ -2,7 +2,6 @@ let host = import ../ignore-hostname.nix; in {
     # remember to regenerate wallpapers if you change colorscheme
     col = import ./colors/catppuccin.nix;
     wall = import ./wall;
-    test = "test";
 
     font = {
         name = "VictorMono";
@@ -59,6 +58,11 @@ let host = import ../ignore-hostname.nix; in {
             height = h;
             width = h * (if host=="nixbox" then 20 else 15);
         };
+    };
+
+    style = {
+        rounding = false;
+        animation = false;
     };
 
     window = let
