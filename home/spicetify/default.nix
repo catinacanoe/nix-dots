@@ -1,9 +1,9 @@
 { inputs, pkgs, ... }: let
-    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+    spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
     col = (import ../../rice).col;
 in {
     programs.spicetify = {
-        enable = false;
+        enable = true;
         theme = spicePkgs.themes.text;
         colorScheme = "custom";
         customColorScheme = {
