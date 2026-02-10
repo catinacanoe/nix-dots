@@ -187,9 +187,9 @@ in
     gesture = 3, horizontal, workspace
     gestures {
         workspace_swipe_use_r = true
-        workspace_swipe_distance = ${if style.animation then "700" else "20"} # basically just sens
-        workspace_swipe_min_speed_to_force = 10 # force switch @ speed
-        workspace_swipe_cancel_ratio = ${if style.animation then "0.3" else "0.2"} # min amount of screen to cover
+        workspace_swipe_distance = ${if style.animation then "700" else "999999"} # basically just sens
+        workspace_swipe_min_speed_to_force = 0 # force switch @ speed
+        workspace_swipe_cancel_ratio = ${if style.animation then "0.3" else "0"} # min amount of screen to cover
         workspace_swipe_direction_lock = ${if style.animation then "false" else "true"} # change direction anytime
     }#gestures
 
