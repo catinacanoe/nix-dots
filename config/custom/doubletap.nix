@@ -14,7 +14,7 @@ timeout="$2"
 counter_file="/tmp/doubletap-$id.counter" # contains how many times this has been pressed (without timing out)
 [ ! -f "$counter_file" ] && echo 0 > "$counter_file"
 
-# record that the command has been run again
+# record that the command has been run again (increment counter file)
 counter="$(cat "$counter_file")"
 counter="$((counter+1))"
 echo "$counter" > "$counter_file"
