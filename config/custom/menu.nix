@@ -2,22 +2,18 @@
 { pkgs, ... }:
 let
     infile = "/tmp/menu-in.fifo";
-    outfile = "/tmp/menu-in.fifo";
+    outfile = "/tmp/menu-out.fifo";
 in {
     wrap = pkgs.writeShellScriptBin "menu" ''
-        [ -f "${infile}" ] && rm "${infile}"
-        [ -p "${infile}" ] || mkfifo "${infile}"
-
-        [ -f "${outfile}" ] && rm "${outfile}"
-        [ -p "${outfile}" ] || mkfifo "${outfile}"
-
         drop menu nohistory
 
         echo "$(
+            # first line is reserved for flags
             if  [ "$1" == "--allow-new" ]; then
                 echo "allow-new"
             else echo; fi
 
+            # then we passthrough stdin (the list of options to choose from)
             cat
         )" > "${infile}"
 
@@ -28,16 +24,20 @@ in {
     '';
 
     ui = pkgs.writeShellScriptBin "menuui" ''
-        [ -f "${infile}" ] && rm "${infile}"
-        [ -p "${infile}" ] || mkfifo "${infile}"
+        rm "${infile}" > /dev/null
+        mkfifo "${infile}"
 
-        [ -f "${outfile}" ] && rm "${outfile}"
-        [ -p "${outfile}" ] || mkfifo "${outfile}"
+        rm "${outfile}" > /dev/null
+        mkfifo "${outfile}"
 
         while true; do
             input="$(cat "${infile}")"
             args="$(echo "$input" | head -n 1)"
             list="$(echo "$input" | tail -n +2)"
+
+            # notify-send "MENU got input" "$input"
+            # echo 'testoutput' > ${outfile}
+            # echo "test output" > ${outfile}
 
             if [ "$args" == "allow-new" ]; then
                 response="$(echo "$list" | fzf --print-query)"
