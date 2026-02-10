@@ -1,22 +1,18 @@
-# flake.nix
 {
     description = "canoe's main configuration flake";
 
     inputs = {
-        # as of 23.05.2025 I have been running nixos-24.11 and home: release-24.11 for multiple months with no issue
-
         # https://channels.nixos.org/
-        nixpkgs.url = "nixpkgs/nixos-25.11"; # nixos-unstable / nixos-24.11
+        nixpkgs.url = "nixpkgs/nixos-25.11"; # nixos-unstable / nixos-XX.XX
 
         # https://github.com/nix-community/home-manager/branches
         home-manager = {
-            url = "github:nix-community/home-manager/release-25.11"; # master / release-24.11
+            url = "github:nix-community/home-manager/release-25.11"; # master / release-XX.XX
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        # hyprland.url = "github:hyprwm/Hyprland";
         xremap-flake.url = "github:xremap/nix-flake";
-        spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
+        # spicetify-nix.url = "github:Gerg-L/spicetify-nix/24.11";
 
         vimplugin-cellular-automaton = {
             url = "github:Eandrju/cellular-automaton.nvim";
