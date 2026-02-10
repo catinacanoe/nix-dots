@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 let
     rice = (import ../../rice);
     fontsize = rice.font.size;
@@ -21,8 +21,9 @@ in
             width = 400;
             height = 150;
             border-size = rice.window.border;
-            border-radius = rice.window.radius;
-            margin = toString rice.window.gaps-out;
+            border-radius = if rice.style.rounding then rice.window.radius else 0;
+            margin = rice.window.gaps-out;
+            outer-margin = "${toString (2*rice.window.gaps-out)},${toString rice.window.gaps-out}";
             padding = toString rice.window.gaps-in;
 
             text-color = "${col.fg.h}ff";
