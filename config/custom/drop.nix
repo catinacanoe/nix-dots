@@ -28,7 +28,7 @@ function hide() {
 
     [ $numwindows -gt 1 ] && [ -n "$scratchfocused" ] && hyprctl dispatch focuscurrentorlast &> /dev/null
 
-    pypr hide "$1"
+    pypr hide "$1" > /dev/null
 
     echo > "$CURRENTFILE"
 }
@@ -39,13 +39,13 @@ function show() {
 
     # drop_mon will be empty if this dropdown has never opened before (in which case we simply open it)
     if [ -z "$drop_mon" ] || [ "$drop_mon" == "$current_mon" ]; then
-        pypr show "$1"
+        pypr show "$1" > /dev/null
     else
         # if the drop is on another monitor we need to cycle it once before opening (for it to position correctly)
         hyprctl keyword animations:enabled false # to prevent visual annoyance
-        pypr show "$1"
-        pypr hide "$1"
-        pypr show "$1"
+        pypr show "$1" > /dev/null
+        pypr hide "$1" > /dev/null
+        pypr show "$1" > /dev/null
         hyprctl keyword animations:enabled true
     fi
 
