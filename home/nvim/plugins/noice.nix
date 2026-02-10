@@ -54,6 +54,23 @@ let
                     },
                 },
 
+                routes = {{
+                    filter = { find = "Loading NixOS", },
+                    opts = { skip = true },
+                },{
+                    filter = { find = "Config Change Detected", },
+                    opts = { skip = true },
+                },{
+                    filter = { find = "lines yanked", },
+                    opts = { skip = true },
+                },{
+                    filter = { find = "<ed", },
+                    opts = { skip = true },
+                },{
+                    filter = { find = ">ed", },
+                    opts = { skip = true },
+                },},
+
                 views = {
                     cmdline_popup = { border = {
                         style = "${if rice.style.rounding then "rounded" else "single"}",
