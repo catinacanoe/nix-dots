@@ -81,9 +81,9 @@ keymap:
     bind = CTRL, XF86AudioRaiseVolume, exec, setvol 1%+
     bind = CTRL, XF86AudioLowerVolume, exec, setvol 1%-
 
-    # bind = , XF86AudioPlay, exec, plyr toggle
-    bind = , XF86AudioPlay, exec, doubletap airpod 300 "plyr toggle" "plyr next" "plyr prev"
-    # bind = , XF86AudioPlay, exec, notify-send "$(date +'%S.%3N')" # to test timeout
+    bind = , XF86AudioPlay, exec, doubletap toggle 300 "plyr toggle" "plyr next" "plyr prev"
+    bind = , XF86AudioNext, exec, plyr next
+    bind = , XF86AudioPrev, exec, plyr prev
 
     bind = SUPER, mouse:274, killactive # super+mmb
     bindm = SUPER, mouse:272, movewindow # super+lmb
