@@ -154,7 +154,7 @@ case "$cmd" in
             elif [ "$current" == "playerctl" ]; then
                 name="$(playerctl metadata title)"
             else
-                name="ERROR: line 154 of plyr.nix, unrecognized media client"
+                name="na"
             fi
             
             if [ -n "$name" ]; then
