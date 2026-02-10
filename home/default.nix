@@ -38,7 +38,6 @@ in
         ./discord
         ./dye
         ./eww
-        # ./firefox NOTE: COMMENTED OUT BC I DON"T USE FF ANYMORE
         ./fzf
         ./git
         ./gitutils
