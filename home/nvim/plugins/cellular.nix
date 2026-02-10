@@ -20,7 +20,7 @@ let
     }'';
 in {
     plugin."${plugins}/cellular.lua".text = /* lua */ ''
-        local animate =  function()
+        local animate = function()
             local rand = math.random(1,3)
             if (rand == 1) then
                 vim.cmd("CellularAutomaton make_it_rain")
