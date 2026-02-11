@@ -61,6 +61,9 @@ let
                     filter = { find = "Config Change Detected", },
                     opts = { skip = true },
                 },{
+                    filter = { find = "No lines in buffer", },
+                    opts = { skip = true },
+                },{
                     filter = { find = "more lines", },
                     opts = { skip = true },
                 },{
