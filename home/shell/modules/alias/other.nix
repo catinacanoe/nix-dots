@@ -1,4 +1,6 @@
 {
+    sio = ''echo "tmp=$(mktemp) && cp \"%%%\" \$tmp && echo \"rm \$tmp\" | at now + 2 min && sioyek \$tmp" | yargs'';
+
     hst = "tac $ZDOTDIR/.zsh_history | awk -F ';' '{ print $2 }' | fzf | tr -d '\\n' | wtype -";
 
     o = "e ../";

@@ -1,17 +1,24 @@
-{ config, lib, ... }@args:
-let
-    repos = config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR;
-  
-in
-{
+{ config, ... }@args: {
+    programs.kitty.shellIntegration.enableZshIntegration = true;
+    programs.starship.enableZshIntegration = true;
+    programs.fzf.enableZshIntegration = true;
+    services.gpg-agent.enableZshIntegration = true;
+
+    # look through autosuggest strategies
+    # look through syntax highlighting styles
+
+    xdg.configFile."zsh/plugins" = {
+        source = ./modules/plugin;
+        recursive = true;
+    };
+
     programs.zsh = {
         enable = true;
         dotDir = "${config.home.homeDirectory}/.config/zsh";
 
-        # enableCompletion = true;
-        # enableAutosuggestions = true;
-        # autosuggestion.enable = true;
-        # syntaxHighlighting.enable = true;
+        enableCompletion = false;
+        autosuggestion.enable = true;
+        syntaxHighlighting.enable = true;
 
         sessionVariables = {
             ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE = "fg=7";
@@ -25,21 +32,19 @@ in
             share = true; # shared hist between files
         };
 
-        shellAliases = (import ./modules/aliases-git.nix) //
-                       (import ./modules/aliases-other.nix);
+        shellAliases = (import ./modules/alias/git.nix) //
+                       (import ./modules/alias/other.nix) // {
+            xioxide="source ${config.xdg.userDirs.extraConfig.XDG_REPOSITORY_DIR}/xioxide/main.sh";
+        };
 
-        initContent = /*bash*/''
-            ${import ./modules/functions-xioxide.nix args}
-            ${import ./modules/functions-download.nix}
-            ${import ./modules/functions-extract.nix}
+        initContent = /*bash*/ ''
+            ${import ./modules/function/xioxide.nix args}
+            ${import ./modules/function/download.nix}
+            ${import ./modules/function/extract.nix}
 
-            # for plugin in $ZDOTDIR/plugins/pre/*.plugin.zsh; do
-            #     source "$plugin"
-            # done
+            ${builtins.readFile ./modules/binds.zsh}
 
-            # for plugin in $ZDOTDIR/plugins/*.plugin.zsh; do
-            #     zsh-defer source "$plugin"
-            # done
+            source $ZDOTDIR/plugins/nix-shell.plugin.zsh
         '';
 
         # completionInit = /* bash */ ''
@@ -48,20 +53,6 @@ in
         # zmodload zsh/complist
         # compinit
         # _comp_options+=(globdots)
-
-        # bindkey -e
-
-        # function copy_buffer() { wl-copy -n <<< "$BUFFER"; }
-        # zle -N copy_buffer
-        # bindkey "^Y" copy_buffer
-
-        # bindkey "^[[1;2D" beginning-of-line # shift left
-        # bindkey "^[[1;2C" end-of-line # shift left
-
-        # bindkey "^[[3~" delete-char # delete key
-
-        # bindkey '^[[Z' autosuggest-accept # shift tab
-        # bindkey '^I' expand-or-complete # tab
         # '';
     };
 }

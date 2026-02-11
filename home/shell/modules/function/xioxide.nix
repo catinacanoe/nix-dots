@@ -1,5 +1,7 @@
 { config, ... }:
-let xioxide_fn = ''[ "$1" == "$HOME" ] && return || return 1''; in
+let 
+    xioxide_fn = ''[ "$1" == "$HOME" ] && return || return 1'';
+in
 with config.programs.zsh.shellAliases;
 /*bash*/ ''
 
