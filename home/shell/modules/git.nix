@@ -12,6 +12,8 @@
     gc = "g commit";
     gco = "g checkout";
     gb = "g branch";
+    gl = "g log --oneline";
+    gm = "g merge";
 
     gll = "sshkey && g pull";
     gsh = "sshkey && g push";
