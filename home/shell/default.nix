@@ -42,10 +42,13 @@
             ${import ./modules/function/download.nix}
             ${import ./modules/function/extract.nix}
 
-            ${builtins.readFile ./modules/binds.zsh}
+            ${builtins.readFile ./modules/bind/binds.zsh}
+            ${builtins.readFile ./modules/bind/lazy-comp-init.zsh}
 
             source $ZDOTDIR/plugins/nix-shell.plugin.zsh
         '';
+
+        # comp options in case i need to revert some
 
         # completionInit = /* bash */ ''
         # autoload -U compinit
