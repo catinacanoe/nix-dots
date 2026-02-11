@@ -84,7 +84,7 @@ in
         EDITOR = "nvim";
         EDITORS = "nvim";
         BROWSER = "org.qutebrowser.qutebrowser";
-        BROWSERS = "firefox\nBrave-browser\norg.qutebrowser.qutebrowser";
+        BROWSERS = "firefox\nbrave-browser\norg.qutebrowser.qutebrowser";
         TERMINAL = "kitty";
         TERMINALS = "kitty";
         DMENU_PROGRAM = "menu";
