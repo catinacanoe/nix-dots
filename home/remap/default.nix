@@ -75,6 +75,8 @@ keymap:
     bind = , XF86MonBrightnessDown, exec, setbright 2%-
     bind = CTRL, XF86MonBrightnessUp, exec, setbright 1%+
     bind = CTRL, XF86MonBrightnessDown, exec, setbright 1%-
+    bind = SHIFT, XF86MonBrightnessUp, exec, setbright 100%
+    bind = SHIFT, XF86MonBrightnessDown, exec, setbright 0%
 
     bind = , XF86AudioRaiseVolume, exec, setvol 2%+
     bind = , XF86AudioLowerVolume, exec, setvol 2%-
