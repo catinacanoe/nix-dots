@@ -8,7 +8,6 @@ in
 
     programs.fzf = {
         enable = true;
-        enableZshIntegration = true;
         # defaultOptions = [
         #     ''--scrollbar=" " --pointer=">" --gutter=" "''
         # ];

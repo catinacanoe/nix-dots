@@ -2,9 +2,6 @@
 with (import ../../rice);
 with col;
 {
-    programs.zsh.shellAliases.sio = /* bash */
-        ''echo "tmp=$(mktemp) && cp \"%%%\" \$tmp && echo \"rm \$tmp\" | at now + 2 min && sioyek \$tmp" | yargs'';
-
     programs.sioyek = {
         enable = true;
 

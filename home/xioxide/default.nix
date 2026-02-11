@@ -6,7 +6,7 @@ in
 with config.xdg.userDirs;
 {
     # activated in the `hm` shell alias
-    programs.zsh.shellAliases.xioxide="source ${repos}/xioxide/main.sh";
+    # INSTALLATION OF XIOXIDE OCCURS IN ZSH ALIASES
     home.sessionVariables.XIOXIDE_PATH = "${extraConfig.XDG_REPOSITORY_DIR}/xioxide";
 
     xdg.configFile."xioxide/sites.conf".text = (import ./sites.nix).conf;
