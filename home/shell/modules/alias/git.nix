@@ -1,4 +1,3 @@
-{ ... }:
 {
     g = "git";
     gy = "sshkey && gitutils sync";
