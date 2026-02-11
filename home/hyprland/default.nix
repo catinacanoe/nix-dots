@@ -43,7 +43,7 @@ in
     exec-once = kitty
     exec-once = pypr
 
-    exec = sleep 3 && ${config.xdg.configHome}/eww/init.sh
+    exec = sleep 5 && ${config.xdg.configHome}/eww/init.sh
     exec = sleep 1 && swww-daemon
     exec = killall .libinput-gestures-wrapped ; libinput-gestures
 
@@ -145,8 +145,8 @@ in
         animation = fadeIn, 1,           2, easeout # fade on opening stuff
         animation = fadeOut, 1,          2, easeout  # fade on closing stuff
         animation = fadeSwitch, 1,       7, easeout # fade on changing focus
-        animation = border, 1,           7,   easeout      # border color changes
-        animation = borderangle, 0,      100, linear, once # changing the gradient angle TERRIBLE FOR BATTERY (2.3h with 'loop', xxh with 'once')
+        animation = border, 1,           7, easeout      # border color changes
+        animation = borderangle, 0,      1, linear, once # changing the gradient angle TERRIBLE FOR BATTERY (2.3h with 'loop', xxh with 'once')
         animation = workspaces, 1,       4, easeout, slidefade 15%
     }#animations
 
