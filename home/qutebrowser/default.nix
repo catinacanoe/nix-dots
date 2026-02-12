@@ -1,7 +1,7 @@
-{ config, ... }@args: {
-    xdg.configFile = (import ./userscripts.nix) // (import ./userstyles.nix);
+{ ... }@args: {
+    xdg.configFile = import ./userstyles.nix // { "qutebrowser/userscripts".source = ./userscripts; };
 
-    home.sessionVariables.QT_QPA_PLATFORM="wayland";
+    home.sessionVariables.QT_QPA_PLATFORM = "wayland";
 
     programs.qutebrowser = {
         enable = true;
