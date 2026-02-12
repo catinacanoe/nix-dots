@@ -5,7 +5,9 @@ let
     outfile = "/tmp/menu-out.fifo";
 in {
     wrap = pkgs.writeShellScriptBin "menu" ''
-        drop menu nohistory
+        if [ "$1" == "--menuui-is-open" ];
+        then shift
+        else drop menu nohistory; fi
 
         echo "$(
             echo "$1" # pass flag

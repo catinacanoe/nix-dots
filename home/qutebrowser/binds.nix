@@ -54,11 +54,13 @@
 
         d = "devtools";
 
-        # interesting stuff
+        # USERSCRIPTS
         v = "spawn ${config.home.sessionVariables.TERMINAL} mpv --input-ipc-server=~/.config/mpvc/mpvsocket0 '{url}'"; # open current yt vid in mpv
         t = "spawn --userscript translate.sh";
-        w = "spawn --userscript browseshell.sh";
-        # "<ctrl-p>" = "spawn --userscript pass.sh";
+
+        # WARN: we pre-call 'drop menu' here for optimization,
+        # so in the script we have to pass --menuui-is-open to menu
+        w = "spawn drop menu nohistory ;; spawn --userscript browseshell.sh";
     };
 
     insert = {

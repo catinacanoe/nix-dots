@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# WARN YOU MUST CALL `drop menu nohistory` BEFORE CALLING THIS SCRIPT
+# we pass --menui-is-open to menu, WE EXPECT THE DROPDOWN TO BE OPEN
+# this is done for optimization: open the menu before we have the list of options
+
 BROWSESHELL_HIST="/tmp/browseshell.hist"
 touch $BROWSESHELL_HIST > /dev/null
 
@@ -44,7 +48,9 @@ function get_query() {
         tac "$BROWSESHELL_HIST"
     )"
 
-    fzout="$(echo "$hist" | menu --print-query)"
+    # WE ASSUME THE `menu` dropdown IS OPEN (`drop menu nohistory` has been called)
+    # so we pass --menuui-is-open
+    fzout="$(echo "$hist" | menu --menuui-is-open --print-query)"
 
     if [ -z "$(echo "$fzout" | head -n 1)" ]; then # we just chose sum, no type
         prequery="$(echo "$fzout" | tail -n 1)"
