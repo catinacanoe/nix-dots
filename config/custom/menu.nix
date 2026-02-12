@@ -5,6 +5,9 @@ let
     outfile = "/tmp/menu-out.fifo";
 in {
     wrap = pkgs.writeShellScriptBin "menu" ''
+        # allow callers to pre-open the dropdown window,
+        # because sometimes it looks too slow
+        # when we open the dropdown all the way here
         if [ "$1" == "--menuui-is-open" ];
         then shift
         else drop menu nohistory; fi
