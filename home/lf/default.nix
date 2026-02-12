@@ -138,9 +138,9 @@ in
                 num="$(echo "$fx" | wc -l)"
 
                 if [ "$num" = "1" ]; then
-                    dragon -T -x "$f" &
+                    dragon-drop -T -x "$f" &
                 else
-                    dragon -T -a -x $(echo $fx) &
+                    dragon-drop -T -a -x $(echo $fx) &
                 fi
             }}'';
 
