@@ -66,7 +66,9 @@ function get_query() {
         [ "$query" == ":q" ] && exit
         if ! grep -q "$query *" "$BROWSESHELL_HIST"; then # not already in history
             if [ -z "$(xio "$query")" ]; then # not a xioxide entry
-                echo "$query *" >> "$BROWSESHELL_HIST"
+                if [[ $query != [[:space:]]* ]]; then # entries that start with space are ugly, omit them
+                    echo "$query *" >> "$BROWSESHELL_HIST"
+                fi
             fi
         fi
     fi
