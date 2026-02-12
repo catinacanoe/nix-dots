@@ -1,4 +1,4 @@
-{ pkgs, plugins, ... }:
+{ pkgs, plugins, rice, ... }:
 let
     config = /* lua */ ''{
         "neovim/nvim-lspconfig",
@@ -9,7 +9,7 @@ let
             vim.keymap.set("n", "<space>ei", vim.diagnostic.open_float)
             vim.keymap.set("n", "<space>en", vim.diagnostic.goto_prev)
             vim.keymap.set("n", "<space>eo", vim.diagnostic.goto_next)
-            vim.keymap.set("n", "<space>ef", vim.cmd.Neoformat)
+            -- vim.keymap.set("n", "<space>ef", vim.cmd.Neoformat)
 
             vim.api.nvim_create_autocmd('LspAttach', {
                 group = vim.api.nvim_create_augroup('UserLspConfig', {}),
@@ -33,35 +33,30 @@ let
                 end,
             })
 
+            local bordertype = "${if rice.style.rounding then "rounded" else "single"}"
+
             vim.diagnostic.config {
                 virtual_text = true,
                 float = {
-                    border = "rounded"
+                    border = bordertype
                 }
             }
             
             vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
                 vim.lsp.handlers.hover, {
-                    border = "rounded"
+                    border = bordertype
                 }
             )
 
             vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
                 vim.lsp.handlers.signature_help, {
-                    border = "rounded"
+                    border = bordertype
                 }
             )
 
-            require('lspconfig.ui.windows').default_options = {
-                border = "rounded"
-            }
-
-            local lspconf = require("lspconfig")
-            local args = { capabilities = require("cmp_nvim_lsp").default_capabilities() }
-
-            lspconf.nil_ls.setup(args)
-            lspconf.lua_ls.setup(args)
-            lspconf.bashls.setup(args)
+            vim.lsp.enable('nil_ls')
+            vim.lsp.enable('lua_ls')
+            vim.lsp.enable('bash_ls')
 
             require("lint").linters_by_ft = {
                 nix = {'nix'},

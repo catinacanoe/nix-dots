@@ -1,12 +1,14 @@
 { col, plugins, ... }:
 let
     config = /* lua */ ''{
-        "ggandor/leap.nvim",
+        -- "ggandor/leap.nvim",
+        url = "https://codeberg.org/andyg/leap.nvim",
 
         lazy = true,
         keys = {
-            { "<tab>", "<Plug>(leap-forward-to)", mode = {'n', 'x', 'o'} },
-            { "<s-tab>", "<Plug>(leap-backward-to)", mode = {'n', 'x', 'o'} },
+            { "<tab>", "<Plug>(leap)", mode = {'n', 'x', 'o'} },
+            { "<s-tab>", "<Plug>(leap-anywhere)", mode = {'n', 'x', 'o'} },
+            -- { "<s-tab>", "<Plug>(leap-backward)", mode = {'n', 'x', 'o'} },
             -- vim.keymap.set('o', '.', '<Plug>(leap-forward-till)')
             -- vim.keymap.set('o', ',', '<Plug>(leap-backward-till)')
         },

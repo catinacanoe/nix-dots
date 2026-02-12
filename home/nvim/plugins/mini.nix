@@ -88,6 +88,7 @@ let
                     local win_id = args.data.win_id
                     vim.api.nvim_win_set_config(win_id, { border = '${if rice.style.rounding then "rounded" else "single"}' })
                     vim.api.nvim_win_set_option(win_id, 'winhighlight', 'FloatBorder:${col.fg.hex}')
+                    vim.api.nvim_win_set_option(win_id, 'winhighlight', 'NormalFloat:Normal')
                 end,
             })
         end,
