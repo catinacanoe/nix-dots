@@ -49,6 +49,7 @@
         y = "yank";
         p = "open -- {clipboard}";
         P = "open -t -- {clipboard}";
+        "<ctrl-p>" = "open --bg -- {clipboard}";
 
         "<tab>" = "hint";
 
