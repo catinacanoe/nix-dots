@@ -47,6 +47,9 @@ in
     exec = sleep 1 && swww-daemon
     exec = killall .libinput-gestures-wrapped ; libinput-gestures
 
+    exec = [ -z $(ps aux | grep 'qutebrowser' | awk '{ print $2 }' | grep -v $$) ] && qutebrowser &
+    exec = sleep 5 && qutebrowser ":spawn --userscript urlupdater.sh" &
+
     # cursor
     exec-once = hyprctl setcursor ${config.home.pointerCursor.name} ${toString config.home.pointerCursor.size}
     env = XCURSOR_SIZE,${toString config.home.pointerCursor.size} # affected by scale (i think)

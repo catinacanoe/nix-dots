@@ -35,8 +35,10 @@
         m = "tab-mute";
         z = "tab-close";
         u = "undo";
+        q = "tab-detach";
         r = "reload";
-        R = "greasemonkey-reload ;; reload";
+        R = "yank ;; tab-close";
+        "<ctrl-r>" = "greasemonkey-reload ;; reload";
         f = "fullscreen";
         "<space>" = "config-cycle tabs.show always never"; # ;; config-cycle statusbar.show always in-mode"; # cycle tabs open close
         "<ctrl-space>" = "clear-messages ;; download-clear";
@@ -49,12 +51,14 @@
         P = "open -t -- {clipboard}";
 
         "<tab>" = "hint";
-        "<shift-tab>" = "hint all tab-bg";
 
         d = "devtools";
+
         # interesting stuff
         v = "spawn ${config.home.sessionVariables.TERMINAL} mpv --input-ipc-server=~/.config/mpvc/mpvsocket0 '{url}'"; # open current yt vid in mpv
         t = "spawn --userscript translate.sh";
+        w = "spawn --userscript browseshell.sh";
+        # "<ctrl-p>" = "spawn --userscript pass.sh";
     };
 
     insert = {
@@ -74,6 +78,8 @@
         ";n" = "mode-leave";
         "<tab>" = "hint all tab-bg";
         "<return>" = "hint-follow";
+        p = "spawn --userscript pass.sh";
+        P = "spawn --userscript pass.sh --interactive";
     };
 
     yesno = {

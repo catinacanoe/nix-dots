@@ -5,8 +5,6 @@ let
 in
 /* yaml */ ''
 # dropdown.nix
-        ${mod}-w:
-            ${drop "browseshell nohistory"}
         ${mod}-dot:
             remap:
                 ${mod}-w:

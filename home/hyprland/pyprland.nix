@@ -40,7 +40,6 @@
             ${term_pad { name = "network";     shellscript = "sudo netshell"; }}
             ${term_pad { name = "nix";         shellscript = "nixshell"; }}
             ${term_pad { name = "menu";        shellscript = "menuui"; }}
-            ${term_pad { name = "browseshell"; shellscript = "browseshell"; }}
             ${term_pad { name = "news";        shellscript = "newsboat"; }}
             ${term_pad { name = "mtag";        shellscript = "mustagger"; }}
             ${term_pad { name = "player";      shellscript = "player"; }}

@@ -1,12 +1,93 @@
 {
-    # TODO add a userscript for pass integration
-    # TODO add a userscript for browseshell integration
+    "qutebrowser/userscripts/pass.sh" = {
+        executable = true;
+        text = '' #!/usr/bin/env bash
 
+        echo "hint inputs -f" >> "$QUTE_FIFO" # opens the first field
+        pw "$@"
+        '';
+    };
+
+    "qutebrowser/userscripts/browseshell.sh" = {
+        executable = true;
+        text = '' #!/usr/bin/env bash
+        BROWSESHELL_HIST="/tmp/browseshell.hist"
+        touch $BROWSESHELL_HIST > /dev/null
+
+        function encode() {
+            local escape="$(echo "$@" | sed 's|"|\"|g')"
+            python3 -c "import sys, urllib.parse as ul; print (ul.quote_plus(\"$escape\"))"
+        }
+
+        function open() {
+            echo "open -t $@" >> "$QUTE_FIFO"
+        }
+
+        function default() {
+            open "google.com/search?q=$(encode "$query")"
+        }
+
+        function xio() {
+            source /home/canoe/repos/xioxide/main.sh "" "" echo "" sites "$@" --no-passthrough
+        }
+
+        function handle_query() {
+            case "$(echo "$query" | wc -w)" in
+                0) true ;;
+                1) 
+                    out="$(xio "$query")"
+                    if [ -z "$out" ]; then default
+                    else open "$out"; fi
+                    ;;
+                *)
+                    searchout="$(xio "${"$\{query%% *\}"}s")"
+
+                    if [ -z "$searchout" ];
+                    then default
+                    else open "$searchout$(encode "${"$\{query#* \}"}")"; fi
+                    ;;
+            esac
+        }
+
+        function get_query() {
+            hist="$(
+                /home/canoe/repos/xioxide/main.sh parsed sites | awk '{ gsub(/_/, "", $1); print }'
+                tac "$BROWSESHELL_HIST"
+            )"
+
+            fzout="$(echo "$hist" | menu --print-query)"
+
+            if [ -z "$(echo "$fzout" | head -n 1)" ]; then # we just chose sum, no type
+                prequery="$(echo "$fzout" | tail -n 1)"
+                if echo "$prequery" | grep -q " \*$"; then
+                    query="$(echo "$prequery" | sed 's/ \*$//')"
+                else
+                    query="$(echo "$prequery" | awk '{ print $1 }')"
+                fi
+            elif echo "$fzout" | head -n 1 | grep -q "\*$"; then # we selected hist w/ *
+                query="$(echo "$fzout" | tail -n 1 | sed 's/ \*$//')"
+            else # we typed something, not selecting history though
+                query="$(echo "$fzout" | head -n 1)"
+                [ "$query" == ":q" ] && exit
+                if ! grep -q "$query *" "$BROWSESHELL_HIST"; then # not already in history
+                    if [ -z "$(xio "$query")" ]; then # not a xioxide entry
+                        echo "$query *" >> "$BROWSESHELL_HIST"
+                    fi
+                fi
+            fi
+        }
+
+        get_query
+        handle_query
+        '';
+    };
+
+    # note: the below script is rerun on hyprland reload
     "qutebrowser/userscripts/urlupdater.sh" = {
         executable = true;
         text = ''
         #!/usr/bin/env bash
-        # ps aux | grep 'bash [^ ]*qutebrowser/userscripts/urlupdater.sh' | grep -qv $$ && exit
+        # ensure we are the only running instance
         kill $(ps aux | grep 'bash [^ ]*qutebrowser/userscripts/urlupdater.sh' | grep -v $$ | awk '{ print $2 }')
 
         infile="/tmp/qute_geturl.out"
@@ -14,30 +95,21 @@
         touch "$outfile"
 
         while true; do
-            qutebrowser ":spawn --userscript geturl.sh"
-            var="$(cat "$infile")"
-
-            if [ "$var" != "$(cat "$outfile")" ]; then
-                echo "$var" > "$outfile"
-            fi
+            qutebrowser ":spawn --userscript geturl.sh" # blocks for ~0.4s
+            cat "$infile" > "$outfile"
         done
         '';
     };
 
     "qutebrowser/userscripts/geturl.sh" = {
         executable = true;
-        text = ''
-        #!/usr/bin/env bash
-        outfile="/tmp/qute_geturl.out"
-        touch "$outfile"
-        echo "$QUTE_URL" > "$outfile"
-        '';
+        text = '' #!/usr/bin/env bash
+        echo "$QUTE_URL" > "/tmp/qute_geturl.out" '';
     };
 
     "qutebrowser/userscripts/translate.sh" = {
         executable = true;
-        text = ''
-        #!/usr/bin/env bash
+        text = '' #!/usr/bin/env bash
         while [[ $# > 0 ]]; do
             case $1 in
                 -s|--source)

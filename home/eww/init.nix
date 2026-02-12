@@ -7,10 +7,6 @@ cat "$XDG_CONFIG_HOME/eww/eww.scss.gen" > "$XDG_CONFIG_HOME/eww/eww.scss"
 eww open dock-0 --restart
 eww open dock-1
 
-kill $(ps aux | grep 'bash [^ ]*qutebrowser/userscripts' | awk '{ print $2 }' | grep -v $$)
-[ -z $(ps aux | grep 'qutebrowser' | awk '{ print $2 }' | grep -v $$) ] && qutebrowser &
-sleep 5 && qutebrowser ":spawn --userscript urlupdater.sh" &
-
 hyprctl dispatch event eww,init,start
 
 function net_check() {

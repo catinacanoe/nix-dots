@@ -1,6 +1,8 @@
 { config, ... }@args: {
     xdg.configFile = (import ./userscripts.nix) // (import ./userstyles.nix);
 
+    home.sessionVariables.QT_QPA_PLATFORM="wayland";
+
     programs.qutebrowser = {
         enable = true;
         loadAutoconfig = true; # don't allow settings changes inside the app

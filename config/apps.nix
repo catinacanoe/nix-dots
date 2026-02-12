@@ -8,7 +8,6 @@
     let
         blueshell = (import ./custom/blueshell.nix args);
         browser     = (import ./custom/browser.nix args);
-        browseshell = (import ./custom/browseshell.nix args);
         doubletap   = (import ./custom/doubletap.nix args);
         drop        = (import ./custom/drop.nix args);
         hypr        = (import ./custom/hypr.nix args);
@@ -35,7 +34,6 @@
         ###############
         blueshell
         browser
-        browseshell
         doubletap
         drop
         launcher

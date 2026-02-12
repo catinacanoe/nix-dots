@@ -8,13 +8,8 @@ in {
         drop menu nohistory
 
         echo "$(
-            # first line is reserved for flags
-            if  [ "$1" == "--allow-new" ]; then
-                echo "allow-new"
-            else echo; fi
-
-            # then we passthrough stdin (the list of options to choose from)
-            cat
+            echo "$1" # pass flag
+            cat # pass stdin
         )" > "${infile}"
 
         cat "${outfile}"
@@ -32,14 +27,10 @@ in {
 
         while true; do
             input="$(cat "${infile}")"
-            args="$(echo "$input" | head -n 1)"
+            arg="$(echo "$input" | head -n 1)"
             list="$(echo "$input" | tail -n +2)"
 
-            # notify-send "MENU got input" "$input"
-            # echo 'testoutput' > ${outfile}
-            # echo "test output" > ${outfile}
-
-            if [ "$args" == "allow-new" ]; then
+            if [ "$arg" == "--allow-new" ]; then
                 response="$(echo "$list" | fzf --print-query)"
                 selected="$(echo "$response" | tail -n 1)"
                 typed="$(echo "$response" | head -n 1)"
@@ -52,6 +43,8 @@ in {
                 else
                     echo "$selected" > "${outfile}" # it exists, and we prefer it always (except for "...*" case)
                 fi
+            elif [ "$arg" == "--print-query" ]; then
+                echo "$list" | fzf --print-query > "${outfile}"
             else
                 echo "$list" | fzf > "${outfile}"
             fi
